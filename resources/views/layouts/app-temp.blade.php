@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <title>Home | Bluumhealth</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
     <meta name="description" content="Home Page Description" />
     <meta name="author" content="Farawe iLyas" />
-    <link rel="icon" type="image/x-icon" href="./assets/images/favicon.ico" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />

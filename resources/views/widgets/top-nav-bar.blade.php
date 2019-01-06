@@ -20,16 +20,10 @@
                 <div class="header__search-close js-header-search-btn-close"><i class="icon-Cancel"></i></div>
             </div>
             <div class="header__menu">
-                <a class="header__menu__link" href="/questions">Ask</a>
+                <a class="header__menu__link" href="/questions">Questions</a>
             </div>
             <div class="header__menu">
                 <a class="header__menu__link" href="/blog">Blog</a>
-            </div>
-            <div class="header__menu">
-                <a class="header__menu__link" href="/login">Sign In</a>
-            </div>
-            <div class="header__menu">
-                <a class="header__menu__link" href="/register">Sign Up</a>
             </div>
             <div class="header__menu header__dropdown">
                 <div class="header__menu-btn" data-dropdown-btn="menu">
@@ -62,36 +56,60 @@
                     </div>
                 </nav>
             </div>
-            <div class="header__user">
-                <div class="header__user-btn" data-dropdown-btn="user">
-                    <img src="{{ asset('fonts/icons/avatars/N.svg') }}" alt="avatar">
-                    Nelson Ife<i class="icon-Arrow_Below"></i>
+            @guest
+                <div class="header__menu">
+                    <a class="header__menu__link" href="/login">Sign In</a>
                 </div>
-                <nav class="dropdown dropdown--design-01" data-dropdown-list="user">
-                    <div>
-                        <div class="dropdown__icons">
-                            <a href="#"><i class="icon-Bookmark"></i></a>
-                            <a href="#"><i class="icon-Message"></i></a>
-                            <a href="#"><i class="icon-Preferences"></i></a>
-                            <a href="#"><i class="icon-Logout"></i></a>
+                <div class="header__menu">
+                    <a class="header__menu__link" href="/register">Sign Up</a>
+                </div>
+            @else
+                <div class="header__user">
+                    <div class="header__user-btn" data-dropdown-btn="user">
+                        <img src="{{ asset('fonts/icons/avatars/N.svg') }}" alt="avatar">
+                        {{ ucwords(Auth::user()->firstname.' '.Auth::user()->lastname) }}<i class="icon-Arrow_Below"></i>
+                    </div>
+                    <nav class="dropdown dropdown--design-01" data-dropdown-list="user">
+                        <div>
+                            <div class="dropdown__icons">
+                                <a href="#"><i class="icon-Bookmark"></i></a>
+                                <a href="#"><i class="icon-Message"></i></a>
+                                <a href="#"><i class="icon-Preferences"></i></a>
+                                <a href="#"><i class="icon-Logout"></i></a>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <ul class="dropdown__catalog">
-                            <li><a href="#">Dashboard</a></li>
-                            <li><a href="#">Badges</a></li>
-                            <li><a href="#">My Groups</a></li>
-                            <li><a href="#">Notifications</a></li>
-                            <li><a href="#">Topics</a></li>
-                            <li><a href="#">Likes</a></li>
-                            <li><a href="#">Solved</a></li>
-                        </ul>
-                    </div>
-                </nav>
+                        <div>
+                            <ul class="dropdown__catalog">
+                                <li><a href="#">Dashboard</a></li>
+                                <li><a href="#">Badges</a></li>
+                                <li><a href="#">My Groups</a></li>
+                                <li><a href="#">Notifications</a></li>
+                                <li><a href="#">Topics</a></li>
+                                <li><a href="#">Likes</a></li>
+                                <li><a href="#">Solved</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            @endguest
+        </div>
+        @guest
+
+        @else
+            <div class="header__offset-btn">
+                <a href="create-post.html"><img src="{{asset('fonts/icons/main/New_Topic.svg')}}" alt="New Blog Post"></a>
             </div>
-        </div>
-        <div class="header__offset-btn">
-            <a href="create-post.html"><img src="{{asset('fonts/icons/main/New_Topic.svg')}}" alt="New Blog Post"></a>
-        </div>
+        @endauth
     </div>
 </header>
