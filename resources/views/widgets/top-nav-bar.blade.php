@@ -3,7 +3,7 @@
     <div class="header js-header js-dropdown">
         <div class="container">
             <div class="header__logo">
-                <a class="header__link" href="index.html" title="Bluumhealth">
+                <a class="header__link" href="/" title="Bluumhealth">
                     <h1>
                         <img src="{{ asset('images/logo_small.png') }}" alt="logo" />
                     </h1>
@@ -20,10 +20,10 @@
                 <div class="header__search-close js-header-search-btn-close"><i class="icon-Cancel"></i></div>
             </div>
             <div class="header__menu">
-                <a class="header__menu__link" href="/questions">Questions</a>
+                <a class="header__menu__link" href="/question/ask">Ask</a>
             </div>
-            <div class="header__menu">
-                <a class="header__menu__link" href="/blog">Blog</a>
+            <div class="header__menu active">
+                <a class="header__menu__link active" href="/blog">Blog</a>
             </div>
             <div class="header__menu header__dropdown">
                 <div class="header__menu-btn" data-dropdown-btn="menu">
@@ -108,7 +108,7 @@
 
         @else
             <div class="header__offset-btn">
-                <a href="create-post.html"><img src="{{asset('fonts/icons/main/New_Topic.svg')}}" alt="New Blog Post"></a>
+                <a href="/blog/post/new"><img src="{{asset('fonts/icons/main/New_Topic.svg')}}" alt="New Blog Post"></a>
             </div>
         @endauth
     </div>

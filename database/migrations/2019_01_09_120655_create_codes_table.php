@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRepliesTable extends Migration
+class CreateCodesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateRepliesTable extends Migration
      */
     public function up()
     {
-        Schema::create('replies', function (Blueprint $table) {
+        Schema::create('codes', function (Blueprint $table) {
             $table->increments('id');
-            $table->longText('body');
-            $table->integer('likes')->default(0);
-            $table->integer('votes')->default(0);
-            $table->integer('recipient')->nullable();
-            $table->integer('post_id');
+            $table->string('key');
+            $table->string('value');
+            $table->longText('additional_info');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateRepliesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('replies');
+        Schema::dropIfExists('codes');
     }
 }

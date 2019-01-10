@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ $title }} | Bluumhealth</title>
     <meta name="description" content="Home Page Description" />
     <meta name="author" content="Farawe iLyas" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap-grid.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}" />
+    @yield('header_scripts')
 </head>
 <body>
 
@@ -28,5 +29,6 @@
 	<script src="{{ asset('js/jquery.min.js') }}"></script>
 	<script src="{{ asset('js/velocity.min.js') }}"></script>
 	<script src="{{ asset('js/app-ui.js') }}"></script>
+    @yield('scripts')
 </body>
 </html>

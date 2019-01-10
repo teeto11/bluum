@@ -7,4 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Reply extends Model
 {
     //
+
+    public function post(){
+        return $this->belongsTo('App\Post', 'foreign_key');
+    }
 }
