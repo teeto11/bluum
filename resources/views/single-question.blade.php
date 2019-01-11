@@ -1,13 +1,5 @@
 @extends('layouts.app-temp')
 
-@section('header_scripts')
-    <style>
-        .topic__footer-likes div a{
-            margin-left: 7.5px;
-            margin-right: 7.5px;
-        }
-    </style>
-@endsection
 @section('content')
     @include('widgets.top-nav-bar')
     <main>
@@ -15,18 +7,18 @@
             <div class="nav">
                 <div class="nav__categories js-dropdown">
                     <div class="nav__select">
-                        <a href="/blog" class="nav__thread-btn nav__thread-btn--prev"><i class="icon-Arrow_Left"></i>Back</a>
+                        <a href="/questions" class="nav__thread-btn nav__thread-btn--prev"><i class="icon-Arrow_Left"></i>Back</a>
                     </div>
                 </div>
             </div>
             <div class="topics">
                 <div class="topics__heading">
-                    <h2 class="topics__heading-title">{{ ucwords($post->title) }}</h2>
+                    <h2 class="topics__heading-title">{{ $question->title }}</h2>
                     <div class="topics__heading-info">
-                        <a href="#" class="category"><i class="bg-3ebafa"></i>{{ ucfirst($post->category) }}</a>
-                        @if ($post->tags)
+                        <a href="#" class="category"><i class="bg-3ebafa"></i>{{ ucfirst($question->category) }}</a>
+                        @if ($question->tags)
                             <div class="tags">
-                                @php $tags = explode(',', $post->tags); @endphp
+                                @php $tags = explode(',', $question->tags); @endphp
                                 @foreach ($tags as $tag)
                                     <a href="#" class="bg-4f80b0">{{ $tag }}</a>
                                 @endforeach
@@ -39,24 +31,24 @@
                         <div class="topic">
                             <div class="topic__head">
                                 <div class="topic__avatar">
-                                    <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/'.$post->user->firstname[0].'.svg') }}" alt="avatar"></a>
+                                    <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/'.$question->user->firstname[0].'.svg') }}" alt="avatar"></a>
                                 </div>
                                 <div class="topic__caption">
                                     <div class="topic__name">
-                                        <a href="#">{{ ucwords($post->user->firstname." ".$post->user->lastname) }}</a>
+                                        <a href="#">{{ ucwords($question->user->firstname." ".$question->user->lastname) }}</a>
                                     </div>
-                                    <div class="topic__date"><i class="icon-Watch_Later"></i>{{ date("h:ia d M, Y", strtotime($post->created_at)) }}</div>
+                                    <div class="topic__date"><i class="icon-Watch_Later"></i>{{ date("h:ia d M, Y", strtotime($question->created_at)) }}</div>
                                 </div>
                             </div>
                             <div class="topic__content">
                                 <div class="topic__text">
-                                    <p>{!! $post->body !!}</p>
+                                    <p>{!! $question->body !!}</p>
                                 </div>
                                 <div class="topic__footer">
                                     <div class="topic__footer-likes">
                                         <div>
                                             <a href="#"><i class="icon-Favorite_Topic"></i></a>
-                                            <span>{{ $post->likes }}</span>
+                                            <span>{{ $question->likes }}</span>
                                         </div>
                                     </div>
                                     <div class="topic__footer-share">
@@ -73,41 +65,43 @@
                                 </div>
                             </div>
                         </div>
-                        @foreach ($post->replies as $reply)
+                        @foreach ($question->replies as $reply)
                             <div class="topic topic--comment">
                                 <div class="topic__head">
                                     <div class="topic__avatar">
-                                        <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/'.ucfirst($reply->user->firstname[0]).'.svg') }}" alt="avatar"></a>
+                                        <a href="#" class="avatar"><img src="./assets/fonts/icons/avatars/F.svg" alt="avatar"></a>
                                     </div>
                                     <div class="topic__caption">
                                         <div class="topic__name">
-                                            <a href="#">{{ ucwords($reply->user->lastname.' '.$reply->user->firstname) }}</a>
+                                            <a href="#">Farawe iLyas</a>
                                         </div>
                                         <div class="topic__date">
-                                            @if ($reply->recipient)
-                                                <div class="topic__user topic__user--pos-r">
-                                                    <i class="icon-Reply_Fill"></i>
-                                                    <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/'.ucfirst($reply->recipient[0]).'.svg') }}" alt="avatar"></a>
-                                                    <a href="#" class="topic__user-name">{{ ucwords($reply->recipient) }}</a>
-                                                </div>
-                                            @endif
-                                            <p><i class="icon-Watch_Later"></i>{{ date("h:ia d M, Y", strtotime($reply->created_at)) }}</p>
+                                            <div class="topic__user topic__user--pos-r">
+                                                <i class="icon-Reply_Fill"></i>
+                                                <a href="#" class="avatar"><img src="./assets/fonts/icons/avatars/N.svg" alt="avatar"></a>
+                                                <a href="#" class="topic__user-name">Nelson Ife</a>
+                                            </div>
+                                            <i class="icon-Watch_Later"></i>06 May, 2017
                                         </div>
                                     </div>
                                 </div>
                                 <div class="topic__content">
                                     <div class="topic__text">
-                                        <p>{{ $reply->body }}</p>
+                                        <p>I am using BootStrap 4, but they are asking me to use PHP framework, which I won't do. My code is secure against SQL injection, XSS and all other attacks, it is well organized, i was using OOP.</p>
                                     </div>
                                     <div class="topic__footer">
                                         <div class="topic__footer-likes">
                                             <div>
-                                                <a href="#"><i class="icon-Favorite_Topic"></i></a>
-                                                <span>{{ $reply->likes }}</span>
+                                                <a href="#"><i class="icon-Upvote"></i></a>
+                                                <span>137</span>
                                             </div>
                                             <div>
-                                                <a href="#" data-id="{{ $reply->user_id }}" class="reply-comment" data-name"{{ strtolower($reply->user->firstname.' '.$reply->user->lastname) }}" ><i class="icon-Reply_Empty"></i></a>
-                                                <span></span>
+                                                <a href="#"><i class="icon-Downvote"></i></a>
+                                                <span>02</span>
+                                            </div>
+                                            <div>
+                                                <a href="#"><i class="icon-Favorite_Topic"></i></a>
+                                                <span>46</span>
                                             </div>
                                         </div>
                                         <div class="topic__footer-share">
@@ -119,6 +113,7 @@
                                             <div data-visible="mobile">
                                                 <a href="#"><i class="icon-More_Options"></i></a>
                                             </div>
+                                            <a href="#"><i class="icon-Reply_Fill"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -127,40 +122,46 @@
                         <div class="topic topic--comment">
                             <div class="topic__head">
                                 <div class="topic__avatar">
-                                    <a href="#" class="avatar"><img src="./assets/fonts/icons/avatars/T.svg" alt="avatar"></a>
+                                    <a href="#" class="avatar"><img src="./assets/fonts/icons/avatars/F.svg" alt="avatar"></a>
                                 </div>
                                 <div class="topic__caption">
                                     <div class="topic__name">
-                                        <a href="#">Tesla</a>
+                                        <a href="#">Farawe iLyas</a>
                                     </div>
-                                    <div class="topic__date"><i class="icon-Watch_Later"></i>07 May, 2017</div>
+                                    <div class="topic__date">
+                                        <div class="topic__user topic__user--pos-r">
+                                            <i class="icon-Reply_Fill"></i>
+                                            <a href="#" class="avatar"><img src="./assets/fonts/icons/avatars/N.svg" alt="avatar"></a>
+                                            <a href="#" class="topic__user-name">Nelson Ife</a>
+                                        </div>
+                                        <i class="icon-Watch_Later"></i>06 May, 2017
+                                    </div>
                                 </div>
                             </div>
                             <div class="topic__content">
                                 <div class="topic__text">
-                                    <p>Yeah! This is really bad. Rejecting an item because its not using a PHP framework(no matter what the script is doing) is a wrong move I think. There are a lot of people reporting this problem(Rejected because of not using a framework).</p>
+                                    <p>I am using BootStrap 4, but they are asking me to use PHP framework, which I won't do. My code is secure against SQL injection, XSS and all other attacks, it is well organized, i was using OOP.</p>
                                 </div>
                                 <div class="topic__footer">
                                     <div class="topic__footer-likes">
                                         <div>
                                             <a href="#"><i class="icon-Upvote"></i></a>
-                                            <span>71</span>
+                                            <span>137</span>
+                                        </div>
+                                        <div>
                                             <a href="#"><i class="icon-Downvote"></i></a>
+                                            <span>02</span>
                                         </div>
                                         <div>
                                             <a href="#"><i class="icon-Favorite_Topic"></i></a>
-                                            <span>42</span>
-                                        </div>
-                                        <div>
-                                            <a href="#"><i class="icon-Reply_Empty"></i></a>
-                                            <span>01</span>
+                                            <span>46</span>
                                         </div>
                                     </div>
                                     <div class="topic__footer-share">
                                         <div data-visible="desktop">
                                             <a href="#"><i class="icon-Share_Topic"></i></a>
                                             <a href="#"><i class="icon-Flag_Topic"></i></a>
-                                            <a href="#" class="active"><i class="icon-Already_Bookmarked"></i></a>
+                                            <a href="#"><i class="icon-Bookmark"></i></a>
                                         </div>
                                         <div data-visible="mobile">
                                             <a href="#"><i class="icon-More_Options"></i></a>
@@ -173,20 +174,13 @@
                         <div class="topic topic--comment">
                             <div class="topic__head">
                                 <div class="topic__avatar">
-                                    <a href="#" class="avatar"><img src="./assets/fonts/icons/avatars/L.svg" alt="avatar"></a>
+                                    <a href="#" class="avatar"><img src="./assets/fonts/icons/avatars/T.svg" alt="avatar"></a>
                                 </div>
                                 <div class="topic__caption">
                                     <div class="topic__name">
-                                        <a href="#">Larry</a>
+                                        <a href="#">Tesla</a>
                                     </div>
-                                    <div class="topic__date">
-                                        <div class="topic__user topic__user--pos-r">
-                                            <i class="icon-Reply_Fill"></i>
-                                            <a href="#" class="avatar"><img src="./assets/fonts/icons/avatars/T.svg" alt="avatar"></a>
-                                            <a href="#" class="topic__user-name">Tesla</a>
-                                        </div>
-                                        <i class="icon-Watch_Later"></i>07 May, 2017
-                                    </div>
+                                    <div class="topic__date"><i class="icon-Watch_Later"></i>07 May, 2017</div>
                                 </div>
                             </div>
                             <div class="topic__content">
@@ -234,13 +228,13 @@
                     <a href="#" class="btn"><i class="icon-Share_Topic"></i>Share</a>
                     <a href="#" class="btn btn--type-02" data-visible="desktop"><i class="icon-Reply_Fill"></i>Reply</a>
                 </div>
-                <div class="topics__title">Suggested Posts</div>
+                <div class="topics__title">Suggested Questions</div>
             </div>
             <div class="posts">
                 <div class="posts__head">
                     <div class="posts__topic">Post</div>
                     <div class="posts__category">Category</div>
-                    <div class="posts__users">Written By</div>
+                    <div class="posts__users">Tags</div>
                     <div class="posts__replies">Replies</div>
                     <div class="posts__views">Views</div>
                     <div class="posts__activity">Activity</div>

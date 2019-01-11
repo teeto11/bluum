@@ -1,8 +1,6 @@
 <?php
 
-Route::get('/', function () {
-    return view('index')->with('title', 'Home');
-});
+Route::get('/', 'indexController@index');
 
 // Auth::routes(["verify" => true]);
 Auth::routes();
@@ -17,7 +15,7 @@ Route::post('blog/post', 'PostController@store')->name('blog.post.store');
 
 //Q&A routes
 Route::get('/questions', 'QuestionController@index')->name('questions');
-Route::get('/question/category/{category}', 'QuestionController@showByCategory')->name('question.showbycategory');
+Route::get('/questions/category/{category}', 'QuestionController@showByCategory')->name('question.showbycategory');
 Route::get('/question/ask', 'QuestionController@create')->name('question.create');
 Route::get('/question/{id}', 'QuestionController@show')->name('question.show');
 Route::post('/question', 'QuestionController@store')->name('question.store');

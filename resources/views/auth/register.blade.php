@@ -1,3 +1,4 @@
+@php $title = 'Register' @endphp
 @extends('layouts.app-temp')
 
 @section('content')

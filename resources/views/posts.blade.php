@@ -1,5 +1,11 @@
 @extends('layouts.app-temp')
 
+@section('header_scripts')
+<style>
+    p{ margin: 0; }
+    .posts__content{ width: 100%; }
+</style>
+@endsection
 @section('content')
     @include('widgets.top-nav-bar');
     <main>
@@ -54,7 +60,7 @@
                 <div class="posts__head">
                     <div class="posts__topic">Post</div>
                     <div class="posts__category">Category</div>
-                    <div class="posts__users">Experts</div>
+                    <div class="posts__users">Posted By</div>
                     <div class="posts__replies">Replies</div>
                     <div class="posts__views">Views</div>
                     <div class="posts__activity">Activity</div>
@@ -74,7 +80,7 @@
                                     <div class="posts__topic">
                                         <div class="posts__content">
                                             <a href="/blog/post/{{ $post->id }}">
-                                                <h3><i><img src="{{ asset('fonts/icons/main/Pinned.svg') }}" alt="Pinned"></i>{{ $post->title }}</h3>
+                                                <h3><i><img src="{{ asset('fonts/icons/main/Pinned.svg') }}" alt="Pinned"></i>{{ ucwords($post->title) }}</h3>
                                             </a>
                                             <p class="ellipsis" >{!! $post->body !!}</p>
                                             <div class="posts__tags tags">
@@ -90,7 +96,7 @@
                                 <div class="posts__section-right">
                                     <div class="posts__users js-dropdown">
                                         <div>
-                                            <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/B.svg') }}" alt="avatar" data-dropdown-btn="user-b"></a>
+                                            <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/'. strtoupper($post->user->firstname[0]).'.svg') }}" alt="avatar" data-dropdown-btn="user-b"></a>
                                             <div class="posts__users-dropdown dropdown dropdown--user dropdown--reverse-y" data-dropdown-list="user-b">
                                                 <div class="dropdown__user">
                                                     <a href="#" class="dropdown__user-label bg-218380">B</a>
@@ -115,28 +121,12 @@
                                             </div>
                                         </div>
                                         <div>
-                                            <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/K.svg') }}" alt="avatar"></a>
-                                        </div>
-                                        <div>
-                                            <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/O.svg') }}" alt="avatar"></a>
+                                            <p >{{ ucfirst($post->user->lastname) }}</p>
                                         </div>
                                     </div>
                                     <div class="posts__replies">{{ count($post->replies) }}</div>
                                     <div class="posts__views">{{ $post->views }}</div>
-
-                                    @php
-                                        $now = date_create(date("Y:m:d H:i:s"));
-                                        $interaction = date_create($post->updated_at);
-                                        $last_activity = date_diff($interaction, $now);
-
-                                        if($last_activity->h < 1) $last_activity_str = $last_activity->i."m";
-                                        if($last_activity->d < 1) $last_activity_str = $last_activity->h."h";
-                                        if($last_activity->d <= 99 && $last_activity->d > 0) $last_activity_str = $last_activity->d."d";
-                                        if($last_activity->d > 99) $last_activity_str = (int)ceil($last_activity/7)."w";
-
-
-                                    @endphp
-                                    <div class="posts__activity">{{ $last_activity_str }}</div>
+                                    <div class="posts__activity">{{ getLastActivityTime($post->updated_at) }}</div>
                                 </div>
                             </div>
                         @endforeach
@@ -148,7 +138,7 @@
                                     <div class="posts__topic">
                                         <div class="posts__content">
                                             <a href="/blog/post/{{ $post->id }}">
-                                                <h3>{{ $post->title }}</h3>
+                                                <h3>{{ ucwords($post->title) }}</h3>
                                             </a>
                                             @if (!is_null($post->tags) || $post->tags != '')
                                                 <div class="posts__tags tags">
@@ -165,13 +155,10 @@
                                 <div class="posts__section-right">
                                     <div class="posts__users">
                                         <div>
-                                            <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/A.svg') }}" alt="avatar"></a>
+                                            <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/'.strtoupper($post->user->firstname[0]).'.svg') }}" alt="avatar"></a>
                                         </div>
                                         <div>
-                                            <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/G.svg') }}" alt="avatar"></a>
-                                        </div>
-                                        <div>
-                                            <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/P.svg') }}" alt="avatar"></a>
+                                            <p >{{ ucfirst($post->user->lastname) }}</p>
                                         </div>
                                     </div>
                                     <div class="posts__replies">{{ count($post->replies) }}</div>

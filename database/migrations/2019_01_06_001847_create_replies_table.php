@@ -18,8 +18,9 @@ class CreateRepliesTable extends Migration
             $table->longText('body');
             $table->integer('likes')->default(0);
             $table->integer('votes')->default(0);
-            $table->integer('recipient')->nullable();
+            $table->string('recipient')->nullable();
             $table->integer('post_id');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

@@ -76,8 +76,13 @@ class QuestionController extends Controller
                 'related' => $related,
             ];
 
-            return view('single-post')->with($data);
+            return view('single-question')->with($data);
         }else return redirect('/questions')->with('error', 'Question not found');
+    }
+
+    public function showByCategory($category){
+
+        dd($category);
     }
 
 
