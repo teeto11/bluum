@@ -15,4 +15,12 @@ class Reply extends Model
     public function user(){
         return $this->belongsTo('App\User');
     }
+
+    public function likes(){
+        return $this->hasMany('App\ReplyLike');
+    }
+
+    public function votes(){
+        return $this->hasMany('App\ReplyVote');
+    }
 }

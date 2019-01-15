@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Code;
 use App\Post;
+use App\PostLike;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -90,6 +91,19 @@ class PostController extends Controller
 
     public function update(Request $request, $id){
 
+    }
+
+    public function like(Request $request){
+
+        $this->validate($request, [
+            'post_id' => ['required', 'integer'],
+            'user_id' => ['required', 'integer'],
+        ]);
+
+        $post = PostLike::where([
+            "post_id" => $request->post_id;
+            'user_id' => $request->user_id,
+        ]);
     }
 
     public function destroy($id){

@@ -15,6 +15,9 @@ class CreateReplyVotesTable extends Migration
     {
         Schema::create('reply_votes', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('reply_id');
+            $table->integer('user_id');
+            $table->boolean('vote');
             $table->timestamps();
         });
     }
