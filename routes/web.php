@@ -1,6 +1,6 @@
 <?php
 
-Route::get('/', 'indexController@index');
+Route::get('/', 'IndexController@index');
 
 // Auth::routes(["verify" => true]);
 Auth::routes();
@@ -19,3 +19,6 @@ Route::get('/questions/category/{category}', 'QuestionController@showByCategory'
 Route::get('/question/ask', 'QuestionController@create')->name('question.create');
 Route::get('/question/{id}', 'QuestionController@show')->name('question.show');
 Route::post('/question', 'QuestionController@store')->name('question.store');
+
+Route::post('/post/like', 'PostLikeController@like')->name('post.like');
+Route::post('/post/unlike', 'PostLikeController@unlike')->name('post.unlike');

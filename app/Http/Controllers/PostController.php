@@ -79,6 +79,7 @@ class PostController extends Controller
                 'title' => ucwords($post->title),
                 'post' => $post,
                 'related' => $related,
+                'liked' => boolval(PostLike::where(["post_id" => $post->id, "user_id" => auth()->user()->id])->count()),
             ];
 
             return view('single-post')->with($data);
@@ -91,19 +92,6 @@ class PostController extends Controller
 
     public function update(Request $request, $id){
 
-    }
-
-    public function like(Request $request){
-
-        $this->validate($request, [
-            'post_id' => ['required', 'integer'],
-            'user_id' => ['required', 'integer'],
-        ]);
-
-        $post = PostLike::where([
-            "post_id" => $request->post_id;
-            'user_id' => $request->user_id,
-        ]);
     }
 
     public function destroy($id){

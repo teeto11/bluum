@@ -6,6 +6,9 @@
             margin-left: 7.5px;
             margin-right: 7.5px;
         }
+        #post-unlike i{
+            color: red;
+        }
     </style>
 @endsection
 @section('content')
@@ -55,8 +58,8 @@
                                 <div class="topic__footer">
                                     <div class="topic__footer-likes">
                                         <div>
-                                            <a href="#"><i class="icon-Favorite_Topic"></i></a>
-                                            <span>{{ $post->likes }}</span>
+                                            <a href="#" class="post-like" id="{{ $liked ? "post-unlike" : "post-like" }}" data-target="{{ $post->id }}" ><i class="icon-Favorite_Topic" ></i></a>
+                                            <span id="post-{{$post->id}}-likes" >{{ $post->likes }}</span>
                                         </div>
                                     </div>
                                     <div class="topic__footer-share">
@@ -350,4 +353,43 @@
         </div>
     </main>
     @include('widgets.footer')
+@endsection
+
+@section('scripts')
+    <script>
+        let running = false;
+
+        $(".post-like").click(function(e){
+
+            e.preventDefault();
+
+            if(running) {
+                alert("Don't click multiple times");
+                return false;
+            }
+
+            running = true;
+            let url = "";
+            let likeBtn = $(this);
+            if(likeBtn.attr('id') === "post-like") url = "{{ route('post.like') }}"; else url = "{{ route('post.unlike') }}";
+            let post_id = $(this).attr('data-target');
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                method: "POST",
+                url: url,
+                data: { post_id:post_id },
+            }).done(function(data){
+                if(data !== 'false' && data !== ''){
+                    $(`#post-${post_id}-likes`).html(data);
+                    if(likeBtn.attr('id') === "post-like") likeBtn.attr("id", "post-unlike"); else likeBtn.attr("id", "post-like");
+                    running = false;
+                }
+            }).fail(function(e){
+                if(e.status === 401) alert('You need to be logged in');
+            });
+        });
+    </script>
 @endsection
