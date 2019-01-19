@@ -64,6 +64,7 @@ class PostController extends Controller
         $post->tags = implode(",", array_map('trim', explode(',', trim($request->tags))));
         $post->type = "POST";
         $post->user_id = auth()->user()->id;
+        $this->updateTags($post->tags);
 
         if($post->save()) return redirect('/blog')->with('success', 'Blog post created successfully'); else{
             return redirect('/blog')->with('error', 'An unknown error occurred');
@@ -79,11 +80,16 @@ class PostController extends Controller
                 'title' => ucwords($post->title),
                 'post' => $post,
                 'related' => $related,
-                'liked' => boolval(PostLike::where(["post_id" => $post->id, "user_id" => auth()->user()->id])->count()),
             ];
+
+            if(!auth()->guest()) $data->liked = boolval(PostLike::where(["post_id" => $post->id, "user_id" => auth()->user()->id])->count());
 
             return view('single-post')->with($data);
         }else return redirect('/blog')->with('error', 'Post not found');
+    }
+
+    public function test(){
+
     }
 
     public function edit($id){
@@ -96,5 +102,9 @@ class PostController extends Controller
 
     public function destroy($id){
 
+    }
+
+    public function updateTags($tags){
+        dd($tags);
     }
 }

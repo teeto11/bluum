@@ -16,11 +16,7 @@ class PostLikeController extends Controller
     public function like(Request $request){
 
         $this->validate($request, [ 'post_id' => ['required', 'integer'] ]);
-        $postLikeCount = PostLike::where([
-            "post_id" => $request->post_id,
-            "user_id" => auth()->user()->id,
-        ])->count();
-
+        $postLikeCount = PostLike::where([ "post_id" => $request->post_id, "user_id" => auth()->user()->id, ])->count();
 
         if($postLikeCount < 1){
             $post = Post::find($request->post_id);
@@ -42,10 +38,7 @@ class PostLikeController extends Controller
     public function unlike(Request $request){
 
         $this->validate($request, [ 'post_id' => ['required', 'integer'] ]);
-        $postLike = PostLike::where([
-            "post_id" => $request->post_id,
-            'user_id' => auth()->user()->id,
-        ]);
+        $postLike = PostLike::where([ "post_id" => $request->post_id, 'user_id' => auth()->user()->id, ]);
 
         if($postLike->count() > 0) $postLike = $postLike->first(); else return "false";
         $postLike->delete();

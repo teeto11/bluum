@@ -58,7 +58,11 @@
                                 <div class="topic__footer">
                                     <div class="topic__footer-likes">
                                         <div>
-                                            <a href="#" class="post-like" id="{{ $liked ? "post-unlike" : "post-like" }}" data-target="{{ $post->id }}" ><i class="icon-Favorite_Topic" ></i></a>
+                                            @guest
+                                                <a href="#" class="post-like" id="post-like" data-target="{{ $post->id }}" ><i class="icon-Favorite_Topic" ></i></a>
+                                            @else
+                                                <a href="#" class="post-like" id="{{ $liked ? "post-unlike" : "post-like" }}" data-target="{{ $post->id }}" ><i class="icon-Favorite_Topic" ></i></a>
+                                            @endguest
                                             <span id="post-{{$post->id}}-likes" >{{ $post->likes }}</span>
                                         </div>
                                     </div>
@@ -117,7 +121,7 @@
                                             <div data-visible="desktop">
                                                 <a href="#"><i class="icon-Share_Topic"></i></a>
                                                 <a href="#"><i class="icon-Flag_Topic"></i></a>
-                                                <a href="#"><i class="icon-Bookmark"></i></a>
+                                                <a href="#" class="active" ><i class="icon-Already_Bookmarked"></i></a>
                                             </div>
                                             <div data-visible="mobile">
                                                 <a href="#"><i class="icon-More_Options"></i></a>
@@ -127,108 +131,6 @@
                                 </div>
                             </div>
                         @endforeach
-                        <div class="topic topic--comment">
-                            <div class="topic__head">
-                                <div class="topic__avatar">
-                                    <a href="#" class="avatar"><img src="./assets/fonts/icons/avatars/T.svg" alt="avatar"></a>
-                                </div>
-                                <div class="topic__caption">
-                                    <div class="topic__name">
-                                        <a href="#">Tesla</a>
-                                    </div>
-                                    <div class="topic__date"><i class="icon-Watch_Later"></i>07 May, 2017</div>
-                                </div>
-                            </div>
-                            <div class="topic__content">
-                                <div class="topic__text">
-                                    <p>Yeah! This is really bad. Rejecting an item because its not using a PHP framework(no matter what the script is doing) is a wrong move I think. There are a lot of people reporting this problem(Rejected because of not using a framework).</p>
-                                </div>
-                                <div class="topic__footer">
-                                    <div class="topic__footer-likes">
-                                        <div>
-                                            <a href="#"><i class="icon-Upvote"></i></a>
-                                            <span>71</span>
-                                            <a href="#"><i class="icon-Downvote"></i></a>
-                                        </div>
-                                        <div>
-                                            <a href="#"><i class="icon-Favorite_Topic"></i></a>
-                                            <span>42</span>
-                                        </div>
-                                        <div>
-                                            <a href="#"><i class="icon-Reply_Empty"></i></a>
-                                            <span>01</span>
-                                        </div>
-                                    </div>
-                                    <div class="topic__footer-share">
-                                        <div data-visible="desktop">
-                                            <a href="#"><i class="icon-Share_Topic"></i></a>
-                                            <a href="#"><i class="icon-Flag_Topic"></i></a>
-                                            <a href="#" class="active"><i class="icon-Already_Bookmarked"></i></a>
-                                        </div>
-                                        <div data-visible="mobile">
-                                            <a href="#"><i class="icon-More_Options"></i></a>
-                                        </div>
-                                        <a href="#"><i class="icon-Reply_Fill"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="topic topic--comment">
-                            <div class="topic__head">
-                                <div class="topic__avatar">
-                                    <a href="#" class="avatar"><img src="./assets/fonts/icons/avatars/L.svg" alt="avatar"></a>
-                                </div>
-                                <div class="topic__caption">
-                                    <div class="topic__name">
-                                        <a href="#">Larry</a>
-                                    </div>
-                                    <div class="topic__date">
-                                        <div class="topic__user topic__user--pos-r">
-                                            <i class="icon-Reply_Fill"></i>
-                                            <a href="#" class="avatar"><img src="./assets/fonts/icons/avatars/T.svg" alt="avatar"></a>
-                                            <a href="#" class="topic__user-name">Tesla</a>
-                                        </div>
-                                        <i class="icon-Watch_Later"></i>07 May, 2017
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="topic__content">
-                                <div class="topic__text">
-                                    <p>Yeah! This is really bad. Rejecting an item because its not using a PHP framework(no matter what the script is doing) is a wrong move I think. There are a lot of people reporting this problem(Rejected because of not using a framework).</p>
-                                </div>
-                                <div class="topic__footer">
-                                    <div class="topic__footer-likes">
-                                        <div>
-                                            <a href="#"><i class="icon-Upvote"></i></a>
-                                            <span>71</span>
-                                        </div>
-                                        <div>
-                                            <a href="#"><i class="icon-Downvote"></i></a>
-                                            <span>06</span>
-                                        </div>
-                                        <div>
-                                            <a href="#"><i class="icon-Favorite_Topic"></i></a>
-                                            <span>42</span>
-                                        </div>
-                                        <div>
-                                            <a href="#"><i class="icon-Reply_Empty"></i></a>
-                                            <span>01</span>
-                                        </div>
-                                    </div>
-                                    <div class="topic__footer-share">
-                                        <div data-visible="desktop">
-                                            <a href="#"><i class="icon-Share_Topic"></i></a>
-                                            <a href="#"><i class="icon-Flag_Topic"></i></a>
-                                            <a href="#" class="active"><i class="icon-Already_Bookmarked"></i></a>
-                                        </div>
-                                        <div data-visible="mobile">
-                                            <a href="#"><i class="icon-More_Options"></i></a>
-                                        </div>
-                                        <a href="#"><i class="icon-Reply_Fill"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="topics__title"><i class="icon-Watch_Later"></i>This topic will has been closed.</div>
