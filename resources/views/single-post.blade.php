@@ -113,7 +113,7 @@
                                                 <span>{{ $reply->likes }}</span>
                                             </div>
                                             <div>
-                                                <a href="#" data-id="{{ $reply->user_id }}" class="reply-comment" data-name"{{ strtolower($reply->user->firstname.' '.$reply->user->lastname) }}" ><i class="icon-Reply_Empty"></i></a>
+                                                <a href="#" data-id="{{ $reply->user_id }}" class="reply-comment" data-name="{{ strtolower($reply->user->firstname.' '.$reply->user->lastname) }}" ><i class="icon-Reply_Empty"></i></a>
                                                 <span></span>
                                             </div>
                                         </div>
@@ -151,105 +151,32 @@
                     <div class="posts__activity">Activity</div>
                 </div>
                 <div class="posts__body">
-                    <div class="posts__item">
-                        <div class="posts__section-left">
-                            <div class="posts__topic">
-                                <div class="posts__content">
-                                    <a href="#">
-                                        <h3>Current news and discussion</h3>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="posts__category"><a href="#" class="category"><i class="bg-368f8b"></i>Politics</a></div>
-                        </div>
-                        <div class="posts__section-right">
-                            <div class="posts__users"><a href="#" class="category"><i class="bg-368f8b"></i>Politics</a></div>
-                            <div class="posts__replies">31</div>
-                            <div class="posts__views">14.5k</div>
-                            <div class="posts__activity">13d</div>
-                        </div>
-                    </div>
-                    <div class="posts__item bg-f2f4f6">
-                        <div class="posts__section-left">
-                            <div class="posts__topic">
-                                <div class="posts__content">
-                                    <a href="#">
-                                        <h3>Get your username drawn by the other users of unity! or a drawing based on what you do</h3>
-                                    </a>
-                                    <div class="posts__tags tags">
-                                        <a href="#" class="bg-4f80b0">gaming</a>
-                                        <a href="#" class="bg-424ee8">nature</a>
-                                        <a href="#" class="bg-36b7d7">entertainment</a>
+                    @foreach($related as $post)
+                        <div class="posts__item">
+                            <div class="posts__section-left">
+                                <div class="posts__topic">
+                                    <div class="posts__content">
+                                        <a href="#">
+                                            <h3>{{ $post->title }}</h3>
+                                        </a>
+                                        <div class="posts__tags tags">
+                                            @php $r_tags = explode(",", $post->tags) @endphp
+                                            @foreach($r_tags as $tag)
+                                                <a href="#" class="bg-4f80b0">{{ $tag }}</a>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="posts__category"><a href="/blog/{{ urlencode($post->category) }}" class="category"><i class="bg-368f8b"></i>{{ ucfirst($post->category) }}</a></div>
                             </div>
-                            <div class="posts__category"><a href="#" class="category"><i class="bg-4436f8"></i>Video</a></div>
-                        </div>
-                        <div class="posts__section-right">
-                            <div class="posts__users"><a href="#" class="category"><i class="bg-368f8b"></i>Politics</a></div>
-                            <div class="posts__replies">252</div>
-                            <div class="posts__views">396</div>
-                            <div class="posts__activity">13m</div>
-                        </div>
-                    </div>
-                    <div class="posts__item">
-                        <div class="posts__section-left">
-                            <div class="posts__topic">
-                                <div class="posts__content">
-                                    <a href="#">
-                                        <h3>Which movie have you watched most recently?</h3>
-                                    </a>
-                                </div>
+                            <div class="posts__section-right">
+                                <div class="posts__users"><a class="category"><i class="bg-368f8b"></i>{{ ucfirst($post->user->lastname) }}</a></div>
+                                <div class="posts__replies">{{ count($post->replies) }}</div>
+                                <div class="posts__views">{{ $post->views }}</div>
+                                <div class="posts__activity">{{ getLastActivityTime($post->updated_at) }}</div>
                             </div>
-                            <div class="posts__category"><a href="#" class="category"><i class="bg-3ebafa"></i> Exchange</a></div>
                         </div>
-                        <div class="posts__section-right">
-                            <div class="posts__users"><a href="#" class="category"><i class="bg-368f8b"></i>Politics</a></div>
-                            <div class="posts__replies">207</div>
-                            <div class="posts__views">7.5k</div>
-                            <div class="posts__activity">41m</div>
-                        </div>
-                    </div>
-                    <div class="posts__item posts__item--bg-gradient">
-                        <div class="posts__section-left">
-                            <div class="posts__topic">
-                                <div class="posts__content">
-                                    <a href="#">
-                                        <h3><span>This post contails spoiler about</span> Star Wars Movie.</h3>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="posts__category"><a href="#" class="category"><i class="bg-777da7"></i> Q&amp;As</a></div>
-                        </div>
-                        <div class="posts__section-right">
-                            <div class="posts__users"><a href="#" class="category"><i class="bg-368f8b"></i>Politics</a></div>
-                            <div class="posts__replies">2.3k</div>
-                            <div class="posts__views">2.0k</div>
-                            <div class="posts__activity">1h</div>
-                        </div>
-                    </div>
-                    <div class="posts__item">
-                        <div class="posts__section-left">
-                            <div class="posts__topic">
-                                <div class="posts__content">
-                                    <a href="#">
-                                        <h3>Take a picture of what you’re doing at this very moment</h3>
-                                    </a>
-                                    <div class="posts__tags tags">
-                                        <a href="#" class="bg-ec008c">selfie</a>
-                                        <a href="#" class="bg-7cc576">camera</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="posts__category"><a href="#" class="category"><i class="bg-c6b38e"></i> Pets</a></div>
-                        </div>
-                        <div class="posts__section-right">
-                            <div class="posts__users"><a href="#" class="category"><i class="bg-368f8b"></i>Politics</a></div>
-                            <div class="posts__replies">441</div>
-                            <div class="posts__views">3.1k</div>
-                            <div class="posts__activity">6h</div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>

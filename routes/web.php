@@ -8,6 +8,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Blog post Routes
 Route::get('/blog', 'PostController@index')->name('blog');
+Route::get('/blog/tag/{tag}', 'PostController@viewByTag')->name('blog.tag');
+Route::get('/blog/unread', 'PostController@viewUnreadOnly')->name('blog.category');
+Route::get('/blog/popular', 'PostController@viewMostPopular')->name('blog.category');
 Route::get('/blog/{category}', 'PostController@viewByCategory')->name('blog.category');
 Route::get('blog/post/new', 'PostController@create')->name('blog.post.create');
 Route::get('/blog/post/{id}', 'PostController@show')->name('blog.post');

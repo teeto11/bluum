@@ -5,10 +5,20 @@ function getLastActivityTime($lastActivityDate){
     $interaction = date_create($lastActivityDate);
     $last_activity = date_diff($interaction, $now);
 
+    //dd($last_activity);
     if($last_activity->h < 1) $last_activity_str = $last_activity->i."m";
-    if($last_activity->d < 1) $last_activity_str = $last_activity->h."h";
+    if($last_activity->d < 1 && $last_activity->h > 0) $last_activity_str = $last_activity->h."h";
     if($last_activity->d <= 99 && $last_activity->d > 0) $last_activity_str = $last_activity->d."d";
     if($last_activity->d > 99) $last_activity_str = (int)ceil($last_activity/7)."w";
 
     return $last_activity_str;
+}
+
+function randomColour(){
+
+    $vals = ['a','b','c','d','e','f',0,1,2,3,4,5,6,7,8,9];
+    do{
+        $colour = '#'.$vals[mt_rand(0,15)].$vals[mt_rand(0,15)].$vals[mt_rand(0,15)].$vals[mt_rand(0,15)].$vals[mt_rand(0,15)].$vals[mt_rand(0,15)];
+    }while(substr_count($colour, 'f') > 5);
+    return $colour;
 }

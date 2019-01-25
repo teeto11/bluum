@@ -16,9 +16,10 @@
                         <div class="btn-select" data-dropdown-btn="categories">All Categories</div>
                         <nav class="dropdown dropdown--design-01" data-dropdown-list="categories">
                             <ul class="dropdown__catalog row">
-                                @if ($categories)
+                                <li class="col-xs-6"><a href="/blog" class="category"><i class="bg-5dd39e"></i>All</a></li>
+                            @if ($categories)
                                     @foreach ($categories as $category)
-                                        <li class="col-xs-6"><a href="/blog/{{ $category->value }}" class="category"><i class="bg-5dd39e"></i>{{ ucfirst($category->value) }}</a></li>
+                                        <li class="col-xs-6"><a href="/blog/{{ urlencode($category->value) }}" class="category"><i class="bg-5dd39e"></i>{{ ucfirst($category->value) }}</a></li>
                                     @endforeach
                                 @endif
                             </ul>
@@ -28,12 +29,9 @@
                         <div class="btn-select" data-dropdown-btn="tags">Tags</div>
                         <div class="dropdown dropdown--design-01" data-dropdown-list="tags">
                             <div class="tags">
-                                <a href="#" class="bg-6f7e9c">funny</a>
-                                <a href="#" class="bg-a3d39c">climbing</a>
-                                <a href="#" class="bg-8781bd">dreams</a>
-                                <a href="#" class="bg-f1ab32">life</a>
-                                <a href="#" class="bg-3b96ca">reason</a>
-                                <a href="#" class="bg-348aa7">social</a>
+                                @foreach($top_tags as $tag)
+                                    <a href="/blog/tag/{{ urlencode($tag->value) }}" class="bg-4f80b0">{{ $tag->value }}</a>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -51,8 +49,8 @@
                     </div>
                     <ul>
                         <li class="active"><a href="#">Latest</a></li>
-                        <li><a href="#">Unread</a></li>
-                        <li><a href="#">Most Liked</a></li>
+                        <li><a href="/blog/unread">Unread</a></li>
+                        <li><a href="/blog/popular">Most Liked</a></li>
                     </ul>
                 </div>
             </div>
@@ -86,7 +84,7 @@
                                             <div class="posts__tags tags">
                                                 @php $tags = explode(',', $post->tags); @endphp
                                                 @foreach ($tags as $tag)
-                                                    <a href="#" class="bg-4f80b0">{{ $tag }}</a>
+                                                    <a href="/blog/tag/{{ urlencode($tag) }}" class="bg-4f80b0">{{ $tag }}</a>
                                                 @endforeach
                                             </div>
                                         </div>

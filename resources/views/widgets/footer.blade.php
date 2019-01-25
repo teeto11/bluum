@@ -24,42 +24,6 @@
                         <li><a href="#"><i class="fa fa-angle-double-right"></i> Site Guidelines</a></li>
                     </ul>
                 </div>
-                <div class="footer__links col-sm-12 col-xs-6 col-md-2">
-                    <ul>
-                        <li class="link__head">Link Header</li>
-                        <li><a href="#"><i class="fa fa-angle-double-right"></i> Link</a></li>
-                        <li><a href="#"><i class="fa fa-angle-double-right"></i> Link</a></li>
-                        <li><a href="#"><i class="fa fa-angle-double-right"></i> Link</a></li>
-                        <li><a href="#"><i class="fa fa-angle-double-right"></i> Link</a></li>
-                    </ul>
-                </div>
-                <div class="footer__links col-sm-12 col-xs-6 col-md-2">
-                    <ul>
-                        <li class="link__head">Link Header</li>
-                        <li><a href="#"><i class="fa fa-angle-double-right"></i> Link</a></li>
-                        <li><a href="#"><i class="fa fa-angle-double-right"></i> Link</a></li>
-                        <li><a href="#"><i class="fa fa-angle-double-right"></i> Link</a></li>
-                        <li><a href="#"><i class="fa fa-angle-double-right"></i> Link</a></li>
-                    </ul>
-                </div>
-                <div class="footer__links col-sm-12 col-xs-6 col-md-2">
-                    <ul>
-                        <li class="link__head">Link Header</li>
-                        <li><a href="#"><i class="fa fa-angle-double-right"></i> Link</a></li>
-                        <li><a href="#"><i class="fa fa-angle-double-right"></i> Link</a></li>
-                        <li><a href="#"><i class="fa fa-angle-double-right"></i> Link</a></li>
-                        <li><a href="#"><i class="fa fa-angle-double-right"></i> Link</a></li>
-                    </ul>
-                </div>
-                <div class="footer__links col-sm-12 col-xs-6 col-md-2">
-                    <ul>
-                        <li class="link__head">Link Header</li>
-                        <li><a href="#"><i class="fa fa-angle-double-right"></i> Link</a></li>
-                        <li><a href="#"><i class="fa fa-angle-double-right"></i> Link</a></li>
-                        <li><a href="#"><i class="fa fa-angle-double-right"></i> Link</a></li>
-                        <li><a href="#"><i class="fa fa-angle-double-right"></i> Link</a></li>
-                    </ul>
-                </div>
             </div>
         </div>
     </div>
