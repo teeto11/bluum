@@ -16,11 +16,11 @@ class Reply extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function likes(){
+    public function replyLikes(){
         return $this->hasMany('App\ReplyLike');
     }
 
-    public function votes(){
+    public function replyVotes(){
         return $this->hasMany('App\ReplyVote');
     }
 }

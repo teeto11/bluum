@@ -14,24 +14,24 @@ class ReplyController extends Controller{
         ]);
     }
 
-    public function addReply($postId, Request $request){
+    public function addReply(Request $request){
 
         $this->validate($request, [
-            'body' => ['required', 'string']
+            'body' => ['required', 'string'],
+            'post_id' => ['required', 'int'],
         ]);
-        $post = Post::find($postId);
+        $post = Post::find($request->post_id);
 
         if($post){
             $reply = new Reply;
             $reply->body = $request->body;
             $reply->user_id = auth()->user()->id;
-            $reply->post_id = $postId;
+            $reply->post_id = $post->id;
+
             if(isset($request->recipient) && !is_null($request->recipient)) $reply->recipient = $request->recipient;
-
-
-            if($post->type = "QUESTION") $redirect = "/question"; else $redirect = "/blog/post/";
-            if($reply->save()) return redirect("$redirect/$postId")->with('success', 'Question asked successfully'); else{
-                return redirect("$redirect/$postId")->with('error', 'An unknown error occurred');
+            if($post->type == "QUESTION") $redirect = "/question"; else $redirect = "/blog/post";
+            if($reply->save()) return redirect("$redirect/$post->id/".formatUrlString($post->title))->with('success', 'Question asked successfully'); else{
+                return redirect("$redirect/$post->id/".formatUrlString($post->title))->with('error', 'An unknown error occurred');
             }
         }
     }

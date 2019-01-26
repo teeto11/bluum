@@ -133,17 +133,18 @@ class PostController extends Controller
         $post = Post::find($id);
 
         if($post){
-            if(auth()->user()->id != $post->user_id) return redirect('/blog')->with('error', 'an error occurred');
+            if(auth()->user()->id != $post->user_id) return redirect('/blog')->with('error', 'access denied');
 
             $categories = Code::where('key', 'BP_CATEGORY')->get();
             $data = [
-                'post' => $post,
                 "title" => 'Edit Post - Bluum',
+                'post' => $post,
                 "categories" => $categories,
             ];
 
             return view('post.edit')->with($data);
         }
+        return redirect('/blog')->with('error', 'an error occurred');
     }
 
     public function update(Request $request, $id){

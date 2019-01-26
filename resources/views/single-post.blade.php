@@ -89,6 +89,23 @@
                                 </div>
                             </div>
                         </div>
+                        <div id="comment" >
+                            <form action="{{ route('blog.post.comment') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="post_id" value="{{ $post->id }}" >
+                                @if ($errors->has('body'))
+                                    <span class="invalid-feedback text-danger" role="alert">
+                                        <strong><p>{{ $errors->first('body') }}</p></strong>
+                                    </span>
+                                @endif
+                                <div class="form-group" >
+                                    <textarea class="form-control" name="body" style="resize: none" rows="5" ></textarea>
+                                </div>
+                                <div class="form-group text-right" >
+                                    <input type="submit" class="btn btn-success" value="Comment" >
+                                </div>
+                            </form>
+                        </div>
                         @foreach ($post->replies as $reply)
                             <div class="topic topic--comment">
                                 <div class="topic__head">
@@ -160,12 +177,14 @@
                     <div class="posts__activity">Activity</div>
                 </div>
                 <div class="posts__body">
+                    @php $counter = 1; @endphp
                     @foreach($related as $post)
-                        <div class="posts__item">
+                        <div class="posts__item {{ ($counter%2 == 0) ? 'bg-f2f4f6' : '' }}">
+                            @php $counter++; @endphp
                             <div class="posts__section-left">
                                 <div class="posts__topic">
                                     <div class="posts__content">
-                                        <a href="#">
+                                        <a href="/blog/post/{{ $post->id }}/{{ formatUrlString($post->title) }}">
                                             <h3>{{ $post->title }}</h3>
                                         </a>
                                         <div class="posts__tags tags">
