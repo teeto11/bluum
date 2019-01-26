@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Code;
 use App\Post;
 use App\PostLike;
+use App\PostView;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -52,7 +53,7 @@ class PostController extends Controller
     function viewByTag($tag){
 
         $tag = strtolower(urldecode($tag));
-        $posts = Post::where([['tags', 'like', "%$tag%"], ['type', 'POST']])->get();
+        $posts = Post::where([['tags', 'like', "%$tag%"], ['type', 'POST']])->paginate(15);
         $data = $this->viewPostsData();
         $data['posts'] = $posts;
 
@@ -122,7 +123,10 @@ class PostController extends Controller
                 'related' => $related,
             ];
 
-            if(!auth()->guest()) $data['liked'] = boolval(PostLike::where(["post_id" => $post->id, "user_id" => auth()->user()->id])->count());
+            if(!auth()->guest()){
+                $data['liked'] = boolval(PostLike::where(["post_id" => $post->id, "user_id" => auth()->user()->id])->count());
+                $this->updateViews($post);
+            }
 
             return view('single-post')->with($data);
         }else return redirect('/blog')->with('error', 'Post not found');
@@ -181,7 +185,7 @@ class PostController extends Controller
 
     }
 
-    public function removeTag($tags){
+    private function removeTag($tags){
 
         foreach ($tags as $tag){
 
@@ -194,7 +198,7 @@ class PostController extends Controller
         }
     }
 
-    public function updateTags($tags){
+    private function updateTags($tags){
 
         foreach ($tags as $tag){
 
@@ -211,6 +215,19 @@ class PostController extends Controller
             }
 
             $t->save();
+        }
+    }
+
+    private function updateViews($post){
+
+        $postViews = PostView::where(['user_id'=>auth()->user()->id, 'post_id'=>$post->id]);
+        if($postViews->count() < 1){
+            $postView = new PostView;
+            $postView->user_id = auth()->user()->id;
+            $postView->post_id = $post->id;
+            $postView->save();
+            $post->views = count($post->postViews);
+            $post->save();
         }
     }
 }

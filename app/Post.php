@@ -20,7 +20,7 @@ class Post extends Model
         return $this->hasMany('App\PostLike');
     }
 
-    public function views(){
+    public function postViews(){
         return $this->hasMany('App\PostView');
     }
 }
