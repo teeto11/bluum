@@ -1,4 +1,7 @@
 <?php
+
+use App\ReplyLike;
+
 function getLastActivityTime($lastActivityDate){
 
     $now = date_create(date("Y:m:d H:i:s"));
@@ -29,4 +32,10 @@ function formatUrlString($string){
     $string = preg_replace('/\s+/', '-', $string);
     $string = strtolower($string);
     return $string;
+}
+
+function userLikedReply($replyId){
+
+    $replyLike = ReplyLike::where(['reply_id'=>$replyId, 'user_id'=>auth()->user()->id]);
+    return boolval($replyLike->count());
 }

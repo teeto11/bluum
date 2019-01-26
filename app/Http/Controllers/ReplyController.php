@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Reply;
 use App\Post;
+use App\User;
+use App\Notificaton;
 use Illuminate\Http\Request;
 
 class ReplyController extends Controller{
@@ -14,13 +16,15 @@ class ReplyController extends Controller{
         ]);
     }
 
-    public function addReply(Request $request){
+    public function addComment(Request $request){
 
         $this->validate($request, [
             'body' => ['required', 'string'],
             'post_id' => ['required', 'int'],
+            'recipient' => ['int'],
         ]);
         $post = Post::find($request->post_id);
+        if($post->type != 'POST') return redirect('/blog')->with('error', 'an error occurred');
 
         if($post){
             $reply = new Reply;
@@ -28,11 +32,44 @@ class ReplyController extends Controller{
             $reply->user_id = auth()->user()->id;
             $reply->post_id = $post->id;
 
-            if(isset($request->recipient) && !is_null($request->recipient)) $reply->recipient = $request->recipient;
-            if($post->type == "QUESTION") $redirect = "/question"; else $redirect = "/blog/post";
-            if($reply->save()) return redirect("$redirect/$post->id/".formatUrlString($post->title))->with('success', 'Question asked successfully'); else{
-                return redirect("$redirect/$post->id/".formatUrlString($post->title))->with('error', 'An unknown error occurred');
+            if(isset($request->recipient) && !is_null($request->recipient)){
+                $recipient = User::find($request->recipient);
+                if($recipient){
+                    $reply->recipient = "@$recipient->username";
+                    $r_notification = $this->newCommentReplyNotification($recipient->id);
+                }else return redirect("/")->with('error', 'an error occurred');
             }
+
+            $reply->save();
+            $this->newCommentNotification($post, $reply->id);
+            if(isset($r_notification) && !is_null($r_notification)){
+                $r_notification->link = "/blog/post/$post->id/".formatUrlString($post->title)."#reply-$reply->id";
+                $r_notification->save();
+            }
+            return redirect("/blog/post/$post->id/".formatUrlString($post->title))->with('success', 'Question asked successfully');
         }
     }
+
+    private function newCommentReplyNotification($user_id){
+
+        $notification = new Notificaton;
+        $notification->user_id = $user_id;
+        $notification->notification = auth()->user()->username.' replied your comment';
+
+        return $notification;
+    }
+
+    private function newCommentNotification($post, $reply_id){
+        $notification = new Notificaton;
+        $notification->user_id = $post->user_id;
+        $notification->notification = auth()->user()->username.'Commented on your post '.ucfirst($post->title);
+        $notification->link = "/blog/post/$post->id/".formatUrlString($post->title)."#reply-$reply_id";
+        $notification->save();
+    }
+
+    public function answerQuestion(){
+
+    }
+
+
 }

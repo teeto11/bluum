@@ -47,4 +47,8 @@ class User extends Authenticatable
     public function replyVotes(){
         return $this->hasMany('App\ReplyVote');
     }
+
+    public function notifications(){
+        return $this->hasMany('App\Notification')->where('seen', false)->orderBy('created_at', 'desc');
+    }
 }

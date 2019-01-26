@@ -17,7 +17,7 @@ Route::get('blog/post/edit/{id}', 'PostController@edit')->name('blog.post.edit')
 Route::get('/blog/post/{id}/{title}', 'PostController@show')->name('blog.post');
 Route::post('blog/post', 'PostController@store')->name('blog.post.store');
 Route::put('/blog/post/{post}', 'PostController@update')->name('blog.post.update');
-Route::post('/blog/post/comment', 'ReplyController@addReply')->name('blog.post.comment');
+Route::post('/blog/post/comment', 'ReplyController@addComment')->name('blog.post.comment');
 
 //Q&A routes
 Route::get('/questions', 'QuestionController@index')->name('questions');
@@ -28,3 +28,6 @@ Route::post('/question', 'QuestionController@store')->name('question.store');
 
 Route::post('/post/like', 'PostLikeController@like')->name('post.like');
 Route::post('/post/unlike', 'PostLikeController@unlike')->name('post.unlike');
+
+Route::post('/reply/like', 'ReplyLikeController@like')->name('reply.like');
+Route::post('/reply/unlike', 'ReplyLikeController@unlike')->name('reply.unlike');

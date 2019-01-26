@@ -107,7 +107,8 @@
                             </form>
                         </div>
                         @foreach ($post->replies as $reply)
-                            <div class="topic topic--comment">
+                            @php $userLikedReply = userLikedReply($reply->id); @endphp
+                            <div class="topic topic--comment" id="reply-{{ $reply->id }}" >
                                 <div class="topic__head">
                                     <div class="topic__avatar">
                                         <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/'.ucfirst($reply->user->firstname[0]).'.svg') }}" alt="avatar"></a>
@@ -135,12 +136,16 @@
                                     <div class="topic__footer">
                                         <div class="topic__footer-likes">
                                             <div>
-                                                <a href="#"><i class="icon-Favorite_Topic"></i></a>
-                                                <span>{{ $reply->likes }}</span>
+                                                @guest
+                                                    <a href="#" class="reply-like" data-id="{{ $reply->id }}" ><i class="icon-Favorite_Topic"></i></a>
+                                                @else
+                                                    <a href="#" class="{{ ($userLikedReply) ? 'reply-unlike' : 'reply-like' }}" data-id="{{ $reply->id }}" ><i class="icon-Favorite_Topic"></i></a>
+                                                @endguest
+                                                <span id="reply-{{ $reply->id }}-likes" >{{ $reply->likes }}</span>
                                             </div>
                                             <div>
                                                 <a href="#" data-id="{{ $reply->user_id }}" class="reply-comment" data-name="{{ strtolower($reply->user->firstname.' '.$reply->user->lastname) }}" ><i class="icon-Reply_Empty"></i></a>
-                                                <span></span>
+                                                <span class="" ></span>
                                             </div>
                                         </div>
                                         <div class="topic__footer-share">
@@ -215,6 +220,38 @@
 @section('scripts')
     <script>
         let running = false;
+
+        $(".reply-like, .reply-unlike").click(function (e) {
+
+            e.preventDefault();
+            if(running) {
+                alert("Don't click multiple times");
+                return false;
+            }
+
+            running = true;
+            let url = '';
+            let likeBtn = $(this);
+            let reply_id = $(this).attr('data-id');
+            if (likeBtn.attr('class') === 'reply-like') url = '{{ route('reply.like') }}'; else url = '{{ route('reply.unlike') }}';
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                method: "POST",
+                url: url,
+                data: { reply_id:reply_id },
+            }).done(function(data){
+                if(data !== 'false' && data !== ''){
+                    $(`#reply-${reply_id}-likes`).html(data);
+                    if(likeBtn.attr('class') === "reply-like") likeBtn.attr("class", "reply-unlike"); else likeBtn.attr("class", "reply-like");
+                    running = false;
+                }
+            }).fail(function(e){
+                if(e.status === 401) alert('You need to be logged in');
+            });
+        });
 
         $(".post-like").click(function(e){
 
