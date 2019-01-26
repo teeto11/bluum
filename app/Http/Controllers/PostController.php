@@ -6,6 +6,8 @@ use App\Code;
 use App\Post;
 use App\PostLike;
 use App\PostView;
+use App\Services\PostUpdateService;
+use App\Services\PostTagService;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -163,19 +165,8 @@ class PostController extends Controller
         if($post){
             if($post->user_id != auth()->user()->id) return redirect("/blog/post/$id")->with('error', 'access denied');
 
-            $tags = array_map('trim', explode(',', trim(strtolower($request->tags))));
-            $oldTags = explode(",", $post->tags);
-            $this->removeTag(array_diff($oldTags, $tags));
-
-            $post->title = $request->title;
-            $post->category = $request->category;
-            $post->body = $request->post;
-            $post->tags = implode(",", $tags);
-            $post->type = "POST";
-            $post->user_id = auth()->user()->id;
-            $this->updateTags(array_diff($tags, $oldTags));
-            $post->save();
-
+            $postUpdate = new PostUpdateService;
+            $postUpdate->updatePost($post, $request);
             return redirect("/blog/post/$post->id/".formatUrlString($post->title))->with('success', 'post updated');
 
         }else return redirect("/blog/post")->with('error', 'an error occurred');
@@ -185,49 +176,9 @@ class PostController extends Controller
 
     }
 
-    private function removeTag($tags){
-
-        foreach ($tags as $tag){
-
-            $t = Code::where([
-                'key' => 'BP_TAG',
-                'value' => $tag
-            ])->first();
-            $t->additional_info = $t->additional_info = (int)$t->additional_info - 1;
-            $t->save();
-        }
-    }
-
-    private function updateTags($tags){
-
-        foreach ($tags as $tag){
-
-            $t = Code::where(['key' => 'BP_TAG', 'value' => $tag]);
-
-            if($t->count() > 0){
-                $t = $t->first();
-                $t->additional_info = (int)$t->additional_info + 1;
-            }else{
-                $t = new Code;
-                $t->key = 'BP_TAG';
-                $t->value = $tag;
-                $t->additional_info = 1;
-            }
-
-            $t->save();
-        }
-    }
-
     private function updateViews($post){
 
-        $postViews = PostView::where(['user_id'=>auth()->user()->id, 'post_id'=>$post->id]);
-        if($postViews->count() < 1){
-            $postView = new PostView;
-            $postView->user_id = auth()->user()->id;
-            $postView->post_id = $post->id;
-            $postView->save();
-            $post->views = count($post->postViews);
-            $post->save();
-        }
+        $postUpdate = new PostUpdateService;
+        $postUpdate->updatePostViews($post);
     }
 }
