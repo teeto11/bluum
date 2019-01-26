@@ -22,3 +22,11 @@ function randomColour(){
     }while(substr_count($colour, 'f') > 5);
     return $colour;
 }
+
+function formatUrlString($string){
+
+    $string = trim($string);
+    $string = preg_replace('/\s+/', '-', $string);
+    $string = strtolower($string);
+    return $string;
+}

@@ -13,7 +13,7 @@ Route::get('/blog/unread', 'PostController@viewUnreadOnly')->name('blog.category
 Route::get('/blog/popular', 'PostController@viewMostPopular')->name('blog.category');
 Route::get('/blog/{category}', 'PostController@viewByCategory')->name('blog.category');
 Route::get('blog/post/new', 'PostController@create')->name('blog.post.create');
-Route::get('/blog/post/{id}', 'PostController@show')->name('blog.post');
+Route::get('/blog/post/{id}/{title}', 'PostController@show')->name('blog.post');
 Route::post('blog/post', 'PostController@store')->name('blog.post.store');
 
 //Q&A routes

@@ -52,8 +52,7 @@ class PostController extends Controller
     function viewByTag($tag){
 
         $tag = strtolower(urldecode($tag));
-        $posts = Post::where(['type' => 'POST'], ['tags' => ['like', "%$tag%"]]);
-        dd($posts);
+        $posts = Post::where([['tags', 'like', "%$tag%"], ['type', 'POST']])->get();
         $data = $this->viewPostsData();
         $data['posts'] = $posts;
 
@@ -115,10 +114,7 @@ class PostController extends Controller
 
         $post = Post::find($id);
         if($post && $post->type == 'POST'){
-            $related = Post::where([
-                'type' => 'POST',
-                'category' => $post->category,
-            ])->orderBy('views', 'desc')->take(5)->get();
+            $related = Post::where('type', 'POST')->orWhere(['category'=>$post->category, 'user_id'=>$post->id])->orderBy('views', 'desc')->take(5)->get();
 
             $data = [
                 'title' => ucwords($post->title),

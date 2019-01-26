@@ -130,12 +130,13 @@
                         @endforeach
                     @endif
                     @if ($posts)
+                        @php $counter = 1; @endphp
                         @foreach ($posts->all() as $post)
-                            <div class="posts__item">
+                            <div class="posts__item {{ ($counter%2 == 0) ? 'bg-f2f4f6' : '' }}">
                                 <div class="posts__section-left">
                                     <div class="posts__topic">
                                         <div class="posts__content">
-                                            <a href="/blog/post/{{ $post->id }}">
+                                            <a href="/blog/post/{{ $post->id }}/{{ formatUrlString($post->title) }}">
                                                 <h3>{{ ucwords($post->title) }}</h3>
                                             </a>
                                             @if (!is_null($post->tags) || $post->tags != '')
@@ -164,7 +165,9 @@
                                     <div class="posts__activity">{{ getLastActivityTime($post->updated_at) }}</div>
                                 </div>
                             </div>
+                            @php $counter++; @endphp
                         @endforeach
+                        {{ $posts->links() }}
                     @endif
                 </div>
             </div>
