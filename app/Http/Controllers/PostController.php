@@ -130,9 +130,24 @@ class PostController extends Controller
 
     public function edit($id){
 
+        $post = Post::find($id);
+
+        if($post){
+            if(auth()->user()->id != $post->user_id) return redirect('/blog')->with('error', 'an error occurred');
+
+            $categories = Code::where('key', 'BP_CATEGORY')->get();
+            $data = [
+                'post' => $post,
+                "title" => 'Edit Post - Bluum',
+                "categories" => $categories,
+            ];
+
+            return view('post.edit')->with($data);
+        }
     }
 
     public function update(Request $request, $id){
+
         $this->validate($request, [
             'title' => ['required', 'string', 'max:255'],
             'post' => ['required', 'string'],
@@ -144,18 +159,19 @@ class PostController extends Controller
             if($post->user_id != auth()->user()->id) return redirect("/blog/post/$id")->with('error', 'access denied');
 
             $tags = array_map('trim', explode(',', trim(strtolower($request->tags))));
-            $oldTags = explode($post->tags, ",");
+            $oldTags = explode(",", $post->tags);
             $this->removeTag(array_diff($oldTags, $tags));
 
             $post->title = $request->title;
             $post->category = $request->category;
             $post->body = $request->post;
-            $post->tags = implode(",", array_diff($tags, $oldTags));
+            $post->tags = implode(",", $tags);
             $post->type = "POST";
             $post->user_id = auth()->user()->id;
-            $this->updateTags($post->tags);
+            $this->updateTags(array_diff($tags, $oldTags));
+            $post->save();
 
-            return redirect("/")->with('success', 'post updated');
+            return redirect("/blog/post/$post->id/".formatUrlString($post->title))->with('success', 'post updated');
 
         }else return redirect("/blog/post")->with('error', 'an error occurred');
     }
@@ -178,26 +194,22 @@ class PostController extends Controller
     }
 
     public function updateTags($tags){
-        $tags = explode(',', $tags);
 
         foreach ($tags as $tag){
 
-            $t = Code::where([
-                'key' => 'BP_TAG',
-                'value' => $tag
-            ]);
+            $t = Code::where(['key' => 'BP_TAG', 'value' => $tag]);
 
             if($t->count() > 0){
                 $t = $t->first();
                 $t->additional_info = (int)$t->additional_info + 1;
-                $t->save();
             }else{
                 $t = new Code;
                 $t->key = 'BP_TAG';
                 $t->value = $tag;
                 $t->additional_info = 1;
-                $t->save();
             }
+
+            $t->save();
         }
     }
 }

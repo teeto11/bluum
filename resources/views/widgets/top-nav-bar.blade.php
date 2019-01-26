@@ -108,8 +108,8 @@
 
         @else
             <div class="header__offset-btn">
-                <a href="/blog/post/new"><img src="{{asset('fonts/icons/main/New_Topic.svg')}}" alt="New Blog Post"></a>
+                <a href="{{ route('blog.post.create') }}"><img src="{{asset('fonts/icons/main/New_Topic.svg')}}" alt="New Blog Post"></a>
             </div>
-        @endauth
+        @endguest
     </div>
 </header>

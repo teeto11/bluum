@@ -24,6 +24,15 @@
             </div>
             <div class="topics">
                 <div class="topics__heading">
+                    @if(auth()->user())
+                        @if(auth()->user()->id == $post->user_id)
+                            <div class="text-right" >
+                                <a href="/blog/post/edit/{{ $post->id }}" >
+                                    <button class="btn btn-success" >EDIT</button>
+                                </a>
+                            </div>
+                        @endif
+                    @endif
                     <h2 class="topics__heading-title">{{ ucwords($post->title) }}</h2>
                     <div class="topics__heading-info">
                         <a href="#" class="category"><i class="bg-3ebafa"></i>{{ ucfirst($post->category) }}</a>
