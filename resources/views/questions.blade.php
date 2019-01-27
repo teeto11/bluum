@@ -10,8 +10,9 @@
                         <div class="btn-select" data-dropdown-btn="categories">All Categories</div>
                         <nav class="dropdown dropdown--design-01" data-dropdown-list="categories">
                             <ul class="dropdown__catalog row">
-                                @foreach ($categories as $category)
-                                    <li class="col-xs-6"><a href="/questions/category/{{ preg_replace('/\s+/', '-', $category->value) }}" class="category"><i class="bg-5dd39e"></i>{{ ucfirst($category->value) }}</a></li>
+                                <li class="col-xs-6"><a href="/questions" class="category"><i class="bg-5dd39e"></i>All</a></li>
+                            @foreach ($categories as $category)
+                                    <li class="col-xs-6"><a href="/questions/category/{{ urlencode($category->value) }}" class="category"><i class="bg-5dd39e"></i>{{ ucfirst($category->value) }}</a></li>
                                 @endforeach
                             </ul>
                         </nav>
@@ -59,8 +60,9 @@
                     <div class="posts__activity">Activity</div>
                 </div>
                 <div class="posts__body">
-                    @foreach ($questions as $question)
-                        <div class="posts__item">
+                    @php $counter=1; @endphp
+                    @foreach ($posts as $question)
+                        <div class="posts__item {{ ($counter%2 == 0) ? 'bg-f2f4f6' : '' }}">
                             <div class="posts__section-left">
                                 <div class="posts__topic">
                                     <div class="posts__content">
@@ -93,8 +95,9 @@
                                 <div class="posts__activity">{{ getLastActivityTime($question->updated_at) }}</div>
                             </div>
                         </div>
+                        @php $counter++; @endphp
                     @endforeach
-                    {!! $questions->links() !!}
+                    {!! $posts->links() !!}
                 </div>
             </div>
         </div>

@@ -39,3 +39,8 @@ function userLikedReply($replyId){
     $replyLike = ReplyLike::where(['reply_id'=>$replyId, 'user_id'=>auth()->user()->id]);
     return boolval($replyLike->count());
 }
+
+function getFirstLetterUppercase($string){
+
+    return strtoupper($string[0]);
+}

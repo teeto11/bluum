@@ -21,7 +21,7 @@ Route::post('/blog/post/comment', 'ReplyController@addComment')->name('blog.post
 
 //Q&A routes
 Route::get('/questions', 'QuestionController@index')->name('questions');
-Route::get('/questions/category/{category}', 'QuestionController@showByCategory')->name('question.showbycategory');
+Route::get('/questions/category/{category}', 'QuestionController@viewByCategory')->name('question.showbycategory');
 Route::get('/question/ask', 'QuestionController@create')->name('question.create');
 Route::get('/question/{id}', 'QuestionController@show')->name('question.show');
 Route::post('/question', 'QuestionController@store')->name('question.store');

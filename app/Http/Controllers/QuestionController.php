@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Code;
+use App\PostLike;
+use App\Services\PostUpdateService;
+use App\Services\PostStoreService;
+use App\Services\PostsViewService;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
@@ -11,7 +15,7 @@ class QuestionController extends Controller
 
     public function __construct(){
         $this->middleware('auth', [
-            'except' => ['index', 'show', 'showByCategory']
+            'except' => ['index', 'show', 'viewByCategory']
         ]);
     }
 
@@ -23,10 +27,18 @@ class QuestionController extends Controller
 
         $data = [
             'title' => 'Questions',
-            'questions' => $questions,
+            'posts' => $questions,
             'pinned_questions' => $pinned_questions,
             'categories' => $categories,
         ];
+
+        return view('questions')->with($data);
+    }
+
+    public function viewByCategory($category){
+
+        $postsViewService = new PostsViewService;
+        $data = $postsViewService->viewPostsByCategory($category, 'QUESTION');
 
         return view('questions')->with($data);
     }
@@ -79,11 +91,4 @@ class QuestionController extends Controller
             return view('single-question')->with($data);
         }else return redirect('/questions')->with('error', 'Question not found');
     }
-
-    public function showByCategory($category){
-
-        dd($category);
-    }
-
-
 }

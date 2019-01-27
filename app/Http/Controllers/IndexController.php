@@ -9,7 +9,11 @@ class indexController extends Controller{
 
     public function index(){
 
-        $popular_questions = Post::where('type', 'QUESTION')->orderBy('views', 'desc')->take(5)->get();
+        $popular_questions = Post::where([
+            ['likes', '>', 0],
+            ['type', 'QUESTION']
+        ])->orderBy('likes', 'desc')->take(5)->get();
+
         $data = [
             'popular_questions' => $popular_questions,
             'title' => 'Home',

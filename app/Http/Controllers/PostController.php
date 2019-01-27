@@ -23,7 +23,7 @@ class PostController extends Controller
         $postsViewService = new PostsViewService;
         $data = $postsViewService->viewPosts('POST');
 
-        return view('posts')->with($data);
+        return view('post.index')->with($data);
     }
 
     public function viewByCategory($category){
@@ -31,7 +31,7 @@ class PostController extends Controller
         $postsViewService = new PostsViewService;
         $data = $postsViewService->viewPostsByCategory($category, 'POST');
 
-        return view('posts')->with($data);
+        return view('post.index')->with($data);
     }
 
     public function viewUnreadOnly(){
@@ -43,7 +43,7 @@ class PostController extends Controller
         $postsViewService = new PostsViewService;
         $data = $postsViewService->viewPostsByPopularity('POST');
 
-        return view('posts')->with($data);
+        return view('post.index')->with($data);
     }
 
     function viewByTag($tag){
@@ -51,7 +51,7 @@ class PostController extends Controller
         $postsViewService = new PostsViewService;
         $data = $postsViewService->viewPostsByTags($tag, 'POST');
 
-        return view('posts')->with($data);
+        return view('post.index')->with($data);
     }
 
     public function create(){
@@ -64,7 +64,7 @@ class PostController extends Controller
             "recent_posts" => $recent_posts
         ];
 
-        return view('create-post')->with($data);
+        return view('post.new')->with($data);
     }
 
     public function store(Request $request){
@@ -101,7 +101,7 @@ class PostController extends Controller
                 $this->updateViews($post);
             }
 
-            return view('single-post')->with($data);
+            return view('post.view')->with($data);
         }else return redirect('/blog')->with('error', 'Post not found');
     }
 

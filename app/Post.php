@@ -16,6 +16,10 @@ class Post extends Model
         return $this->hasMany('App\Reply')->orderBy('created_at', 'desc');
     }
 
+    public function popularReplies(){
+        return $this->hasMany('App\Reply')->orderBy('likes', 'desc')->where('likes', '>', '0')->take(3);
+    }
+
     public function postLikes(){
         return $this->hasMany('App\PostLike');
     }
