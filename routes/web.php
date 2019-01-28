@@ -1,6 +1,6 @@
 <?php
 
-Route::get('/', 'IndexController@index');
+Route::get('/', 'IndexController@index')->name('index');
 
 // Auth::routes(["verify" => true]);
 Auth::routes();

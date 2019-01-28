@@ -44,3 +44,8 @@ function getFirstLetterUppercase($string){
 
     return strtoupper($string[0]);
 }
+
+function expert(){
+
+    if(auth()->user()->role == 'EXPERT') return true; else return false;
+}

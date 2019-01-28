@@ -117,7 +117,7 @@
 								<div class="card-body">
 									<h3 class="card-text">320+ Gynaecologists, <br />Paediatricians, <br />and experts.</h3>
 									<p class="card-text mute">Join a live session to get started.</p>
-									<p><a href="create-post.html" class="btn btn-lg btn-ask btn-lg">Ask an expert</a></p>
+									<p><a href="/question/ask" class="btn btn-lg btn-ask btn-lg">Ask an expert</a></p>
 								</div>
 							</div>
 						</div>

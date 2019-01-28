@@ -9,6 +9,15 @@
         #post-unlike i{
             color: red;
         }
+        .reply-unlike i{
+            color: red!important;
+        }
+        #reply-comment{
+            margin-top: 1.5rem;
+        }
+        #reply-comment a.close{
+            font-size: 3rem;
+        }
     </style>
 @endsection
 @section('content')
@@ -107,7 +116,7 @@
                             </form>
                         </div>
                         @foreach ($post->replies as $reply)
-                            @php $userLikedReply = userLikedReply($reply->id); @endphp
+                            @php if(auth()->user()) $userLikedReply = userLikedReply($reply->id); @endphp
                             <div class="topic topic--comment" id="reply-{{ $reply->id }}" >
                                 <div class="topic__head">
                                     <div class="topic__avatar">
@@ -121,7 +130,7 @@
                                             @if ($reply->recipient)
                                                 <div class="topic__user topic__user--pos-r">
                                                     <i class="icon-Reply_Fill"></i>
-                                                    <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/'.ucfirst($reply->recipient[0]).'.svg') }}" alt="avatar"></a>
+                                                    <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/'.ucfirst($reply->recipient[1]).'.svg') }}" alt="avatar"></a>
                                                     <a href="#" class="topic__user-name">{{ ucwords($reply->recipient) }}</a>
                                                 </div>
                                             @endif
@@ -139,12 +148,12 @@
                                                 @guest
                                                     <a href="#" class="reply-like" data-id="{{ $reply->id }}" ><i class="icon-Favorite_Topic"></i></a>
                                                 @else
-                                                    <a href="#" class="{{ ($userLikedReply) ? 'reply-unlike' : 'reply-like' }}" data-id="{{ $reply->id }}" ><i class="icon-Favorite_Topic"></i></a>
+                                                    <a href="#" class="{{ ($userLikedReply) ? __('reply-unlike') : __('reply-like') }}" data-id="{{ $reply->id }}" ><i class="icon-Favorite_Topic"></i></a>
                                                 @endguest
                                                 <span id="reply-{{ $reply->id }}-likes" >{{ $reply->likes }}</span>
                                             </div>
                                             <div>
-                                                <a href="#" data-id="{{ $reply->user_id }}" class="reply-comment" data-name="{{ strtolower($reply->user->firstname.' '.$reply->user->lastname) }}" ><i class="icon-Reply_Empty"></i></a>
+                                                <a href="#" data-id="{{ $reply->id }}" class="reply-comment" data-name="{{ strtolower($reply->user->firstname.' '.$reply->user->lastname) }}" ><i class="icon-Reply_Empty"></i></a>
                                                 <span class="" ></span>
                                             </div>
                                         </div>
@@ -183,30 +192,30 @@
                 </div>
                 <div class="posts__body">
                     @php $counter = 1; @endphp
-                    @foreach($related as $post)
+                    @foreach($related as $rpost)
                         <div class="posts__item {{ ($counter%2 == 0) ? 'bg-f2f4f6' : '' }}">
                             @php $counter++; @endphp
                             <div class="posts__section-left">
                                 <div class="posts__topic">
                                     <div class="posts__content">
-                                        <a href="/blog/post/{{ $post->id }}/{{ formatUrlString($post->title) }}">
-                                            <h3>{{ $post->title }}</h3>
+                                        <a href="/blog/post/{{ $rpost->id }}/{{ formatUrlString($rpost->title) }}">
+                                            <h3>{{ $rpost->title }}</h3>
                                         </a>
                                         <div class="posts__tags tags">
-                                            @php $r_tags = explode(",", $post->tags) @endphp
+                                            @php $r_tags = explode(",", $rpost->tags) @endphp
                                             @foreach($r_tags as $tag)
                                                 <a href="#" class="bg-4f80b0">{{ $tag }}</a>
                                             @endforeach
                                         </div>
                                     </div>
                                 </div>
-                                <div class="posts__category"><a href="/blog/{{ urlencode($post->category) }}" class="category"><i class="bg-368f8b"></i>{{ ucfirst($post->category) }}</a></div>
+                                <div class="posts__category"><a href="/blog/{{ urlencode($rpost->category) }}" class="category"><i class="bg-368f8b"></i>{{ ucfirst($rpost->category) }}</a></div>
                             </div>
                             <div class="posts__section-right">
-                                <div class="posts__users"><a class="category"><i class="bg-368f8b"></i>{{ ucfirst($post->user->lastname) }}</a></div>
-                                <div class="posts__replies">{{ count($post->replies) }}</div>
-                                <div class="posts__views">{{ $post->views }}</div>
-                                <div class="posts__activity">{{ getLastActivityTime($post->updated_at) }}</div>
+                                <div class="posts__users"><a class="category"><i class="bg-368f8b"></i>{{ ucfirst($rpost->user->lastname) }}</a></div>
+                                <div class="posts__replies">{{ count($rpost->replies) }}</div>
+                                <div class="posts__views">{{ $rpost->views }}</div>
+                                <div class="posts__activity">{{ getLastActivityTime($rpost->updated_at) }}</div>
                             </div>
                         </div>
                     @endforeach
@@ -284,6 +293,45 @@
             }).fail(function(e){
                 if(e.status === 401) alert('You need to be logged in');
             });
+        });
+    </script>
+
+    <script>
+        $(".reply-comment").click(function (e) {
+
+            e.preventDefault();
+            $('#reply-comment').remove();
+            let recipient = $(this).attr('data-id');
+            let postId = '{{ $post->id }}';
+
+            let replyComment = `
+                <div id="reply-comment" >
+                    <form action="{{ route('blog.post.comment') }}" method="post" >
+                        @csrf
+                        <div class="form-group" style="text-align: right;" >
+                            <a href="#" class="close" >
+                                <span style="color: red;font-weight: bold;" >&times;</span>
+                            </a>
+                        </div>
+                        <input type="hidden" name="recipient" value="${recipient}" >
+                        <input type="hidden" name="post_id" value="${postId}" >
+                        <div class="form-group" >
+                            <textarea class="form-control" name="body" style="resize: none;" ></textarea>
+                        </div>
+                        <div class="form-group text-right" >
+                            <input type="submit" class="btn btn-success" value="Reply" >
+                        </div>
+                    </form>
+                </div>
+            `;
+
+            $("#reply-"+recipient).append(replyComment);
+        });
+
+        $(document).on('click', '#reply-comment .close', function (e) {
+
+            e.preventDefault();
+            $("#reply-comment").remove();
         });
     </script>
 @endsection

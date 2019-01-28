@@ -43,9 +43,9 @@
                         <ul class="dropdown__catalog row">
                             <li class="col-xs-6"><a href="/questions" class="category"><i class="bg-5dd39e"></i>All</a></li>
                             <li class="col-xs-6"><a href="/questions/category/pregnancy" class="category"><i class="bg-c49bbb"></i>Pregnancy</a></li>
-                            <li class="col-xs-6"><a href="/questions/category/medical-travels" class="category"><i class="bg-525252"></i>Medical travels</a></li>
-                            <li class="col-xs-6"><a href="/questions/category/common-illness" class="category"><i class="bg-777da7"></i>Common illness</a></li>
-                            <li class="col-xs-6"><a href="/questions/category/special-illness" class="category"><i class="bg-368f8b"></i>Special illness</a></li>
+                            <li class="col-xs-6"><a href="/questions/category/medical+travels" class="category"><i class="bg-525252"></i>Medical travels</a></li>
+                            <li class="col-xs-6"><a href="/questions/category/common+illness" class="category"><i class="bg-777da7"></i>Common illness</a></li>
+                            <li class="col-xs-6"><a href="/questions/category/special+illness" class="category"><i class="bg-368f8b"></i>Special illness</a></li>
                         </ul>
                     </div>
                     <div>

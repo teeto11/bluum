@@ -136,6 +136,7 @@ class PostController extends Controller
         if($post){
             if($post->user_id != auth()->user()->id) return redirect("/blog/post/$id")->with('error', 'access denied');
 
+            $request->type = 'POST';
             $postUpdate = new PostUpdateService;
             $postUpdate->updatePost($post, $request);
             return redirect("/blog/post/$post->id/".formatUrlString($post->title))->with('success', 'post updated');

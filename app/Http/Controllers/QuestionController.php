@@ -46,14 +46,15 @@ class QuestionController extends Controller
     public function create(){
 
         $categories = Code::where('key', 'Q_CATEGORY')->get();
-        $popular_questions = Post::orderBy('created_at', 'desc')->take(5)->get();
+        $popular_questions = Post::where([['type', 'QUESTION'], ['likes', '>', 0]])->orderBy('likes', 'desc')->take(5)->get();
 
         $data = [
             'title' => 'Ask',
+            'popular_questions' => $popular_questions,
             'categories' => $categories,
         ];
 
-        return view('ask')->with($data);
+        return view('question.ask')->with($data);
     }
 
     public function store(Request $request){
@@ -64,15 +65,11 @@ class QuestionController extends Controller
             'category' => ['required', 'string'],
         ]);
 
-        $question = new Post;
-        $question->title = $request->title;
-        $question->category = $request->category;
-        $question->body = $request->description;
-        $question->tags = implode(",", array_map('trim', explode(',', trim($request->tags))));
-        $question->type = "QUESTION";
-        $question->user_id = auth()->user()->id;
+        $request->type = "QUESTION";
+        $postStoreService = new PostStoreService;
+        $question = $postStoreService->store($request);
 
-        if($question->save()) return redirect('/questions')->with('success', 'Question asked successfully'); else{
+        if($question) return redirect('/questions')->with('success', 'Question asked successfully'); else{
             return redirect('/questions')->with('error', 'An unknown error occurred');
         }
     }

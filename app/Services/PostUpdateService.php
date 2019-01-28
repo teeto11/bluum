@@ -8,14 +8,14 @@ class PostUpdateService{
 
     public function updatePost($post, $request){
 
-        $postTagService = new PostTagService;
+        $postTagService = new PostTagService($request->type);
         $tags = array_map('trim', explode(',', trim(strtolower($request->tags))));
         $oldTags = explode(",", $post->tags);
         $postTagService->removeTag(array_diff($oldTags, $tags));
 
         $post->title = $request->title;
         $post->category = $request->category;
-        $post->body = $request->post;
+        $post->body = ($request->type == 'POST') ? $request->post : $request->description;
         $post->tags = implode(",", $tags);
         $post->user_id = auth()->user()->id;
         $postTagService->updateTag(array_diff($tags, $oldTags));

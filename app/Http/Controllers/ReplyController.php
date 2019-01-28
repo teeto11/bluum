@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Reply;
 use App\Post;
+use App\ReplyLike;
 use App\User;
 use App\Notificaton;
 use Illuminate\Http\Request;
@@ -23,6 +24,7 @@ class ReplyController extends Controller{
             'post_id' => ['required', 'int'],
             'recipient' => ['int'],
         ]);
+
         $post = Post::find($request->post_id);
         if($post->type != 'POST') return redirect('/blog')->with('error', 'an error occurred');
 
@@ -33,10 +35,14 @@ class ReplyController extends Controller{
             $reply->post_id = $post->id;
 
             if(isset($request->recipient) && !is_null($request->recipient)){
-                $recipient = User::find($request->recipient);
+                $recipientReply = Reply::find($request->recipient);
+                $recipient = $recipientReply->user;
+
+                if($recipientReply->parent_id) $reply->parent_id = $recipientReply->parent_id; else $reply->parent_id = $recipientReply->id;
                 if($recipient){
                     $reply->recipient = "@$recipient->username";
-                    $r_notification = $this->newCommentReplyNotification($recipient->id);
+                    $comment = substr($recipientReply->body, 0, 50);
+                    $r_notification = $this->newCommentReplyNotification($recipient->id, $comment);
                 }else return redirect("/")->with('error', 'an error occurred');
             }
 
@@ -50,11 +56,11 @@ class ReplyController extends Controller{
         }
     }
 
-    private function newCommentReplyNotification($user_id){
+    private function newCommentReplyNotification($user_id, $comment){
 
         $notification = new Notificaton;
         $notification->user_id = $user_id;
-        $notification->notification = auth()->user()->username.' replied your comment';
+        $notification->notification = auth()->user()->username.' replied your comment '.$comment;
 
         return $notification;
     }
