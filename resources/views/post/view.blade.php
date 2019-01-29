@@ -115,7 +115,7 @@
                                 </div>
                             </form>
                         </div>
-                        @foreach ($post->replies as $reply)
+                        @foreach ($post->replies->where('parent_reply', null) as $reply)
                             @php if(auth()->user()) $userLikedReply = userLikedReply($reply->id); @endphp
                             <div class="topic topic--comment" id="reply-{{ $reply->id }}" >
                                 <div class="topic__head">
@@ -168,6 +168,13 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <hr>
+                                    @foreach($post->replies->where('parent_reply', $reply->id) as $creply)
+                                        <div class="creply" >
+                                            <p>{{ $creply->recipien }} {{ $creply->body }}. <strong>{{ $creply->user->username }}</strong></p>
+                                        </div>
+                                        <hr>
+                                    @endforeach
                                 </div>
                             </div>
                         @endforeach

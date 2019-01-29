@@ -38,7 +38,7 @@ class ReplyController extends Controller{
                 $recipientReply = Reply::find($request->recipient);
                 $recipient = $recipientReply->user;
 
-                if($recipientReply->parent_id) $reply->parent_id = $recipientReply->parent_id; else $reply->parent_id = $recipientReply->id;
+                if($recipientReply->parent_reply) $reply->parent_reply = $recipientReply->parent_reply; else $reply->parent_reply = $recipientReply->id;
                 if($recipient){
                     $reply->recipient = "@$recipient->username";
                     $comment = substr($recipientReply->body, 0, 50);

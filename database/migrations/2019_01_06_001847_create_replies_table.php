@@ -19,7 +19,7 @@ class CreateRepliesTable extends Migration
             $table->integer('likes')->default(0);
             $table->integer('votes')->default(0);
             $table->string('recipient')->nullable();
-            $table->string('parent_reply')->nullable();
+            $table->integer('parent_reply')->nullable();
             $table->integer('post_id');
             $table->integer('user_id');
             $table->timestamps();
