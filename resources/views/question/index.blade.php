@@ -21,13 +21,9 @@
                         <div class="btn-select" data-dropdown-btn="tags">Tags</div>
                         <div class="dropdown dropdown--design-01" data-dropdown-list="tags">
                             <div class="tags">
-                                <a href="#" class="bg-424ee8">nature</a>
-                                <a href="#" class="bg-6f7e9c">funny</a>
-                                <a href="#" class="bg-a3d39c">climbing</a>
-                                <a href="#" class="bg-8781bd">dreams</a>
-                                <a href="#" class="bg-f1ab32">life</a>
-                                <a href="#" class="bg-3b96ca">reason</a>
-                                <a href="#" class="bg-348aa7">social</a>
+                                @foreach($top_tags as $tag)
+                                    <a href="/questions/tag/{{ urlencode($tag->value) }}" class="bg-36b7d7">{{ $tag->value }}</a>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -37,16 +33,16 @@
                         <div class="btn-select" data-dropdown-btn="menu">Latest</div>
                         <div class="dropdown dropdown--design-01" data-dropdown-list="menu">
                             <ul class="dropdown__catalog">
-                                <li><a href="#">Latest</a></li>
+                                <li><a href="/questions">Latest</a></li>
                                 <li><a href="#">Unread</a></li>
-                                <li><a href="#">Most Liked</a></li>
+                                <li><a href="/questions/popular">Most Liked</a></li>
                             </ul>
                         </div>
                     </div>
                     <ul>
-                        <li class="active"><a href="#">Latest</a></li>
+                        <li class="active"><a href="/questions">Latest</a></li>
                         <li><a href="#">Unread</a></li>
-                        <li><a href="#">Most Liked</a></li>
+                        <li><a href="/questions/popular">Most Liked</a></li>
                     </ul>
                 </div>
             </div>

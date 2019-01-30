@@ -20,16 +20,16 @@ class PostController extends Controller
 
     public function index(){
 
-        $postsViewService = new PostsViewService;
-        $data = $postsViewService->viewPosts('POST');
+        $postsViewService = new PostsViewService('POST');
+        $data = $postsViewService->viewPosts();
 
         return view('post.index')->with($data);
     }
 
     public function viewByCategory($category){
 
-        $postsViewService = new PostsViewService;
-        $data = $postsViewService->viewPostsByCategory($category, 'POST');
+        $postsViewService = new PostsViewService('POST');
+        $data = $postsViewService->viewPostsByCategory($category);
 
         return view('post.index')->with($data);
     }
@@ -40,16 +40,16 @@ class PostController extends Controller
 
     public function viewMostPopular(){
 
-        $postsViewService = new PostsViewService;
-        $data = $postsViewService->viewPostsByPopularity('POST');
+        $postsViewService = new PostsViewService('POST');
+        $data = $postsViewService->viewPostsByPopularity();
 
         return view('post.index')->with($data);
     }
 
     function viewByTag($tag){
 
-        $postsViewService = new PostsViewService;
-        $data = $postsViewService->viewPostsByTags($tag, 'POST');
+        $postsViewService = new PostsViewService('POST');
+        $data = $postsViewService->viewPostsByTags($tag);
 
         return view('post.index')->with($data);
     }

@@ -41,14 +41,14 @@
                         <div class="btn-select" data-dropdown-btn="menu">Latest</div>
                         <div class="dropdown dropdown--design-01" data-dropdown-list="menu">
                             <ul class="dropdown__catalog">
-                                <li><a href="#">Latest</a></li>
-                                <li><a href="#">Unread</a></li>
-                                <li><a href="#">Most Liked</a></li>
+                                <li><a href="/blog">Latest</a></li>
+                                <li><a href="/blog/unread">Unread</a></li>
+                                <li><a href="/blog/popular">Most Liked</a></li>
                             </ul>
                         </div>
                     </div>
                     <ul>
-                        <li class="active"><a href="#">Latest</a></li>
+                        <li class="active"><a href="/blog">Latest</a></li>
                         <li><a href="/blog/unread">Unread</a></li>
                         <li><a href="/blog/popular">Most Liked</a></li>
                     </ul>

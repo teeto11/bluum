@@ -103,9 +103,9 @@
                                 @csrf
                                 <input type="hidden" name="post_id" value="{{ $post->id }}" >
                                 @if ($errors->has('body'))
-                                    <span class="invalid-feedback text-danger" role="alert">
-                                        <strong><p>{{ $errors->first('body') }}</p></strong>
-                                    </span>
+                                    <div class="invalid-feedback text-danger" role="alert">
+                                        <p><strong>{{ $errors->first('body') }}</strong></p>
+                                    </div>
                                 @endif
                                 <div class="form-group" >
                                     <textarea class="form-control" name="body" style="resize: none" rows="5" ></textarea>
@@ -154,7 +154,7 @@
                                             </div>
                                             <div>
                                                 <a href="#" data-id="{{ $reply->id }}" class="reply-comment" data-name="{{ strtolower($reply->user->firstname.' '.$reply->user->lastname) }}" ><i class="icon-Reply_Empty"></i></a>
-                                                <span class="" ></span>
+                                                <span class="" >{{ $post->replies->where('parent_reply', $reply->id)->count() }}</span>
                                             </div>
                                         </div>
                                         <div class="topic__footer-share">

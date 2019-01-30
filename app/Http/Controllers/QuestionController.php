@@ -21,26 +21,38 @@ class QuestionController extends Controller
 
     public function index(){
 
-        $pinned_questions = Post::where('type', 'QUESTION')->orderBy('created_at', 'desc')->get();
-        $questions = Post::where('type', 'QUESTION')->orderBy('created_at', 'desc')->paginate(15);
-        $categories = Code::where('key', 'BP_CATEGORY')->get();
+        $postsViewService = new PostsViewService('QUESTION');
+        $data = $postsViewService->viewPosts();
 
-        $data = [
-            'title' => 'Questions',
-            'posts' => $questions,
-            'pinned_questions' => $pinned_questions,
-            'categories' => $categories,
-        ];
-
-        return view('questions')->with($data);
+        return view('question.index')->with($data);
     }
 
     public function viewByCategory($category){
 
-        $postsViewService = new PostsViewService;
-        $data = $postsViewService->viewPostsByCategory($category, 'QUESTION');
+        $postsViewService = new PostsViewService('QUESTION');
+        $data = $postsViewService->viewPostsByCategory($category);
 
-        return view('questions')->with($data);
+        return view('question.index')->with($data);
+    }
+
+    public function viewUnreadOnly(){
+        dd('unread');
+    }
+
+    public function viewMostPopular(){
+
+        $postsViewService = new PostsViewService('QUESTION');
+        $data = $postsViewService->viewPostsByPopularity();
+
+        return view('question.index')->with($data);
+    }
+
+    function viewByTag($tag){
+
+        $postsViewService = new PostsViewService('QUESTION');
+        $data = $postsViewService->viewPostsByTags($tag);
+
+        return view('question.index')->with($data);
     }
 
     public function create(){
