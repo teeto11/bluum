@@ -97,7 +97,7 @@ class QuestionController extends Controller
                 'related' => $related,
             ];
 
-            return view('single-question')->with($data);
+            return view('question.view')->with($data);
         }else return redirect('/questions')->with('error', 'Question not found');
     }
 }

@@ -60,55 +60,69 @@
                                         <div data-visible="mobile">
                                             <a href="#"><i class="icon-More_Options"></i></a>
                                         </div>
-                                        <a href="#"><i class="icon-Reply_Fill"></i></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        @foreach ($question->replies as $reply)
+                        <div id="comment" >
+                            <form action="{{ route('question.answer') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="post_id" value="{{ $question->id }}" >
+                                @if ($errors->has('body'))
+                                    <div class="invalid-feedback text-danger" role="alert">
+                                        <p><strong>{{ $errors->first('body') }}</strong></p>
+                                    </div>
+                                @endif
+                                <div class="form-group" >
+                                    <textarea class="form-control" name="body" style="resize: none" rows="5" ></textarea>
+                                </div>
+                                <div class="form-group text-right" >
+                                    <input type="submit" class="btn btn-success" value="Answer" >
+                                </div>
+                            </form>
+                        </div>
+                        @foreach ($question->replies as $answer)
+                            @php $r_user = $answer->user @endphp
                             <div class="topic topic--comment">
                                 <div class="topic__head">
                                     <div class="topic__avatar">
-                                        <a href="#" class="avatar"><img src="./assets/fonts/icons/avatars/F.svg" alt="avatar"></a>
+                                        <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/'.getFirstLetterUppercase($r_user->firstname).'.svg') }}" alt="avatar"></a>
                                     </div>
                                     <div class="topic__caption">
                                         <div class="topic__name">
-                                            <a href="#">Farawe iLyas</a>
+                                            <a href="#">{{ ucwords($r_user->firstname.' '.$r_user->lastname) }}</a>
                                         </div>
-                                        <div class="topic__date">
-                                            <div class="topic__user topic__user--pos-r">
-                                                <i class="icon-Reply_Fill"></i>
-                                                <a href="#" class="avatar"><img src="./assets/fonts/icons/avatars/N.svg" alt="avatar"></a>
-                                                <a href="#" class="topic__user-name">Nelson Ife</a>
-                                            </div>
-                                            <i class="icon-Watch_Later"></i>06 May, 2017
-                                        </div>
+                                        <div class="topic__date"><i class="icon-Watch_Later"></i>{{ date('H:ia d M, Y', strtotime($answer->created_at)) }}</div>
                                     </div>
                                 </div>
                                 <div class="topic__content">
                                     <div class="topic__text">
-                                        <p>I am using BootStrap 4, but they are asking me to use PHP framework, which I won't do. My code is secure against SQL injection, XSS and all other attacks, it is well organized, i was using OOP.</p>
+                                        <p>{{ $answer->body }}.</p>
                                     </div>
                                     <div class="topic__footer">
                                         <div class="topic__footer-likes">
                                             <div>
                                                 <a href="#"><i class="icon-Upvote"></i></a>
-                                                <span>137</span>
+                                                <span>71</span>
                                             </div>
                                             <div>
                                                 <a href="#"><i class="icon-Downvote"></i></a>
-                                                <span>02</span>
+                                                <span>{{ dd($answer->votes) }}</span>
                                             </div>
                                             <div>
                                                 <a href="#"><i class="icon-Favorite_Topic"></i></a>
-                                                <span>46</span>
+                                                <span>42</span>
+                                            </div>
+                                            <div>
+                                                <a href="#"><i class="icon-Reply_Empty"></i></a>
+                                                <span>01</span>
                                             </div>
                                         </div>
                                         <div class="topic__footer-share">
                                             <div data-visible="desktop">
                                                 <a href="#"><i class="icon-Share_Topic"></i></a>
                                                 <a href="#"><i class="icon-Flag_Topic"></i></a>
-                                                <a href="#"><i class="icon-Bookmark"></i></a>
+                                                <a href="#" class="active"><i class="icon-Already_Bookmarked"></i></a>
                                             </div>
                                             <div data-visible="mobile">
                                                 <a href="#"><i class="icon-More_Options"></i></a>
@@ -119,107 +133,6 @@
                                 </div>
                             </div>
                         @endforeach
-                        <div class="topic topic--comment">
-                            <div class="topic__head">
-                                <div class="topic__avatar">
-                                    <a href="#" class="avatar"><img src="./assets/fonts/icons/avatars/F.svg" alt="avatar"></a>
-                                </div>
-                                <div class="topic__caption">
-                                    <div class="topic__name">
-                                        <a href="#">Farawe iLyas</a>
-                                    </div>
-                                    <div class="topic__date">
-                                        <div class="topic__user topic__user--pos-r">
-                                            <i class="icon-Reply_Fill"></i>
-                                            <a href="#" class="avatar"><img src="./assets/fonts/icons/avatars/N.svg" alt="avatar"></a>
-                                            <a href="#" class="topic__user-name">Nelson Ife</a>
-                                        </div>
-                                        <i class="icon-Watch_Later"></i>06 May, 2017
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="topic__content">
-                                <div class="topic__text">
-                                    <p>I am using BootStrap 4, but they are asking me to use PHP framework, which I won't do. My code is secure against SQL injection, XSS and all other attacks, it is well organized, i was using OOP.</p>
-                                </div>
-                                <div class="topic__footer">
-                                    <div class="topic__footer-likes">
-                                        <div>
-                                            <a href="#"><i class="icon-Upvote"></i></a>
-                                            <span>137</span>
-                                        </div>
-                                        <div>
-                                            <a href="#"><i class="icon-Downvote"></i></a>
-                                            <span>02</span>
-                                        </div>
-                                        <div>
-                                            <a href="#"><i class="icon-Favorite_Topic"></i></a>
-                                            <span>46</span>
-                                        </div>
-                                    </div>
-                                    <div class="topic__footer-share">
-                                        <div data-visible="desktop">
-                                            <a href="#"><i class="icon-Share_Topic"></i></a>
-                                            <a href="#"><i class="icon-Flag_Topic"></i></a>
-                                            <a href="#"><i class="icon-Bookmark"></i></a>
-                                        </div>
-                                        <div data-visible="mobile">
-                                            <a href="#"><i class="icon-More_Options"></i></a>
-                                        </div>
-                                        <a href="#"><i class="icon-Reply_Fill"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="topic topic--comment">
-                            <div class="topic__head">
-                                <div class="topic__avatar">
-                                    <a href="#" class="avatar"><img src="./assets/fonts/icons/avatars/T.svg" alt="avatar"></a>
-                                </div>
-                                <div class="topic__caption">
-                                    <div class="topic__name">
-                                        <a href="#">Tesla</a>
-                                    </div>
-                                    <div class="topic__date"><i class="icon-Watch_Later"></i>07 May, 2017</div>
-                                </div>
-                            </div>
-                            <div class="topic__content">
-                                <div class="topic__text">
-                                    <p>Yeah! This is really bad. Rejecting an item because its not using a PHP framework(no matter what the script is doing) is a wrong move I think. There are a lot of people reporting this problem(Rejected because of not using a framework).</p>
-                                </div>
-                                <div class="topic__footer">
-                                    <div class="topic__footer-likes">
-                                        <div>
-                                            <a href="#"><i class="icon-Upvote"></i></a>
-                                            <span>71</span>
-                                        </div>
-                                        <div>
-                                            <a href="#"><i class="icon-Downvote"></i></a>
-                                            <span>06</span>
-                                        </div>
-                                        <div>
-                                            <a href="#"><i class="icon-Favorite_Topic"></i></a>
-                                            <span>42</span>
-                                        </div>
-                                        <div>
-                                            <a href="#"><i class="icon-Reply_Empty"></i></a>
-                                            <span>01</span>
-                                        </div>
-                                    </div>
-                                    <div class="topic__footer-share">
-                                        <div data-visible="desktop">
-                                            <a href="#"><i class="icon-Share_Topic"></i></a>
-                                            <a href="#"><i class="icon-Flag_Topic"></i></a>
-                                            <a href="#" class="active"><i class="icon-Already_Bookmarked"></i></a>
-                                        </div>
-                                        <div data-visible="mobile">
-                                            <a href="#"><i class="icon-More_Options"></i></a>
-                                        </div>
-                                        <a href="#"><i class="icon-Reply_Fill"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="topics__title"><i class="icon-Watch_Later"></i>This topic will has been closed.</div>
@@ -344,4 +257,113 @@
         </div>
     </main>
     @include('widgets.footer')
+@endsection
+@section('scripts')
+    <script>
+        let running = false;
+
+        $(".reply-like, .reply-unlike").click(function (e) {
+
+            e.preventDefault();
+            if(running) {
+                alert("Don't click multiple times");
+                return false;
+            }
+
+            running = true;
+            let url = '';
+            let likeBtn = $(this);
+            let reply_id = $(this).attr('data-id');
+            if (likeBtn.attr('class') === 'reply-like') url = '{{ route('reply.like') }}'; else url = '{{ route('reply.unlike') }}';
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                method: "POST",
+                url: url,
+                data: { reply_id:reply_id },
+            }).done(function(data){
+                if(data !== 'false' && data !== ''){
+                    $(`#reply-${reply_id}-likes`).html(data);
+                    if(likeBtn.attr('class') === "reply-like") likeBtn.attr("class", "reply-unlike"); else likeBtn.attr("class", "reply-like");
+                    running = false;
+                }
+            }).fail(function(e){
+                if(e.status === 401) alert('You need to be logged in');
+            });
+        });
+
+        $(".post-like").click(function(e){
+
+            e.preventDefault();
+
+            if(running) {
+                alert("Don't click multiple times");
+                return false;
+            }
+
+            running = true;
+            let url = "";
+            let likeBtn = $(this);
+            if(likeBtn.attr('id') === "post-like") url = "{{ route('post.like') }}"; else url = "{{ route('post.unlike') }}";
+            let post_id = $(this).attr('data-target');
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                method: "POST",
+                url: url,
+                data: { post_id:post_id },
+            }).done(function(data){
+                if(data !== 'false' && data !== ''){
+                    $(`#post-${post_id}-likes`).html(data);
+                    if(likeBtn.attr('id') === "post-like") likeBtn.attr("id", "post-unlike"); else likeBtn.attr("id", "post-like");
+                    running = false;
+                }
+            }).fail(function(e){
+                if(e.status === 401) alert('You need to be logged in');
+            });
+        });
+    </script>
+
+    <script>
+        $(".reply-comment").click(function (e) {
+
+            e.preventDefault();
+            $('#reply-comment').remove();
+            let recipient = $(this).attr('data-id');
+            let postId = '{{ $question->id }}';
+
+            let replyComment = `
+                <div id="reply-comment" >
+                    <form action="{{ route('blog.post.comment') }}" method="post" >
+                        @csrf
+                <div class="form-group" style="text-align: right;" >
+                    <a href="#" class="close" >
+                        <span style="color: red;font-weight: bold;" >&times;</span>
+                    </a>
+                </div>
+                <input type="hidden" name="recipient" value="${recipient}" >
+                        <input type="hidden" name="post_id" value="${postId}" >
+                        <div class="form-group" >
+                            <textarea class="form-control" name="body" style="resize: none;" ></textarea>
+                        </div>
+                        <div class="form-group text-right" >
+                            <input type="submit" class="btn btn-success" value="Reply" >
+                        </div>
+                    </form>
+                </div>
+            `;
+
+            $("#reply-"+recipient).append(replyComment);
+        });
+
+        $(document).on('click', '#reply-comment .close', function (e) {
+
+            e.preventDefault();
+            $("#reply-comment").remove();
+        });
+    </script>
 @endsection
