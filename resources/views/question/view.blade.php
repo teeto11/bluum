@@ -103,15 +103,15 @@
                                         <div class="topic__footer-likes">
                                             <div>
                                                 <a href="#"><i class="icon-Upvote"></i></a>
-                                                <span>71</span>
+                                                <span>{{ $answer->upVote->count() }}</span>
                                             </div>
                                             <div>
                                                 <a href="#"><i class="icon-Downvote"></i></a>
-                                                <span>{{ dd($answer->votes) }}</span>
+                                                <span>{{ $answer->downVote->count() }}</span>
                                             </div>
                                             <div>
-                                                <a href="#"><i class="icon-Favorite_Topic"></i></a>
-                                                <span>42</span>
+                                                <a href="#" class="" ><i class="icon-Favorite_Topic"></i></a>
+                                                <span>{{ $answer->downVote->count() }}</span>
                                             </div>
                                             <div>
                                                 <a href="#"><i class="icon-Reply_Empty"></i></a>
