@@ -25,6 +25,8 @@ Route::get('/questions/category/{category}', 'QuestionController@viewByCategory'
 Route::get('/questions/tag/{tag}', 'QuestionController@viewByTag')->name('question.showbytag');
 Route::get('/questions/popular', 'QuestionController@viewMostPopular')->name('question.popular');
 Route::get('/question/ask', 'QuestionController@create')->name('question.create');
+Route::post('/question/answer/up-vote', 'ReplyVoteController@upVote')->name('question.answer.up-vote');
+Route::post('/question/answer/down-vote', 'ReplyController@answerQuestion')->name('question.answer.down-vote');
 Route::post('/question/answer', 'ReplyController@answerQuestion')->name('question.answer');
 Route::get('/question/{id}/{title}', 'QuestionController@show')->name('question.show');
 Route::post('/question', 'QuestionController@store')->name('question.store');

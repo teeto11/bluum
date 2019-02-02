@@ -35,23 +35,6 @@ class ReplyController extends Controller{
 
     }
 
-    private function newCommentReplyNotification($user_id, $comment){
-
-        $notification = new Notificaton;
-        $notification->user_id = $user_id;
-        $notification->notification = auth()->user()->username.' replied your comment '.$comment;
-
-        return $notification;
-    }
-
-    private function newCommentNotification($post, $reply_id){
-        $notification = new Notificaton;
-        $notification->user_id = $post->user_id;
-        $notification->notification = auth()->user()->username.'Commented on your post '.ucfirst($post->title);
-        $notification->link = "/blog/post/$post->id/".formatUrlString($post->title)."#reply-$reply_id";
-        $notification->save();
-    }
-
     public function answerQuestion(Request $request){
 
         $this->validate($request, [

@@ -29,6 +29,6 @@ class Reply extends Model
     }
 
     public function downVote(){
-        return $this->hasMany('App\ReplyVote')->where('vote', true);
+        return $this->hasMany('App\ReplyVote')->where('vote', false);
     }
 }

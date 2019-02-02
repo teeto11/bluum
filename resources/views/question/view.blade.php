@@ -81,9 +81,12 @@
                                 </div>
                             </form>
                         </div>
-                        @foreach ($question->replies as $answer)
-                            @php $r_user = $answer->user @endphp
-                            <div class="topic topic--comment">
+                        @foreach ($question->replies->where('parent_reply', null) as $answer)
+                            @php
+                                $r_user = $answer->user;
+                                if(auth()->user()) $userLikedReply = userLikedReply($answer->id);
+                            @endphp
+                            <div class="topic topic--comment" id="reply-{{ $answer->id }}" >
                                 <div class="topic__head">
                                     <div class="topic__avatar">
                                         <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/'.getFirstLetterUppercase($r_user->firstname).'.svg') }}" alt="avatar"></a>
@@ -92,7 +95,7 @@
                                         <div class="topic__name">
                                             <a href="#">{{ ucwords($r_user->firstname.' '.$r_user->lastname) }}</a>
                                         </div>
-                                        <div class="topic__date"><i class="icon-Watch_Later"></i>{{ date('H:ia d M, Y', strtotime($answer->created_at)) }}</div>
+                                        <div class="topic__date"><i class="icon-Watch_Later"></i>{{ formatTime($answer->created_at) }}</div>
                                     </div>
                                 </div>
                                 <div class="topic__content">
@@ -102,20 +105,20 @@
                                     <div class="topic__footer">
                                         <div class="topic__footer-likes">
                                             <div>
-                                                <a href="#"><i class="icon-Upvote"></i></a>
+                                                <a href="#" class="up-vote" data-target="{{ $answer->id }}" ><i class="icon-Upvote"></i></a>
                                                 <span>{{ $answer->upVote->count() }}</span>
                                             </div>
                                             <div>
-                                                <a href="#"><i class="icon-Downvote"></i></a>
+                                                <a href="#" class="down-vote" data-target="{{ $answer->id }}" ><i class="icon-Downvote"></i></a>
                                                 <span>{{ $answer->downVote->count() }}</span>
                                             </div>
                                             <div>
                                                 <a href="#" class="" ><i class="icon-Favorite_Topic"></i></a>
-                                                <span>{{ $answer->downVote->count() }}</span>
+                                                <span>{{ $answer->likes }}</span>
                                             </div>
                                             <div>
-                                                <a href="#"><i class="icon-Reply_Empty"></i></a>
-                                                <span>01</span>
+                                                <a href="#" class="reply-answer" data-id="{{ $answer->id }}" data-parent="{{ $answer->id }}" ><i class="icon-Reply_Empty"></i></a>
+                                                <span>{{ $question->replies->where('parent_reply', $answer->id)->count() }}</span>
                                             </div>
                                         </div>
                                         <div class="topic__footer-share">
@@ -127,9 +130,15 @@
                                             <div data-visible="mobile">
                                                 <a href="#"><i class="icon-More_Options"></i></a>
                                             </div>
-                                            <a href="#"><i class="icon-Reply_Fill"></i></a>
                                         </div>
                                     </div>
+                                    <hr>
+                                    @foreach($question->replies->where('parent_reply', $answer->id) as $a_reply)
+                                        <div class="creply" >
+                                            <p><strong>{{ $a_reply->recipient }}</strong> {{ $a_reply->body }}. <strong>{{ $a_reply->user->username }}</strong> <a href="#" class="reply-answer" data-id="{{ $a_reply->id }}" data-parent="{{ $answer->id }}" ><i class="icon-Reply_Empty"></i></a></p>
+                                        </div>
+                                        <hr>
+                                    @endforeach
                                 </div>
                             </div>
                         @endforeach
@@ -329,24 +338,25 @@
     </script>
 
     <script>
-        $(".reply-comment").click(function (e) {
+        $(".reply-answer").click(function (e) {
 
             e.preventDefault();
             $('#reply-comment').remove();
             let recipient = $(this).attr('data-id');
-            let postId = '{{ $question->id }}';
+            let questionId = '{{ $question->id }}';
+            let parentId = $(this).attr('data-parent');
 
             let replyComment = `
                 <div id="reply-comment" >
-                    <form action="{{ route('blog.post.comment') }}" method="post" >
+                    <form action="{{ route('question.answer') }}" method="post" >
                         @csrf
-                <div class="form-group" style="text-align: right;" >
-                    <a href="#" class="close" >
-                        <span style="color: red;font-weight: bold;" >&times;</span>
-                    </a>
-                </div>
-                <input type="hidden" name="recipient" value="${recipient}" >
-                        <input type="hidden" name="post_id" value="${postId}" >
+                        <div class="form-group" style="text-align: right;" >
+                            <a href="#" class="close" >
+                                <span style="color: red;font-weight: bold;" >&times;</span>
+                            </a>
+                        </div>
+                        <input type="hidden" name="recipient" value="${recipient}" >
+                        <input type="hidden" name="post_id" value="${questionId}" >
                         <div class="form-group" >
                             <textarea class="form-control" name="body" style="resize: none;" ></textarea>
                         </div>
@@ -357,13 +367,45 @@
                 </div>
             `;
 
-            $("#reply-"+recipient).append(replyComment);
+            $("#reply-"+parentId).append(replyComment);
         });
 
         $(document).on('click', '#reply-comment .close', function (e) {
 
             e.preventDefault();
             $("#reply-comment").remove();
+        });
+    </script>
+
+    <script>
+
+        $('.up-vote').click(function (e) {
+
+            e.preventDefault();
+            if(running){
+                alert("Don't click multiple times");
+                return false;
+            }
+
+            running = true;
+            // let urlEnd = $(this).attr('data-function');
+            answerId = $(this).attr('data-target');
+            voteBtn = $(this);
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                method: "POST",
+                data: {answerId: answerId},
+                url: "/question/answer/up-vote",
+            }).done(function (res) {
+                voteBtn.closest('span').html('more');
+                running = false;
+                console.log(res);
+            }).fail(function(e){
+                if(e.status === 401) alert('You need to be logged in');
+            });
         });
     </script>
 @endsection

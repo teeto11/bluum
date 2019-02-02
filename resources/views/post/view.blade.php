@@ -171,7 +171,7 @@
                                     <hr>
                                     @foreach($post->replies->where('parent_reply', $reply->id) as $creply)
                                         <div class="creply" >
-                                            <p>{{ $creply->recipien }} {{ $creply->body }}. <strong>{{ $creply->user->username }}</strong></p>
+                                            <p><strong>{{ $creply->recipient }}</strong> {{ $creply->body }}. <strong>{{ $creply->user->username }}</strong></p>
                                         </div>
                                         <hr>
                                     @endforeach

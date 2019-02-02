@@ -49,3 +49,8 @@ function expert(){
 
     if(auth()->user()->role == 'EXPERT') return true; else return false;
 }
+
+function formatTime($time){
+
+    return date('H:ia d M, Y', strtotime($time));
+}
