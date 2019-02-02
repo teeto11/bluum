@@ -90,7 +90,7 @@ class QuestionController extends Controller
 
         $question = Post::find($id);
         if($question && $question->type == 'QUESTION'){
-            $related = Post::where('type', 'QUESTION')->orWhere(['category'=>$question->category, 'user_id'=>$question->id])->orderBy('views', 'desc')->take(5)->get();
+            $related = Post::where([ ['type', 'QUESTION'], ['category', $question->category] ])->orWhere([ ['type', 'QUESTION'], ['user_id', $question->id] ])->orderBy('views', 'desc')->take(5)->get();
             $data = [
                 'title' => ucwords($question->title),
                 'question' => $question,
