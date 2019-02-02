@@ -17,7 +17,7 @@ class PostStoreService{
         $post->user_id = auth()->user()->id;
 
         $postTagService = new PostTagService($request->type);
-        $postTagService->updateTag($post->tags);
+        $postTagService->updateTag(explode(",", $post->tags));
 
         return $post->save();
     }
