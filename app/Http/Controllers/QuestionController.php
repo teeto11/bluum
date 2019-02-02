@@ -90,12 +90,18 @@ class QuestionController extends Controller
 
         $question = Post::find($id);
         if($question && $question->type == 'QUESTION'){
-            $related = '';
+            $related = Post::where('type', 'QUESTION')->orWhere(['category'=>$question->category, 'user_id'=>$question->id])->orderBy('views', 'desc')->take(5)->get();
             $data = [
                 'title' => ucwords($question->title),
                 'question' => $question,
                 'related' => $related,
             ];
+
+            if(!auth()->guest()){
+                $data['liked'] = boolval(PostLike::where(["post_id" => $question->id, "user_id" => auth()->user()->id])->count());
+                $questionUpdate = new PostUpdateService;
+                $questionUpdate->updatePostViews($question);
+            }
 
             return view('question.view')->with($data);
         }else return redirect('/questions')->with('error', 'Question not found');

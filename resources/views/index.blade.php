@@ -185,8 +185,9 @@
                     <div class="posts__activity">Activity</div>
                 </div>
                 <div class="posts__body">
+					@php $counter = 1; @endphp
                     @foreach ($popular_questions as $question)
-                        <div class="posts__item">
+                        <div class="posts__item {{ ($counter%2 == 0) ? 'bg-f2f4f6' : '' }}">
                             <div class="posts__section-left">
                                 <div class="posts__topic">
                                     <div class="posts__content">
@@ -210,6 +211,7 @@
                                 <div class="posts__activity">{{ getLastActivityTime($question->updated_at) }}</div>
                             </div>
                         </div>
+						@php $counter++ @endphp
                     @endforeach
                 </div>
             </div>
