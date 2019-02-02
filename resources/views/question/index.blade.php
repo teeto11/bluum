@@ -76,15 +76,11 @@
                             </div>
                             <div class="posts__section-right">
                                 <div class="posts__users">
-                                    <div>
-                                        <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/A.svg') }}" alt="avatar"></a>
-                                    </div>
-                                    <div>
-                                        <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/G.svg') }}" alt="avatar"></a>
-                                    </div>
-                                    <div>
-                                        <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/P.svg') }}" alt="avatar"></a>
-                                    </div>
+                                    @foreach($question->popularReplies as $reply)
+                                        <div>
+                                            <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/'.getFirstLetterUppercase($reply->user->firstname)).'.svg' }}" alt="avatar"></a>
+                                        </div>
+                                    @endforeach
                                 </div>
                                 <div class="posts__replies">{{ count($question->replies) }}</div>
                                 <div class="posts__views">{{ $question->views }}</div>
