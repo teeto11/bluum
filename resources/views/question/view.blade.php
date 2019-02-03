@@ -135,7 +135,7 @@
                                             </div>
                                             <div>
                                                 @guest
-                                                    <a href="#" class="reply-like" data-id="{{ $reply->id }}" ><i class="icon-Favorite_Topic"></i></a>
+                                                    <a href="#" class="reply-like" data-id="{{ $answer->id }}" ><i class="icon-Favorite_Topic"></i></a>
                                                 @else
                                                     <a href="#" class="{{ ($userLikedReply) ? __('reply-unlike') : __('reply-like') }}" data-id="{{ $answer->id }}" ><i class="icon-Favorite_Topic"></i></a>
                                                 @endguest
