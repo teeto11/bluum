@@ -51,10 +51,7 @@
                 <a href="/admin/questions">Questions <i class="fa fa-question-circle float-right"></i></a>
             </li>
             <li>
-                <a href="#">Add post <i class="fa fa-pencil float-right"></i></a>
-            </li>
-            <li>
-                <a href="/admin/posts">View Posts <i class="fa fa-sticky-note-o float-right"></i></a>
+                <a href="/admin/posts">Posts <i class="fa fa-sticky-note-o float-right"></i></a>
             </li>
         </ul>
     </nav>

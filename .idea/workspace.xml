@@ -2,21 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d7ed4ed8-8947-4183-9c51-9858af585117" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/PostController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/add-category.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/add-category.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/add-post.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/add-post.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/add-sub-category.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/add-sub-category.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/edit-category.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/edit-category.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/edit-post.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/edit-post.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/edit-sub-category.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/edit-sub-category.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/view-categories.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/view-categories.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/view-category.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/view-category.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/view-post.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/view-post.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/view-posts.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/view-posts.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/view-sub-categories.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/view-sub-categories.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/view-sub-category.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/view-sub-category.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bluum.zip" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -507,16 +493,15 @@
       <workItem from="1549914345163" duration="2697000" />
       <workItem from="1550063607859" duration="6500000" />
       <workItem from="1550127994438" duration="1975000" />
-      <workItem from="1550404106451" duration="33729000" />
+      <workItem from="1550404106451" duration="34373000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="139690000" />
+    <option name="totallyTimeSpent" value="140334000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="11" />
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
