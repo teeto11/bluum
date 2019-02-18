@@ -99,11 +99,16 @@ class QuestionController extends Controller
 
             if(!auth()->guest()){
                 $data['liked'] = boolval(PostLike::where(["post_id" => $question->id, "user_id" => auth()->user()->id])->count());
-                $questionUpdate = new PostUpdateService;
-                $questionUpdate->updatePostViews($question);
+                $this->updateViews($question);
             }
 
             return view('question.view')->with($data);
         }else return redirect('/questions')->with('error', 'Question not found');
+    }
+
+    private function updateViews($question){
+
+        $questionUpdate = new PostUpdateService;
+        $questionUpdate->updatePostViews($question);
     }
 }

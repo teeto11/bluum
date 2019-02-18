@@ -14,7 +14,7 @@ class PostController extends Controller
 {
     public function __construct(){
         $this->middleware('auth', [
-            'except' => ['index', 'show', 'viewByCategory', 'viewByTag']
+            'except' => ['index', 'show', 'viewByCategory', 'viewByTag', 'viewMostPopular']
         ]);
     }
 

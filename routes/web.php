@@ -36,3 +36,15 @@ Route::post('/post/unlike', 'PostLikeController@unlike')->name('post.unlike');
 
 Route::post('/reply/like', 'ReplyLikeController@like')->name('reply.like');
 Route::post('/reply/unlike', 'ReplyLikeController@unlike')->name('reply.unlike');
+
+Route::get('/admin', 'Admin\AdminController@index')->name('admin.home');
+Route::get('/admin/experts', 'Admin\ExpertController@viewExperts')->name('admin.expert');
+Route::get('/admin/expert/new', 'Admin\ExpertController@showAddExpertForm')->name('admin.expert.new');
+Route::post('/admin/expert/new', 'Admin\ExpertController@addExpert')->name('admin.expert.store');
+Route::delete('/admin/expert/delete', 'Admin\ExpertController@removeExpert')->name('admin.expert.delete');
+Route::get('/admin/expert/{id}', 'Admin\ExpertController@viewExpert')->name('admin.expert.show');
+
+Route::get('/admin/questions', 'Admin\QuestionController@index')->name('admin.questions');
+Route::delete('/admin/question/delete', 'Admin\QuestionController@deleteQuestion')->name('admin.question.delete');
+Route::get('/admin/question/{id}', 'Admin\QuestionController@viewQuestion')->name('admin.question.show');
+Route::delete('/admin/question/answer/delete', 'Admin\QuestionController@deleteAnswer')->name('admin.question.answer.delete');
