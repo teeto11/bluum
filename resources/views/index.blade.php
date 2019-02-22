@@ -130,7 +130,7 @@
 								<div class="card expert-card">
 									<img class="card-img-top" src="{{ asset('fonts/icons/avatars/B.svg') }}" alt="Card image cap" />
 									<div class="card-body">
-										<h5 class="card-title">Expert Name</h5>
+										<h5 class="card-title">Expert Dafom</h5>
 										<p class="card-text">Expert description, expert description, expert description, expert description, expert description.</p>
 									</div>
 								</div>
