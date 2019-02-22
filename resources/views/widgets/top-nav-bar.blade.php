@@ -66,7 +66,7 @@
             @else
                 <div class="header__user">
                     <div class="header__user-btn" data-dropdown-btn="user">
-                        <img src="{{ asset('fonts/icons/avatars/'.Auth::user()->firstname[0].'.svg') }}" alt="avatar">
+                        <img src="{{ asset('fonts/icons/avatars/'.ucfirst(Auth::user()->firstname[0]).'.svg') }}" alt="avatar">
                         {{ ucwords(Auth::user()->firstname.' '.Auth::user()->lastname) }}<i class="icon-Arrow_Below"></i>
                     </div>
                     <nav class="dropdown dropdown--design-01" data-dropdown-list="user">

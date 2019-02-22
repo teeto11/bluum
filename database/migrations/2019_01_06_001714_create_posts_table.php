@@ -23,6 +23,7 @@ class CreatePostsTable extends Migration
             $table->string('category');
             $table->longText('tags');
             $table->integer('user_id');
+            $table->longText('cover_img')->nullable();
             $table->timestamps();
         });
     }

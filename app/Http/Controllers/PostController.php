@@ -76,6 +76,7 @@ class PostController extends Controller
             'title' => ['required', 'string', 'max:255'],
             'post' => ['required', 'string'],
             'category' => ['required', 'string'],
+            'coverImg' => ['image', 'nullable', 'max:1999']
         ]);
 
         $request->type = 'POST';

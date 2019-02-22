@@ -1,11 +1,22 @@
 @extends('layouts.app-temp')
 
+@section('header_scripts')
+    <style>
+        .coverImgBtn:hover{
+            cursor: pointer;
+        }
+        #coverImg{
+            display: none;
+        }
+    </style>
+@endsection
+
 @section('content')
     @include('widgets.top-nav-bar')
     <main>
         <div class="container">
             <div class="create">
-                <form action="{{ route('blog.post.store') }}" method="POST">
+                <form action="{{ route('blog.post.store') }}" method="POST" enctype="multipart/form-data" >
                     @csrf
                     <div class="create__head">
                         <div class="create__title"><img src="{{asset('fonts/icons/main/New_Topic.svg')}}" alt="New topic">Create New Post</div>
@@ -34,6 +45,23 @@
                                 @endforeach
                             </select>
                         </label>
+                    </div>
+                    @if($errors->has('coverImg'))
+                        <span class="invalid-feedback text-danger" role="alert">
+                            <strong><p>{{ $errors->first('coverImg') }}</p></strong>
+                        </span>
+                    @endif
+                    <div class="create__section" >
+                        <div class="form-group">
+                            <label for="coverImg" >Cover Image</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="coverImgPlaceholder" placeholder="Cover Image" >
+                                <div class="input-group-addon coverImgBtn">
+                                    <span>Browse</span>
+                                </div>
+                            </div>
+                            <input type="file" name="coverImg" id="coverImg" >
+                        </div>
                     </div>
                     @if ($errors->has('post'))
                         <span class="invalid-feedback text-danger" role="alert">
@@ -110,4 +138,20 @@
         </div>
     </main>
     @include('widgets.footer')
+@endsection
+
+@section('scripts')
+    <script>
+        $('.coverImgBtn, #coverImgPlaceholder').click(function () {
+            $('#coverImg').click();
+        });
+
+        $('#coverImg').change(function () {
+            let input = this;
+
+            if(input.files && input.files[0]){
+                $('#coverImgPlaceholder').val(input.files[0].name);
+            }
+        });
+    </script>
 @endsection
