@@ -57,6 +57,14 @@ class PostController extends Controller
         return view('post.index')->with($data);
     }
 
+    function viewByFollowing(){
+
+        $postViewService = new PostsViewService('POST');
+        $data = $postViewService->viewByFollowing();
+
+        return view('post.index')->with($data);
+    }
+
     public function create(){
 
         $categories = Code::where('key', 'BP_CATEGORY')->get();

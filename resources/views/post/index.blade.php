@@ -44,6 +44,7 @@
                                 <li><a href="{{ route('blog') }}">Latest</a></li>
                                 <li><a href="{{ route('blog.unread') }}">Unread</a></li>
                                 <li><a href="{{ route('blog.popular') }}">Most Liked</a></li>
+                                <li><a href="{{ route('blog.following') }}">Following</a></li>
                             </ul>
                         </div>
                     </div>
@@ -51,6 +52,7 @@
                         <li id="latest-link" ><a href="{{ route('blog') }}">Latest</a></li>
                         <li id="unread-link" ><a href="{{ route('blog.unread') }}">Unread</a></li>
                         <li id="popular-link" ><a href="{{ route('blog.popular') }}">Most Liked</a></li>
+                        <li id="following-link" ><a href="{{ route('blog.following') }}">Following</a></li>
                     </ul>
                 </div>
             </div>
