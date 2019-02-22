@@ -41,16 +41,16 @@
                         <div class="btn-select" data-dropdown-btn="menu">Latest</div>
                         <div class="dropdown dropdown--design-01" data-dropdown-list="menu">
                             <ul class="dropdown__catalog">
-                                <li><a href="/blog">Latest</a></li>
-                                <li><a href="/blog/unread">Unread</a></li>
-                                <li><a href="/blog/popular">Most Liked</a></li>
+                                <li><a href="{{ route('blog') }}">Latest</a></li>
+                                <li><a href="{{ route('blog.unread') }}">Unread</a></li>
+                                <li><a href="{{ route('blog.popular') }}">Most Liked</a></li>
                             </ul>
                         </div>
                     </div>
                     <ul>
-                        <li class="active"><a href="/blog">Latest</a></li>
-                        <li><a href="/blog/unread">Unread</a></li>
-                        <li><a href="/blog/popular">Most Liked</a></li>
+                        <li id="latest-link" ><a href="{{ route('blog') }}">Latest</a></li>
+                        <li id="unread-link" ><a href="{{ route('blog.unread') }}">Unread</a></li>
+                        <li id="popular-link" ><a href="{{ route('blog.popular') }}">Most Liked</a></li>
                     </ul>
                 </div>
             </div>
@@ -174,4 +174,11 @@
         </div>
     </main>
     @include('widgets.footer')
+@endsection
+
+@section('scripts')
+    <script>
+        let activeLink = '{{ $active_link }}';
+        $("#"+activeLink).addClass('active');
+    </script>
 @endsection

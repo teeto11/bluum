@@ -15,7 +15,7 @@ class QuestionController extends Controller
 
     public function __construct(){
         $this->middleware('auth', [
-            'except' => ['index', 'show', 'viewByCategory']
+            'except' => ['index', 'show', 'viewByCategory', 'viewMostPopular']
         ]);
     }
 
@@ -36,7 +36,10 @@ class QuestionController extends Controller
     }
 
     public function viewUnreadOnly(){
-        dd('unread');
+        $postsViewService = new PostsViewService('QUESTION');
+        $data = $postsViewService->viewUnreadPost();
+
+        return view('question.index')->with($data);
     }
 
     public function viewMostPopular(){
@@ -90,12 +93,15 @@ class QuestionController extends Controller
 
         $question = Post::find($id);
         if($question && $question->type == 'QUESTION'){
-            $related = Post::where([ ['type', 'QUESTION'], ['category', $question->category] ])->orWhere([ ['type', 'QUESTION'], ['user_id', $question->id] ])->orderBy('views', 'desc')->take(5)->get();
+            $related = Post::where([ ['type', 'QUESTION'], ['category', $question->category], ['id', '!=', $id]])->orWhere([ ['type', 'QUESTION'], ['user_id', $question->id], ['id', '!=', $id]])->orderBy('views', 'desc')->take(5)->get();
             $data = [
                 'title' => ucwords($question->title),
                 'question' => $question,
                 'related' => $related,
             ];
+
+            $correctAnswer = $question->replies->where('correct', true);
+            if($correctAnswer->count() > 0 ) $data['correctAnswer'] = $correctAnswer->first();
 
             if(!auth()->guest()){
                 $data['liked'] = boolval(PostLike::where(["post_id" => $question->id, "user_id" => auth()->user()->id])->count());

@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Code;
 use App\Post;
+use App\PostView;
+use App\User;
 
 class PostsViewService{
 
@@ -41,7 +43,7 @@ class PostsViewService{
         $posts = Post::where([
             'type' => $this->type,
             'category' => $category
-        ])->paginate(15);
+        ])->orderBy('created_at', 'DESC')->paginate(15);
         $data = $this->viewPostsData();
         $data['posts'] = $posts;
 
@@ -53,6 +55,7 @@ class PostsViewService{
         $posts = Post::where('type', $this->type)->orderBy('likes', 'desc')->paginate(15);
         $data = $this->viewPostsData();
         $data['posts'] = $posts;
+        $data['active_link'] = 'popular-link';
 
         return $data;
     }
@@ -60,9 +63,20 @@ class PostsViewService{
     public function viewPostsByTags($tag){
 
         $tag = strtolower(urldecode($tag));
-        $posts = Post::where([['tags', 'like', "%$tag%"], ['type', $this->type]])->paginate(15);
+        $posts = Post::where([['tags', $tag], ['type', $this->type]])->orderBy('created_at', 'DESC')->paginate(15);
         $data = $this->viewPostsData();
         $data['posts'] = $posts;
+
+        return $data;
+    }
+
+    public function viewUnreadPost(){
+
+        $seenPost = PostView::where('user_id', auth()->user()->id)->pluck('post_id')->toArray();
+        $posts = Post::where('type', $this->type)->whereNotIn('id', $seenPost)->orderBy('created_at', 'DESC')->paginate(15);
+        $data = $this->viewPostsData();
+        $data['posts'] = $posts;
+        $data['active_link'] = 'unread-link';
 
         return $data;
     }
@@ -77,7 +91,8 @@ class PostsViewService{
             'title' => $this->title,
             'pinned_posts' => $pinned_posts,
             'categories' => $categories,
-            'top_tags' => $top_tags
+            'top_tags' => $top_tags,
+            'active_link' => 'latest-link',
         ];
 
         return $data;

@@ -21,10 +21,12 @@ Route::post('/blog/post/comment', 'ReplyController@addComment')->name('blog.post
 
 //Q&A routes
 Route::get('/questions', 'QuestionController@index')->name('questions');
+Route::get('/questions/popular', 'QuestionController@viewMostPopular')->name('question.popular');
+Route::get('/questions/unread', 'QuestionController@viewUnreadOnly')->name('question.unread');
+Route::get('/question/ask', 'QuestionController@create')->name('question.create');
 Route::get('/questions/category/{category}', 'QuestionController@viewByCategory')->name('question.showbycategory');
 Route::get('/questions/tag/{tag}', 'QuestionController@viewByTag')->name('question.showbytag');
-Route::get('/questions/popular', 'QuestionController@viewMostPopular')->name('question.popular');
-Route::get('/question/ask', 'QuestionController@create')->name('question.create');
+Route::post('/question/answer/markAsCorrect', 'ReplyController@markAsCorrect')->name('question.answer.markAsCorrect');
 Route::post('/question/answer/up-vote', 'ReplyVoteController@upVote')->name('question.answer.up-vote');
 Route::post('/question/answer/down-vote', 'ReplyVoteController@downVote')->name('question.answer.down-vote');
 Route::post('/question/answer', 'ReplyController@answerQuestion')->name('question.answer');
@@ -36,6 +38,11 @@ Route::post('/post/unlike', 'PostLikeController@unlike')->name('post.unlike');
 
 Route::post('/reply/like', 'ReplyLikeController@like')->name('reply.like');
 Route::post('/reply/unlike', 'ReplyLikeController@unlike')->name('reply.unlike');
+
+Route::get('/experts', 'ExpertController@index')->name('experts');
+Route::get('/expert/{id}', 'ExpertController@viewExpert')->name('expert.profile');
+Route::post('/expert/follow', 'ExpertController@followExpert')->name('expert.follow');
+Route::post('/expert/unfollow', 'ExpertController@unfollowExpert')->name('expert.unfollow');
 
 Route::get('/admin', 'Admin\AdminController@index')->name('admin.home');
 Route::get('/admin/experts', 'Admin\ExpertController@viewExperts')->name('admin.expert');

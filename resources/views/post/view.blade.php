@@ -49,7 +49,7 @@
                             <div class="tags">
                                 @php $tags = explode(',', $post->tags); @endphp
                                 @foreach ($tags as $tag)
-                                    <a href="#" class="bg-4f80b0">{{ $tag }}</a>
+                                    <a href="/blog/tag/{{ $tag }}" class="bg-4f80b0">{{ $tag }}</a>
                                 @endforeach
                             </div>
                         @endif

@@ -14,6 +14,9 @@
         #reply-comment a.close{
             font-size: 3rem;
         }
+        .correct-answer{
+            border: 1px solid #3c763d;
+        }
     </style>
 @endsection
 
@@ -37,7 +40,7 @@
                             <div class="tags">
                                 @php $tags = explode(',', $question->tags); @endphp
                                 @foreach ($tags as $tag)
-                                    <a href="#" class="bg-4f80b0">{{ $tag }}</a>
+                                    <a href="{{ route('blog.tag', ['tag'=>$tag]) }}" class="bg-4f80b0">{{ $tag }}</a>
                                 @endforeach
                             </div>
                         @endif
@@ -102,7 +105,76 @@
                                 </div>
                             </form>
                         </div>
-                        @foreach ($question->replies->where('parent_reply', null) as $answer)
+                        @if(isset($correctAnswer))
+                            @php
+                                $answer = $correctAnswer;
+                                $r_user = $answer->user;
+                                if(auth()->user()) $userLikedReply = userLikedReply($answer->id);
+                            @endphp
+                            <div class="topic topic--comment correct-answer" id="reply-{{ $answer->id }}" >
+                                <div class="topic__head">
+                                    <div class="topic__avatar">
+                                        <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/'.getFirstLetterUppercase($r_user->firstname).'.svg') }}" alt="avatar"></a>
+                                    </div>
+                                    <div class="topic__caption">
+                                        <div class="topic__name">
+                                            <a href="#">{{ ucwords($r_user->firstname.' '.$r_user->lastname) }}</a>
+                                        </div>
+                                        <div class="topic__date"><i class="icon-Watch_Later"></i>{{ formatTime($answer->created_at) }}</div>
+                                    </div>
+                                </div>
+                                <div class="topic__content">
+                                    <div class="topic__text">
+                                        <p>{{ $answer->body }}.</p>
+                                    </div>
+                                    <div class="topic__footer">
+                                        <div class="topic__footer-likes">
+                                            <div>
+                                                <a href="#" class="up-vote" data-target="{{ $answer->id }}" ><i class="icon-Upvote"></i></a>
+                                                <span>{{ $answer->upVote->count() }}</span>
+                                            </div>
+                                            <div>
+                                                <a href="#" class="down-vote" data-target="{{ $answer->id }}" ><i class="icon-Downvote"></i></a>
+                                                <span>{{ $answer->downVote->count() }}</span>
+                                            </div>
+                                            <div>
+                                                @guest
+                                                    <a href="#" class="reply-like" data-id="{{ $answer->id }}" ><i class="icon-Favorite_Topic"></i></a>
+                                                @else
+                                                    <a href="#" class="{{ ($userLikedReply) ? __('reply-unlike') : __('reply-like') }}" data-id="{{ $answer->id }}" ><i class="icon-Favorite_Topic"></i></a>
+                                                @endguest
+                                                <span id="reply-{{ $answer->id }}-likes" >{{ $answer->likes }}</span>
+                                            </div>
+                                            <div>
+                                                <a href="#" class="reply-answer" data-id="{{ $answer->id }}" data-parent="{{ $answer->id }}" ><i class="icon-Reply_Empty"></i></a>
+                                                <span>{{ $question->replies->where('parent_reply', $answer->id)->count() }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="topic__footer-share">
+                                            <div data-visible="desktop">
+                                                <a href="#"><i class="icon-Share_Topic"></i></a>
+                                                <a href="#"><i class="icon-Flag_Topic"></i></a>
+                                                <a href="#" class="active"><i class="icon-Already_Bookmarked"></i></a>
+                                            </div>
+                                            <div data-visible="mobile">
+                                                <a href="#"><i class="icon-More_Options"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    @foreach($question->replies->where('parent_reply', $answer->id) as $a_reply)
+                                        <div class="creply" >
+                                            <p><strong>{{ $a_reply->recipient }}</strong> {{ $a_reply->body }}. <strong>{{ $a_reply->user->username }}</strong> <a href="#" class="reply-answer" data-id="{{ $a_reply->id }}" data-parent="{{ $answer->id }}" ><i class="icon-Reply_Empty"></i></a></p>
+                                        </div>
+                                        <hr>
+                                    @endforeach
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-success" style="font-weight: bold;" >CORRECT ANSWER</p>
+                                </div>
+                            </div>
+                        @endif
+                        @foreach ($question->replies->where('parent_reply', null)->where('correct', false) as $answer)
                             @php
                                 $r_user = $answer->user;
                                 if(auth()->user()) $userLikedReply = userLikedReply($answer->id);
@@ -165,6 +237,17 @@
                                         <hr>
                                     @endforeach
                                 </div>
+                                @auth
+                                    @if(!isset($correctAnswer) && auth()->user()->id == $question->user_id )
+                                        <div class="text-right">
+                                            <form method="post" action="{{ route('question.answer.markAsCorrect') }}" >
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{ $answer->id }}" >
+                                                <button type="submit" class=" btn btn-success" style="font-weight: bold;" >MARK AS CORRECT</button>
+                                            </form>
+                                        </div>
+                                    @endif
+                                @endauth
                             </div>
                         @endforeach
                     </div>

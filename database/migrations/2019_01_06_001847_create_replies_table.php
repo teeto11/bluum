@@ -22,6 +22,7 @@ class CreateRepliesTable extends Migration
             $table->integer('parent_reply')->nullable();
             $table->integer('post_id');
             $table->integer('user_id');
+            $table->boolean('correct')->default(false);
             $table->timestamps();
         });
     }

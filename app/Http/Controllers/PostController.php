@@ -35,7 +35,10 @@ class PostController extends Controller
     }
 
     public function viewUnreadOnly(){
-        dd('unread');
+        $postsViewService = new PostsViewService('POST');
+        $data = $postsViewService->viewUnreadPost();
+
+        return view('post.index')->with($data);
     }
 
     public function viewMostPopular(){

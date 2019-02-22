@@ -45,7 +45,8 @@
                     <div class="body">
                         <ul>
                             @foreach($expert->followers as $follower)
-                                <li class="px-3" > <a href="" >Chollom Dafom</a></li>
+                                @php $fUsert = $follower->user @endphp
+                                <li class="px-3" > <a href="" >{{ ucwords($fUsert->firstname.' '.$fUsert->lastname) }}</a></li>
                             @endforeach
                         </ul>
                     </div>

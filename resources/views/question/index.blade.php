@@ -33,16 +33,16 @@
                         <div class="btn-select" data-dropdown-btn="menu">Latest</div>
                         <div class="dropdown dropdown--design-01" data-dropdown-list="menu">
                             <ul class="dropdown__catalog">
-                                <li><a href="/questions">Latest</a></li>
-                                <li><a href="#">Unread</a></li>
-                                <li><a href="/questions/popular">Most Liked</a></li>
+                                <li><a href="{{ route('questions') }}">Latest</a></li>
+                                <li><a href="{{ route('question.unread') }}">Unread</a></li>
+                                <li><a href="{{ route('question.popular') }}">Most Liked</a></li>
                             </ul>
                         </div>
                     </div>
                     <ul>
-                        <li class="active"><a href="/questions">Latest</a></li>
-                        <li><a href="#">Unread</a></li>
-                        <li><a href="/questions/popular">Most Liked</a></li>
+                        <li class="filter-link" id="latest-link" ><a href="{{ route('questions') }}">Latest</a></li>
+                        <li class="filter-link" id="unread-link" ><a href="{{ route('question.unread') }}">Unread</a></li>
+                        <li class="filter-link" id="popular-link" ><a href="{{ route('question.popular') }}">Most Liked</a></li>
                     </ul>
                 </div>
             </div>
@@ -95,4 +95,11 @@
         </div>
     </main>
     @include('widgets.footer')
+@endsection
+
+@section('scripts')
+    <script>
+        let activeLink = '{{ $active_link }}';
+        $("#"+activeLink).addClass('active');
+    </script>
 @endsection

@@ -33,9 +33,9 @@
                     <div>
                         <ul class="dropdown__catalog row">
                             <li class="col-xs-6"><a href="/question/ask">New</a></li>
-                            <li class="col-xs-6"><a href="questions.html">Experts</a></li>
-                            <li class="col-xs-6"><a href="questions.html">Tags</a></li>
-                            <li class="col-xs-6"><a href="questions.html">Pregnancy</a></li>
+                            <li class="col-xs-6"><a href="/experts">Experts</a></li>
+                            <li class="col-xs-6"><a href="/tags">Tags</a></li>
+                            <li class="col-xs-6"><a href="/question/category/pregnancy">Pregnancy</a></li>
                         </ul>
                     </div>
                     <div>

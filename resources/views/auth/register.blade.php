@@ -28,7 +28,7 @@
                                 <strong><p>{{ $errors->first('lastname') }}</p></strong>
                             </span>
                         @endif
-                        <div class="row" data-visible="desktop">
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="signup__section">
                                     <label class="signup__label" for="first-name">{{ __('First Name:') }}</label>

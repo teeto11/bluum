@@ -51,5 +51,29 @@ class ReplyController extends Controller{
         }
     }
 
+    public function markAsCorrect(Request $request){
+
+        $this->validate($request, [
+            'id' => ['required', 'int']
+        ]);
+
+        $reply = Reply::find($request->id);
+        $question = $reply->post;
+
+        if($question){
+            if(auth()->user()->id == $question->user_id){
+                $hasCorrect = $question->replies->where('correct', true)->count();
+
+                if ($hasCorrect < 1){
+                    $reply->correct = true;
+                    $reply->save();
+                    $message = ['success', 'Answer saved as correct answer'];
+                }else $message = ['error', 'Question has a correct answer'];
+            }else $message = ['error', 'Permission not granted'];
+
+            return redirect()->route('question.show', ['id'=>$question->id, 'title'=>formatUrlString($question->title)])->with($message);
+        }else return redirect()->route('questions');
+
+    }
 
 }

@@ -191,7 +191,7 @@
                             <div class="posts__section-left">
                                 <div class="posts__topic">
                                     <div class="posts__content">
-                                        <a href="/question/{{ $question->id }}">
+                                        <a href="/question/{{ $question->id }}/{{ formatUrlString($question->title) }}">
                                             <h3>{{ $question->title }}</h3>
                                         </a>
                                     </div>
