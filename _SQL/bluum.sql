@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Feb 22, 2019 at 05:47 AM
+-- Generation Time: Feb 22, 2019 at 08:25 AM
 -- Server version: 5.7.23
 -- PHP Version: 7.2.10
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `codes` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `codes`
@@ -64,7 +64,9 @@ INSERT INTO `codes` (`id`, `key`, `value`, `additional_info`, `created_at`, `upd
 (24, 'Q_TAG', 'pregnant', '1', '2019-02-02 11:59:14', '2019-02-02 11:59:14'),
 (25, 'Q_TAG', 'pain', '1', '2019-02-02 11:59:14', '2019-02-02 11:59:14'),
 (26, 'BP_TAG', 'lots', '1', '2019-02-18 15:38:35', '2019-02-18 15:38:35'),
-(27, 'BP_TAG', 'newtag', '1', '2019-02-18 15:38:35', '2019-02-18 15:38:35');
+(27, 'BP_TAG', 'newtag', '1', '2019-02-18 15:38:35', '2019-02-18 15:38:35'),
+(28, 'BP_TAG', 'image', '1', '2019-02-22 05:31:37', '2019-02-22 05:31:37'),
+(29, 'BP_TAG', 'blog', '1', '2019-02-22 05:31:37', '2019-02-22 05:31:37');
 
 -- --------------------------------------------------------
 
@@ -254,7 +256,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1011 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=1012 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `posts`
@@ -1319,7 +1321,7 @@ CREATE TABLE IF NOT EXISTS `post_views` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `post_views`
@@ -1353,7 +1355,8 @@ INSERT INTO `post_views` (`id`, `post_id`, `user_id`, `created_at`, `updated_at`
 (25, 188, 1, '2019-02-21 12:58:49', '2019-02-21 12:58:49'),
 (26, 146, 1, '2019-02-21 12:59:01', '2019-02-21 12:59:01'),
 (27, 667, 1, '2019-02-21 18:49:30', '2019-02-21 18:49:30'),
-(28, 56, 1, '2019-02-21 18:49:44', '2019-02-21 18:49:44');
+(28, 56, 1, '2019-02-21 18:49:44', '2019-02-21 18:49:44'),
+(29, 1011, 1, '2019-02-22 05:31:40', '2019-02-22 05:31:40');
 
 -- --------------------------------------------------------
 
