@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Code;
+use App\Followers;
 use App\Post;
 use App\PostView;
 use App\User;
@@ -66,6 +67,17 @@ class PostsViewService{
         $posts = Post::where([['tags', $tag], ['type', $this->type]])->orderBy('created_at', 'DESC')->paginate(15);
         $data = $this->viewPostsData();
         $data['posts'] = $posts;
+
+        return $data;
+    }
+
+    public function viewByFollowing(){
+
+        $expertsId = Followers::where('user_id', auth()->user()->id)->pluck('expert_id')->toArray();
+        $posts = Post::where('type', $this->type)->whereIn('user_id', $expertsId)->orderBy('created_at', 'DESC')->paginate(15);
+        $data = $this->viewPostsData();
+        $data['posts'] = $posts;
+        $data['active_link'] = 'following-link';
 
         return $data;
     }

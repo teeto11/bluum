@@ -11,6 +11,7 @@ Route::get('/blog', 'PostController@index')->name('blog');
 Route::get('/blog/tag/{tag}', 'PostController@viewByTag')->name('blog.tag');
 Route::get('/blog/unread', 'PostController@viewUnreadOnly')->name('blog.unread');
 Route::get('/blog/popular', 'PostController@viewMostPopular')->name('blog.popular');
+Route::get('/blog/following', 'PostController@viewByFollowing')->name('blog.following');
 Route::get('/blog/{category}', 'PostController@viewByCategory')->name('blog.category');
 Route::get('blog/post/new', 'PostController@create')->name('blog.post.create');
 Route::get('blog/post/edit/{id}', 'PostController@edit')->name('blog.post.edit');
@@ -23,6 +24,7 @@ Route::post('/blog/post/comment', 'ReplyController@addComment')->name('blog.post
 Route::get('/questions', 'QuestionController@index')->name('questions');
 Route::get('/questions/popular', 'QuestionController@viewMostPopular')->name('question.popular');
 Route::get('/questions/unread', 'QuestionController@viewUnreadOnly')->name('question.unread');
+Route::get('/question/following', 'QuestionController@viewByFollowing')->name('question.following');
 Route::get('/question/ask', 'QuestionController@create')->name('question.create');
 Route::get('/questions/category/{category}', 'QuestionController@viewByCategory')->name('question.showbycategory');
 Route::get('/questions/tag/{tag}', 'QuestionController@viewByTag')->name('question.showbytag');
