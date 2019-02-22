@@ -125,47 +125,20 @@
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-12">
 					<div class="row text-center">
-						<div class="col-md-12">
-							<div class="col-lg-6 col-md-6 col-sm-12">
-								<div class="card expert-card">
-									<img class="card-img-top" src="{{ asset('fonts/icons/avatars/B.svg') }}" alt="Card image cap" />
-									<div class="card-body">
-										<h5 class="card-title">Expert Name</h5>
-										<p class="card-text">Expert description, expert description, expert description, expert description, expert description.</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-12">
-								<div class="card expert-card">
-									<img class="card-img-top" src="{{ asset('fonts/icons/avatars/D.svg') }}" alt="Card image cap" />
-									<div class="card-body">
-										<h5 class="card-title">Expert Name</h5>
-										<p class="card-text">Expert description, expert description, expert description, expert description, expert description.</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-12">
-							<div class="col-lg-6 col-md-6 col-sm-12">
-								<div class="card expert-card">
-									<img class="card-img-top" src="{{ asset('fonts/icons/avatars/W.svg') }}" alt="Card image cap" />
-									<div class="card-body">
-										<h5 class="card-title">Expert Name</h5>
-										<p class="card-text">Expert description, expert description, expert description, expert description, expert description.</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-12">
-								<div class="card expert-card">
-									<img class="card-img-top" src="{{ asset('fonts/icons/avatars/O.svg') }}" alt="Card image cap" />
-									<div class="card-body">
-										<h5 class="card-title">Expert Name</h5>
-										<p class="card-text">Expert description, expert description, expert description, expert description, expert description.</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+                        <div class="col-md-12">
+                        @foreach($topExperts as $expert)
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="card expert-card">
+                                    <img class="card-img-top" src="{{ asset('fonts/icons/avatars/'.getFirstLetterUppercase($expert->firstname).'.svg') }}" alt="Card image cap" />
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ ucwords("$expert->firstname $expert->lastname") }}</h5>
+                                        <p class="card-text">{{ ucfirst($expert->expert->about) }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                        </div>
+                    </div>
 				</div>
 			</div>
 		</div>
