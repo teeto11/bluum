@@ -21,7 +21,7 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="card card-content">
 						<p><img class="card-img-top" src="{{ asset('fonts/icons/badges/pregnant.png') }}" alt="user-icon" /></p>
-						<a class="card-content-links" href="" title="">
+						<a class="card-content-links" href="{{ route('blog.category', formatUrlString('pregnancy')) }}" title="">
 							<div class="card-body">
 								<h4 class="card-title">Pregnancy</h4>
 								<p class="card-text">Connect with experts and other users for a stress free and exciting pregnancy experience, trimester by trimester.</p>
@@ -32,7 +32,7 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="card card-content">
 						<p><img class="card-img-top" src="{{ asset('fonts/icons/badges/medical.png') }}" alt="user-icon" /></p>
-						<a class="card-content-links" href="" title="">
+						<a class="card-content-links" href="{{ route('blog.category', formatUrlString('medical travels')) }}" title="">
 							<div class="card-body">
 								<h4 class="card-title">Pregnancy Medical Travels</h4>
 								<p class="card-text">Connect and get concise information from experienced moms for your baby delivery and health outside your country of residence.</p>
@@ -43,7 +43,7 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="card card-content">
 						<p><img class="card-img-top" src="{{ asset('fonts/icons/badges/illness.jpg') }}" alt="user-icon" /></p>
-						<a class="card-content-links" href="" title="">
+						<a class="card-content-links" href="{{ route('blog.category', formatUrlString('common illness')) }}" title="">
 							<div class="card-body">
 								<h4 class="card-title">Common Illnesses</h4>
 								<p class="card-text">Connect with experts and other users on information regarding to common illnesses that can tamper with your babies' healthy development e.g measles.</p>
@@ -56,7 +56,7 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="card card-content">
 						<p><img class="card-img-top" src="{{ asset('fonts/icons/badges/special_illness.jpg') }}" alt="user-icon" /></p>
-						<a class="card-content-links" href="" title="">
+						<a class="card-content-links" href="{{ route('blog.category', formatUrlString('special illness')) }}" title="">
 							<div class="card-body">
 								<h4 class="card-title">Special Illnesses</h4>
 								<p class="card-text">Connect with experts and other users on information regarding to special illnesses around children that can be avoided and also managed for healthy development.</p>
@@ -67,7 +67,7 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="card card-content">
 						<p><img class="card-img-top" src="{{ asset('fonts/icons/badges/Lets_talk.svg') }}" alt="user-icon" /></p>
-						<a class="card-content-links" href="" title="">
+						<a class="card-content-links" href="{{ route('blog.category', formatUrlString('bluum stories')) }}" title="">
 							<div class="card-body">
 								<h4 class="card-title">Bluum Stories</h4>
 								<p class="card-text">Tell your story of how your pregnancy, the scare, the joy, the moments, the myths and how your journey can motivate a newbie in the process.</p>
@@ -78,7 +78,7 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="card card-content">
 						<p><img class="card-img-top" src="{{ asset('fonts/icons/badges/blog.svg') }}" alt="user-icon" /></p>
-						<a class="card-content-links" href="" title="">
+						<a class="card-content-links" href="{{ route('blog') }}" title="">
 							<div class="card-body">
 								<h4 class="card-title">Blog</h4>
 								<p class="card-text">All news and exciting new findings for you and your baby.</p>
@@ -117,7 +117,7 @@
 								<div class="card-body">
 									<h3 class="card-text">320+ Gynaecologists, <br />Paediatricians, <br />and experts.</h3>
 									<p class="card-text mute">Join a live session to get started.</p>
-									<p><a href="/question/ask" class="btn btn-lg btn-ask btn-lg">Ask an expert</a></p>
+									<p><a href="{{ route('question.create') }}" class="btn btn-lg btn-ask btn-lg">Ask an expert</a></p>
 								</div>
 							</div>
 						</div>

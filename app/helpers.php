@@ -34,6 +34,14 @@ function formatUrlString($string){
     return $string;
 }
 
+function unFormatUrlString($string){
+
+    $string = trim($string);
+    $string = preg_replace('/-+/', ' ', $string);
+    $string = strtolower($string);
+    return $string;
+}
+
 function userLikedReply($replyId){
 
     $replyLike = ReplyLike::where(['reply_id'=>$replyId, 'user_id'=>auth()->user()->id]);

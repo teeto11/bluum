@@ -39,7 +39,7 @@ class PostsViewService{
 
     public function viewPostsByCategory($category){
 
-        $category = urldecode($category);
+        $category = unFormatUrlString($category);
         $posts = Post::where([
             'type' => $this->type,
             'category' => $category

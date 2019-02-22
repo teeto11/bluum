@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Followers;
 use App\Post;
-use Illuminate\Http\Request;
+use App\User;
+use Illuminate\Support\Facades\DB;
 
 class indexController extends Controller{
 
@@ -14,8 +16,18 @@ class indexController extends Controller{
             ['type', 'QUESTION']
         ])->orderBy('likes', 'desc')->take(5)->get();
 
+        $topExpertId = Followers::select('expert_id', DB::raw('count(user_id) as followers'))
+                                    ->groupBy('expert_id')
+                                    ->orderBy('followers', 'DESC')
+                                    ->take(4)
+                                    ->pluck('expert_id')
+                                    ->toArray();
+
+        $topExperts = User::whereIn('id', $topExpertId)->get();
+
         $data = [
             'popular_questions' => $popular_questions,
+            'topExperts' => $topExperts,
             'title' => 'Home',
         ];
 
