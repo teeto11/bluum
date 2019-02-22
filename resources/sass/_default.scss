@@ -374,12 +374,24 @@
                 .btn{
                     width:100%;
                     box-shadow: 1px 10px 10px #d4d4d4;
-                    background: #4B7E63;
+                    background-color: #4B7E63;
                     color: #fff;
+                    -webkit-transition: all .5s ease-out;
+                    -moz-transition: all .5s ease-out;
+                    -o-transition: all .5s ease-out;
+                    transition: all .5s ease-out;
                     i{
                         color: #fff;
                         padding: 0px 5px;
                     }
+                }
+                .btn:hover{
+                    -webkit-transition: all .5s ease-out;
+                    -moz-transition: all .5s ease-out;
+                    -o-transition: all .5s ease-out;
+                    transition: all .5s ease-out;
+                    background-color: #6500c3de;
+                    
                 }
                 .profile-sidebar-body{
                     padding:20px 0px; 

@@ -1,7 +1,7 @@
 @extends('layouts.app-temp')
 
 @section('header_scripts')
-    <link rel="stylesheet" href="{{ asset('css/default.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/hover.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}" />
 @endsection

@@ -431,13 +431,19 @@
   .profile-wrapper .profile-sub-wrapper .profile-sidebar .btn {
     width: 100%;
     box-shadow: 1px 10px 10px #d4d4d4;
-    background: #4B7E63;
+    background-color: #4B7E63;
     color: #fff;
+    transition: all 0.5s ease-out;
   }
 
   .profile-wrapper .profile-sub-wrapper .profile-sidebar .btn i {
     color: #fff;
     padding: 0px 5px;
+  }
+
+  .profile-wrapper .profile-sub-wrapper .profile-sidebar .btn:hover {
+    transition: all 0.5s ease-out;
+    background-color: #6500c3de;
   }
 
   .profile-wrapper .profile-sub-wrapper .profile-sidebar .profile-sidebar-body {
