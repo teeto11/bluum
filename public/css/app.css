@@ -4,6 +4,11 @@
   margin: 25px 0px;
 }
 
+.experts-wrapper .experts-container .expert-card-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .experts-wrapper .experts-container .page-link {
   font-family: "Courier New", Courier, monospace;
 }
@@ -13,7 +18,7 @@
           transform: scale(1.2);
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 900px) {
   .experts-wrapper .experts-container .expert-card {
     width: 100%;
     margin-top: 20px;
@@ -131,12 +136,12 @@
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
   .experts-wrapper .experts-container .expert-card {
     box-shadow: 0px 7px 10px #d4d4d4;
     margin-top: 20px;
-    padding: 10px 30px;
-    width: 50%;
+    padding: 10px 15px;
+    width: 33%;
   }
 
   .experts-wrapper .experts-container .expert-card .image-wrapper {
@@ -159,7 +164,6 @@
     color: white;
     background: rgba(75, 126, 99, 0.609);
     width: 100%;
-    border-radius: 25px;
   }
 
   .experts-wrapper .experts-container .expert-card .expert-header i {
@@ -190,7 +194,131 @@
   }
 
   .experts-wrapper .experts-container .expert-card .expert-footer .small a {
-    float: right;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .experts-wrapper .experts-container .expert-card {
+    box-shadow: 0px 7px 10px #d4d4d4;
+    margin-top: 20px;
+    padding: 10px 15px;
+    width: 50%;
+  }
+
+  .experts-wrapper .experts-container .expert-card .image-wrapper {
+    width: 100%;
+    text-align: center;
+  }
+
+  .experts-wrapper .experts-container .expert-card .image-wrapper img {
+    padding: 10px 10px;
+    border-radius: 100%;
+    height: 200px;
+    width: 210px;
+    border: 0px;
+    box-shadow: 1px 10px 20px #d4d4d4;
+  }
+
+  .experts-wrapper .experts-container .expert-card .expert-header {
+    padding: 5px 10px;
+    margin: 10px 0px;
+    color: white;
+    background: rgba(75, 126, 99, 0.609);
+    width: 100%;
+  }
+
+  .experts-wrapper .experts-container .expert-card .expert-header i {
+    padding: 0px 5px;
+  }
+
+  .experts-wrapper .experts-container .expert-card .expert-header .expert-name {
+    font-size: 15px;
+  }
+
+  .experts-wrapper .experts-container .expert-card .expert-header .expert-practice {
+    font-size: 15px;
+  }
+
+  .experts-wrapper .experts-container .expert-card .expert-footer .exp {
+    width: 100% !important;
+    font-size: 13px;
+    opacity: 0.7;
+  }
+
+  .experts-wrapper .experts-container .expert-card .expert-footer .small {
+    width: 100% !important;
+  }
+
+  .experts-wrapper .experts-container .expert-card .expert-footer .small button {
+    border: 0px;
+    width: 150px;
+  }
+
+  .experts-wrapper .experts-container .expert-card .expert-footer .small a {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .experts-wrapper .experts-container .expert-card {
+    box-shadow: 0px 7px 10px #d4d4d4;
+    margin-top: 20px;
+    padding: 10px 15px;
+    width: 100%;
+  }
+
+  .experts-wrapper .experts-container .expert-card .image-wrapper {
+    width: 100%;
+    text-align: center;
+  }
+
+  .experts-wrapper .experts-container .expert-card .image-wrapper img {
+    padding: 10px 10px;
+    border-radius: 100%;
+    height: 200px;
+    width: 210px;
+    border: 0px;
+    box-shadow: 1px 10px 20px #d4d4d4;
+  }
+
+  .experts-wrapper .experts-container .expert-card .expert-header {
+    padding: 5px 10px;
+    margin: 10px 0px;
+    color: white;
+    background: rgba(75, 126, 99, 0.609);
+    width: 100%;
+  }
+
+  .experts-wrapper .experts-container .expert-card .expert-header i {
+    padding: 0px 5px;
+  }
+
+  .experts-wrapper .experts-container .expert-card .expert-header .expert-name {
+    font-size: 15px;
+  }
+
+  .experts-wrapper .experts-container .expert-card .expert-header .expert-practice {
+    font-size: 15px;
+  }
+
+  .experts-wrapper .experts-container .expert-card .expert-footer .exp {
+    width: 100% !important;
+    font-size: 13px;
+    opacity: 0.7;
+  }
+
+  .experts-wrapper .experts-container .expert-card .expert-footer .small {
+    width: 100% !important;
+  }
+
+  .experts-wrapper .experts-container .expert-card .expert-footer .small button {
+    border: 0px;
+    width: 150px;
+  }
+
+  .experts-wrapper .experts-container .expert-card .expert-footer .small a {
+    text-align: center;
   }
 }
 

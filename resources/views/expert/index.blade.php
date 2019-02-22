@@ -12,7 +12,7 @@
         <div class="container experts-container">
             <h2>Meet our Experts</h2>
             <hr>
-            <div class="container-fluid" >
+            <div class="container-fluid expert-card-wrapper" >
                 @foreach($experts as $expert)
                     @php $details = $expert->expert @endphp
                     <div class="expert-card hvr-float ">

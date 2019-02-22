@@ -1,13 +1,20 @@
 .experts-wrapper{
     margin: 25px 0px;
     .experts-container{
+        .expert-card-wrapper{
+            display:-webkit-box;
+            display:-ms-flexbox;
+            display:flex;
+            -ms-flex-wrap:wrap;
+            flex-wrap:wrap;
+        }
         .page-link{
             font-family: 'Courier New', Courier, monospace;
         }
         .page-link:hover{
             transform: scale(1.2);
         }
-        @media screen and(min-width:800px) {
+        @media screen and(min-width:900px) {
             .expert-card{
                 width: 100%;
                 margin-top: 20px;
@@ -110,12 +117,12 @@
             }
 
         }
-        @media screen and(max-width:800px) {
+        @media screen and(max-width:900px) {
             .expert-card{
                 box-shadow: 0px 7px 10px #d4d4d4;
                 margin-top: 20px;
-                padding: 10px 30px;
-                width: 50%;
+                padding: 10px 15px;
+                width: 33%;
                 .image-wrapper{
                     width: 100%;
                     text-align: center;
@@ -134,7 +141,6 @@
                     color: white;
                     background: rgba(75, 126, 99, 0.609);
                     width: 100%;
-                    border-radius: 25px;
                     i{
                         padding: 0px 5px;
                     }
@@ -158,7 +164,113 @@
                             width: 150px;
                         }
                         a{
-                            float: right;
+                            text-align: center;
+                        }
+                    }
+                }
+            }
+        }
+        @media screen and(max-width:800px) {
+            .expert-card{
+                box-shadow: 0px 7px 10px #d4d4d4;
+                margin-top: 20px;
+                padding: 10px 15px;
+                width: 50%;
+                .image-wrapper{
+                    width: 100%;
+                    text-align: center;
+                    img{
+                        padding: 10px 10px;
+                        border-radius: 100%;
+                        height: 200px;
+                        width: 210px;
+                        border: 0px;
+                        box-shadow: 1px 10px 20px #d4d4d4;
+                    }
+                }
+                .expert-header{
+                    padding: 5px 10px;
+                    margin: 10px 0px;
+                    color: white;
+                    background: rgba(75, 126, 99, 0.609);
+                    width: 100%;
+                    i{
+                        padding: 0px 5px;
+                    }
+                    .expert-name{
+                        font-size: 15px;
+                    }
+                    .expert-practice{
+                        font-size: 15px;
+                    }
+                }
+                .expert-footer{
+                    .exp{
+                        width: 100% !important;
+                        font-size: 13px;
+                        opacity: .7;
+                    }
+                    .small{
+                        width: 100% !important;
+                        button{
+                            border: 0px;
+                            width: 150px;
+                        }
+                        a{
+                            text-align: center;
+                        }
+                    }
+                }
+            }
+        }
+        @media screen and(max-width:600px) {
+            .expert-card{
+                box-shadow: 0px 7px 10px #d4d4d4;
+                margin-top: 20px;
+                padding: 10px 15px;
+                width: 100%;
+                .image-wrapper{
+                    width: 100%;
+                    text-align: center;
+                    img{
+                        padding: 10px 10px;
+                        border-radius: 100%;
+                        height: 200px;
+                        width: 210px;
+                        border: 0px;
+                        box-shadow: 1px 10px 20px #d4d4d4;
+                    }
+                }
+                .expert-header{
+                    padding: 5px 10px;
+                    margin: 10px 0px;
+                    color: white;
+                    background: rgba(75, 126, 99, 0.609);
+                    width: 100%;
+                    i{
+                        padding: 0px 5px;
+                    }
+                    .expert-name{
+                        font-size: 15px;
+                    }
+                    .expert-practice{
+                        font-size: 15px;
+                    }
+                }
+                .expert-footer{
+                    .exp{
+                        width: 100% !important;
+                        font-size: 13px;
+                        opacity: .7;
+                    }
+                    .small{
+                        width: 100% !important;
+                        button{
+                            border: 0px;
+                            width: 150px;
+                        }
+                        a{
+                            text-align: center;
                         }
                     }
                 }
