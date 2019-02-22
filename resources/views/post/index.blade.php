@@ -142,7 +142,7 @@
                             <div class="posts__item {{ ($counter%2 == 0) ? 'bg-f2f4f6' : '' }}">
                                 <div class="posts__section-left">
                                     <div class="posts__topic">
-                                        <img class="cover_img" src="{{ asset('images/bmc.jpg') }}" >
+                                        <img class="cover_img" src="/storage/post_cover_image/{{ $post->cover_img }}" >
                                         <div class="posts__content">
                                             <a href="/blog/post/{{ $post->id }}/{{ formatUrlString($post->title) }}">
                                                 <h3>{{ ucwords($post->title) }}</h3>
