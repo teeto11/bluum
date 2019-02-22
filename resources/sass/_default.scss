@@ -25,6 +25,9 @@
                 box-shadow: 1px 10px 20px #d4d4d4;
                 .image-wrapper{
                     width: 20%;
+                    width: 210px;
+                    height: 200px;
+                    border-radius:100%; 
                     img{
                         padding: 10px 10px;
                         border-radius: 100%;
@@ -41,19 +44,23 @@
                         padding: 5px 10px;
                         margin: 10px 0px;
                         color: white;
-                        background: rgba(75, 126, 99, 0.609);
+                        background: rgba(6, 33, 124, 0.609);
                         display: flex;
                         width: 100%;
-                        border-radius: 25px;
                         i{
                             padding: 0px 5px;
                         }
                         .expert-name{
                             width: 50%;
+                            overflow: hidden;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
                         }
                         .expert-practice{
                             width: 50%;
-                            text-align: center;
+                            overflow: hidden;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
                         }
                     }
                     .expert-summary{
@@ -61,6 +68,7 @@
                     }
                     .expert-footer{
                         display: flex;
+                        padding: 0px 10px;
                         .exp{
                             width: 30%;
                             font-size: 15px;
@@ -104,6 +112,7 @@
                                   
                                 a:hover span{
                                     padding-right: 15px;
+                                    color: #35aca2;
                                 }
                                   
                                 a:hover span:after{
@@ -139,16 +148,22 @@
                     padding: 5px 10px;
                     margin: 10px 0px;
                     color: white;
-                    background: rgba(75, 126, 99, 0.609);
+                    background: rgba(6, 33, 124, 0.609);
                     width: 100%;
                     i{
                         padding: 0px 5px;
                     }
                     .expert-name{
                         font-size: 15px;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
                     }
                     .expert-practice{
                         font-size: 15px;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
                     }
                 }
                 .expert-footer{
@@ -192,16 +207,22 @@
                     padding: 5px 10px;
                     margin: 10px 0px;
                     color: white;
-                    background: rgba(75, 126, 99, 0.609);
+                    background: rgba(6, 33, 124, 0.609);
                     width: 100%;
                     i{
                         padding: 0px 5px;
                     }
                     .expert-name{
                         font-size: 15px;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
                     }
                     .expert-practice{
                         font-size: 15px;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
                     }
                 }
                 .expert-footer{
@@ -224,6 +245,13 @@
             }
         }
         @media screen and(max-width:600px) {
+            h2{
+                font-size: 40px;
+                text-align: center;
+                color: white;
+                padding: 20px 0px;
+                background: linear-gradient(140deg, rgba(105, 4, 4, 0.664), rgba(110, 4, 117, 0.938),)
+            }
             .expert-card{
                 box-shadow: 0px 7px 10px #d4d4d4;
                 margin-top: 20px;
@@ -245,16 +273,22 @@
                     padding: 5px 10px;
                     margin: 10px 0px;
                     color: white;
-                    background: rgba(75, 126, 99, 0.609);
+                    background: rgba(6, 33, 124, 0.609);
                     width: 100%;
                     i{
                         padding: 0px 5px;
                     }
                     .expert-name{
                         font-size: 15px;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
                     }
                     .expert-practice{
                         font-size: 15px;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
                     }
                 }
                 .expert-footer{
