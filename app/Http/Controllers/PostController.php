@@ -151,9 +151,9 @@ class PostController extends Controller
             $request->type = 'POST';
             $postUpdate = new PostUpdateService;
             $postUpdate->updatePost($post, $request);
-            return redirect("/blog/post/$post->id/".formatUrlString($post->title))->with('success', 'post updated');
+            return redirect()->route('blog.post', ['id'=>$post->id, 'title'=>formatUrlString($post->title)])->with('success', 'post updated');
 
-        }else return redirect("/blog/post")->with('error', 'an error occurred');
+        }else return redirect()->route('blog')->with('error', 'an error occurred');
     }
 
     private function updateViews($post){

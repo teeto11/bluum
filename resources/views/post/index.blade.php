@@ -4,6 +4,11 @@
 <style>
     p{ margin: 0; }
     .posts__content{ width: 100%; }
+
+    .cover_img{
+        margin-right: 1rem;
+        height: 0;
+    }
 </style>
 @endsection
 @section('content')
@@ -137,6 +142,7 @@
                             <div class="posts__item {{ ($counter%2 == 0) ? 'bg-f2f4f6' : '' }}">
                                 <div class="posts__section-left">
                                     <div class="posts__topic">
+                                        <img class="cover_img" src="{{ asset('images/bmc.jpg') }}" >
                                         <div class="posts__content">
                                             <a href="/blog/post/{{ $post->id }}/{{ formatUrlString($post->title) }}">
                                                 <h3>{{ ucwords($post->title) }}</h3>
@@ -182,5 +188,7 @@
     <script>
         let activeLink = '{{ $active_link }}';
         $("#"+activeLink).addClass('active');
+
+        $(".cover_img").height($('.posts__item').height());
     </script>
 @endsection
