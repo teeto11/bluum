@@ -25,7 +25,7 @@
     padding: 10px 30px;
     display: flex;
     max-height: auto;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.904);
     box-shadow: 1px 10px 20px #d4d4d4;
   }
 
@@ -151,6 +151,7 @@
     margin-top: 20px;
     padding: 10px 15px;
     width: 33%;
+    background: rgba(255, 255, 255, 0.904);
   }
 
   .experts-wrapper .experts-container .expert-card .image-wrapper {
@@ -219,6 +220,7 @@
     margin-top: 20px;
     padding: 10px 15px;
     width: 50%;
+    background: rgba(255, 255, 255, 0.904);
   }
 
   .experts-wrapper .experts-container .expert-card .image-wrapper {
@@ -295,6 +297,7 @@
     margin-top: 20px;
     padding: 10px 15px;
     width: 100%;
+    background: rgba(255, 255, 255, 0.904);
   }
 
   .experts-wrapper .experts-container .expert-card .image-wrapper {
@@ -360,6 +363,10 @@
 @media screen and (max-width: 1250px) {
   .experts-wrapper .experts-container {
     width: 100%;
+  }
+
+  .experts-wrapper .experts-container .expert-card {
+    background: rgba(255, 255, 255, 0.904);
   }
 
   .experts-wrapper .experts-container .expert-card .expert-footer .exp {
