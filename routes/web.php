@@ -45,6 +45,8 @@ Route::get('/experts', 'ExpertController@index')->name('experts');
 Route::get('/expert/{id}', 'ExpertController@viewExpert')->name('expert.profile');
 Route::post('/expert/follow', 'ExpertController@followExpert')->name('expert.follow');
 Route::post('/expert/unfollow', 'ExpertController@unfollowExpert')->name('expert.unfollow');
+Route::post('/expert/posts', function (){ return view('expert.index'); })->name('expert.post');
+Route::post('/expert/answers', function (){ return view('expert.index'); })->name('expert.answers');
 
 Route::get('/admin', 'Admin\AdminController@index')->name('admin.home');
 Route::get('/admin/experts', 'Admin\ExpertController@viewExperts')->name('admin.expert');
@@ -62,3 +64,5 @@ Route::get('/admin/posts', 'Admin\PostController@index')->name('admin.posts');
 Route::delete('/admin/post/delete', 'Admin\PostController@deletePost')->name('admin.post.delete');
 Route::get('/admin/post/{id}', 'Admin\PostController@viewPost')->name('admin.post.show');
 Route::delete('/admin/post/comment/delete', 'Admin\PostController@deleteComment')->name('admin.post.comment.delete');
+
+Route::get('/search/{query}', function (){ return view('index'); })->name('search');
