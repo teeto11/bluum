@@ -7,6 +7,7 @@ use App\Followers;
 use App\Post;
 use App\PostView;
 use App\User;
+use http\Env\Request;
 
 class PostsViewService{
 
@@ -64,7 +65,7 @@ class PostsViewService{
     public function viewPostsByTags($tag){
 
         $tag = strtolower(urldecode($tag));
-        $posts = Post::where([['tags', $tag], ['type', $this->type]])->orderBy('created_at', 'DESC')->paginate(15);
+        $posts = Post::where([['tags', 'LIKE', "%$tag%"], ['type', $this->type]])->orderBy('created_at', 'DESC')->paginate(15);
         $data = $this->viewPostsData();
         $data['posts'] = $posts;
 
@@ -91,6 +92,58 @@ class PostsViewService{
         $data['active_link'] = 'unread-link';
 
         return $data;
+    }
+
+    public function viewExpertPost($id){
+
+        $filters = self::getFilter();
+        $filters['filters'][] = ['user_id', $id];
+        $posts = Post::where($filters['filters'])->orderBy('created_at', 'DESC')->paginate(15);
+        $data = $this->viewPostsData();
+        $data['urlPad'] = $filters['urlPad'];
+        $data['posts'] = $posts;
+
+        return $data;
+    }
+
+    public function viewExpertPopularPost($id){
+
+        $filters = self::getFilter();
+        $filters['filters'][] = ['user_id', $id];
+        $posts = Post::where($filters['filters'])->orderBy('likes', 'DESC')->paginate(15);
+        $data = $this->viewPostsData();
+        $data['urlPad'] = $filters['urlPad'];
+        $data['posts'] = $posts;
+
+        return $data;
+    }
+
+    public function viewExpertAnswers($id){
+
+        $filters = self::getFilter();
+    }
+
+    public function getFilter(){
+
+        $filters = array();
+        $filters[] = ['type', $this->type];
+        $urlPad = '';
+
+        if (request('category')) {
+            $filters[] = ['category', request('category')];
+            $urlPad .= '&category='.request('category');
+        }
+
+
+        if (request('tag')) {
+            $filters[] = ['tags', 'LIKE', '%'.request('category').'%' ];
+            $urlPad .= '&tag='.request('tag');
+        }
+
+        return [
+            'filters' => $filters,
+            'urlPad' => $urlPad,
+        ];
     }
 
     private function viewPostsData(){

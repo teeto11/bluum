@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Followers;
+use App\Services\PostsViewService;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -82,5 +83,29 @@ class ExpertController extends Controller{
     function viewExpert($id){
 
         return view('expert.view')->with('title', 'Expert');
+    }
+
+    function viewPosts($id){
+
+        $postViewService = new PostsViewService('POST');
+        $posts = $postViewService->viewExpertPost($id);
+
+        return $posts;
+    }
+
+    function viewAnswers($id){
+
+        $postViewService = new PostsViewService('QUESTION');
+        $posts = $postViewService->viewExpertPost($id);
+
+        return $posts;
+    }
+
+    function viewPopularPosts($id){
+
+        $postViewService = new PostsViewService('POST');
+        $posts = $postViewService->viewExpertPopularPost($id);
+
+        return $posts;
     }
 }

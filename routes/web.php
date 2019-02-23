@@ -44,8 +44,8 @@ Route::post('/reply/unlike', 'ReplyLikeController@unlike')->name('reply.unlike')
 Route::get('/experts', 'ExpertController@index')->name('experts');
 Route::post('/expert/follow', 'ExpertController@followExpert')->name('expert.follow');
 Route::post('/expert/unfollow', 'ExpertController@unfollowExpert')->name('expert.unfollow');
-Route::get('/expert/posts', function (){ return view('expert.index')->with('title', 'Posts'); })->name('expert.post');
-Route::get('/expert/answers', function (){ return view('expert.index')->with('title', 'Answers'); })->name('expert.answers');
+Route::get('/expert/{id}/posts', 'ExpertController@viewPosts')->name('expert.post');
+Route::get('/expert/{id}/answers', 'ExpertController@viewAnswers')->name('expert.answers');
 Route::get('/expert/{id}', 'ExpertController@viewExpert')->name('expert.profile');
 
 Route::get('/admin', 'Admin\AdminController@index')->name('admin.home');
