@@ -58,6 +58,14 @@ class QuestionController extends Controller
         return view('question.index')->with($data);
     }
 
+    function viewByFollowing(){
+
+        $postViewService = new PostsViewService('QUESTION');
+        $data = $postViewService->viewByFollowing();
+
+        return view('question.index')->with($data);
+    }
+
     public function create(){
 
         $categories = Code::where('key', 'Q_CATEGORY')->get();
