@@ -88,9 +88,9 @@ class ExpertController extends Controller{
     function viewPosts($id){
 
         $postViewService = new PostsViewService('POST');
-        $posts = $postViewService->viewExpertPost($id);
+        $data = $postViewService->viewExpertPost($id);
 
-        return $posts;
+        return view('expert.post')->with($data);
     }
 
     function viewAnswers($id){
@@ -104,8 +104,8 @@ class ExpertController extends Controller{
     function viewPopularPosts($id){
 
         $postViewService = new PostsViewService('POST');
-        $posts = $postViewService->viewExpertPopularPost($id);
+        $data = $postViewService->viewExpertPopularPost($id);
 
-        return $posts;
+        return view('expert.post')->with($data);
     }
 }

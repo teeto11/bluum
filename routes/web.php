@@ -4,7 +4,6 @@ Route::get('/', 'IndexController@index')->name('index');
 
 // Auth::routes(["verify" => true]);
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
 
 //Blog post Routes
 Route::get('/blog', 'PostController@index')->name('blog');
@@ -65,4 +64,4 @@ Route::delete('/admin/post/delete', 'Admin\PostController@deletePost')->name('ad
 Route::get('/admin/post/{id}', 'Admin\PostController@viewPost')->name('admin.post.show');
 Route::delete('/admin/post/comment/delete', 'Admin\PostController@deleteComment')->name('admin.post.comment.delete');
 
-Route::get('/search/{query}', function (){ return view('index')->with('title', 'Result'); })->name('search');
+Route::get('/search/{query}', 'IndexController@search')->name('search');

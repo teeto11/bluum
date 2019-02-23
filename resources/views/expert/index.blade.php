@@ -1,7 +1,7 @@
 @extends('layouts.app-temp')
 
 @section('header_scripts')
-    <link rel="stylesheet" href="{{ asset('css/default.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/hover.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}" />
 @endsection
@@ -12,7 +12,7 @@
         <div class="container experts-container">
             <h2>Meet our Experts</h2>
             <hr>
-            <div class="container-fluid" >
+            <div class="container-fluid expert-card-wrapper" >
                 @foreach($experts as $expert)
                     @php $details = $expert->expert @endphp
                     <div class="expert-card hvr-float ">
@@ -27,7 +27,7 @@
                             <section class="expert-summary">
                                 <p>{{ ucfirst($details->about) }}.</p>
                             </section>
-                            <section class="expert-footer" style="padding: 1rem" >
+                            <section class="expert-footer" style="" >
                                 <span class="exp"><b>WORK EXPERIENCE : </b>{{ $details->experience }} YEARS</span>
                                 <div class="small">
                                     <section>
