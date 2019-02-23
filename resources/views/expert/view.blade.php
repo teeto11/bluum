@@ -1,7 +1,7 @@
 @extends('layouts.app-temp')
 
 @section('header_scripts')
-    <link rel="stylesheet" href="{{ asset('css/default.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/hover.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}" />
 @endsection
@@ -37,13 +37,13 @@
             </div>
             <div class="profile-main">
                 <section class="summary">
-                    <div class="posts">Posts<br>10</div>
-                    <div class="question">Answers<br>20</div>
-                </section>
+					<a href="experts-post.html" class="posts" type="submit" formaction="experts-post.html"><i class="fa fa-bookmark-o"></i>Posts<br>10</a>
+					<a href="experts-post.html" class="question" type="submit" formaction="experts-answers.html"><i class="fa fa-question-circle"></i>Answers<br>10</a>
+				</section>
                 <section class="page-posts">
                     <div class="container post-container">
                         <div class="card-head">
-                            <h3 class="h2">Recent Posts.</h3>
+                            <h3 class="">Recent Posts.</h3>
                         </div>
                         <div class="posts bg-success">
                             <div class="posts__head" style="padding-left:10px;padding-right: 10px;">
@@ -159,34 +159,33 @@
                     </div>
                 </section>
                 <section class="questions">
-                    <div class="table-row">
-                        <div class="table-responsive bg-white">
-                            <h3 class="">Recent Responses</h3><hr>
-                            <table class="table table-borderless table-hover">
-                                <thead>
-                                <tr>
-                                    <th scope="" style="width:80%">Title</th>
-                                    <th></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>Which movie have you watched most recently</td>
-                                    <td><a href="view-post.html" class="btn"><i class="fa fa-eye text-light"></i></a> <a href="" class="btn"><i class="fa fa-trash"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td>How to kill thanos  </td>
-                                    <td><a href="" class="btn"><i class="fa fa-eye text-light"></i></a> <a href="" class="btn"><i class="fa fa-trash"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td>stuff</td>
-                                    <td><a href="" class="btn"><i class="fa fa-eye text-light"></i></a> <a href="" class="btn"><i class="fa fa-trash"></i></a></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </section>
+					<div class="table-row">
+						<div class="bg-white">
+							<h3 class="" style="font-size:20px;">Recent Responses</h3><hr>
+							<table class="table table-borderless table-hover">
+								<thead>
+									<tr>
+										<th scope="" style="width:80%">Title</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Which movie have you watched most recently</td>
+										<td><a href="view-post.html" class=""><i class="fa fa-eye text-light"></i></a> <a href="" class=""><i class="fa fa-trash"></i></a></td>
+									</tr>
+									<tr>
+										<td>How to kill thanos  </td>
+										<td><a href="" class=""><i class="fa fa-eye text-light"></i></a> <a href="" class=""><i class="fa fa-trash"></i></a></td>
+									</tr>
+									<tr>
+										<td>stuff</td>
+										<td><a href="" class=""><i class="fa fa-eye text-light"></i></a> <a href="" class=""><i class="fa fa-trash"></i></a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+				</section>
             </div>
         </div>
     </div>

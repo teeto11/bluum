@@ -1,5 +1,11 @@
 @extends('layouts.app-temp')
 
+@section('header_scripts')
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/hover.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/animate.css') }}" />
+@endsection
+
 @section('content')
     @include('widgets.top-nav-bar')
     <section class="bg-header view text-white">
