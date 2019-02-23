@@ -100,7 +100,7 @@ class ExpertController extends Controller{
         }else return redirect()->route('experts');
     }
 
-    function viewPostAsExpert(){
+    function viewPostsAsExpert(){
 
         $expert = User::find(auth()->user()->id);
 
@@ -147,9 +147,10 @@ class ExpertController extends Controller{
     private function expertDetails($expert){
 
         $postQ = $expert->post->where('type', 'POST');
+        $questionQ = Post::where('type', 'QUESTION');
         $data = $this->details($expert);
         $data['recentPost'] = $postQ->take(5);
-        $data['recentResponses'] = $expert->replies->take(5);
+        $data['recentResponses'] = $expert->replies->whereIn('post_id', $questionQ->pluck('id')->toArray())->take(5);
 
         return $data;
     }
@@ -178,10 +179,10 @@ class ExpertController extends Controller{
         if($expert->role != 'EXPERT') return redirect()->route('login')->with('error', 'Access denied');
         $expert->password = null;
         $personalInfo = $expert->expert;
-        $postQ = $expert->post->where('type', 'POST');
-        $totalPost = $postQ->count();
+        $totalPost = $expert->post->where('type', 'POST')->count();
         $totalFollowers = $expert->followers->count();
-        $totalAnswers = Reply::where('parent_reply', null)->whereIn('post_id', $postQ->pluck('id')->toArray())->count();
+        $questionQ = Post::where('type', 'QUESTION');
+        $totalAnswers = $expert->replies->where('parent_reply', null)->whereIn('post_id', $questionQ->pluck('id')->toArray())->count();
 
         $data = [
             'title'             =>  'Expert',

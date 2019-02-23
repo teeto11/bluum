@@ -36,7 +36,7 @@
                                             <input type="hidden" name="id" value="{{ $expert->id }}">
                                             <button type="submit" class="btn hvr-grow"><i class="icon-Add_User"></i></button>
                                         </form>
-                                        <a href="{{ route('expert.profile', ['id' => $expert->id]) }}" class="button" style="padding: 1rem;" ><span>View profile </span></a>
+                                        <a href="{{ route('expert.show', ['id' => $expert->id]) }}" class="button" style="padding: 1rem;" ><span>View profile </span></a>
                                     </section>
                                 </div>
                             </section>

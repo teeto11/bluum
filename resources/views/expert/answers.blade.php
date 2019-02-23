@@ -17,7 +17,7 @@
                     @foreach($answers as $answer)
                         <tr>
                             <td>{{ $answer->body }}</td>
-                            <td class="text-right" ><a href="{{ route('blog.post', ['id'=>$answer->post->id, 'title'=>formatUrlString($answer->post->title)]) }}" class="" ><i class="fa fa-eye text-light"></i></a></td>
+                            <td class="text-right" ><a href="{{ route('question.show', ['id'=>$answer->post->id, 'title'=>formatUrlString($answer->post->title)]) }}" class="" ><i class="fa fa-eye text-light"></i></a></td>
                             <td class="text-right" ><a href="" class="text-danger" ><i class="fa fa-trash"></i></a></td>
                         </tr>
                     @endforeach

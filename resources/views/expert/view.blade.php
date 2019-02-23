@@ -2,15 +2,20 @@
 
 @section('profile-main')
     <section class="summary">
-        <a href="{{ route('expert.posts', $expert->id) }}" class="posts" ><i class="fa fa-bookmark-o"></i>Posts<br>{{ $totalPost }}</a>
-        <a href="{{ route('expert.answers', $expert->id) }}" class="question" ><i class="fa fa-question-circle"></i>Answers<br>{{ $totalAnswers }}</a>
+        @if(auth()->user() && auth()->user()->role == 'EXPERT' && auth()->user()->id == $expert->id)
+            <a href="{{ route('expert.posts') }}" class="posts" ><i class="fa fa-bookmark-o"></i>Posts<br>{{ $totalPost }}</a>
+            <a href="{{ route('expert.answers') }}" class="question" ><i class="fa fa-question-circle"></i>Answers<br>{{ $totalAnswers }}</a>
+        @else
+            <a href="{{ route('expert.guest.posts', ['id'=>$expert->id]) }}" class="posts" ><i class="fa fa-bookmark-o"></i>Posts<br>{{ $totalPost }}</a>
+            <a href="{{ route('expert.guest.answers', ['id'=>$expert->id]) }}" class="question" ><i class="fa fa-question-circle"></i>Answers<br>{{ $totalAnswers }}</a>
+        @endif
     </section>
     <section class="page-posts">
         <div class="container post-container">
             <div class="card-head">
                 <h3 class="">Recent Posts.</h3>
             </div>
-            <div class="posts bg-success">
+            <div class="posts bg-success" style="margin-bottom: 2rem;" >
                 <div class="posts__head" style="padding-left:10px;padding-right: 10px;">
                     <div class="posts__topic">Post</div>
                     <div class="posts__category">Category</div>
@@ -52,7 +57,7 @@
             </div>
         </div>
     </section>
-    <section class="questions">
+    <section class="questions" style="margin-top: 2rem" >
         <div class="table-row">
             <div class="bg-white">
                 <h3 class="" style="font-size:20px;">Recent Responses</h3><hr>
@@ -69,7 +74,7 @@
                         <tr>
                             <td>{{ ucfirst($response->body) }}</td>
                             <td class="text-right" >
-                                <a href="{{ route('blog.post', ['id'=>$response->post->id, 'title'=>formatUrlString($response->post->title)]) }}" class=""><i class="fa fa-eye text-light"></i></a>
+                                <a href="{{ route('question.show', ['id'=>$response->post->id, 'title'=>formatUrlString($response->post->title)]) }}" class=""><i class="fa fa-eye text-light"></i></a>
                             </td>
                             <td class="text-right" >
                                 <a href="" class=""><i class="fa fa-trash"></i></a>

@@ -20,10 +20,10 @@
                 <div class="header__search-close js-header-search-btn-close"><i class="icon-Cancel"></i></div>
             </div>
             <div class="header__menu">
-                <a class="header__menu__link" href="/question/ask">Ask</a>
+                <a class="header__menu__link" href="{{ route('question.create') }}">Ask</a>
             </div>
             <div class="header__menu active">
-                <a class="header__menu__link active" href="/blog">Blog</a>
+                <a class="header__menu__link active" href="{{ route('blog') }}">Blog</a>
             </div>
             <div class="header__menu header__dropdown">
                 <div class="header__menu-btn" data-dropdown-btn="menu">
@@ -32,36 +32,36 @@
                 <nav class="dropdown dropdown--design-01" data-dropdown-list="menu">
                     <div>
                         <ul class="dropdown__catalog row">
-                            <li class="col-xs-6"><a href="/question/ask">New</a></li>
-                            <li class="col-xs-6"><a href="/experts">Experts</a></li>
+                            <li class="col-xs-6"><a href="{{ route('question.create') }}">New</a></li>
+                            <li class="col-xs-6"><a href="{{ route('experts') }}">Experts</a></li>
                             <li class="col-xs-6"><a href="/tags">Tags</a></li>
-                            <li class="col-xs-6"><a href="/question/category/pregnancy">Pregnancy</a></li>
+                            <li class="col-xs-6"><a href="{{ route('question.showbycategory', 'pregnancy') }}">Pregnancy</a></li>
                         </ul>
                     </div>
                     <div>
                         <h3>Categories</h3>
                         <ul class="dropdown__catalog row">
-                            <li class="col-xs-6"><a href="/questions" class="category"><i class="bg-5dd39e"></i>All</a></li>
-                            <li class="col-xs-6"><a href="/questions/category/pregnancy" class="category"><i class="bg-c49bbb"></i>Pregnancy</a></li>
-                            <li class="col-xs-6"><a href="/questions/category/medical+travels" class="category"><i class="bg-525252"></i>Medical travels</a></li>
-                            <li class="col-xs-6"><a href="/questions/category/common+illness" class="category"><i class="bg-777da7"></i>Common illness</a></li>
-                            <li class="col-xs-6"><a href="/questions/category/special+illness" class="category"><i class="bg-368f8b"></i>Special illness</a></li>
+                            <li class="col-xs-6"><a href="{{ route('questions') }}" class="category"><i class="bg-5dd39e"></i>All</a></li>
+                            <li class="col-xs-6"><a href="{{ route('question.showbycategory', 'pregnancy') }}" class="category"><i class="bg-c49bbb"></i>Pregnancy</a></li>
+                            <li class="col-xs-6"><a href="{{ route('question.showbycategory', formatUrlString('medical travels')) }}" class="category"><i class="bg-525252"></i>Medical travels</a></li>
+                            <li class="col-xs-6"><a href="{{ route('question.showbycategory', formatUrlString('common illness')) }}" class="category"><i class="bg-777da7"></i>Common illness</a></li>
+                            <li class="col-xs-6"><a href="{{ route('question.showbycategory', formatUrlString('special illness')) }}" class="category"><i class="bg-368f8b"></i>Special illness</a></li>
                         </ul>
                     </div>
                     <div>
                         <ul class="dropdown__catalog row">
                             <li class="col-xs-6"><a href="#">Forum Rules</a></li>
-                            <li class="col-xs-6"><a href="/blog">Blog</a></li>
+                            <li class="col-xs-6"><a href="{{ route('blog') }}">Blog</a></li>
                         </ul>
                     </div>
                 </nav>
             </div>
             @guest
                 <div class="header__menu">
-                    <a class="header__menu__link" href="/login">Sign In</a>
+                    <a class="header__menu__link" href="{{ route('login') }}">Sign In</a>
                 </div>
                 <div class="header__menu">
-                    <a class="header__menu__link" href="/register">Sign Up</a>
+                    <a class="header__menu__link" href="{{ route('register') }}">Sign Up</a>
                 </div>
             @else
                 <div class="header__user">
@@ -80,13 +80,18 @@
                         </div>
                         <div>
                             <ul class="dropdown__catalog">
-                                <li><a href="#">Dashboard</a></li>
-                                <li><a href="#">Badges</a></li>
-                                <li><a href="#">My Groups</a></li>
+                                @if(auth()->user()->role == 'EXPERT')
+                                    <li><a href="{{ route('expert.profile') }}">Dashboard</a></li>
+                                    <li><a href="{{ route('expert.posts') }}">Topics</a></li>
+                                @else
+                                    <li><a href="{{ route('expert.profile') }}">Profile</a></li>
+                                    <li><a href="{{ route('expert.posts') }}">Questions</a></li>
+                                @endif
+                                {{--<li><a href="#">Badges</a></li>
+                                <li><a href="#">My Groups</a></li>--}}
                                 <li><a href="#">Notifications</a></li>
-                                <li><a href="#">Topics</a></li>
-                                <li><a href="#">Likes</a></li>
-                                <li><a href="#">Solved</a></li>
+                                {{--<li><a href="">Likes</a></li>
+                                <li><a href="#">Solved</a></li>--}}
                                 <li>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
