@@ -45,7 +45,7 @@ Route::get('/experts', 'ExpertController@index')->name('experts');
 Route::get('/expert/{id}', 'ExpertController@viewExpert')->name('expert.profile');
 Route::post('/expert/follow', 'ExpertController@followExpert')->name('expert.follow');
 Route::post('/expert/unfollow', 'ExpertController@unfollowExpert')->name('expert.unfollow');
-Route::post('/expert/posts', function (){ return view('expert.posts'); })->name('expert.post');
+Route::post('/expert/posts', function (){ return view('expert.post'); })->name('expert.post');
 Route::post('/expert/answers', function (){ return view('expert.index'); })->name('expert.answers');
 
 Route::get('/admin', 'Admin\AdminController@index')->name('admin.home');
