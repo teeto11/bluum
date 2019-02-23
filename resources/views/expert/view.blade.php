@@ -37,8 +37,8 @@
             </div>
             <div class="profile-main">
                 <section class="summary">
-					<a href="experts-post.html" class="posts" type="submit" formaction="experts-post.html"><i class="fa fa-bookmark-o"></i>Posts<br>10</a>
-					<a href="experts-post.html" class="question" type="submit" formaction="experts-answers.html"><i class="fa fa-question-circle"></i>Answers<br>10</a>
+					<a href="post" class="posts" type="submit" formaction="experts-post.html"><i class="fa fa-bookmark-o"></i>Posts<br>10</a>
+					<a href="answers" class="question" type="submit" formaction="experts-answers.html"><i class="fa fa-question-circle"></i>Answers<br>10</a>
 				</section>
                 <section class="page-posts">
                     <div class="container post-container">
