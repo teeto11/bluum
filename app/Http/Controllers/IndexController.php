@@ -33,4 +33,10 @@ class indexController extends Controller{
 
         return view("index")->with($data);
     }
+
+    function search($query){
+
+        $query = urldecode($query);
+        return view('search')->with('title', 'Result');
+    }
 }
