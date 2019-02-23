@@ -14,7 +14,7 @@ class ExpertController extends Controller{
     function __construct(){
 
         $this->middleware('auth', [
-            'except' => ['index', 'viewPopular', 'viewExpert', 'viewPosts']
+            'except' => ['index', 'viewPopular', 'viewExpert', 'viewPostsAsGuest', 'viewAnswersAsGuest']
         ]);
     }
 
@@ -82,40 +82,58 @@ class ExpertController extends Controller{
         return redirect()->route('experts')->with('success', "Followed expert");
     }
 
+    function profile(){
+        $expert = User::find(auth()->user()->id);
+        if($expert->role != 'EXPERT') return redirect()->route('login')->with('error', 'Access denied');
+        $data = $this->expertDetails($expert);
+
+        return view('expert.view')->with($data);
+    }
+
     function viewExpert($id){
 
         $expert = User::find($id);
 
         if ($expert){
-
-            $postQ = $expert->post->where('type', 'POST');
-            $data = $this->details($expert);
-            $data['recentPost'] = $postQ->take(5);
-            $data['recentResponses'] = $expert->replies->take(5);
-
+            $data = $this->expertDetails($expert);
             return view('expert.view')->with($data);
         }else return redirect()->route('experts');
     }
 
-    function viewPosts($id){
+    function viewPostAsExpert(){
+
+        $expert = User::find(auth()->user()->id);
+
+        $data = $this->viewPost($expert);
+        return view('expert.post')->with($data);
+    }
+
+    function viewPostsAsGuest($id){
 
         $expert = User::find($id);
 
         if($expert){
-            $postViewService = new PostsViewService('POST');
-            $data = $this->details($expert);
-            $data += $postViewService->viewExpertPost($id);
-
+            $data = $this->viewPost($expert);
             return view('expert.post')->with($data);
         }else return redirect()->route('experts');
     }
 
-    function viewAnswers($id){
+    function viewAnswersAsExpert(){
 
-        $postViewService = new PostsViewService('QUESTION');
-        $posts = $postViewService->viewExpertPost($id);
+        $expert = User::find(auth()->user()->id);
+        $data = $this->viewAnswers($expert);
 
-        return $posts;
+        return view('expert.answers')->with($data);
+    }
+
+    function viewAnswersAsGuest($id){
+
+        $expert = User::find($id);
+
+        if ($expert){
+            $data = $this->viewAnswers($expert);
+            return view('expert.answers')->with($data);
+        }else return redirect()->route('experts');
     }
 
     function viewPopularPosts($id){
@@ -126,8 +144,38 @@ class ExpertController extends Controller{
         return view('expert.post')->with($data);
     }
 
+    private function expertDetails($expert){
+
+        $postQ = $expert->post->where('type', 'POST');
+        $data = $this->details($expert);
+        $data['recentPost'] = $postQ->take(5);
+        $data['recentResponses'] = $expert->replies->take(5);
+
+        return $data;
+    }
+
+    private function viewPost($expert){
+
+        $postViewService = new PostsViewService('POST');
+        $data = $this->details($expert);
+        $data += $postViewService->viewExpertPost($expert->id);
+
+        return $data;
+    }
+
+    private function viewAnswers($expert){
+
+        $postViewService = new PostsViewService('QUESTION');
+        $data = $this->details($expert);
+        $questionIds = Post::where('type', 'QUESTION')->pluck('id')->toArray();
+        $data['answers'] = Reply::where([ ['parent_reply', null], ['user_id', $expert->id] ])->whereIn('post_id', $questionIds)->orderBy('created_at', 'DESC')->paginate(15);
+
+        return $data;
+    }
+
     private function details($expert){
 
+        if($expert->role != 'EXPERT') return redirect()->route('login')->with('error', 'Access denied');
         $expert->password = null;
         $personalInfo = $expert->expert;
         $postQ = $expert->post->where('type', 'POST');

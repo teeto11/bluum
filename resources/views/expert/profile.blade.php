@@ -22,30 +22,30 @@
                 <div class="posts__body">
                     @php $counter = 1; @endphp
                     @foreach($recentPost as $post)
-                    <div class="posts__item {{ ($counter%2 == 0) ? 'bg-f2f4f6' : '' }}">
-                        <div class="posts__section-left">
-                            <div class="posts__topic">
-                                <div class="posts__content">
-                                    <a href="#">
-                                        <h3>{{ ucwords($post->title) }}</h3>
-                                    </a>
-                                    <div class="posts__tags tags">
-                                        @php $tags = explode(',', $post->tags) @endphp
-                                        @foreach($tags as $tag)
-                                            <a href="#" class="bg-4f80b0">{{ $tag }}</a>
-                                        @endforeach
+                        <div class="posts__item {{ ($counter%2 == 0) ? 'bg-f2f4f6' : '' }}">
+                            <div class="posts__section-left">
+                                <div class="posts__topic">
+                                    <div class="posts__content">
+                                        <a href="#">
+                                            <h3>{{ ucwords($post->title) }}</h3>
+                                        </a>
+                                        <div class="posts__tags tags">
+                                            @php $tags = explode(',', $post->tags) @endphp
+                                            @foreach($tags as $tag)
+                                                <a href="#" class="bg-4f80b0">{{ $tag }}</a>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="posts__category"><a href="#" class="category"><i class="bg-4436f8"></i>{{ ucfirst($post->category) }}</a></div>
                             </div>
-                            <div class="posts__category"><a href="#" class="category"><i class="bg-4436f8"></i>{{ ucfirst($post->category) }}</a></div>
+                            <div class="posts__section-right">
+                                <div class="posts__replies" >{{ $post->likes }}</div>
+                                <div class="posts__replies">{{ $post->replies->count() }}</div>
+                                <div class="posts__views">{{ $post->views }}</div>
+                                <div class="posts__activity">{{ getLastActivityTime($post->updated_at) }}</div>
+                            </div>
                         </div>
-                        <div class="posts__section-right">
-                            <div class="posts__replies" >{{ $post->likes }}</div>
-                            <div class="posts__replies">{{ $post->replies->count() }}</div>
-                            <div class="posts__views">{{ $post->views }}</div>
-                            <div class="posts__activity">{{ getLastActivityTime($post->updated_at) }}</div>
-                        </div>
-                    </div>
                         @php $counter++; @endphp
                     @endforeach
                 </div>

@@ -43,10 +43,13 @@ Route::post('/reply/unlike', 'ReplyLikeController@unlike')->name('reply.unlike')
 Route::get('/experts', 'ExpertController@index')->name('experts');
 Route::post('/expert/follow', 'ExpertController@followExpert')->name('expert.follow');
 Route::post('/expert/unfollow', 'ExpertController@unfollowExpert')->name('expert.unfollow');
+Route::get('/expert/profile', 'ExpertController@profile')->name('expert.posts');
+Route::get('/expert/posts', 'ExpertController@viewPostsAsExpert')->name('expert.posts');
+Route::get('/expert/answers', 'ExpertController@viewAnswersAsExpert')->name('expert.answers');
 Route::get('/expert/edit', 'ExpertController@unfollowExpert')->name('expert.edit');
 Route::get('/expert/{id}', 'ExpertController@viewExpert')->name('expert.profile');
-Route::get('/expert/{id}/posts', 'ExpertController@viewPosts')->name('expert.posts');
-Route::get('/expert/{id}/answers', 'ExpertController@viewAnswers')->name('expert.answers');
+Route::get('/expert/{id}/posts', 'ExpertController@viewPostsAsGuest')->name('expert.posts');
+Route::get('/expert/{id}/answers', 'ExpertController@viewAnswersAsGuest')->name('expert.answers');
 
 Route::get('/admin', 'Admin\AdminController@index')->name('admin.home');
 Route::get('/admin/experts', 'Admin\ExpertController@viewExperts')->name('admin.expert');
