@@ -4,6 +4,11 @@
 <style>
     p{ margin: 0; }
     .posts__content{ width: 100%; }
+
+    .cover_img{
+        margin-right: 1rem;
+        height: 0;
+    }
 </style>
 @endsection
 @section('content')
@@ -44,6 +49,7 @@
                                 <li><a href="{{ route('blog') }}">Latest</a></li>
                                 <li><a href="{{ route('blog.unread') }}">Unread</a></li>
                                 <li><a href="{{ route('blog.popular') }}">Most Liked</a></li>
+                                <li><a href="{{ route('blog.following') }}">Following</a></li>
                             </ul>
                         </div>
                     </div>
@@ -51,6 +57,7 @@
                         <li id="latest-link" ><a href="{{ route('blog') }}">Latest</a></li>
                         <li id="unread-link" ><a href="{{ route('blog.unread') }}">Unread</a></li>
                         <li id="popular-link" ><a href="{{ route('blog.popular') }}">Most Liked</a></li>
+                        <li id="following-link" ><a href="{{ route('blog.following') }}">Following</a></li>
                     </ul>
                 </div>
             </div>
@@ -135,6 +142,7 @@
                             <div class="posts__item {{ ($counter%2 == 0) ? 'bg-f2f4f6' : '' }}">
                                 <div class="posts__section-left">
                                     <div class="posts__topic">
+                                        <img class="cover_img" src="/storage/post_cover_image/{{ $post->cover_img }}" >
                                         <div class="posts__content">
                                             <a href="/blog/post/{{ $post->id }}/{{ formatUrlString($post->title) }}">
                                                 <h3>{{ ucwords($post->title) }}</h3>
@@ -180,5 +188,7 @@
     <script>
         let activeLink = '{{ $active_link }}';
         $("#"+activeLink).addClass('active');
+
+        $(".cover_img").height($('.posts__item').height());
     </script>
 @endsection

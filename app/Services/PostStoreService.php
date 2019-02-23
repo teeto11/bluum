@@ -16,6 +16,15 @@ class PostStoreService{
         $post->type = $request->type;
         $post->user_id = auth()->user()->id;
 
+        if($request->hasFile('coverImg')){
+            $fileNameWithExtension = $request->file('coverImg')->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
+            $extension = $request->file('coverImg')->getClientOriginalExtension();
+            $fileNameToStore = $fileName.'_'.time().'.'.$extension;
+            $path = $request->file('coverImg')->storeAs('public/post_cover_image', $fileNameToStore);
+        }else $fileNameToStore = 'noimage.jpg';
+
+        $post->cover_img = $fileNameToStore;
         $postTagService = new PostTagService($request->type);
         $postTagService->updateTag(explode(",", $post->tags));
 

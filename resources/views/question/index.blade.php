@@ -36,6 +36,7 @@
                                 <li><a href="{{ route('questions') }}">Latest</a></li>
                                 <li><a href="{{ route('question.unread') }}">Unread</a></li>
                                 <li><a href="{{ route('question.popular') }}">Most Liked</a></li>
+                                <li><a href="{{ route('question.following') }}">Following</a></li>
                             </ul>
                         </div>
                     </div>
@@ -43,6 +44,7 @@
                         <li class="filter-link" id="latest-link" ><a href="{{ route('questions') }}">Latest</a></li>
                         <li class="filter-link" id="unread-link" ><a href="{{ route('question.unread') }}">Unread</a></li>
                         <li class="filter-link" id="popular-link" ><a href="{{ route('question.popular') }}">Most Liked</a></li>
+                        <li class="filter-link" id="following-link" ><a href="{{ route('question.following') }}">Following</a></li>
                     </ul>
                 </div>
             </div>
