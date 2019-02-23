@@ -30,9 +30,10 @@
                                         <h3>{{ ucwords($post->title) }}</h3>
                                     </a>
                                     <div class="posts__tags tags">
-                                        <a href="#" class="bg-4f80b0">gaming</a>
-                                        <a href="#" class="bg-424ee8">nature</a>
-                                        <a href="#" class="bg-36b7d7">entertainment</a>
+                                        @php $tags = explode(',', $post->tags) @endphp
+                                        @foreach($tags as $tag)
+                                            <a href="#" class="bg-4f80b0">{{ $tag }}</a>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
