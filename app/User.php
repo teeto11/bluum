@@ -29,7 +29,7 @@ class User extends Authenticatable
     ];
 
     public function post(){
-        return $this->hasMany('App\Post');
+        return $this->hasMany('App\Post')->orderBy('created_at', 'DESC');
     }
 
     public function postLikes(){
@@ -37,7 +37,7 @@ class User extends Authenticatable
     }
 
     public function replies(){
-        return $this->hasMany('App\Reply');
+        return $this->hasMany('App\Reply')->orderBy('created_at', 'DESC');
     }
 
     public function replyLikes(){
