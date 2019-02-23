@@ -8,7 +8,7 @@
 
 @section('content')
     @include('widgets.top-nav-bar')
-    <div class="profile-wrapper">
+    <div class="profile-wrapper" style="margin-top: 5rem">
         <div class="container profile-sub-wrapper">
             <div class="profile-sidebar">
 				<div class="edit-btn-wrapper">
