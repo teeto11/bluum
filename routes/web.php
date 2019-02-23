@@ -42,11 +42,11 @@ Route::post('/reply/like', 'ReplyLikeController@like')->name('reply.like');
 Route::post('/reply/unlike', 'ReplyLikeController@unlike')->name('reply.unlike');
 
 Route::get('/experts', 'ExpertController@index')->name('experts');
-Route::get('/expert/{id}', 'ExpertController@viewExpert')->name('expert.profile');
 Route::post('/expert/follow', 'ExpertController@followExpert')->name('expert.follow');
 Route::post('/expert/unfollow', 'ExpertController@unfollowExpert')->name('expert.unfollow');
-Route::post('/expert/posts', function (){ return view('expert.index'); })->name('expert.post');
-Route::post('/expert/answers', function (){ return view('expert.index'); })->name('expert.answers');
+Route::get('/expert/posts', function (){ return view('expert.index'); })->name('expert.post');
+Route::get('/expert/answers', function (){ return view('expert.index'); })->name('expert.answers');
+Route::get('/expert/{id}', 'ExpertController@viewExpert')->name('expert.profile');
 
 Route::get('/admin', 'Admin\AdminController@index')->name('admin.home');
 Route::get('/admin/experts', 'Admin\ExpertController@viewExperts')->name('admin.expert');
