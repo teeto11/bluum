@@ -31,12 +31,22 @@
                                 <span class="exp"><b>WORK EXPERIENCE : </b>{{ $details->experience }} YEARS</span>
                                 <div class="small">
                                     <section>
-                                        <form action="{{ route('expert.follow') }}" method="post" >
-                                            @csrf
-                                            <input type="hidden" name="id" value="{{ $expert->id }}">
-                                            <button type="submit" class="btn hvr-grow"><i class="icon-Add_User"></i></button>
-                                        </form>
-                                        <a href="{{ route('expert.profile', ['id' => $expert->id]) }}" class="button" style="padding: 1rem;" ><span>View profile </span></a>
+                                        @if(auth()->user() && $expert->followers->where('user_id', auth()->user()->id)->count())
+                                            <form action="{{ route('expert.unfollow') }}" method="post" >
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{ $expert->id }}">
+                                                <button type="submit" class="btn hvr-grow">UnFollow <i class="glyphicon-remove-sign"></i></button>
+                                            </form>
+                                        @elseif(auth()->user() && $expert->id == auth()->user()->id)
+
+                                        @else
+                                            <form action="{{ route('expert.follow') }}" method="post" >
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{ $expert->id }}">
+                                                <button type="submit" class="btn hvr-grow">Follow <i class="icon-Add_User"></i></button>
+                                            </form>
+                                        @endif
+                                        <a href="{{ route('expert.show', ['id' => $expert->id]) }}" class="button" style="padding: 1rem;" ><span>View profile </span></a>
                                     </section>
                                 </div>
                             </section>

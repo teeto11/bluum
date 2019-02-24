@@ -5,6 +5,8 @@ Route::get('/', 'IndexController@index')->name('index');
 // Auth::routes(["verify" => true]);
 Auth::routes();
 
+Route::get('/profile', 'UserController@profile')->name('user.profile');
+
 //Blog post Routes
 Route::get('/blog', 'PostController@index')->name('blog');
 Route::get('/blog/tag/{tag}', 'PostController@viewByTag')->name('blog.tag');
@@ -43,9 +45,19 @@ Route::post('/reply/unlike', 'ReplyLikeController@unlike')->name('reply.unlike')
 Route::get('/experts', 'ExpertController@index')->name('experts');
 Route::post('/expert/follow', 'ExpertController@followExpert')->name('expert.follow');
 Route::post('/expert/unfollow', 'ExpertController@unfollowExpert')->name('expert.unfollow');
-Route::get('/expert/{id}/posts', 'ExpertController@viewPosts')->name('expert.post');
-Route::get('/expert/{id}/answers', 'ExpertController@viewAnswers')->name('expert.answers');
-Route::get('/expert/{id}', 'ExpertController@viewExpert')->name('expert.profile');
+Route::get('/expert/profile', 'ExpertController@profile')->name('expert.profile');
+Route::get('/expert/posts', 'ExpertController@viewPostsAsExpert')->name('expert.posts');
+Route::delete('/expert/post', 'ExpertController@deletePost')->name('expert.post.delete');
+Route::delete('/expert/post/reply', 'ExpertController@deleteResponse')->name('expert.post.reply.delete');
+Route::get('/expert/post/popular', 'ExpertController@viewPopularPostsAsExpert')->name('expert.posts.popular');
+Route::get('/expert/post/{category}', 'ExpertController@viewPostsAsExpert')->name('expert.posts.viewByCategory');
+Route::get('/expert/answers', 'ExpertController@viewAnswersAsExpert')->name('expert.answers');
+Route::get('/expert/edit', 'ExpertController@unfollowExpert')->name('expert.edit');
+Route::get('/expert/{id}', 'ExpertController@viewExpert')->name('expert.show');
+Route::get('/expert/{id}/posts', 'ExpertController@viewPostsAsGuest')->name('expert.guest.posts');
+Route::get('/expert/{id}/post/popular', 'ExpertController@viewPopularPostsAsGuest')->name('expert.guest.posts.popular');
+Route::get('/expert/{id}/post/{category}', 'ExpertController@viewPostsAsGuest')->name('expert.guest.posts.viewByCategory');
+Route::get('/expert/{id}/answers', 'ExpertController@viewAnswersAsGuest')->name('expert.guest.answers');
 
 Route::get('/admin', 'Admin\AdminController@index')->name('admin.home');
 Route::get('/admin/experts', 'Admin\ExpertController@viewExperts')->name('admin.expert');
