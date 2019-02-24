@@ -118,6 +118,24 @@ class ExpertController extends Controller{
         }else return redirect()->route('experts');
     }
 
+    function viewPopularPostsAsExpert(){
+
+        $expert = User::find(auth()->user()->id);
+        $data = $this->viewPopularPosts($expert);
+
+        return view('expert.post')->with($data);
+    }
+
+    function viewPopularPostsAsGuest($id){
+
+        $expert = User::find($id);
+
+        if($expert){
+            $data = $this->viewPopularPosts($expert);
+            return view('expert.post')->with($data);
+        }else return redirect()->route('experts');
+    }
+
     function viewAnswersAsExpert(){
 
         $expert = User::find(auth()->user()->id);
@@ -136,12 +154,13 @@ class ExpertController extends Controller{
         }else return redirect()->route('experts');
     }
 
-    function viewPopularPosts($id){
+    private function viewPopularPosts($expert){
 
         $postViewService = new PostsViewService('POST');
-        $data = $postViewService->viewExpertPopularPost($id);
+        $data = $this->details($expert);
+        $data += $postViewService->viewExpertPopularPost($expert->id);
 
-        return view('expert.post')->with($data);
+        return $data;
     }
 
     function deletePost(Request $request){

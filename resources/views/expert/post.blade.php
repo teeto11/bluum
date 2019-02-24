@@ -29,14 +29,24 @@
                     <div class="btn-select" data-dropdown-btn="menu">Latest</div>
                     <div class="dropdown dropdown--design-01" data-dropdown-list="menu">
                         <ul class="dropdown__catalog">
-                            <li><a href="#">Latest</a></li>
-                            <li><a href="#">Most Liked</a></li>
+                            @if(auth()->user() && auth()->user()->role == 'EXPERT' && auth()->user()->id == $expert->id)
+                                <li><a href="{{ route('expert.posts') }}">Latest</a></li>
+                                <li><a href="{{ route('expert.posts.popular') }}">Most Liked</a></li>
+                            @else
+                                <li><a href="{{ route('expert.guest.posts', $expert->id) }}">Latest</a></li>
+                                <li><a href="{{ route('expert.guest.posts.popular', $expert->id) }}">Most Liked</a></li>
+                            @endif
                         </ul>
                     </div>
                 </div>
                 <ul>
-                    <li class="active"><a href="#">Latest</a></li>
-                    <li><a href="#">Most Liked</a></li>
+                    @if(auth()->user() && auth()->user()->role == 'EXPERT' && auth()->user()->id == $expert->id)
+                        <li class="active" ><a href="{{ route('expert.posts') }}">Latest</a></li>
+                        <li><a href="{{ route('expert.posts.popular') }}">Most Liked</a></li>
+                    @else
+                        <li class="active" ><a href="{{ route('expert.guest.posts', $expert->id) }}">Latest</a></li>
+                        <li><a href="{{ route('expert.guest.posts.popular', $expert->id) }}">Most Liked</a></li>
+                    @endif
                 </ul>
             </div>
         </div>
@@ -57,7 +67,7 @@
                         <div class="posts__section-left">
                             <div class="posts__topic">
                                 <div class="posts__content">
-                                    <a href="#">
+                                    <a href="{{ route('blog.post', [$post->id, formatUrlString($post->title)]) }}">
                                         <h3>{{ ucwords($post->title) }}</h3>
                                     </a>
                                     <div class="posts__tags tags">
@@ -68,7 +78,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="posts__category"><a href="#" class="category"><i class="bg-4436f8"></i>{{ ucfirst($post->category) }}</a></div>
+                            <div class="posts__category"><a href="{{ route('blog.category', formatUrlString($post->category)) }}" class="category"><i class="bg-4436f8"></i>{{ ucfirst($post->category) }}</a></div>
                         </div>
                         <div class="posts__section-right">
                             <div class="posts__replies">{{ $post->replies->count() }}</div>

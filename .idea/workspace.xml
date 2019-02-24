@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d7ed4ed8-8947-4183-9c51-9858af585117" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ExpertController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ExpertController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/expert/post.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/expert/post.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/expert/profile.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/expert/view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/expert/view.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -61,8 +58,8 @@
       <file leaf-file-name="web.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="53" column="77" selection-start-line="53" selection-start-column="77" selection-end-line="53" selection-end-column="77" />
+            <state relative-caret-position="119">
+              <caret line="48" column="93" selection-start-line="48" selection-start-column="93" selection-end-line="48" selection-end-column="93" />
             </state>
           </provider>
         </entry>
@@ -70,29 +67,40 @@
       <file leaf-file-name="ExpertController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ExpertController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="172" column="45" lean-forward="true" selection-start-line="172" selection-start-column="45" selection-end-line="172" selection-end-column="45" />
+            <state relative-caret-position="126">
+              <caret line="128" column="36" selection-start-line="128" selection-start-column="13" selection-end-line="128" selection-end-column="36" />
               <folding>
+                <element signature="e#673#942#0#PHP" />
+                <element signature="e#948#1764#0#PHP" />
+                <element signature="e#1770#2127#0#PHP" />
+                <element signature="e#3140#3334#0#PHP" />
+                <element signature="e#3343#3595#0#PHP" />
+                <element signature="e#3121#3307#0#PHP" />
+                <element signature="e#3313#3567#0#PHP" />
+                <element signature="e#3786#4079#0#PHP" />
+                <element signature="e#4085#4360#0#PHP" />
+                <element signature="e#4366#4593#0#PHP" />
+                <element signature="e#4599#5023#0#PHP" />
                 <element signature="e#4821#5702#0#PHP" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PostsViewService.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PostsViewService.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Services/PostsViewService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="99" column="35" lean-forward="true" selection-start-line="99" selection-start-column="35" selection-end-line="99" selection-end-column="35" />
+            <state relative-caret-position="198">
+              <caret line="111" column="47" selection-start-line="111" selection-start-column="44" selection-end-line="111" selection-end-column="47" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="post.blade.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="post.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/expert/post.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="175" selection-start-line="20" selection-start-column="175" selection-end-line="20" selection-end-column="175" />
+            <state relative-caret-position="289">
+              <caret line="43" column="93" selection-start-line="43" selection-start-column="93" selection-end-line="43" selection-end-column="93" />
               <folding>
                 <element signature="e#4442#4504#0#HTML" expanded="true" />
               </folding>
@@ -187,7 +195,6 @@
         <option value="$PROJECT_DIR$/resources/views/post/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Services/PostStoreService.php" />
         <option value="$PROJECT_DIR$/resources/views/index.blade.php" />
-        <option value="$PROJECT_DIR$/app/Services/PostsViewService.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/IndexController.php" />
         <option value="$PROJECT_DIR$/app/User.php" />
         <option value="$PROJECT_DIR$/resources/views/expert/layout/profile.blade.php" />
@@ -196,9 +203,10 @@
         <option value="$PROJECT_DIR$/resources/views/widgets/top-nav-bar.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/expert/answers.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/expert/view.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/expert/post.blade.php" />
-        <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="$PROJECT_DIR$/app/Services/PostsViewService.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ExpertController.php" />
+        <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="$PROJECT_DIR$/resources/views/expert/post.blade.php" />
       </list>
     </option>
   </component>
@@ -457,7 +465,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="221066000" />
+    <option name="totallyTimeSpent" value="222566000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
@@ -468,8 +476,8 @@
       <window_info anchor="bottom" id="Database Changes" order="1" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="4" weight="0.32972136" />
       <window_info anchor="bottom" id="Run" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="3" visible="true" weight="0.1486068" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.22919819" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="3" visible="true" weight="0.24148607" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.22919819" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" weight="0.32980332" />
       <window_info anchor="bottom" id="Find" order="6" weight="0.32972136" />
@@ -525,7 +533,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="5" />
+      <option name="time" value="6" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -840,37 +848,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/expert/post.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/Services/PostsViewService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="175" selection-start-line="20" selection-start-column="175" selection-end-line="20" selection-end-column="175" />
+        <state relative-caret-position="198">
+          <caret line="111" column="47" selection-start-line="111" selection-start-column="44" selection-end-line="111" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ExpertController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="128" column="36" selection-start-line="128" selection-start-column="13" selection-end-line="128" selection-end-column="36" />
           <folding>
-            <element signature="e#4442#4504#0#HTML" expanded="true" />
+            <element signature="e#673#942#0#PHP" />
+            <element signature="e#948#1764#0#PHP" />
+            <element signature="e#1770#2127#0#PHP" />
+            <element signature="e#3140#3334#0#PHP" />
+            <element signature="e#3343#3595#0#PHP" />
+            <element signature="e#3121#3307#0#PHP" />
+            <element signature="e#3313#3567#0#PHP" />
+            <element signature="e#3786#4079#0#PHP" />
+            <element signature="e#4085#4360#0#PHP" />
+            <element signature="e#4366#4593#0#PHP" />
+            <element signature="e#4599#5023#0#PHP" />
+            <element signature="e#4821#5702#0#PHP" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="53" column="77" selection-start-line="53" selection-start-column="77" selection-end-line="53" selection-end-column="77" />
+        <state relative-caret-position="119">
+          <caret line="48" column="93" selection-start-line="48" selection-start-column="93" selection-end-line="48" selection-end-column="93" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ExpertController.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/expert/post.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="172" column="45" lean-forward="true" selection-start-line="172" selection-start-column="45" selection-end-line="172" selection-end-column="45" />
+        <state relative-caret-position="289">
+          <caret line="43" column="93" selection-start-line="43" selection-start-column="93" selection-end-line="43" selection-end-column="93" />
           <folding>
-            <element signature="e#4821#5702#0#PHP" />
+            <element signature="e#4442#4504#0#HTML" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Services/PostsViewService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="99" column="35" lean-forward="true" selection-start-line="99" selection-start-column="35" selection-end-line="99" selection-end-column="35" />
         </state>
       </provider>
     </entry>

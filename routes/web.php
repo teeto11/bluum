@@ -46,11 +46,13 @@ Route::post('/expert/unfollow', 'ExpertController@unfollowExpert')->name('expert
 Route::get('/expert/profile', 'ExpertController@profile')->name('expert.profile');
 Route::get('/expert/posts', 'ExpertController@viewPostsAsExpert')->name('expert.posts');
 Route::delete('/expert/post', 'ExpertController@deletePost')->name('expert.post.delete');
+Route::get('/expert/post/popular', 'ExpertController@viewPopularPostsAsExpert')->name('expert.posts.popular');
 Route::get('/expert/post/{category}', 'ExpertController@viewPostsAsExpert')->name('expert.posts.viewByCategory');
 Route::get('/expert/answers', 'ExpertController@viewAnswersAsExpert')->name('expert.answers');
 Route::get('/expert/edit', 'ExpertController@unfollowExpert')->name('expert.edit');
 Route::get('/expert/{id}', 'ExpertController@viewExpert')->name('expert.show');
 Route::get('/expert/{id}/posts', 'ExpertController@viewPostsAsGuest')->name('expert.guest.posts');
+Route::get('/expert/{id}/post/popular', 'ExpertController@viewPopularPostsAsGuest')->name('expert.guest.posts.popular');
 Route::get('/expert/{id}/post/{category}', 'ExpertController@viewPostsAsGuest')->name('expert.guest.posts.viewByCategory');
 Route::get('/expert/{id}/answers', 'ExpertController@viewAnswersAsGuest')->name('expert.guest.answers');
 
