@@ -84,7 +84,7 @@
                                     <li><a href="{{ route('expert.profile') }}">Dashboard</a></li>
                                     <li><a href="{{ route('expert.posts') }}">Topics</a></li>
                                 @else
-                                    <li><a href="{{ route('expert.profile') }}">Profile</a></li>
+                                    <li><a href="{{ route('user.profile') }}">Profile</a></li>
                                     <li><a href="{{ route('expert.posts') }}">Questions</a></li>
                                 @endif
                                 {{--<li><a href="#">Badges</a></li>

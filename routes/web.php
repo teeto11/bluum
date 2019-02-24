@@ -5,6 +5,8 @@ Route::get('/', 'IndexController@index')->name('index');
 // Auth::routes(["verify" => true]);
 Auth::routes();
 
+Route::get('/profile', 'UserController@profile')->name('user.profile');
+
 //Blog post Routes
 Route::get('/blog', 'PostController@index')->name('blog');
 Route::get('/blog/tag/{tag}', 'PostController@viewByTag')->name('blog.tag');

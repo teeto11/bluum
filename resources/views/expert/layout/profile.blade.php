@@ -13,7 +13,7 @@
             <div class="profile-sidebar">
                 <div class="profile-sidebar-header">
                     <img src="{{ asset('fonts/icons/avatars/'.getFirstLetterUppercase($expert->firstname)).'.svg' }}" class="" alt="">
-                    <p>AGBOMA FESTUS</p>
+                    <p>{{ ucwords($expert->firstname.' '.$expert->lastname) }}</p>
                 </div>
                 <div class="profile-sidebar-social hvr-float">
                     <div class="followers">
