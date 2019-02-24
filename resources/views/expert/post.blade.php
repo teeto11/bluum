@@ -83,19 +83,21 @@
                         <div class="posts__section-right">
                             <div class="posts__replies">{{ $post->replies->count() }}</div>
                             <div class="posts__views">{{ $post->views }}</div>
-                            <div class="posts__activity" id="post_actions" >
-                                <div>
-                                    <a href="{{ route('blog.post.edit', $post->id) }}" class=""><i class="fa fa-pencil"></i></a>
+                            @if(auth()->user() && $expert->id == auth()->user()->id)
+                                <div class="posts__activity" id="post_actions" >
+                                    <div>
+                                        <a href="{{ route('blog.post.edit', $post->id) }}" class=""><i class="fa fa-pencil"></i></a>
+                                    </div>
+                                    <div>
+                                        <form action="{{ route('expert.post.delete') }}" method="post" >
+                                            @csrf
+                                            @method('delete')
+                                            <input type="hidden" name="id" value="{{ $post->id }}" >
+                                            <button type="submit" style="background: transparent;border: none;box-shadow: none;" ><i class="fa fa-trash text-danger"></i></button>
+                                        </form>
+                                    </div>
                                 </div>
-                                <div>
-                                    <form action="{{ route('expert.post.delete') }}" method="post" >
-                                        @csrf
-                                        @method('delete')
-                                        <input type="hidden" name="id" value="{{ $post->id }}" >
-                                        <button type="submit" style="background: transparent;border: none;box-shadow: none;" ><i class="fa fa-trash text-danger"></i></button>
-                                    </form>
-                                </div>
-                            </div>
+                            @endif
                         </div>
                     </div>
                     @php $counter++; @endphp
