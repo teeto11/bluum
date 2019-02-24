@@ -27,8 +27,18 @@
                     <div class="text-center" style="margin-top: 1rem">
                         <a href="{{ route('expert.edit') }}" class="edit-btn hvr-pulse" style=""><i class="fa fa-edit"></i> Edit</a>
                     </div>
+                @elseif(auth()->user() && $following)
+                    <form action="{{ route('expert.unfollow') }}" method="post" >
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $expert->id }}">
+                        <button type="submit" class="btn hvr-grow">UnFollow <i class="fa fa-minus-circle"></i></button>
+                    </form>
                 @else
-                    <div class="btn hvr-grow" style="">Follow <i class="fa fa-plus-circle"></i></div>
+                    <form action="{{ route('expert.follow') }}" method="post" >
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $expert->id }}">
+                        <button type="submit" class="btn hvr-grow">Follow <i class="fa fa-plus-circle"></i></button>
+                    </form>
                 @endif
                 <div class="profile-sidebar-body">
                     <ul>

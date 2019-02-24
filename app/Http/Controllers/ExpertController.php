@@ -14,7 +14,7 @@ class ExpertController extends Controller{
     function __construct(){
 
         $this->middleware('auth', [
-            'except' => ['index', 'viewPopular', 'viewExpert', 'viewPostsAsGuest', 'viewAnswersAsGuest']
+            'except' => ['index', 'viewPopular', 'viewExpert', 'viewPostsAsGuest', 'viewAnswersAsGuest', 'viewPopularPostsAsGuest']
         ]);
     }
 
@@ -154,15 +154,6 @@ class ExpertController extends Controller{
         }else return redirect()->route('experts');
     }
 
-    private function viewPopularPosts($expert){
-
-        $postViewService = new PostsViewService('POST');
-        $data = $this->details($expert);
-        $data += $postViewService->viewExpertPopularPost($expert->id);
-
-        return $data;
-    }
-
     function deletePost(Request $request){
 
         $this->validate($request, [
@@ -173,6 +164,27 @@ class ExpertController extends Controller{
         if(auth()->user()->id == $post->user_id) $post->delete();
 
         return redirect()->route('expert.posts');
+    }
+
+    function deleteResponse(Request $request){
+
+        $this->validate($request, [
+            'id' => ['required', 'int']
+        ]);
+
+        $reply = Reply::find($request->id);
+        if(auth()->user()->id == $reply->user_id) $reply->delete();
+
+        return redirect()->route('expert.profile');
+    }
+
+    private function viewPopularPosts($expert){
+
+        $postViewService = new PostsViewService('POST');
+        $data = $this->details($expert);
+        $data += $postViewService->viewExpertPopularPost($expert->id);
+
+        return $data;
     }
 
     private function expertDetails($expert){
@@ -222,6 +234,8 @@ class ExpertController extends Controller{
             'totalFollowers'    =>  $totalFollowers,
             'totalAnswers'      =>  $totalAnswers,
         ];
+
+        if (auth()->user()) $data['following'] = $expert->followers->where('user_id', auth()->user()->id)->count();
 
         return $data;
     }

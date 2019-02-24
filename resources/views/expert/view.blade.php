@@ -84,7 +84,15 @@
                                 <a href="{{ $route }}" class=""><i class="fa fa-eye text-light"></i></a>
                             </td>
                             <td class="text-right" >
-                                <a href="" class=""><i class="fa fa-trash"></i></a>
+                                @if(auth()->user() && auth()->user()->role == 'EXPERT' && auth()->user()->id == $expert->id)
+                                    <form action="{{ route('expert.post.reply.delete') }}" method="post" >
+                                        @csrf
+                                        @method('delete')
+                                        <input type="hidden" name="id" value="{{ $response->id }}" >
+                                        <button type="submit" style="background: transparent;border: none" ><i class="fa fa-trash text-danger"></i></button>
+                                    </form>
+                                    <a href="" class=""></a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

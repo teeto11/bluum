@@ -46,6 +46,7 @@ Route::post('/expert/unfollow', 'ExpertController@unfollowExpert')->name('expert
 Route::get('/expert/profile', 'ExpertController@profile')->name('expert.profile');
 Route::get('/expert/posts', 'ExpertController@viewPostsAsExpert')->name('expert.posts');
 Route::delete('/expert/post', 'ExpertController@deletePost')->name('expert.post.delete');
+Route::delete('/expert/post/reply', 'ExpertController@deleteResponse')->name('expert.post.reply.delete');
 Route::get('/expert/post/popular', 'ExpertController@viewPopularPostsAsExpert')->name('expert.posts.popular');
 Route::get('/expert/post/{category}', 'ExpertController@viewPostsAsExpert')->name('expert.posts.viewByCategory');
 Route::get('/expert/answers', 'ExpertController@viewAnswersAsExpert')->name('expert.answers');
