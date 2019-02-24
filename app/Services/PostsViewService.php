@@ -130,13 +130,13 @@ class PostsViewService{
         $urlPad = '';
 
         if (request('category')) {
-            $filters[] = ['category', request('category')];
+            $filters[] = ['category', unFormatUrlString(request('category'))];
             $urlPad .= '&category='.request('category');
         }
 
 
         if (request('tag')) {
-            $filters[] = ['tags', 'LIKE', '%'.request('category').'%' ];
+            $filters[] = ['tags', 'LIKE', '%'.unFormatUrlString(request('category')).'%' ];
             $urlPad .= '&tag='.request('tag');
         }
 

@@ -74,7 +74,14 @@
                         <tr>
                             <td>{{ ucfirst($response->body) }}</td>
                             <td class="text-right" >
-                                <a href="{{ route('question.show', ['id'=>$response->post->id, 'title'=>formatUrlString($response->post->title)]) }}" class=""><i class="fa fa-eye text-light"></i></a>
+                                @php
+                                if($response->post->type == 'QUESTION'):
+                                    $route = route('question.show', ['id'=>$response->post->id, 'title'=>formatUrlString($response->post->title)]);
+                                else:
+                                    $route = route('blog.post', ['id'=>$response->post->id, 'title'=>formatUrlString($response->post->title)]);
+                                endif;
+                                @endphp
+                                <a href="{{ $route }}" class=""><i class="fa fa-eye text-light"></i></a>
                             </td>
                             <td class="text-right" >
                                 <a href="" class=""><i class="fa fa-trash"></i></a>

@@ -100,15 +100,15 @@ class ExpertController extends Controller{
         }else return redirect()->route('experts');
     }
 
-    function viewPostsAsExpert(){
+    function viewPostsAsExpert($category = null){
 
         $expert = User::find(auth()->user()->id);
-
         $data = $this->viewPost($expert);
+
         return view('expert.post')->with($data);
     }
 
-    function viewPostsAsGuest($id){
+    function viewPostsAsGuest($id, $category = null){
 
         $expert = User::find($id);
 
@@ -144,13 +144,24 @@ class ExpertController extends Controller{
         return view('expert.post')->with($data);
     }
 
+    function deletePost(Request $request){
+
+        $this->validate($request, [
+            'id' => ['required', 'int']
+        ]);
+
+        $post = Post::find($request->id);
+        if(auth()->user()->id == $post->user_id) $post->delete();
+
+        return redirect()->route('expert.posts');
+    }
+
     private function expertDetails($expert){
 
         $postQ = $expert->post->where('type', 'POST');
-        $questionQ = Post::where('type', 'QUESTION');
         $data = $this->details($expert);
         $data['recentPost'] = $postQ->take(5);
-        $data['recentResponses'] = $expert->replies->whereIn('post_id', $questionQ->pluck('id')->toArray())->take(5);
+        $data['recentResponses'] = $expert->replies->take(5);
 
         return $data;
     }
