@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Followers;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller{
 
@@ -19,6 +20,17 @@ class UserController extends Controller{
 
         $data = $this->details();
         $data['title'] = 'Profile';
+
+        $topExpertId = Followers::select('expert_id', DB::raw('count(user_id) as followers'))
+            ->where('user_id', auth()->user()->id)
+            ->groupBy('expert_id')
+            ->orderBy('followers', 'DESC')
+            ->take(4)
+            ->pluck('expert_id')
+            ->toArray();
+
+        $data['topFollowing'] = User::whereIn('id', $topExpertId)->get();
+
         return view('user.index')->with($data);
     }
 
