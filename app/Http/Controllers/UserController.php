@@ -38,6 +38,20 @@ class UserController extends Controller{
         return view('user.index')->with($data);
     }
 
+    public function deleteReply(Request $request){
+
+        $this->validate($request, [
+            'id' => ['int', 'required']
+        ]);
+
+        $reply = Reply::find($request->id);
+        if($reply && $reply->user_id == auth()->user()->id){
+
+            $reply->delete();
+            return redirect()->route('user.profile');
+        }else{ return redirect()->route('user.profile')->with('error', 'Access denied'); }
+    }
+
     private function details(){
 
         $user = User::find(auth()->user()->id);
