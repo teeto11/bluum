@@ -42,11 +42,13 @@ class PostsViewService{
     public function viewPostsByCategory($category){
 
         $category = unFormatUrlString($category);
-        $posts = Post::where([
+        $postQ = Post::where([
             'type' => $this->type,
             'category' => $category
-        ])->orderBy('created_at', 'DESC')->paginate(15);
+        ])->orderBy('created_at', 'DESC');
+        $posts = $postQ->paginate(15);
         $data = $this->viewPostsData();
+        $data['totalPosts'] = $postQ->count();
         $data['posts'] = $posts;
 
         return $data;

@@ -16,16 +16,16 @@
     </style>
 @endsection
 @section('content')
-    @include('widgets.top-nav-bar');
+    @include('widgets.top-nav-bar')
     <main>
         <div class="category-wrapper">
             @if(request('category'))
-                <div class="parrallax-wrapper animated fadeIn" style="background-image:linear-gradient(200deg,rgba(0, 0, 0, 0.45),rgba(0, 0, 0, 0.45), rgba(0, 243, 142, 0.45)), url('images/category-pregnant.jpg');">
+                <div class="parrallax-wrapper animated fadeIn" style="background-image:linear-gradient(200deg,rgba(0, 0, 0, 0.45),rgba(0, 0, 0, 0.45), rgba(0, 243, 142, 0.45)), url({{ asset('images/category-pregnant.jpg') }})">
                     <div class="parrallax-contents animated fadeInLeftBig">
-                        <img src="./assets/fonts/icons/badges/pregnant.png" class="" width="100" height="100" alt="">
-                        <h3 class="">Pregnancy</h3>
-                        <p>Connect with experts and other users for a stress free and exciting pregnancy experience, trimester by trimester.</p>
-                        <span><b>Posts : </b>1190</span>
+                        <img src="{{ asset('fonts/icons/badges/'.$category->icon) }}" class="" width="100" height="100" alt="">
+                        <h3 class="">{{ $category->title }}</h3>
+                        <p>{{ $category->desc }}</p>
+                        <span><b>Posts : </b>{{ $totalPosts }}</span>
                     </div>
                 </div>
             @endif

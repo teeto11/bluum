@@ -28,8 +28,38 @@ class PostController extends Controller
 
     public function viewByCategory($category){
 
+        $categories = [
+            'pregnancy' => [
+                'title' => 'Pregnancy',
+                'icon'  => 'pregnant.png',
+                'desc'  => 'Connect with experts and other users for a stress free and exciting pregnancy experience, trimester by trimester.'
+            ],
+            'bluum-stories' => [
+                'title' => 'Bluum Stories',
+                'icon'  => 'Lets_talk.svg',
+                'desc'  => 'Tell your story of how your pregnancy, the scare, the joy, the moments, the myths and how your journey can motivate a newbie in the process.'
+            ],'medical-travels' => [
+                'title' => 'Pregnancy Medical Travels',
+                'icon'  => 'medical.png',
+                'desc'  => 'Connect and get concise information from experienced moms for your baby delivery and health outside your country of residence.'
+            ],'common-illness' => [
+                'title' => 'Common Illnesses',
+                'icon'  => 'illness.jpg',
+                'desc'  => 'Connect with experts and other users on information regarding to common illnesses that can tamper with your babies\' healthy development e.g measles.'
+            ],'special-illness' => [
+                'title' => 'Special Illnesses',
+                'icon'  => 'special_illness.jpg',
+                'desc'  => 'Connect with experts and other users on information regarding to special illnesses around children that can be avoided and also managed for healthy development.'
+            ],'blog' => [
+                'title' => 'Blog',
+                'icon'  => 'blog.svg',
+                'desc'  => 'All news and exciting new findings for you and your baby.'
+            ],
+        ];
+
         $postsViewService = new PostsViewService('POST');
         $data = $postsViewService->viewPostsByCategory($category);
+        $data['category'] =  (object) $categories[strtolower($category)];
 
         return view('post.index')->with($data);
     }
