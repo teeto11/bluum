@@ -52,6 +52,21 @@ class UserController extends Controller{
         }else{ return redirect()->route('user.profile')->with('error', 'Access denied'); }
     }
 
+    public function deleteQuestion(Request $request){
+
+        $this->validate($request, [
+            'id' => ['int', 'required']
+        ]);
+
+        $question = Post::find($request->id);
+
+        if($question && $question->user_id == auth()->user()->id){
+
+            $question->delete();
+            return redirect()->route('user.profile');
+        }else{ return redirect()->route('user.profile')->with('error', 'Access denied'); }
+    }
+
     private function details(){
 
         $user = User::find(auth()->user()->id);

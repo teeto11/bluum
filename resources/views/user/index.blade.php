@@ -45,9 +45,12 @@
                         <div class="posts__replies">{{ $question->replies->count() }}</div>
                         <div class="posts__views">{{ $question->views }}</div>
                         <div class="posts__activity" id="post_actions">
-                            <div>
-                                <a href="#" class=""><i class="fa fa-trash"></i></a>
-                            </div>
+                            <form action="{{ route('question.delete') }}" method="post" >
+                                @csrf
+                                @method('delete')
+                                <input type="hidden" name="id" value="{{ $question->id }}" >
+                                <button type="submit" style="background: transparent;border: none;" ><i class="fa fa-trash"></i></button>
+                            </form>
                         </div>
                     </div>
                 </div>

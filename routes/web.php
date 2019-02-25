@@ -8,6 +8,7 @@ Auth::routes();
 Route::get('/profile', 'UserController@profile')->name('user.profile');
 Route::get('/profile/edit', 'UserController@showEditForm')->name('user.showeditform');
 Route::post('/profile/edit', 'UserController@edit')->name('user.edit');
+Route::delete('/question/delete', 'UserController@deleteQuestion')->name('question.delete');
 Route::delete('/reply/delete', 'UserController@deleteReply')->name('reply.delete');
 
 //Blog post Routes
