@@ -1106,3 +1106,102 @@
         padding: 0px 1px;
     }
 }
+.followers-list-wrapper{
+    padding: 0px 20px;
+    background: white;
+    margin: 0px 10px;
+    .header{
+        background: linear-gradient(140deg,#6b006e,rgb(155, 2, 116));
+        margin-bottom: 10px;
+        padding: 15px 20px;
+        color: white;
+        h4{
+            font-size: 20px;
+            a{
+                color: #F5F5F5;
+                font-size: 15px;
+            }
+        }
+    }
+    .follow-wrapper{
+        border-bottom: 1.5px solid #f5f5f5;
+        display: flex;
+        padding: 20px;
+        .image-wrapper{
+            width: 10%;
+        }
+        .user-details{
+            width: 90%;
+            padding: 0px 20px;
+            display: flex;
+            .details{
+                width: 70%;
+            }
+            .follow-button{
+                width: 30%;
+                align-self: center;
+                .btn{
+                    float: right;
+                    border-radius: 20px;
+                    background: rgb(0, 138, 64);
+                    color: white;
+                    i{
+                        color: white;
+                        font-size:13px;
+                        margin-right: 10px;
+                    }
+                }
+                .btn:hover{
+                    background: white;
+                    color: #282828;
+                    border: 1px solid #282828d0;
+                    font-weight: 700;
+                    -webkit-transition: all .5s ease-out;
+                    -moz-transition: all .5s ease-out;
+                    -o-transition: all .5s ease-out;
+                    transition: all .5s ease-out;
+                    i{
+                        color: #282828;
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and(max-width:768px) {
+    .followers-list-wrapper{
+        margin: 10rem 0px;
+        padding: 0px 1px;
+        .follow-wrapper{
+            .user-details{
+                padding-right: 0px;
+                padding-left: 5px;
+                .details{
+                    align-self: center;
+                    .name{
+                        
+                    }
+                    .job{
+                        display: none;
+                    }
+                }
+                .follow-button{
+                    form{
+                        .btn{
+                            font-size: 10px;
+                            padding: 0px 5px;
+                            border-radius: 0px;
+                            height: 30px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and(max-width:1039px) {
+    .followers-list-wrapper{
+        margin: 5rem 0px;
+        padding: 0px 1px;
+    }
+}

@@ -1220,6 +1220,112 @@
   }
 }
 
+.followers-list-wrapper {
+  padding: 0px 20px;
+  background: white;
+  margin: 0px 10px;
+}
+
+.followers-list-wrapper .header {
+  background: linear-gradient(140deg, #6b006e, #9b0274);
+  margin-bottom: 10px;
+  padding: 15px 20px;
+  color: white;
+}
+
+.followers-list-wrapper .header h4 {
+  font-size: 20px;
+}
+
+.followers-list-wrapper .header h4 a {
+  color: #F5F5F5;
+  font-size: 15px;
+}
+
+.followers-list-wrapper .follow-wrapper {
+  border-bottom: 1.5px solid #f5f5f5;
+  display: flex;
+  padding: 20px;
+}
+
+.followers-list-wrapper .follow-wrapper .image-wrapper {
+  width: 10%;
+}
+
+.followers-list-wrapper .follow-wrapper .user-details {
+  width: 90%;
+  padding: 0px 20px;
+  display: flex;
+}
+
+.followers-list-wrapper .follow-wrapper .user-details .details {
+  width: 70%;
+}
+
+.followers-list-wrapper .follow-wrapper .user-details .follow-button {
+  width: 30%;
+  align-self: center;
+}
+
+.followers-list-wrapper .follow-wrapper .user-details .follow-button .btn {
+  float: right;
+  border-radius: 20px;
+  background: #008a40;
+  color: white;
+}
+
+.followers-list-wrapper .follow-wrapper .user-details .follow-button .btn i {
+  color: white;
+  font-size: 13px;
+  margin-right: 10px;
+}
+
+.followers-list-wrapper .follow-wrapper .user-details .follow-button .btn:hover {
+  background: white;
+  color: #282828;
+  border: 1px solid #282828d0;
+  font-weight: 700;
+  transition: all 0.5s ease-out;
+}
+
+.followers-list-wrapper .follow-wrapper .user-details .follow-button .btn:hover i {
+  color: #282828;
+}
+
+@media screen and (max-width: 768px) {
+  .followers-list-wrapper {
+    margin: 10rem 0px;
+    padding: 0px 1px;
+  }
+
+  .followers-list-wrapper .follow-wrapper .user-details {
+    padding-right: 0px;
+    padding-left: 5px;
+  }
+
+  .followers-list-wrapper .follow-wrapper .user-details .details {
+    align-self: center;
+  }
+
+  .followers-list-wrapper .follow-wrapper .user-details .details .job {
+    display: none;
+  }
+
+  .followers-list-wrapper .follow-wrapper .user-details .follow-button form .btn {
+    font-size: 10px;
+    padding: 0px 5px;
+    border-radius: 0px;
+    height: 30px;
+  }
+}
+
+@media screen and (max-width: 1039px) {
+  .followers-list-wrapper {
+    margin: 5rem 0px;
+    padding: 0px 1px;
+  }
+}
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
