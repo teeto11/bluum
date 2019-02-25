@@ -103,6 +103,7 @@ class ExpertController extends Controller{
     function viewPostsAsExpert($category = null){
 
         $expert = User::find(auth()->user()->id);
+        if($expert->role != 'EXPERT') return redirect()->route('login')->with('error', 'Access denied');
         $data = $this->viewPost($expert);
 
         return view('expert.post')->with($data);
@@ -121,6 +122,7 @@ class ExpertController extends Controller{
     function viewPopularPostsAsExpert(){
 
         $expert = User::find(auth()->user()->id);
+        if($expert->role != 'EXPERT') return redirect()->route('login')->with('error', 'Access denied');
         $data = $this->viewPopularPosts($expert);
 
         return view('expert.post')->with($data);
@@ -139,6 +141,7 @@ class ExpertController extends Controller{
     function viewAnswersAsExpert(){
 
         $expert = User::find(auth()->user()->id);
+        if($expert->role != 'EXPERT') return redirect()->route('login')->with('error', 'Access denied');
         $data = $this->viewAnswers($expert);
 
         return view('expert.answers')->with($data);
