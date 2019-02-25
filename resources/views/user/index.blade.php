@@ -6,11 +6,13 @@
             <h4 class="" style="margin:0px;">Experts you follow <span style="float:right; padding-right:10px;"><a href="">view all</a></span></h4>
         </div>
         <div class="follow-card-wrapper">
-            <div class="follow-card hvr-grow">
-                <img src="assets/images/dafom.jpg" height="100" width="100" alt="">
-                <p class=""><a href="">Festusyuma</a></p>
-                <a href="" class="btn"><i class="fa fa-check"></i> following</a>
-            </div>
+            @foreach($topFollowing as $expert)
+                <div class="follow-card hvr-grow">
+                    <img src="{{ asset('fonts/') }}" height="100" width="100" alt="">
+                    <p class=""><a href="">{{ ucwords($expert->firstname.' '.$expert->lastname) }}</a></p>
+                    <a href="" class="btn"><i class="fa fa-check"></i> following</a>
+                </div>
+            @endforeach
             <div class="follow-card hvr-grow">
                 <img src="assets/images/dafom.jpg" height="100" width="100" alt="">
                 <p class="">Festusyuma</p>
