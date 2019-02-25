@@ -6,6 +6,8 @@ Route::get('/', 'IndexController@index')->name('index');
 Auth::routes();
 
 Route::get('/profile', 'UserController@profile')->name('user.profile');
+Route::get('/profile/edit', 'UserController@showEditForm')->name('user.showeditform');
+Route::post('/profile/edit', 'UserController@edit')->name('user.edit');
 
 //Blog post Routes
 Route::get('/blog', 'PostController@index')->name('blog');

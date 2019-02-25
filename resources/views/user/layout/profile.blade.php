@@ -17,14 +17,14 @@
                 </div>
                 <div class="profile-sidebar-social hvr-float">
                     <div class="followers">
-                        <p><i class="fa fa-users"></i> Following <br> <span></span></p>
+                        <p><i class="fa fa-users"></i> Following <br> <span>{{ $following }}</span></p>
                     </div>
                     <div class="post">
-                        <p><i class="fa fa-sticky-note"></i> Questions <br> <span></span></p>
+                        <p><i class="fa fa-sticky-note"></i> Questions <br> <span>{{ $totalQuestions }}</span></p>
                     </div>
                 </div>
                 <div class="text-center" style="margin-top: 1rem">
-                    <a href="{{ route('expert.edit') }}" class="edit-btn hvr-pulse" style=""><i class="fa fa-edit"></i> Edit</a>
+                    <a href="{{ route('user.showeditform') }}" class="edit-btn hvr-pulse" style=""><i class="fa fa-edit"></i> Edit</a>
                 </div>
             </div>
             <div class="profile-main">
