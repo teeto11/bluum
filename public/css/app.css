@@ -961,6 +961,12 @@
   font-size: 13px !important;
 }
 
+.category-wrapper .category-results-wrapper .results .content-wrapper .post-details .mini-text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .category-wrapper .category-results-wrapper .results .content-wrapper .post-details .post-header {
   font-size: 18px;
   margin: 0px;

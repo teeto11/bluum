@@ -871,6 +871,11 @@
                         font-family: 'Barlow', sans-serif;
                         font-size: 13px !important;
                     }
+                    .mini-text{
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                    }
                     .post-header{
                         font-size: 18px;
                         margin: 0px;
