@@ -25,7 +25,7 @@
     padding: 10px 30px;
     display: flex;
     max-height: auto;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.904);
     box-shadow: 1px 10px 20px #d4d4d4;
   }
 
@@ -151,6 +151,7 @@
     margin-top: 20px;
     padding: 10px 15px;
     width: 33%;
+    background: rgba(255, 255, 255, 0.904);
   }
 
   .experts-wrapper .experts-container .expert-card .image-wrapper {
@@ -219,6 +220,7 @@
     margin-top: 20px;
     padding: 10px 15px;
     width: 50%;
+    background: rgba(255, 255, 255, 0.904);
   }
 
   .experts-wrapper .experts-container .expert-card .image-wrapper {
@@ -295,6 +297,7 @@
     margin-top: 20px;
     padding: 10px 15px;
     width: 100%;
+    background: rgba(255, 255, 255, 0.904);
   }
 
   .experts-wrapper .experts-container .expert-card .image-wrapper {
@@ -360,6 +363,10 @@
 @media screen and (max-width: 1250px) {
   .experts-wrapper .experts-container {
     width: 100%;
+  }
+
+  .experts-wrapper .experts-container .expert-card {
+    background: rgba(255, 255, 255, 0.904);
   }
 
   .experts-wrapper .experts-container .expert-card .expert-footer .exp {
@@ -898,6 +905,121 @@
 
 .table-borderless tr:hover {
   background: #f0f0f0;
+}
+
+.category-wrapper .parrallax-wrapper {
+  /* Full height */
+  height: 40vh;
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.category-wrapper .parrallax-wrapper .parrallax-contents {
+  background: rgba(0, 158, 119, 0.7);
+  width: 30em;
+  border-radius: 125px 0px;
+  text-align: center;
+  color: #F5F5F5;
+  padding: 10px 6px;
+}
+
+.category-wrapper .parrallax-wrapper .parrallax-contents h3 {
+  margin: 0px;
+}
+
+.category-wrapper .parrallax-wrapper .parrallax-contents span {
+  margin: 10px;
+}
+
+.category-wrapper .category-results-wrapper .results .content-wrapper {
+  background: white;
+  padding: 10px 20px;
+  margin: 5px 0px;
+  display: flex;
+}
+
+.category-wrapper .category-results-wrapper .results .content-wrapper .image-wrapper {
+  width: 20%;
+}
+
+.category-wrapper .category-results-wrapper .results .content-wrapper .post-details {
+  width: 80%;
+  padding: 10px 15px;
+}
+
+.category-wrapper .category-results-wrapper .results .content-wrapper .post-details .mini-header {
+  font-weight: 300;
+  opacity: 0.4;
+  margin: 0px;
+  font-family: "Barlow", sans-serif;
+}
+
+.category-wrapper .category-results-wrapper .results .content-wrapper .post-details .post-header {
+  font-size: 18px;
+  margin: 0px;
+  font-weight: 1000;
+  font-family: "Rokkitt", serif;
+}
+
+.category-wrapper .category-results-wrapper .results .content-wrapper .post-details .buttons {
+  margin-bottom: 0px;
+  text-align: right;
+}
+
+.category-wrapper .category-results-wrapper .results .content-wrapper .post-details .buttons .read {
+  background: #39a56b;
+  color: #F5F5F5;
+  border-radius: 20px;
+}
+
+.category-wrapper .category-results-wrapper .results .content-wrapper .post-details .buttons .read i {
+  color: #F5F5F5;
+  padding: 2px 2px;
+}
+
+.category-wrapper .category-results-wrapper .results .content-wrapper .post-details .buttons .delete {
+  background: #ff0c04;
+  color: #F5F5F5;
+  border-radius: 20px;
+}
+
+.category-wrapper .category-results-wrapper .results .content-wrapper .post-details .buttons .delete i {
+  color: #F5F5F5;
+  padding: 2px 2px;
+}
+
+.category-wrapper .category-results-wrapper .results .content-wrapper .post-details .buttons .edit {
+  background: #7F7EFF;
+  color: #F5F5F5;
+  border-radius: 20px;
+}
+
+.category-wrapper .category-results-wrapper .results .content-wrapper .post-details .buttons .edit i {
+  color: #F5F5F5;
+  padding: 2px 2px;
+}
+
+@media screen and (max-width: 1250px) {
+  .category-wrapper .category-results-wrapper .results .content-wrapper {
+    width: 100%;
+    padding: 5px 10px;
+    margin: 10px 0px;
+    box-shadow: 0px 2px 10px #b4b4b4;
+  }
+
+  .category-wrapper .category-results-wrapper .results .content-wrapper .image-wrapper {
+    display: none;
+  }
+
+  .category-wrapper .category-results-wrapper .results .content-wrapper .post-details {
+    width: 100%;
+  }
 }
 
 .navbar-laravel {
