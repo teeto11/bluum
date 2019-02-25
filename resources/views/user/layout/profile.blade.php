@@ -27,7 +27,7 @@
                     <a href="{{ route('user.showeditform') }}" class="edit-btn hvr-pulse" style=""><i class="fa fa-edit"></i> Edit</a>
                 </div>
             </div>
-            <div class="profile-main">
+            <div class="profile-main user-profile-main">
                 @yield('profile-main')
             </div>
         </div>
