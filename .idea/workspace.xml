@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d7ed4ed8-8947-4183-9c51-9858af585117" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ExpertController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ExpertController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/IndexController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Services/ReplyStoreService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/ReplyStoreService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/notification.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/notification.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/post/view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/post/view.blade.php" afterDir="false" />
-    </list>
+    <list default="true" id="d7ed4ed8-8947-4183-9c51-9858af585117" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -156,8 +149,8 @@
       <file leaf-file-name="ReplyStoreService.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Services/ReplyStoreService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="40" column="63" selection-start-line="40" selection-start-column="51" selection-end-line="40" selection-end-column="63" />
+            <state relative-caret-position="119">
+              <caret line="41" column="101" lean-forward="true" selection-start-line="41" selection-start-column="101" selection-end-line="41" selection-end-column="101" />
             </state>
           </provider>
         </entry>
@@ -540,7 +533,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="266724000" />
+    <option name="totallyTimeSpent" value="266980000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
@@ -964,8 +957,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Services/ReplyStoreService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="40" column="63" selection-start-line="40" selection-start-column="51" selection-end-line="40" selection-end-column="63" />
+        <state relative-caret-position="119">
+          <caret line="41" column="101" lean-forward="true" selection-start-line="41" selection-start-column="101" selection-end-line="41" selection-end-column="101" />
         </state>
       </provider>
     </entry>
