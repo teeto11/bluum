@@ -475,6 +475,7 @@
     overflow-y: auto;
     margin: 0px 10px;
     background: white;
+    z-index: 0 !important;
   }
 
   .profile-wrapper .profile-sub-wrapper .profile-main .questions {
@@ -1080,7 +1081,7 @@
 }
 
 .user-profile-main {
-  padding: 0px 20px;
+  padding: 0px 0px;
 }
 
 .user-profile-main .following {
@@ -1254,9 +1255,9 @@
 }
 
 .followers-list-wrapper {
-  padding: 0px 20px;
   background: white;
-  margin: 0px 10px;
+  width: 100% !important;
+  margin: 0px !important;
 }
 
 .followers-list-wrapper .header {
@@ -1356,6 +1357,96 @@
   .followers-list-wrapper {
     margin: 5rem 0px;
     padding: 0px 1px;
+  }
+}
+
+.notifications-wrapper-main .notifications-wrapper .notification-comments,
+.notifications-wrapper-main .notifications-wrapper .notification-post {
+  padding: 20px;
+  margin: 10px 0px;
+  transition: all 0.6s;
+}
+
+.notifications-wrapper-main .notifications-wrapper .notification-comments button,
+.notifications-wrapper-main .notifications-wrapper .notification-post button {
+  float: right;
+  border: 0px;
+  background: transparent;
+  color: #F5F5F5;
+}
+
+.notifications-wrapper-main .notifications-wrapper .notification-comments a,
+.notifications-wrapper-main .notifications-wrapper .notification-post a {
+  display: flex;
+}
+
+.notifications-wrapper-main .notifications-wrapper .notification-comments a .notification-image-wrapper,
+.notifications-wrapper-main .notifications-wrapper .notification-post a .notification-image-wrapper {
+  width: 10%;
+}
+
+.notifications-wrapper-main .notifications-wrapper .notification-comments a .notification-body,
+.notifications-wrapper-main .notifications-wrapper .notification-post a .notification-body {
+  width: 90%;
+  padding: 0px 20px;
+  color: #F5F5F5;
+}
+
+.notifications-wrapper-main .notifications-wrapper .notification-comments a .notification-body h5 .date,
+.notifications-wrapper-main .notifications-wrapper .notification-post a .notification-body h5 .date {
+  font-size: 15px;
+  float: right;
+}
+
+.notifications-wrapper-main .notifications-wrapper .notification-comments:hover {
+  -webkit-transform: scale(1.02);
+          transform: scale(1.02);
+  transition: all 0.6s;
+  border-radius: 40px;
+}
+
+.notifications-wrapper-main .notifications-wrapper .notification-post:hover {
+  -webkit-transform: scale(1.02);
+          transform: scale(1.02);
+  transition: all 0.6s;
+  border-radius: 40px;
+}
+
+.notifications-wrapper-main .notifications-wrapper .notification-post {
+  background: linear-gradient(140deg, #008085, #65008d);
+}
+
+.notifications-wrapper-main .notifications-wrapper .notification-comments {
+  background: linear-gradient(140deg, #8d0036, #490039);
+}
+
+@media screen and (max-width: 787px) {
+  .notifications-wrapper-main .notifications-wrapper {
+    margin: 10px 0px;
+    width: 100%;
+  }
+
+  .notifications-wrapper-main .notifications-wrapper .notification-comments,
+  .notifications-wrapper-main .notifications-wrapper .notification-post {
+    border-radius: 0px;
+  }
+
+  .notifications-wrapper-main .notifications-wrapper .notification-comments .notification-body h5,
+  .notifications-wrapper-main .notifications-wrapper .notification-post .notification-body h5 {
+    margin: 0px;
+    font-size: 15px;
+  }
+
+  .notifications-wrapper-main .notifications-wrapper .notification-comments .notification-body h5 .date,
+  .notifications-wrapper-main .notifications-wrapper .notification-post .notification-body h5 .date {
+    font-size: 10px !important;
+    padding: 5px 0px;
+  }
+
+  .notifications-wrapper-main .notifications-wrapper .notification-comments .notification-body .notification-text,
+  .notifications-wrapper-main .notifications-wrapper .notification-post .notification-body .notification-text {
+    font-size: 10px;
+    margin-bottom: 0px;
   }
 }
 

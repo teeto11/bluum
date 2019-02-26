@@ -416,6 +416,7 @@
                 overflow-y: auto;
                 margin: 0px 10px;
                 background: white;
+                z-index: 0 !important;
                 .questions{
                     padding: 20px;
                     .table-row{
@@ -978,7 +979,7 @@
     }
 }
 .user-profile-main{
-    padding:0px 20px;
+    padding:0px 0px;
     .following{
         padding: 5px 0px;
         .following-header{
@@ -1135,9 +1136,10 @@
     }
 }
 .followers-list-wrapper{
-    padding: 0px 20px;
     background: white;
-    margin: 0px 10px;
+    width: 100% !important;
+    margin: 0px !important;
+    ; 
     .header{
         background: linear-gradient(140deg,#6b006e,rgb(155, 2, 116));
         margin-bottom: 10px;
@@ -1231,5 +1233,76 @@
     .followers-list-wrapper{
         margin: 5rem 0px;
         padding: 0px 1px;
+    }
+}
+.notifications-wrapper-main{
+    .notifications-wrapper{
+        .notification-comments,.notification-post{
+            padding: 20px;
+            margin: 10px 0px;
+            transition: all .6s;
+            button{
+                float:right;
+                border: 0px;
+                background: transparent;
+                color: #F5F5F5;
+            }
+            a{
+                display: flex;
+                .notification-image-wrapper{
+                    width: 10%;
+                }
+                .notification-body{
+                    width: 90%;
+                    padding: 0px 20px;
+                    color: #F5F5F5;
+                    h5{
+                        .date{
+                            font-size:15px;
+                            float: right;
+                        }
+                    }
+                }
+            }
+        }
+        .notification-comments:hover{
+            transform: scale(1.02);
+            transition: all .6s;
+            border-radius: 40px;
+        }
+        .notification-post:hover{
+            transform: scale(1.02);
+            transition: all .6s;
+            border-radius: 40px;
+        }
+        .notification-post{
+            background: linear-gradient(140deg,#008085,#65008d);
+        }
+        .notification-comments{
+            background: linear-gradient(140deg,#8d0036,#490039);
+        }
+    }
+    @media screen and(max-width:787px) {
+        .notifications-wrapper{
+            margin: 10px 0px;
+            width: 100%;
+            .notification-comments,.notification-post{
+                border-radius: 0px;
+                .notification-body{
+                    h5{
+                        margin: 0px;
+                        font-size: 15px;
+                        .date{
+                            font-size: 10px !important;
+                            padding: 5px 0px;
+                        }
+                    }
+                    .notification-text{
+                        font-size: 10px;
+                        margin-bottom: 0px;
+                    }
+                }
+            }
+        }
     }
 }
