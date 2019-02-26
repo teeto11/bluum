@@ -167,6 +167,7 @@ class ExpertController extends Controller{
 
         $post = Post::find($request->id);
         if(auth()->user()->id == $post->user_id){
+            Reply::where('post_id', $post->id)->delete();
             $post->delete();
             return redirect()->route('expert.posts');
         }else return redirect()->route('index')->with('error', 'access denied');

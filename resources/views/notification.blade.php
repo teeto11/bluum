@@ -8,32 +8,32 @@
 
 @section('content')
     @include('widgets.top-nav-bar')
-    <div class="notifications-wrapper-main">
+    <div class="notifications-wrapper-main" style="margin-top: 2rem" >
         <div class="container notifications-wrapper">
-            <h4><i class="fa fa-exclamation-circle"></i> Notifications</h4><hr>
-            <div class="notification-post ">
-                <button><i class="fa fa-times-circle hvr-grow-rotate"></i></button>
-                <a href="index.html" class="">
-                    <div class="notification-image-wrapper">
-                        <img src="assets/fonts/icons/avatars/Q.svg" alt="">
-                    </div>
-                    <div class="notification-body">
-                        <h5 class="animated zoomin ">Post Alert <i class="fa fa-bookmark-o"></i> <span class="date">3 may 2018</span></h5>
-                        <p class="notification-text">Festus agboma has dropped a new post</p>
-                    </div>
-                </a>
-            </div>
-            <div class="notification-comments">
-                <button><i class="fa fa-times-circle hvr-grow-rotate"></i></button>
-                <a href="index.html" class="">
-                    <div class="notification-image-wrapper">
-                        <img src="assets/fonts/icons/avatars/C.svg" alt="">
-                    </div>
-                    <div class="notification-body">
-                        <h5 class="animated zoomin ">Comment Alert <i class="fa fa-comment "></i> <span class="date">3 may 2018</span></h5>
-                        <p class="notification-text">Festus commented on your question</p>
-                    </div>
-                </a>
+            <h4><i class="fa fa-exclamation-circle"></i> Notifications</h4>
+            <hr>
+            <style>
+                #notifications{
+                    height: 70vh;
+                    overflow-y: auto;
+                }
+                #notifications ul{
+                    list-style: circle;
+                }
+                #notifications ul li{
+                    border-bottom: 1px solid #d7d7d7;
+                    line-height: 5rem;
+                }
+                a, a:visited, a:active, a:link {
+                    color: #2a2a2a;
+                }
+            </style>
+            <div id="notifications" >
+                <ul>
+                    @foreach($notifications as $notification)
+                        <li><a href="{{ $notification->link }}" ><p><i class="fa fa-circle" ></i> {!! $notification->notification !!}</p></a></li>
+                    @endforeach
+                </ul>
             </div>
         </div>
     </div>
