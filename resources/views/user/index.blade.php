@@ -20,7 +20,7 @@
         </div>
     </section>
     <section class="posts user-questions">
-        <h4 class="" style=""><i class="fa fa-question-circle"></i> Questions <span style=""><a href="">view all</a></span></h4>
+        <h4 class="" style=""><i class="fa fa-question-circle"></i> Questions <span style=""><a href="{{ route('user.questions') }}">view all</a></span></h4>
         <div class="posts__head" style="background:white">
             <div class="posts__topic" style="padding-left: 30px">Question</div>
             <div class="posts__category">Category</div>

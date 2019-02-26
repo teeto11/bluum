@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Followers;
 use App\Post;
 use App\Reply;
+use App\Services\PostsViewService;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
 
 class UserController extends Controller{
 
@@ -63,7 +65,9 @@ class UserController extends Controller{
         if($question && $question->user_id == auth()->user()->id){
 
             $question->delete();
-            return redirect()->route('user.profile');
+            if($request->redirect){
+                return redirect()->route($request->redirect);
+            }else return redirect()->route('user.profile');
         }else{ return redirect()->route('user.profile')->with('error', 'Access denied'); }
     }
 
@@ -78,6 +82,28 @@ class UserController extends Controller{
         return view('user.following')->with($data);
     }
 
+    public function questions(){
+
+        $data = $this->details();
+        $data['title'] = 'Questions';
+
+        $postViewService = new PostsViewService('QUESTION');
+        $data += $postViewService->viewUserPost(auth()->user()->id);
+
+        return view('user.questions')->with($data);
+    }
+
+    public function popularQuestions(){
+
+        $data = $this->details();
+        $data['title'] = 'Questions';
+
+        $postViewService = new PostsViewService('QUESTION');
+        $data += $postViewService->viewUserPopularPost(auth()->user()->id);
+
+        return view('user.questions')->with($data);
+    }
+
     private function details(){
 
         $user = User::find(auth()->user()->id);
@@ -88,6 +114,7 @@ class UserController extends Controller{
             'user'              => $user,
             'following'         => $following,
             'totalQuestions'    => $totalQuestions,
+            'routeName'         => Route::currentRouteName(),
         ];
 
         return $data;

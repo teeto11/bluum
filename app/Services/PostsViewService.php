@@ -96,7 +96,7 @@ class PostsViewService{
         return $data;
     }
 
-    public function viewExpertPost($id){
+    public function viewUserPost($id){
 
         $filters = self::getFilter();
         $filters['filters'][] = ['user_id', $id];
@@ -108,7 +108,7 @@ class PostsViewService{
         return $data;
     }
 
-    public function viewExpertPopularPost($id){
+    public function viewUserPopularPost($id){
 
         $filters = self::getFilter();
         $filters['filters'][] = ['user_id', $id];

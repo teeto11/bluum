@@ -7,11 +7,10 @@
                 <div class="btn-select" data-dropdown-btn="categories">All Categories</div>
                 <nav class="dropdown dropdown--design-01" data-dropdown-list="categories">
                     <ul class="dropdown__catalog row">
-                        <li class="col-xs-6"><a href="#" class="category"><i class="bg-5dd39e"></i>Random</a></li>
-                        <li class="col-xs-6"><a href="#" class="category"><i class="bg-c49bbb"></i>Science</a></li>
-                        <li class="col-xs-6"><a href="#" class="category"><i class="bg-525252"></i>Education</a></li>
-                        <li class="col-xs-6"><a href="#" class="category"><i class="bg-777da7"></i>Q&amp;As</a></li>
-                        <li class="col-xs-6"><a href="#" class="category"><i class="bg-368f8b"></i>Politics</a></li>
+                        <li class="col-xs-6"><a href="{{ route('user.questions') }}" class="category"><i class="bg-c49bbb"></i>All</a></li>
+                        @foreach($categories as $category)
+                            <li class="col-xs-6"><a href="{{ route('user.viewquestionsbycategory', formatUrlString($category->value)) }}" class="category"><i class="bg-5dd39e"></i>{{ ucfirst($category->value) }}</a></li>
+                        @endforeach
                     </ul>
                 </nav>
             </div>
@@ -21,14 +20,14 @@
                 <div class="btn-select" data-dropdown-btn="menu">Latest</div>
                 <div class="dropdown dropdown--design-01" data-dropdown-list="menu">
                     <ul class="dropdown__catalog">
-                        <li><a href="#">Latest</a></li>
-                        <li><a href="#">Most Liked</a></li>
+                        <li><a href="{{ route('user.questions') }}">Latest</a></li>
+                        <li><a href="{{ route('user.questions.popular') }}">Most Liked</a></li>
                     </ul>
                 </div>
             </div>
             <ul>
-                <li class="active"><a href="#">Latest</a></li>
-                <li><a href="#">Most Liked</a></li>
+                <li class="active"><a href="{{ route('user.questions') }}">Latest</a></li>
+                <li><a href="{{ route('user.questions.popular') }}">Most Liked</a></li>
             </ul>
         </div>
     </section>
@@ -41,32 +40,37 @@
             <div class="posts__activity" id="post_actions"></div>
         </div>
         <div class="posts__body">
-            <div class="posts__item">
-                <div class="posts__section-left">
-                    <div class="posts__topic">
-                        <div class="posts__content">
-                            <a href="single-post.html">
-                                <h3>Current news and discussion</h3>
-                            </a>
+            @foreach($posts as $question)
+                <div class="posts__item">
+                    <div class="posts__section-left">
+                        <div class="posts__topic">
+                            <div class="posts__content">
+                                <a href="{{ route('question.show', [$question->id, formatUrlString($question->title)]) }}">
+                                    <h3>{{ ucwords($question->title) }}</h3>
+                                </a>
+                            </div>
                         </div>
+                        <div class="posts__category"><a href="{{ route('question.showbycategory', formatUrlString($question->category)) }}" class="category"><i class="bg-368f8b"></i>{{ ucfirst($question->category) }}</a></div>
                     </div>
-                    <div class="posts__category"><a href="#" class="category"><i class="bg-368f8b"></i>Politics</a></div>
-                </div>
-                <div class="posts__section-right">
-                    <div class="posts__replies">31</div>
-                    <div class="posts__views">14.5k</div>
-                    <div class="posts__activity" id="post_actions">
+                    <div class="posts__section-right">
+                        <div class="posts__replies">{{ $question->replies->where('parent_reply', null)->count() }}</div>
+                        <div class="posts__views">{{ $question->views }}</div>
+                        <div class="posts__activity" id="post_actions">
+
+                        </div>
                         <div>
-                            <a href="#" class=""><i class="fa fa-pencil"></i></a>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <a href="#" class=""><i class="fa fa-trash"></i></a>
+                            <form action="{{ route('question.delete') }}" method="post" >
+                                @csrf
+                                @method('delete')
+                                <input type="hidden" name="id" value="{{ $question->id }}" >
+                                <input type="hidden" name="redirect" value="{{ $routeName }}" >
+                                <button type="submit" style="background: transparent;border: none;" ><i class="fa fa-trash"></i></button>
+                            </form>
                         </div>
                     </div>
                 </div>
-            </div>
+                {{ $posts->links() }}
+            @endforeach
         </div>
     </section>
 @endsection
