@@ -10,15 +10,13 @@
                         <ul class="dropdown__catalog row">
                             <li class="col-xs-6"><a href="{{ route('expert.posts') }}" class="category"><i class="bg-5dd39e"></i>All</a></li>
                             @if(auth()->user() && auth()->user()->role == 'EXPERT' && auth()->user()->id == $expert->id)
-                                <li class="col-xs-6"><a href="{{ route('expert.posts.viewByCategory', formatUrlString('pregnancy')) }}" class="category"><i class="bg-5dd39e"></i>Pregnancy</a></li>
-                                <li class="col-xs-6"><a href="{{ route('expert.posts.viewByCategory', formatUrlString('medical travels')) }}" class="category"><i class="bg-c49bbb"></i>Medical Travels</a></li>
-                                <li class="col-xs-6"><a href="{{ route('expert.posts.viewByCategory', formatUrlString('common illness')) }}" class="category"><i class="bg-525252"></i>Common Illness</a></li>
-                                <li class="col-xs-6"><a href="{{ route('expert.posts.viewByCategory', formatUrlString('special illness')) }}" class="category"><i class="bg-777da7"></i>Special Illness</a></li>
+                                @foreach($categories as $category)
+                                    <li class="col-xs-6"><a href="{{ route('expert.posts.viewByCategory', formatUrlString($category->value)) }}" class="category"><i class="bg-5dd39e"></i>{{ ucfirst($category->value) }}</a></li>
+                                @endforeach
                             @else
-                                <li class="col-xs-6"><a href="{{ route('expert.guest.posts.viewByCategory', ['id'=>$expert->id, 'category'=>formatUrlString('pregnancy')]) }}" class="category"><i class="bg-5dd39e"></i>Pregnancy</a></li>
-                                <li class="col-xs-6"><a href="{{ route('expert.guest.posts.viewByCategory', ['id'=>$expert->id, 'category'=>formatUrlString('medical travels')]) }}" class="category"><i class="bg-c49bbb"></i>Medical Travels</a></li>
-                                <li class="col-xs-6"><a href="{{ route('expert.guest.posts.viewByCategory', ['id'=>$expert->id, 'category'=>formatUrlString('common illness')]) }}" class="category"><i class="bg-525252"></i>Common Illness</a></li>
-                                <li class="col-xs-6"><a href="{{ route('expert.guest.posts.viewByCategory', ['id'=>$expert->id, 'category'=>formatUrlString('special illness')]) }}" class="category"><i class="bg-777da7"></i>Special Illness</a></li>
+                                @foreach($categories as $category)
+                                    <li class="col-xs-6"><a href="{{ route('expert.guest.posts.viewByCategory', ['id'=>$expert->id, 'category'=>formatUrlString($category->value)]) }}" class="category"><i class="bg-5dd39e"></i>{{ ucfirst($category->value) }}</a></li>
+                                @endforeach
                             @endif
                         </ul>
                     </nav>
