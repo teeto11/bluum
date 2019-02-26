@@ -12,7 +12,7 @@
                             <ul class="dropdown__catalog row">
                                 <li class="col-xs-6"><a href="/questions" class="category"><i class="bg-5dd39e"></i>All</a></li>
                             @foreach ($categories as $category)
-                                    <li class="col-xs-6"><a href="/questions/category/{{ urlencode($category->value) }}" class="category"><i class="bg-5dd39e"></i>{{ ucfirst($category->value) }}</a></li>
+                                    <li class="col-xs-6"><a href="/questions/category/{{ formatUrlString($category->value) }}" class="category"><i class="bg-5dd39e"></i>{{ ucfirst($category->value) }}</a></li>
                                 @endforeach
                             </ul>
                         </nav>
@@ -22,7 +22,7 @@
                         <div class="dropdown dropdown--design-01" data-dropdown-list="tags">
                             <div class="tags">
                                 @foreach($top_tags as $tag)
-                                    <a href="/questions/tag/{{ urlencode($tag->value) }}" class="bg-36b7d7">{{ $tag->value }}</a>
+                                    <a href="/questions/tag/{{ formatUrlString($tag->value) }}" class="bg-36b7d7">{{ $tag->value }}</a>
                                 @endforeach
                             </div>
                         </div>

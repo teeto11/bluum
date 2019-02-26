@@ -6,8 +6,13 @@ Route::get('/', 'IndexController@index')->name('index');
 Auth::routes();
 
 Route::get('/profile', 'UserController@profile')->name('user.profile');
+Route::get('/following', 'UserController@following')->name('user.following');
+Route::get('/profile/questions', 'UserController@questions')->name('user.questions');
+Route::get('/profile/question/{category}', 'UserController@questions')->name('user.viewquestionsbycategory');
+Route::get('/profile/question/popular', 'UserController@popularQuestions')->name('user.questions.popular');
 Route::get('/profile/edit', 'UserController@showEditForm')->name('user.showeditform');
 Route::post('/profile/edit', 'UserController@edit')->name('user.edit');
+Route::delete('/question/delete', 'UserController@deleteQuestion')->name('question.delete');
 Route::delete('/reply/delete', 'UserController@deleteReply')->name('reply.delete');
 
 //Blog post Routes
@@ -79,4 +84,5 @@ Route::delete('/admin/post/delete', 'Admin\PostController@deletePost')->name('ad
 Route::get('/admin/post/{id}', 'Admin\PostController@viewPost')->name('admin.post.show');
 Route::delete('/admin/post/comment/delete', 'Admin\PostController@deleteComment')->name('admin.post.comment.delete');
 
-Route::get('/search/{query}', 'IndexController@search')->name('search');
+Route::post('/search', 'IndexController@search')->name('search');
+Route::get('/search/{query}', 'IndexController@searchResult')->name('search.result');

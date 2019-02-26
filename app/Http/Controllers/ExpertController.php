@@ -79,7 +79,9 @@ class ExpertController extends Controller{
             ['expert_id', $request->id]
         ])->delete();
 
-        return redirect()->route('experts')->with('success', "Followed expert");
+        if($request->redirect){
+            return redirect()->route($request->redirect)->with('success', "UnFollowed expert");
+        }else return redirect()->route('experts')->with('success', "UnFollowed expert");
     }
 
     function profile(){
@@ -186,7 +188,7 @@ class ExpertController extends Controller{
 
         $postViewService = new PostsViewService('POST');
         $data = $this->details($expert);
-        $data += $postViewService->viewExpertPopularPost($expert->id);
+        $data += $postViewService->viewUserPopularPost($expert->id);
 
         return $data;
     }
@@ -205,7 +207,7 @@ class ExpertController extends Controller{
 
         $postViewService = new PostsViewService('POST');
         $data = $this->details($expert);
-        $data += $postViewService->viewExpertPost($expert->id);
+        $data += $postViewService->viewUserPost($expert->id);
 
         return $data;
     }
