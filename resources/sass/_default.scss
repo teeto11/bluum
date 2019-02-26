@@ -416,6 +416,7 @@
                 overflow-y: auto;
                 margin: 0px 10px;
                 background: white;
+                z-index: 0 !important;
                 .questions{
                     padding: 20px;
                     .table-row{
@@ -978,7 +979,7 @@
     }
 }
 .user-profile-main{
-    padding:0px 20px;
+    padding:0px 0px;
     .following{
         padding: 5px 0px;
         .following-header{
@@ -1135,9 +1136,10 @@
     }
 }
 .followers-list-wrapper{
-    padding: 0px 20px;
     background: white;
-    margin: 0px 10px;
+    width: 100% !important;
+    margin: 0px !important;
+    ; 
     .header{
         background: linear-gradient(140deg,#6b006e,rgb(155, 2, 116));
         margin-bottom: 10px;
