@@ -90,7 +90,7 @@
                                 @endif
                                 {{--<li><a href="#">Badges</a></li>
                                 <li><a href="#">My Groups</a></li>--}}
-                                <li><a href="#">Notifications</a></li>
+                                <li><a href="{{ route('notification') }}">Notifications</a></li>
                                 {{--<li><a href="">Likes</a></li>
                                 <li><a href="#">Solved</a></li>--}}
                                 <li>

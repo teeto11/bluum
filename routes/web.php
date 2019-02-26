@@ -86,3 +86,4 @@ Route::delete('/admin/post/comment/delete', 'Admin\PostController@deleteComment'
 
 Route::post('/search', 'IndexController@search')->name('search');
 Route::get('/search/{query}', 'IndexController@searchResult')->name('search.result');
+Route::get('/notification', 'IndexController@notification')->name('notification');

@@ -48,4 +48,13 @@ class indexController extends Controller{
 
         dd($query);
     }
+
+    function notification(){
+
+        $data = [
+            'title' => 'Notification'
+        ];
+
+        return view('notification')->with($data);
+    }
 }
