@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Followers;
 use App\Post;
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class indexController extends Controller{
@@ -34,9 +35,17 @@ class indexController extends Controller{
         return view("index")->with($data);
     }
 
-    function search($query){
+    function search(Request $request){
 
-        $query = urldecode($query);
-        return view('search')->with('title', 'Result');
+        $this->validate($request, [
+            'sQuery' => ['string', 'required']
+        ]);
+
+        return redirect()->route('search.result', urlencode($request->sQuery));
+    }
+
+    function searchResult($query){
+
+        dd($query);
     }
 }

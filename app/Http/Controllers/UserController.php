@@ -67,6 +67,17 @@ class UserController extends Controller{
         }else{ return redirect()->route('user.profile')->with('error', 'Access denied'); }
     }
 
+    public function following(){
+
+        $data = $this->details();
+        $data['title'] = 'Following';
+
+        $followingIds = Followers::where('user_id', auth()->user()->id)->pluck('expert_id')->toArray();
+        $data['usersFollowing'] = User::whereIn('id', $followingIds)->get();
+
+        return view('user.following')->with($data);
+    }
+
     private function details(){
 
         $user = User::find(auth()->user()->id);

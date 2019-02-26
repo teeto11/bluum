@@ -3,7 +3,7 @@
 @section('profile-main')
     <section class="following">
         <div class="following-header">
-            <h4 class="" style="margin:0px;">Experts you follow <span style="float:right; padding-right:10px;"><a href="">view all</a></span></h4>
+            <h4 class="" style="margin:0px;">Experts you follow <span style="float:right; padding-right:10px;"><a href="{{ route('user.following') }}">view all</a></span></h4>
         </div>
         <div class="follow-card-wrapper">
             @foreach($topFollowing as $expert)
