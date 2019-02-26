@@ -57,7 +57,11 @@ class UserController extends Controller{
         ]);
 
         $user = User::find(auth()->user()->id);
-        $user->update($request->all());
+        $user->update([
+            'firstname' => $request->firstname,
+            'lastname'  => $request->lastname,
+            'email'     => $request->email,
+        ]);
 
         return redirect()->route('user.showeditform')->with('success', 'profile updated');
     }

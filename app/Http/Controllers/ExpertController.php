@@ -92,6 +92,33 @@ class ExpertController extends Controller{
         return view('expert.view')->with($data);
     }
 
+    function showEditForm(){
+
+        $expert = User::find(auth()->user()->id);
+        $data = $this->expertDetails($expert);
+
+        return view('expert.edit')->with($data);
+    }
+
+    function update(Request $request){
+
+        $this->validate($request, [
+            'telephone' => ['required', 'max:15'],
+            'about' => ['string', 'required'],
+            'expertise' => ['string', 'required'],
+            'experience' => ['int', 'required'],
+        ]);
+
+        $expert = User::find(auth()->user()->id)->expert;
+        $expert->expertise  = $request->expertise;
+        $expert->experience = $request->experience;
+        $expert->telephone  = $request->telephone;
+        $expert->about      = $request->about;
+        $expert->save();
+
+        return redirect()->route('expert.edit')->with('success', 'Expert updated');
+    }
+
     function viewExpert($id){
 
         $expert = User::find($id);
