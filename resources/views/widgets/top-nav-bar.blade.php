@@ -11,10 +11,11 @@
                 </a>
             </div>
             <div class="header__search">
-                <form action="#">
+                <form action="{{ route('search') }}" method="post" id="search-form" >
+                    @csrf
                     <label>
-                        <i class="icon-Search js-header-search-btn-open"></i>
-                        <input type="search" placeholder="Search anything" class="form-control" />
+                        <i class="icon-Search js-header-search-btn-open" id="search-btn" ></i>
+                        <input type="search" placeholder="Search anything" class="form-control" name="sQuery" />
                     </label>
                 </form>
                 <div class="header__search-close js-header-search-btn-close"><i class="icon-Cancel"></i></div>
@@ -85,11 +86,11 @@
                                     <li><a href="{{ route('expert.posts') }}">Topics</a></li>
                                 @else
                                     <li><a href="{{ route('user.profile') }}">Profile</a></li>
-                                    <li><a href="{{ route('expert.posts') }}">Questions</a></li>
+                                    <li><a href="{{ route('user.questions') }}">Questions</a></li>
                                 @endif
                                 {{--<li><a href="#">Badges</a></li>
                                 <li><a href="#">My Groups</a></li>--}}
-                                <li><a href="#">Notifications</a></li>
+                                <li><a href="{{ route('notification') }}">Notifications</a></li>
                                 {{--<li><a href="">Likes</a></li>
                                 <li><a href="#">Solved</a></li>--}}
                                 <li>

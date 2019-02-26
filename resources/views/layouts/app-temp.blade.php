@@ -29,6 +29,18 @@
 	<script src="{{ asset('js/jquery.min.js') }}"></script>
 	<script src="{{ asset('js/velocity.min.js') }}"></script>
 	<script src="{{ asset('js/app-ui.js') }}"></script>
+    <script>
+        $('#search-btn').click(function () {
+            $('#search-form').submit();
+        });
+
+        $('#search-form').keydown(function(event){
+            if(event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    </script>
     @yield('scripts')
 </body>
 </html>

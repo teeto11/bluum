@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Followers;
+use App\Notificaton;
 use App\Post;
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class indexController extends Controller{
@@ -34,9 +36,28 @@ class indexController extends Controller{
         return view("index")->with($data);
     }
 
-    function search($query){
+    function search(Request $request){
 
-        $query = urldecode($query);
-        return view('search')->with('title', 'Result');
+        $this->validate($request, [
+            'sQuery' => ['string', 'required']
+        ]);
+
+        return redirect()->route('search.result', urlencode($request->sQuery));
+    }
+
+    function searchResult($query){
+
+        dd($query);
+    }
+
+    function notification(){
+
+        $data = [
+            'title' => 'Notification',
+            'notifications' => Notificaton::where('user_id', auth()->user()->id)->orderBy('created_at', 'DESC')->get(),
+        ];
+        Notificaton::where([ ['user_id', auth()->user()->id], ['seen', false] ])->update(['seen' => true]);
+
+        return view('notification')->with($data);
     }
 }
