@@ -910,7 +910,7 @@
 
 .category-wrapper .parrallax-wrapper {
   /* Full height */
-  height: 40vh;
+  height: auto;
   /* Create the parallax scrolling effect */
   background-attachment: fixed;
   background-position: center;
@@ -924,10 +924,11 @@
 .category-wrapper .parrallax-wrapper .parrallax-contents {
   background: rgba(0, 158, 119, 0.7);
   width: 30em;
-  border-radius: 125px 0px;
+  border-radius: 100px 0px;
   text-align: center;
   color: #F5F5F5;
-  padding: 10px 6px;
+  padding: 10px 11px;
+  margin: 10px 0px;
 }
 
 .category-wrapper .parrallax-wrapper .parrallax-contents h3 {
