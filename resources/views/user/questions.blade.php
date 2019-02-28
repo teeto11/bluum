@@ -69,7 +69,6 @@
                         </div>
                     </div>
                 </div>
-                {{ $posts->links() }}
             @endforeach
         </div>
     </section>

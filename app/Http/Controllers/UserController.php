@@ -40,6 +40,32 @@ class UserController extends Controller{
         return view('user.index')->with($data);
     }
 
+    public function showUpdateForm(){
+
+        $data = $this->details();
+        $data['title'] = 'Update Profile';
+
+        return view('user.edit')->with($data);
+    }
+
+    public function update(Request $request){
+
+        $this->validate($request, [
+            'firstname' => ['string', 'required', 'max:255'],
+            'lastname' => ['string', 'required', 'max:255'],
+            'email' => ['string', 'required', 'max:255'],
+        ]);
+
+        $user = User::find(auth()->user()->id);
+        $user->update([
+            'firstname' => $request->firstname,
+            'lastname'  => $request->lastname,
+            'email'     => $request->email,
+        ]);
+
+        return redirect()->route('user.showeditform')->with('success', 'profile updated');
+    }
+
     public function deleteReply(Request $request){
 
         $this->validate($request, [

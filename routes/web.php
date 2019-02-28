@@ -10,8 +10,8 @@ Route::get('/following', 'UserController@following')->name('user.following');
 Route::get('/profile/questions', 'UserController@questions')->name('user.questions');
 Route::get('/profile/question/{category}', 'UserController@questions')->name('user.viewquestionsbycategory');
 Route::get('/profile/question/popular', 'UserController@popularQuestions')->name('user.questions.popular');
-Route::get('/profile/edit', 'UserController@showEditForm')->name('user.showeditform');
-Route::post('/profile/edit', 'UserController@edit')->name('user.edit');
+Route::get('/profile/edit', 'UserController@showUpdateForm')->name('user.showeditform');
+Route::post('/profile/update', 'UserController@update')->name('user.update');
 Route::delete('/question/delete', 'UserController@deleteQuestion')->name('question.delete');
 Route::delete('/reply/delete', 'UserController@deleteReply')->name('reply.delete');
 
@@ -54,13 +54,14 @@ Route::get('/experts', 'ExpertController@index')->name('experts');
 Route::post('/expert/follow', 'ExpertController@followExpert')->name('expert.follow');
 Route::post('/expert/unfollow', 'ExpertController@unfollowExpert')->name('expert.unfollow');
 Route::get('/expert/profile', 'ExpertController@profile')->name('expert.profile');
+Route::get('/expert/edit', 'ExpertController@showEditForm')->name('expert.edit');
+Route::post('/expert/update', 'ExpertController@update')->name('expert.update');
 Route::get('/expert/posts', 'ExpertController@viewPostsAsExpert')->name('expert.posts');
 Route::delete('/expert/post', 'ExpertController@deletePost')->name('expert.post.delete');
 Route::delete('/expert/post/reply', 'ExpertController@deleteResponse')->name('expert.post.reply.delete');
 Route::get('/expert/post/popular', 'ExpertController@viewPopularPostsAsExpert')->name('expert.posts.popular');
 Route::get('/expert/post/{category}', 'ExpertController@viewPostsAsExpert')->name('expert.posts.viewByCategory');
 Route::get('/expert/answers', 'ExpertController@viewAnswersAsExpert')->name('expert.answers');
-Route::get('/expert/edit', 'ExpertController@unfollowExpert')->name('expert.edit');
 Route::get('/expert/{id}', 'ExpertController@viewExpert')->name('expert.show');
 Route::get('/expert/{id}/posts', 'ExpertController@viewPostsAsGuest')->name('expert.guest.posts');
 Route::get('/expert/{id}/post/popular', 'ExpertController@viewPopularPostsAsGuest')->name('expert.guest.posts.popular');
@@ -86,3 +87,4 @@ Route::delete('/admin/post/comment/delete', 'Admin\PostController@deleteComment'
 
 Route::post('/search', 'IndexController@search')->name('search');
 Route::get('/search/{query}', 'IndexController@searchResult')->name('search.result');
+Route::get('/notification', 'IndexController@notification')->name('notification');
