@@ -61,6 +61,20 @@ class QuestionController extends Controller{
         return redirect()->route('admin.questions')->with('success', 'question deleted');
     }
 
+    public function restoreQuestion(Request $request){
+
+        $this->validate($request, [
+            'id' => ['required', 'int']
+        ]);
+
+        $question = Post::find($request->id);
+        if(! $question) return redirect(route('admin.questions.deleted'));
+        $question->active = true;
+        $question->save();
+
+        return redirect()->route('admin.questions.deleted')->with('success', 'question restored');
+    }
+
     public function deleteAnswer(Request $request){
 
         $this->validate($request, [

@@ -38,7 +38,14 @@
                                 @if($question->active)
                                     <td><a href="/admin/question/{{ $question->id }}" class="btn btn-warning"><i class="fa fa-eye text-light"></i></a></td>
                                 @else
-                                    <td><a href="/admin/question/{{ $question->id }}" class="btn btn-success"><i class="fa fa-undo text-light"></i></a></td>
+                                    <td>
+                                        <form action="{{ route('admin.question.restore') }}" method="post" >
+                                            @csrf
+                                            @method('put')
+                                            <input type="hidden" name="id" value="{{ $question->id }}" >
+                                            <button type="submit" class="btn btn-sm btn-success" ><i class="fa fa-undo text-light"></i></button>
+                                        </form>
+                                    </td>
                                 @endif
                             </tr>
                         @endforeach

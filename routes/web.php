@@ -74,12 +74,13 @@ Route::get('/admin/expert/disabled', 'Admin\ExpertController@viewDisabledExperts
 Route::get('/admin/expert/new', 'Admin\ExpertController@showAddExpertForm')->name('admin.expert.new');
 Route::post('/admin/expert/new', 'Admin\ExpertController@addExpert')->name('admin.expert.store');
 Route::delete('/admin/expert/delete', 'Admin\ExpertController@removeExpert')->name('admin.expert.delete');
-Route::put('/admin/expert/delete', 'Admin\ExpertController@enableExpert')->name('admin.expert.enable');
+Route::put('/admin/expert/restore', 'Admin\ExpertController@enableExpert')->name('admin.expert.enable');
 Route::get('/admin/expert/{id}', 'Admin\ExpertController@viewExpert')->name('admin.expert.show');
 
 Route::get('/admin/questions', 'Admin\QuestionController@index')->name('admin.questions');
 Route::get('/admin/question/deleted', 'Admin\QuestionController@viewDeletedQuestions')->name('admin.questions.deleted');
 Route::delete('/admin/question/delete', 'Admin\QuestionController@deleteQuestion')->name('admin.question.delete');
+Route::put('/admin/question/restore', 'Admin\QuestionController@restoreQuestion')->name('admin.question.restore');
 Route::get('/admin/question/{id}', 'Admin\QuestionController@viewQuestion')->name('admin.question.show');
 Route::delete('/admin/question/answer/delete', 'Admin\QuestionController@deleteAnswer')->name('admin.question.answer.delete');
 
