@@ -13,11 +13,11 @@ class Post extends Model
     }
 
     public function replies(){
-        return $this->hasMany('App\Reply')->orderBy('created_at', 'desc');
+        return $this->hasMany('App\Reply')->orderBy('created_at', 'desc')->where('active', true);
     }
 
     public function popularReplies(){
-        return $this->hasMany('App\Reply')->orderBy('likes', 'desc')->where('likes', '>', '0')->take(3);
+        return $this->hasMany('App\Reply')->orderBy('likes', 'desc')->where([ ['likes', '>', '0'], ['active', true] ])->take(3);
     }
 
     public function postLikes(){
