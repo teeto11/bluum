@@ -78,11 +78,13 @@ Route::put('/admin/expert/delete', 'Admin\ExpertController@enableExpert')->name(
 Route::get('/admin/expert/{id}', 'Admin\ExpertController@viewExpert')->name('admin.expert.show');
 
 Route::get('/admin/questions', 'Admin\QuestionController@index')->name('admin.questions');
+Route::get('/admin/question/deleted', 'Admin\QuestionController@viewDeletedQuestions')->name('admin.questions.deleted');
 Route::delete('/admin/question/delete', 'Admin\QuestionController@deleteQuestion')->name('admin.question.delete');
 Route::get('/admin/question/{id}', 'Admin\QuestionController@viewQuestion')->name('admin.question.show');
 Route::delete('/admin/question/answer/delete', 'Admin\QuestionController@deleteAnswer')->name('admin.question.answer.delete');
 
 Route::get('/admin/posts', 'Admin\PostController@index')->name('admin.posts');
+Route::get('/admin/post/deleted', 'Admin\PostController@viewDeletedPosts')->name('admin.posts.deleted');
 Route::delete('/admin/post/delete', 'Admin\PostController@deletePost')->name('admin.post.delete');
 Route::get('/admin/post/{id}', 'Admin\PostController@viewPost')->name('admin.post.show');
 Route::delete('/admin/post/comment/delete', 'Admin\PostController@deleteComment')->name('admin.post.comment.delete');

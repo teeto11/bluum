@@ -12,7 +12,23 @@ class QuestionController extends Controller{
     public function index(){
 
         $questions = Post::where(['type'=>'QUESTION', 'active'=>true])->orderBy('created_at', 'DESC')->paginate(20);
-        return view('admin.question')->with('questions', $questions);
+        $data = [
+            'questions' =>  $questions,
+            'type'      =>  'active',
+        ];
+
+        return view('admin.question')->with($data);
+    }
+
+    public function viewDeletedQuestions(){
+
+        $questions = Post::where(['type'=>'QUESTION', 'active'=>false])->orderBy('created_at', 'DESC')->paginate(20);
+        $data = [
+            'questions' =>  $questions,
+            'type'      =>  'deleted',
+        ];
+
+        return view('admin.question')->with($data);
     }
 
     public function viewQuestion($id){

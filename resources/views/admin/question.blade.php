@@ -5,7 +5,21 @@
         <div class="view-questions-wrapper">
             <div class="table-row">
                 <div class="table-responsive bg-white px-4">
-                    <h3 class="">All Questions</h3><hr>
+                    <div class="row" >
+                        <div class="col-sm-10" >
+                            <h3 class="">All Questions</h3>
+                        </div>
+                        <div class="col-sm-2 text-center" >
+                            <div style="display: flex;align-items: flex-end;justify-content: center;height: 100%;" >
+                                @if($type == 'deleted')
+                                    <a href="{{ route('admin.questions') }}" ><button class="btn btn-success" ><i class="fa fa-eye" ></i></button></a>
+                                @else
+                                    <a href="{{ route('admin.questions.deleted') }}" ><button class="btn btn-danger" ><i class="fa fa-trash" ></i></button></a>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
                     <table class="table table-striped table-hover">
                         <thead>
                         <tr>
@@ -21,7 +35,11 @@
                                 <td>{{ ucwords($question->user->firstname.' '.$question->user->lastname) }}</td>
                                 <td>{{ ucwords($question->title) }}</td>
                                 <td>{{ date('M d, Y', strtotime($question->created_at)) }}</td>
-                                <td><a href="/admin/question/{{ $question->id }}" class="btn btn-warning"><i class="fa fa-eye text-light"></i></a></td>
+                                @if($question->active)
+                                    <td><a href="/admin/question/{{ $question->id }}" class="btn btn-warning"><i class="fa fa-eye text-light"></i></a></td>
+                                @else
+                                    <td><a href="/admin/question/{{ $question->id }}" class="btn btn-success"><i class="fa fa-undo text-light"></i></a></td>
+                                @endif
                             </tr>
                         @endforeach
                         </tbody>
