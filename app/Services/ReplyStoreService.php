@@ -39,15 +39,15 @@ class ReplyStoreService{
             if($recipient){
                 $reply->recipient = "@$recipient->username";
                 $body = substr($recipientReply->body, 0, 50);
-                $r_notification = ($this->type == 'POST') ? $this->newCommentReplyNotification($recipient->id, $body) : $this->newAnswerCommentNotification($recipient->id, $body);
+                $r_notification = ($this->type == 'POST') ? NotificationService::newCommentReplyNotification($recipient->id, $body) : NotificationService::newAnswerCommentNotification($recipient->id, $body);
             }else return false;
         }
 
         $reply->save();
         if(auth()->user()->id != $post->user_id) {
             if($this->type == 'POST') {
-                $this->newCommentNotification($post, $reply->id);
-            } elseif($this->type == 'QUESTION' && is_null($reply->parent_reply)) $this->newAnswerNotification($post, $reply->id);
+                NotificationService::newCommentNotification($post, $reply->id)->save();
+            } elseif($this->type == 'QUESTION' && is_null($reply->parent_reply)) NotificationService::newAnswerNotification($post, $reply->id)->save();
         }
 
         if(isset($r_notification) && !is_null($r_notification)){
@@ -57,41 +57,5 @@ class ReplyStoreService{
         }
 
         return $reply;
-    }
-
-    private function newCommentNotification($post, $reply_id){
-
-        $notification = new Notificaton;
-        $notification->user_id = $post->user_id;
-        $notification->notification = '<strong>'.getInitials(auth()->user()).'</strong> commented on your post <strong>'.ucfirst($post->title).'</strong>';
-        $notification->link = route('blog.post', [$post->id, formatUrlString($post->title)])."#reply-$reply_id";
-        $notification->save();
-    }
-
-    private function newCommentReplyNotification($user_id, $comment){
-
-        $notification = new Notificaton;
-        $notification->user_id = $user_id;
-        $notification->notification = '<strong>'.getInitials(auth()->user()).'</strong> replied your comment <strong>'.$comment.'</strong>';
-
-        return $notification;
-    }
-
-    private function newAnswerNotification($post, $reply_id){
-
-        $notification = new Notificaton;
-        $notification->user_id = $post->user_id;
-        $notification->notification = '<strong>'.getInitials(auth()->user()).'</strong> answered your question <strong>'.ucfirst($post->title).'</strong>';
-        $notification->link = route('question.show', [$post->id, formatUrlString($post->title)])."#reply-$reply_id";
-        $notification->save();
-    }
-
-    private function newAnswerCommentNotification($user_id, $body){
-
-        $notification = new Notificaton;
-        $notification->user_id = $user_id;
-        $notification->notification = '<strong>'.getInitials(auth()->user()).'</strong> commented on your answer <strong>'.$body.'</strong>';
-
-        return $notification;
     }
 }

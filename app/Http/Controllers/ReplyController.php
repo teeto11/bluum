@@ -46,8 +46,8 @@ class ReplyController extends Controller{
         $addAnswer = new ReplyStoreService('QUESTION');
         $newAnswer = $addAnswer->store($request);
 
-        if($newAnswer) return redirect("/question/".$newAnswer->post->id."/".formatUrlString($newAnswer->post->title))->with('success', 'Answer submitted');else{
-            return redirect("/question/".$newAnswer->post->id."/".formatUrlString($newAnswer->post->title))->with('error', 'An error occurred');
+        if($newAnswer) return redirect()->route('question.show', [$newAnswer->post->id, formatUrlString($newAnswer->post->title)])->with('success', 'Answer submitted');else{
+            return redirect()->route('question.show', [$newAnswer->post->id, formatUrlString($newAnswer->post->title)])->with('error', 'An error occurred');
         }
     }
 
