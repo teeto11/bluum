@@ -23,6 +23,7 @@ class CreateRepliesTable extends Migration
             $table->integer('post_id');
             $table->integer('user_id');
             $table->boolean('correct')->default(false);
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

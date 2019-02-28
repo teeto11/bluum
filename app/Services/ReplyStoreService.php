@@ -37,7 +37,7 @@ class ReplyStoreService{
 
             if($recipientReply->parent_reply) $reply->parent_reply = $recipientReply->parent_reply; else $reply->parent_reply = $recipientReply->id;
             if($recipient){
-                $reply->recipient = "@$recipient->username";
+                $reply->recipient = "@".getInitials($recipient);
                 $body = substr($recipientReply->body, 0, 50);
                 $r_notification = ($this->type == 'POST') ? NotificationService::newCommentReplyNotification($recipient->id, $body) : NotificationService::newAnswerCommentNotification($recipient->id, $body);
             }else return false;

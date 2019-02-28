@@ -24,6 +24,7 @@ class CreatePostsTable extends Migration
             $table->longText('tags');
             $table->integer('user_id');
             $table->longText('cover_img')->nullable();
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }
