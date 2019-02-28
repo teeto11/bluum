@@ -20,10 +20,12 @@ class QuestionController extends Controller{
         $question = Post::find($id);
         if(!$question->active) return view('item-removed')->with('back', route('admin.posts'));
         $answers = $question->replies->where('parent_reply', null);
+        $comments = $question->replies->where('parent_reply', '!=', null);
 
         $data = [
             'question' => $question,
             'answers' => $answers,
+            'comments' => $comments,
         ];
 
         return view('admin.view-question')->with($data);

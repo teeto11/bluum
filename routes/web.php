@@ -73,6 +73,7 @@ Route::get('/admin/experts', 'Admin\ExpertController@viewExperts')->name('admin.
 Route::get('/admin/expert/new', 'Admin\ExpertController@showAddExpertForm')->name('admin.expert.new');
 Route::post('/admin/expert/new', 'Admin\ExpertController@addExpert')->name('admin.expert.store');
 Route::delete('/admin/expert/delete', 'Admin\ExpertController@removeExpert')->name('admin.expert.delete');
+Route::put('/admin/expert/delete', 'Admin\ExpertController@enableExpert')->name('admin.expert.enable');
 Route::get('/admin/expert/{id}', 'Admin\ExpertController@viewExpert')->name('admin.expert.show');
 
 Route::get('/admin/questions', 'Admin\QuestionController@index')->name('admin.questions');

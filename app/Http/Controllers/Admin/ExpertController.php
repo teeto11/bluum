@@ -19,8 +19,6 @@ class ExpertController extends Controller{
 
     public function addExpert(Request $request){
 
-        dd($request->profile_image_base64);
-
         $this->validate($request, [
             'email' => ['required', 'string', 'max:255'],
             'tel' => ['required', 'string'],
@@ -60,6 +58,13 @@ class ExpertController extends Controller{
         return view('admin.view-experts')->with('experts', $experts);
     }
 
+    public function viewDisabledExperts(){
+
+        $userIds = Expert::where('active', false)->pluck('user_id')->toArray();
+        $experts = User::whereIn('id', $userIds)->paginate(15);
+        return view('admin.view-experts')->with('experts', $experts);
+    }
+
     public function viewExpert($id){
 
         $expert = User::find($id);
@@ -87,11 +92,25 @@ class ExpertController extends Controller{
         $user = User::find($request->id);
         $expert = $user->expert;
 
-        if($expert) $expert->delete();
+        if($expert) $expert->active = false;
         Followers::where('expert_id', $user->id)->delete();
         $user->role = 'USER';
         $user->save();
+        $expert->save();
 
-        return redirect()->route('admin.expert')->with('success', 'Experts successfully removed');
+        return redirect()->route('admin.expert.show', $user->id)->with('success', 'Experts successfully removed');
+    }
+
+    public function enableExpert(Request $request){
+
+        $user = User::find($request->id);
+        $expert = $user->expert;
+
+        if ($expert) $expert->active = true;
+        $user->role = 'EXPERT';
+        $user->save();
+        $expert->save();
+
+        return redirect()->route('admin.expert.show', $user->id)->with('success', 'Expert enabled');
     }
 }
