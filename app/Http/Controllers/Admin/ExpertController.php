@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Expert;
+use App\Followers;
 use App\Post;
 use App\Reply;
 use App\User;
@@ -18,12 +19,15 @@ class ExpertController extends Controller{
 
     public function addExpert(Request $request){
 
+        dd($request->profile_image_base64);
+
         $this->validate($request, [
             'email' => ['required', 'string', 'max:255'],
             'tel' => ['required', 'string'],
             'expertise' => ['required', 'string'],
             'about' => ['required', 'string'],
             'experience' => ['required', 'string'],
+            'profile_image_base64' => ['required']
         ]);
 
         $user = User::where('email', $request->email);
@@ -31,7 +35,6 @@ class ExpertController extends Controller{
         if($user->count() > 0){
 
             $user = $user->first();
-
             if(Expert::where('user_id', $user->id)->count() > 0) redirect()->route('admin.expert.new')->with('error', 'User already an expert');
 
             $expert = new Expert;
@@ -40,6 +43,8 @@ class ExpertController extends Controller{
             $expert->experience = $request->experience;
             $expert->about = $request->about;
             $expert->user_id = $user->id;
+
+            // todo upload base64 image here
 
             $expert->save();
             $user->role = 'EXPERT';
@@ -52,7 +57,6 @@ class ExpertController extends Controller{
     public function viewExperts(){
 
         $experts = User::where('role', 'EXPERT')->paginate(15);
-
         return view('admin.view-experts')->with('experts', $experts);
     }
 
@@ -84,6 +88,7 @@ class ExpertController extends Controller{
         $expert = $user->expert;
 
         if($expert) $expert->delete();
+        Followers::where('expert_id', $user->id)->delete();
         $user->role = 'USER';
         $user->save();
 

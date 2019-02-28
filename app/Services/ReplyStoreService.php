@@ -9,15 +9,15 @@ use App\Reply;
 class ReplyStoreService{
 
     private $type;
-    private $rlink;
+    private $rLink;
 
     function __construct($type){
 
         $this->type = $type;
         if($type == 'POST'){
-            $rlink = 'blog/post';
+            $this->rLink = 'blog.post';
         }else{
-            $rlink = 'question/';
+            $this->rLink = 'question.show';
         }
     }
 
@@ -44,9 +44,15 @@ class ReplyStoreService{
         }
 
         $reply->save();
-        if(auth()->user()->id != $post->user_id) if($this->type == 'POST') $this->newCommentNotification($post, $reply->id); else $this->newAnswerNotification($post, $reply->id);
+        if(auth()->user()->id != $post->user_id) {
+            if($this->type == 'POST') {
+                $this->newCommentNotification($post, $reply->id);
+            } elseif($this->type == 'QUESTION' && is_null($reply->parent_reply)) $this->newAnswerNotification($post, $reply->id);
+        }
+
         if(isset($r_notification) && !is_null($r_notification)){
-            $r_notification->link = route('blog.post', [$post->id, formatUrlString($post->title)])."#reply-$reply->id";
+
+            $r_notification->link = route($this->rLink, [$post->id, formatUrlString($post->title)])."#reply-$reply->id";
             $r_notification->save();
         }
 
@@ -57,7 +63,7 @@ class ReplyStoreService{
 
         $notification = new Notificaton;
         $notification->user_id = $post->user_id;
-        $notification->notification = '<strong>'.auth()->user()->username.'</strong> Commented on your post <strong>'.ucfirst($post->title).'</strong>';
+        $notification->notification = '<strong>'.getInitials(auth()->user()).'</strong> commented on your post <strong>'.ucfirst($post->title).'</strong>';
         $notification->link = route('blog.post', [$post->id, formatUrlString($post->title)])."#reply-$reply_id";
         $notification->save();
     }
@@ -66,7 +72,7 @@ class ReplyStoreService{
 
         $notification = new Notificaton;
         $notification->user_id = $user_id;
-        $notification->notification = '<strong>'.auth()->user()->username.'</strong> replied your comment <strong>'.$comment.'</strong>';
+        $notification->notification = '<strong>'.getInitials(auth()->user()).'</strong> replied your comment <strong>'.$comment.'</strong>';
 
         return $notification;
     }
@@ -75,9 +81,8 @@ class ReplyStoreService{
 
         $notification = new Notificaton;
         $notification->user_id = $post->user_id;
-        $notification->notification = '<strong>'.auth()->user()->username.'</strong> answered your question <strong>'.ucfirst($post->title).'</strong>';
+        $notification->notification = '<strong>'.getInitials(auth()->user()).'</strong> answered your question <strong>'.ucfirst($post->title).'</strong>';
         $notification->link = route('question.show', [$post->id, formatUrlString($post->title)])."#reply-$reply_id";
-        dd($notification);
         $notification->save();
     }
 
@@ -85,7 +90,7 @@ class ReplyStoreService{
 
         $notification = new Notificaton;
         $notification->user_id = $user_id;
-        $notification->notification = auth()->user()->username.'Commented on your answer '.$body;
+        $notification->notification = '<strong>'.getInitials(auth()->user()).'</strong> commented on your answer <strong>'.$body.'</strong>';
 
         return $notification;
     }

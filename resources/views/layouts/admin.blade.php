@@ -89,8 +89,10 @@
 </div>
 
 <script src="{{ asset('js/jquery.min.js') }}"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 <script src="{{ asset('js/popper.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap4.min.js') }}"></script>
+<script src="{{ asset('js/html2canvas.min.js') }}" ></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('#sidebarCollapse').on('click', function () {
@@ -98,5 +100,6 @@
         });
     });
 </script>
+@yield('scripts')
 </body>
 </html>

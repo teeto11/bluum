@@ -86,17 +86,18 @@ class ExpertController extends Controller{
 
     function profile(){
         $expert = User::find(auth()->user()->id);
-        if($expert->role != 'EXPERT') return redirect()->route('login')->with('error', 'Access denied');
-        $data = $this->expertDetails($expert);
+        if(!$this->isExpert($expert)) $this->accessDenied();
 
+        $data = $this->expertDetails($expert);
         return view('expert.view')->with($data);
     }
 
     function showEditForm(){
 
         $expert = User::find(auth()->user()->id);
-        $data = $this->expertDetails($expert);
+        if(!$this->isExpert($expert)) $this->accessDenied();
 
+        $data = $this->expertDetails($expert);
         return view('expert.edit')->with($data);
     }
 
@@ -109,7 +110,9 @@ class ExpertController extends Controller{
             'experience' => ['int', 'required'],
         ]);
 
-        $expert = User::find(auth()->user()->id)->expert;
+        $expert = User::find(auth()->user()->id);
+        if ($this->isExpert($expert)) $expert = $expert->expert; else return $this->accessDenied();
+
         $expert->expertise  = $request->expertise;
         $expert->experience = $request->experience;
         $expert->telephone  = $request->telephone;
@@ -122,68 +125,64 @@ class ExpertController extends Controller{
     function viewExpert($id){
 
         $expert = User::find($id);
+        if (!$this->isExpert($expert)) return $this->accessDenied();
 
-        if ($expert){
-            $data = $this->expertDetails($expert);
-            return view('expert.view')->with($data);
-        }else return redirect()->route('experts');
+        $data = $this->expertDetails($expert);
+        return view('expert.view')->with($data);
     }
 
     function viewPostsAsExpert($category = null){
 
         $expert = User::find(auth()->user()->id);
-        if($expert->role != 'EXPERT') return redirect()->route('login')->with('error', 'Access denied');
-        $data = $this->viewPost($expert);
+        if(!$this->isExpert($expert)) $this->accessDenied();
 
+        $data = $this->viewPost($expert);
         return view('expert.post')->with($data);
     }
 
     function viewPostsAsGuest($id, $category = null){
 
         $expert = User::find($id);
+        if(!$this->isExpert($expert)) return $this->accessDenied();
 
-        if($expert){
-            $data = $this->viewPost($expert);
-            return view('expert.post')->with($data);
-        }else return redirect()->route('experts');
+        $data = $this->viewPost($expert);
+        return view('expert.post')->with($data);
     }
 
     function viewPopularPostsAsExpert(){
 
         $expert = User::find(auth()->user()->id);
-        if($expert->role != 'EXPERT') return redirect()->route('login')->with('error', 'Access denied');
-        $data = $this->viewPopularPosts($expert);
+        if(!$this->isExpert($expert)) return $this->accessDenied();
 
+        $data = $this->viewPopularPosts($expert);
         return view('expert.post')->with($data);
     }
 
     function viewPopularPostsAsGuest($id){
 
         $expert = User::find($id);
+        if(!$this->isExpert($expert)) return $this->accessDenied();
 
-        if($expert){
-            $data = $this->viewPopularPosts($expert);
-            return view('expert.post')->with($data);
-        }else return redirect()->route('experts');
+        $data = $this->viewPopularPosts($expert);
+        return view('expert.post')->with($data);
     }
 
     function viewAnswersAsExpert(){
 
         $expert = User::find(auth()->user()->id);
-        if($expert->role != 'EXPERT') return redirect()->route('login')->with('error', 'Access denied');
-        $data = $this->viewAnswers($expert);
+        if(!$this->isExpert($expert)) return $this->accessDenied();
 
+        $data = $this->viewAnswers($expert);
         return view('expert.answers')->with($data);
     }
 
     function viewAnswersAsGuest($id){
 
         $expert = User::find($id);
+        if (!$this->isExpert($expert)) return $this->accessDenied();
 
-        if ($expert){
-            $data = $this->viewAnswers($expert);
-            return view('expert.answers')->with($data);
-        }else return redirect()->route('experts');
+        $data = $this->viewAnswers($expert);
+        return view('expert.answers')->with($data);
     }
 
     function deletePost(Request $request){
@@ -196,6 +195,7 @@ class ExpertController extends Controller{
         if(auth()->user()->id == $post->user_id){
             Reply::where('post_id', $post->id)->delete();
             $post->delete();
+
             return redirect()->route('expert.posts');
         }else return redirect()->route('index')->with('error', 'access denied');
     }
@@ -252,7 +252,6 @@ class ExpertController extends Controller{
 
     private function details($expert){
 
-        if($expert->role != 'EXPERT') return redirect()->route('login')->with('error', 'Access denied');
         $expert->password = null;
         $personalInfo = $expert->expert;
         $totalPost = $expert->post->where('type', 'POST')->count();
@@ -272,5 +271,16 @@ class ExpertController extends Controller{
         if (auth()->user()) $data['following'] = $expert->followers->where('user_id', auth()->user()->id)->count();
 
         return $data;
+    }
+
+    private function accessDenied(){
+        return redirect()->route('index')->with('error', 'Access denied');
+    }
+
+    private function isExpert($expert) {
+
+        if($expert && $expert->role == 'EXPERT'){
+            if($expert->expert) return true; else return false;
+        }else return false;
     }
 }

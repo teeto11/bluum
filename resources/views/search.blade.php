@@ -10,60 +10,25 @@
     @include('widgets.top-nav-bar')
     <div class="search-post-wrapper">
 		<div class="container">
-			<h3><span>Search Result for "<span></span>"</span></h3><hr>
-			<div class="nav">
-                <div class="nav__categories js-dropdown">
-                    <div class="nav__select">
-                        <div class="btn-select" data-dropdown-btn="categories">All Categories</div>
-                        <nav class="dropdown dropdown--design-01" data-dropdown-list="categories">
-                            <ul class="dropdown__catalog row">
-                                <li class="col-xs-6"><a href="#" class="category"><i class="bg-5dd39e"></i>Random</a></li>
-                                <li class="col-xs-6"><a href="#" class="category"><i class="bg-c49bbb"></i>Science</a></li>
-                                <li class="col-xs-6"><a href="#" class="category"><i class="bg-525252"></i>Education</a></li>
-                                <li class="col-xs-6"><a href="#" class="category"><i class="bg-777da7"></i>Q&amp;As</a></li>
-								<li class="col-xs-6"><a href="#" class="category"><i class="bg-368f8b"></i>Politics</a></li>
-								<li class="col-xs-6"><a href="#" class="category"><i class="bg-368f8b"></i>Questions</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
+			<h5><span>Search Result for "<span>{{ $query }}</span>"</span></h5><hr>
 			<div class="posts-subwrapper">
 				<div class="main">
 					<div class="row">
-						<div class="content-wrapper">
-							<div class="image-wrapper">
-								<img src="assets/images/1.jpg" width="100%" alt="">
-							</div>
-							<div class="post-details">
-								<p class="mini-header"><span>3rd feb 2018 </span> - <span class="medicine"> Medicine </span> - <span> 50 comments</span></p>
-								<p class="post-header"><b>How to avoid getting a cold</b></p>
-								<p class="mini-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit nisi sed sollicitudin pellentesque. Nunc posuere purus rhoncus pulvinar aliquam. Ut aliquet</p>
-								<p class="buttons"><a href="" class="btn-sm read"><i class="fa fa-book"></i>Read more</a> </p>
-							</div>
-						</div>
-						<div class="content-wrapper">
-							<div class="image-wrapper">
-								<img src="assets/images/1.jpg" width="100%" alt="">
-							</div>
-							<div class="post-details">
-								<p class="mini-header"><span>3rd feb 2018 </span> - <span class="medicine"> Medicine </span> - <span> 50 comments</span></p>
-								<p class="post-header"><b>How to avoid getting a cold</b></p>
-								<p class="mini-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit nisi sed sollicitudin pellentesque. Nunc posuere purus rhoncus pulvinar aliquam. Ut aliquet</p>
-								<p class="buttons"><a href="" class="btn-sm read"><i class="fa fa-book"></i>Read more</a> </p>
-							</div>
-						</div>
-						<div class="content-wrapper">
-							<div class="image-wrapper">
-								<img src="assets/images/1.jpg" width="100%" alt="">
-							</div>
-							<div class="post-details">
-								<p class="mini-header"><span>3rd feb 2018 </span> - <span class="medicine"> Medicine </span> - <span> 50 comments</span></p>
-								<p class="post-header"><b>How to avoid getting a cold</b></p>
-								<p class="mini-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit nisi sed sollicitudin pellentesque. Nunc posuere purus rhoncus pulvinar aliquam. Ut aliquet</p>
-								<p class="buttons"><a href="" class="btn-sm read"><i class="fa fa-book"></i>Read more</a> </p>
-							</div>
-						</div>
+						@foreach($result as $post)
+                            @php $urlParam = ['id'=>$post->id, 'title'=>formatUrlString($post->title)]; @endphp
+                            <div class="content-wrapper">
+                                <div class="image-wrapper">
+                                    <img src="/storage/post_cover_image/{{ $post->cover_img }}" width="100%" alt="">
+                                </div>
+                                <div class="post-details">
+                                    <p class="mini-header"><span>{{ formatTime($post->created_at) }}</span> - <span class="medicine"><a href="{{ route('blog.category', formatUrlString($post->category)) }}" >{{ ucfirst($post->category) }}</a></span> - <span>{{ $post->replies->count() }} comments</span> - <span class="views"> {{ $post->views }} view{{ ($post->views > 1) ? 's' : '' }} </span></p>
+                                    <p class="post-header"><a href="{{ ($post->type == 'POST') ? route('blog.post', $urlParam) : route('question.show', $urlParam) }}" ><b>{{ ucwords($post->title) }}</b></a> <span class="views" style="float: right; opacity: .6"><span class="activity">Activity</span> {{ getLastActivityTime($post->updated_at) }}</span> </p>
+                                    <p class="mini-text">{{ ucfirst($post->body) }}</p>
+                                    <p class="buttons"><span class="" style="float: left">Posted by: <a href="{{ route('expert.show', $post->user->id) }}" class="name">{{ ucwords($post->user->firstname.' '.$post->user->lastname) }}</a></span> <a href="{{ ($post->type == 'POST') ? route('blog.post', $urlParam) : route('question.show', $urlParam) }}" class="btn-sm read"><i class="fa fa-book"></i>Read more</a> </p>
+                                </div>
+                            </div>
+                        @endforeach
+                        {{ $result->links() }}
 					</div>
 				</div>
 			</div>
