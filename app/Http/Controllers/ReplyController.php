@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Reply;
 use App\Post;
 use App\ReplyLike;
+use App\Services\NotificationService;
 use App\User;
 use App\Services\ReplyStoreService;
 use App\Notificaton;
@@ -67,6 +68,7 @@ class ReplyController extends Controller{
                 if ($hasCorrect < 1){
                     $reply->correct = true;
                     $reply->save();
+                    NotificationService::correctAnswer($question, $reply)->save();
                     $message = ['success', 'Answer saved as correct answer'];
                 }else $message = ['error', 'Question has a correct answer'];
             }else $message = ['error', 'Permission not granted'];

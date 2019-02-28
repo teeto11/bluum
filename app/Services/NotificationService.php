@@ -44,4 +44,14 @@ class NotificationService{
 
         return $notification;
     }
+
+    static function correctAnswer($question, $answer){
+
+        $notification = new Notificaton;
+        $notification->user_id = $answer->user_id;
+        $notification->notification = '<strong>'.getInitials($question->user).'</strong> marked your answer as correct';
+        $notification->link = route('question.show', [$question->id, $question->title])."#reply-$answer->id";
+
+        return $notification;
+    }
 }
