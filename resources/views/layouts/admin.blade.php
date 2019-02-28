@@ -37,10 +37,13 @@
                 <a href="#expertsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Experts</a>
                 <ul class="collapse list-unstyled" id="expertsSubmenu">
                     <li>
-                        <a href="/admin/expert/new">Add Expert <i class="fa fa-user-plus float-right"></i></a>
+                        <a href="{{ route('admin.expert.new') }}">Add Expert <i class="fa fa-user-plus float-right"></i></a>
                     </li>
                     <li>
-                        <a href="/admin/experts">View Experts <i class="fa fa-eye float-right"></i></a>
+                        <a href="{{ route('admin.expert') }}">View Experts <i class="fa fa-eye float-right"></i></a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.expert.disabled') }}">View Disabled Experts <i class="fa fa-eye float-right"></i></a>
                     </li>
                 </ul>
             </li>

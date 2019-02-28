@@ -70,6 +70,7 @@ Route::get('/expert/{id}/answers', 'ExpertController@viewAnswersAsGuest')->name(
 
 Route::get('/admin', 'Admin\AdminController@index')->name('admin.home');
 Route::get('/admin/experts', 'Admin\ExpertController@viewExperts')->name('admin.expert');
+Route::get('/admin/expert/disabled', 'Admin\ExpertController@viewDisabledExperts')->name('admin.expert.disabled');
 Route::get('/admin/expert/new', 'Admin\ExpertController@showAddExpertForm')->name('admin.expert.new');
 Route::post('/admin/expert/new', 'Admin\ExpertController@addExpert')->name('admin.expert.store');
 Route::delete('/admin/expert/delete', 'Admin\ExpertController@removeExpert')->name('admin.expert.delete');
