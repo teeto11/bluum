@@ -77,11 +77,3 @@
         {{ $posts->links() }}
     </div>
 @endsection
-
-@section('scripts')
-    <script>
-        $(".delete-post").click(function (e) {
-
-        });
-    </script>
-@endsection
