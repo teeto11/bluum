@@ -11,12 +11,12 @@ class AdminController extends Controller{
 
     public function index(){
 
-        $blogPosts = Post::where('type', 'POST')->count();
-        $questions = Post::where('type', 'QUESTION')->count();
-        $experts = User::where('role', 'EXPERT')->count();
+        $blogPosts = Post::where(['type'=>'POST', 'active'=>true])->count();
+        $questions = Post::where(['type'=>'QUESTION', 'active'=>true])->count();
+        $experts = User::where(['role'=>'EXPERT', 'active'=>true])->count();
         $users = User::count();
-        $latestQuestions = Post::where('type', 'QUESTION')->orderBy('created_at', 'DESC')->take(3)->get();
-        $latestExperts = User::where('role', 'EXPERT')->orderBy('created_at', 'DESC')->take(3)->get();
+        $latestQuestions = Post::where(['type'=>'QUESTION', 'active'=>true])->orderBy('created_at', 'DESC')->take(3)->get();
+        $latestExperts = User::where(['role'=>'EXPERT', 'active'=>true])->orderBy('created_at', 'DESC')->take(3)->get();
         $latestUsers = User::where('role', 'USER')->orderBy('created_at', 'DESC')->take(3)->get();
 
         $data = [
