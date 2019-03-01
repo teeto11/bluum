@@ -11,7 +11,7 @@ class PostController extends Controller{
 
     public function index(){
 
-        $posts = Post::where('type', 'POST')->orderBy('created_at', 'DESC')->paginate(20);
+        $posts = Post::where([ 'type'=>'POST', 'active'=>true])->orderBy('created_at', 'DESC')->paginate(20);
 
         return view('admin.view-posts')->with('posts', $posts);
     }
@@ -19,6 +19,7 @@ class PostController extends Controller{
     public function viewPost($id){
 
         $post = Post::find($id);
+        if(!$post->active) return view('item-removed')->with('back', route('admin.posts'));
         $comments = $post->replies;
 
         $data = [
@@ -36,9 +37,9 @@ class PostController extends Controller{
         ]);
 
         $post = Post::find($request->id);
-        if(! $post) return redirect('/admin');
-        Reply::where('post_id', $post->id)->delete();
-        $post->delete();
+        if(! $post) return redirect()->route('admin');
+        $post->active = false;
+        $post->save();
 
         return redirect()->route('admin.posts')->with('success', 'post deleted');
     }
@@ -51,10 +52,11 @@ class PostController extends Controller{
 
         $comment = Reply::find($request->id);
         if(! $comment) return redirect('/admin');
-        $postId = $comment->post->id;
-        Reply::where('parent_reply', $comment->id)->delete();
 
-        $comment->delete();
+        $postId = $comment->post_id;
+        $comment->active = false;
+        $comment->save();
+
         return redirect()->route('admin.post.show', $postId)->with('success', 'comment deleted');
     }
 }

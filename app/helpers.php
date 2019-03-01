@@ -62,3 +62,11 @@ function formatTime($time){
 
     return date('H:ia d M, Y', strtotime($time));
 }
+
+function getInitials($user){
+
+    $name = strtoupper($user->firstname[0]).'. '.ucfirst($user->lastname);
+    if($user->role == 'EXPERT') $name .= ' <i class="fa fa-check" ></i>';
+
+    return $name;
+}

@@ -25,7 +25,7 @@
                                     <a href="/admin/post/{{ $post->id }}" class="btn btn-warning"><i class="fa fa-eye text-light"></i></a>
                                 </td>
                                 <td class="text-right" >
-                                    <form action="{{ route('admin.post.delete') }}" method="post" >
+                                    <form action="{{ route('admin.post.delete') }}" method="post" class="delete-post" >
                                         @csrf
                                         @method('delete')
                                         <input type="hidden" name="id" value="{{ $post->id }}" >
@@ -43,4 +43,12 @@
     <div class="my-4" >
         {{ $posts->links() }}
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(".delete-post").click(function (e) {
+
+        });
+    </script>
 @endsection

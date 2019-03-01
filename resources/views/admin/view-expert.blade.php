@@ -8,16 +8,10 @@
                     <div class="post-details">
                         <div class="table-row">
                             <div class="table-responsive bg-white">
-                                <form method="post" action="{{ route('admin.expert.delete') }}" >
-                                    @csrf
-                                    @method('delete')
-                                    <input name="id" type="hidden" value="{{ $expert->id }}" >
-                                    <h3 class="">Expert Details <a href="" class="btn btn-sm float-right"></a></h3><hr>
-                                    <button type="submit" class="btn btn-sm float-right" ><i class="fa fa-trash"></i></button>
-                                </form>
+                                <h3 class="">Expert Details <a href="" class="btn btn-sm float-right"></a></h3><hr>
                                 <table class="table table-borderless table-hover">
                                     <tbody>
-                                    <tr><img src="../assets/images/fyuma.jpg" class="expert-img" alt=""></tr>
+                                    <tr><img src="{{ asset('') }}" class="expert-img" alt=""></tr>
                                     <tr>
                                         <td>Name</td>
                                         <td>{{ ucwords($expert->firstname.' '.$expert->lastname) }}</td>
@@ -33,6 +27,28 @@
                                     <tr>
                                         <td>Number</td>
                                         <td>{{ $expert->expert->telephone }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Status</td>
+                                        @if($expert->expert->active)
+                                            <td>
+                                                <form method="post" action="{{ route('admin.expert.delete') }}" >
+                                                    @csrf
+                                                    @method('delete')
+                                                    <input name="id" type="hidden" value="{{ $expert->id }}" >
+                                                    <button type="submit" class="btn btn-danger btn-sm" >DISABLE</button>
+                                                </form>
+                                            </td>
+                                        @else
+                                            <td>
+                                                <form method="post" action="{{ route('admin.expert.enable') }}" >
+                                                    @csrf
+                                                    @method('put')
+                                                    <input name="id" type="hidden" value="{{ $expert->id }}" >
+                                                    <button type="submit" class="btn btn-success btn-sm" >ENABLE</button>
+                                                </form>
+                                            </td>
+                                        @endif
                                     </tr>
                                     </tbody>
                                 </table>

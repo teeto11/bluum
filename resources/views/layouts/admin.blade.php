@@ -37,10 +37,13 @@
                 <a href="#expertsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Experts</a>
                 <ul class="collapse list-unstyled" id="expertsSubmenu">
                     <li>
-                        <a href="/admin/expert/new">Add Expert <i class="fa fa-user-plus float-right"></i></a>
+                        <a href="{{ route('admin.expert.new') }}">Add Expert <i class="fa fa-user-plus float-right"></i></a>
                     </li>
                     <li>
-                        <a href="/admin/experts">View Experts <i class="fa fa-eye float-right"></i></a>
+                        <a href="{{ route('admin.expert') }}">View Experts <i class="fa fa-eye float-right"></i></a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.expert.disabled') }}">View Disabled Experts <i class="fa fa-eye float-right"></i></a>
                     </li>
                 </ul>
             </li>
@@ -89,8 +92,10 @@
 </div>
 
 <script src="{{ asset('js/jquery.min.js') }}"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 <script src="{{ asset('js/popper.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap4.min.js') }}"></script>
+<script src="{{ asset('js/html2canvas.min.js') }}" ></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('#sidebarCollapse').on('click', function () {
@@ -98,5 +103,6 @@
         });
     });
 </script>
+@yield('scripts')
 </body>
 </html>

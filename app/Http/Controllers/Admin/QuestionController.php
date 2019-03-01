@@ -11,19 +11,37 @@ class QuestionController extends Controller{
 
     public function index(){
 
-        $questions = Post::where('type', 'QUESTION')->orderBy('created_at', 'DESC')->paginate(20);
+        $questions = Post::where(['type'=>'QUESTION', 'active'=>true])->orderBy('created_at', 'DESC')->paginate(20);
+        $data = [
+            'questions' =>  $questions,
+            'type'      =>  'active',
+        ];
 
-        return view('admin.question')->with('questions', $questions);
+        return view('admin.question')->with($data);
+    }
+
+    public function viewDeletedQuestions(){
+
+        $questions = Post::where(['type'=>'QUESTION', 'active'=>false])->orderBy('created_at', 'DESC')->paginate(20);
+        $data = [
+            'questions' =>  $questions,
+            'type'      =>  'deleted',
+        ];
+
+        return view('admin.question')->with($data);
     }
 
     public function viewQuestion($id){
 
         $question = Post::find($id);
+        if(!$question->active) return view('item-removed')->with('back', route('admin.posts'));
         $answers = $question->replies->where('parent_reply', null);
+        $comments = $question->replies->where('parent_reply', '!=', null);
 
         $data = [
             'question' => $question,
             'answers' => $answers,
+            'comments' => $comments,
         ];
 
         return view('admin.view-question')->with($data);
@@ -36,11 +54,25 @@ class QuestionController extends Controller{
         ]);
 
         $question = Post::find($request->id);
-        if(! $question) return redirect('/admin');
-        Reply::where('post_id', $question->id)->delete();
-        $question->delete();
+        if(! $question) return redirect(route('admin.questions'));
+        $question->active = false;
+        $question->save();
 
         return redirect()->route('admin.questions')->with('success', 'question deleted');
+    }
+
+    public function restoreQuestion(Request $request){
+
+        $this->validate($request, [
+            'id' => ['required', 'int']
+        ]);
+
+        $question = Post::find($request->id);
+        if(! $question) return redirect(route('admin.questions.deleted'));
+        $question->active = true;
+        $question->save();
+
+        return redirect()->route('admin.questions.deleted')->with('success', 'question restored');
     }
 
     public function deleteAnswer(Request $request){
@@ -50,11 +82,11 @@ class QuestionController extends Controller{
         ]);
 
         $answer = Reply::find($request->id);
-        if(! $answer) return redirect('/admin');
+        if(! $answer) return redirect('admin.questions');
         $postId = $answer->post->id;
-        Reply::where('parent_reply', $answer->id)->delete();
+        $answer->active = false;
+        $answer->save();
 
-        $answer->delete();
         return redirect()->route('admin.question.show', $postId)->with('success', 'answer deleted');
     }
 }

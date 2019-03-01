@@ -46,10 +46,10 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12 px-0" id="comments">
+                <div class="col-md-12 px-0" id="answers">
                     <div class="table-row">
                         <div class="table-responsive bg-white">
-                            <h3 class="">Answer</h3><hr>
+                            <h3 class="">Answers</h3><hr>
                             <table class="table table-striped table-hover">
                                 <thead>
                                 <tr>
@@ -70,6 +70,42 @@
                                                 @csrf
                                                 @method('delete')
                                                 <input type="hidden" value="{{ $answer->id }}" name="id" >
+                                                <button type="submit" class="btn btn-danger" style="font-size:10px;"><i class="fa fa-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-12 px-0" id="comments">
+                    <div class="table-row">
+                        <div class="table-responsive bg-white">
+                            <h3 class="">Comments</h3><hr>
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                <tr>
+                                    <th scope="" >User</th>
+                                    <th scope="" style="width:70%">Answer</th>
+                                    <th scope="">Date</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($comments as $comment)
+                                    <tr>
+                                        <td>{{ ucwords($comment->user->firstname.' '.$comment->user->lastname) }}</td>
+                                        <td>{{ ucfirst($comment->body) }}</td>
+                                        <td>{{ date('M d, Y', strtotime($comment->created_at)) }}</td>
+                                        <td>
+                                            <form action="{{ route('admin.question.answer.delete') }}" method="post" >
+                                                @csrf
+                                                @method('delete')
+                                                <input type="hidden" value="{{ $comment->id }}" name="id" >
                                                 <button type="submit" class="btn btn-danger" style="font-size:10px;"><i class="fa fa-trash"></i></button>
                                             </form>
                                         </td>

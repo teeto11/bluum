@@ -15,7 +15,7 @@
                     @csrf
                     <label>
                         <i class="icon-Search js-header-search-btn-open" id="search-btn" ></i>
-                        <input type="search" placeholder="Search anything" class="form-control" name="sQuery" />
+                        <input type="search" placeholder="Search anything" class="form-control" name="sQuery" value="{{ (isset($query)) ? $query : '' }}" />
                     </label>
                 </form>
                 <div class="header__search-close js-header-search-btn-close"><i class="icon-Cancel"></i></div>

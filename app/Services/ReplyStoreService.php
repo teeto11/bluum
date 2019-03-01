@@ -9,15 +9,15 @@ use App\Reply;
 class ReplyStoreService{
 
     private $type;
-    private $rlink;
+    private $rLink;
 
     function __construct($type){
 
         $this->type = $type;
         if($type == 'POST'){
-            $rlink = 'blog/post';
+            $this->rLink = 'blog.post';
         }else{
-            $rlink = 'question/';
+            $this->rLink = 'question.show';
         }
     }
 
@@ -37,56 +37,25 @@ class ReplyStoreService{
 
             if($recipientReply->parent_reply) $reply->parent_reply = $recipientReply->parent_reply; else $reply->parent_reply = $recipientReply->id;
             if($recipient){
-                $reply->recipient = "@$recipient->username";
+                $reply->recipient = "@".getInitials($recipient);
                 $body = substr($recipientReply->body, 0, 50);
-                $r_notification = ($this->type == 'POST') ? $this->newCommentReplyNotification($recipient->id, $body) : $this->newAnswerCommentNotification($recipient->id, $body);
+                $r_notification = ($this->type == 'POST') ? NotificationService::newCommentReplyNotification($recipient->id, $body) : NotificationService::newAnswerCommentNotification($recipient->id, $body);
             }else return false;
         }
 
         $reply->save();
-        if(auth()->user()->id != $post->user_id) if($this->type == 'POST') $this->newCommentNotification($post, $reply->id); else $this->newAnswerNotification($post, $reply->id);
+        if(auth()->user()->id != $post->user_id) {
+            if($this->type == 'POST') {
+                NotificationService::newCommentNotification($post, $reply->id)->save();
+            } elseif($this->type == 'QUESTION' && is_null($reply->parent_reply)) NotificationService::newAnswerNotification($post, $reply->id)->save();
+        }
+
         if(isset($r_notification) && !is_null($r_notification)){
-            $r_notification->link = route('blog.post', [$post->id, formatUrlString($post->title)])."#reply-$reply->id";
+
+            $r_notification->link = route($this->rLink, [$post->id, formatUrlString($post->title)])."#reply-$reply->id";
             $r_notification->save();
         }
 
         return $reply;
-    }
-
-    private function newCommentNotification($post, $reply_id){
-
-        $notification = new Notificaton;
-        $notification->user_id = $post->user_id;
-        $notification->notification = '<strong>'.auth()->user()->username.'</strong> Commented on your post <strong>'.ucfirst($post->title).'</strong>';
-        $notification->link = route('blog.post', [$post->id, formatUrlString($post->title)])."#reply-$reply_id";
-        $notification->save();
-    }
-
-    private function newCommentReplyNotification($user_id, $comment){
-
-        $notification = new Notificaton;
-        $notification->user_id = $user_id;
-        $notification->notification = '<strong>'.auth()->user()->username.'</strong> replied your comment <strong>'.$comment.'</strong>';
-
-        return $notification;
-    }
-
-    private function newAnswerNotification($post, $reply_id){
-
-        $notification = new Notificaton;
-        $notification->user_id = $post->user_id;
-        $notification->notification = '<strong>'.auth()->user()->username.'</strong> answered your question <strong>'.ucfirst($post->title).'</strong>';
-        $notification->link = route('question.show', [$post->id, formatUrlString($post->title)])."#reply-$reply_id";
-        dd($notification);
-        $notification->save();
-    }
-
-    private function newAnswerCommentNotification($user_id, $body){
-
-        $notification = new Notificaton;
-        $notification->user_id = $user_id;
-        $notification->notification = auth()->user()->username.'Commented on your answer '.$body;
-
-        return $notification;
     }
 }

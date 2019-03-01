@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\DB;
 
 class indexController extends Controller{
 
+    public function __construct(){
+
+        $this->middleware('auth', [
+            'except' => ['index', 'search', 'searchResult']
+        ]);
+    }
+
     public function index(){
 
         $popular_questions = Post::where([
@@ -47,7 +54,29 @@ class indexController extends Controller{
 
     function searchResult($query){
 
-        dd($query);
+        $query = urldecode($query);
+        $expertIds = User::where('firstname', 'like', "%$query%")
+                            ->orWhere('lastname', 'like', "%$query%")
+                            ->orWhere(DB::raw("CONCAT(firstname,' ',lastname)"), 'like', "%$query%")
+                            ->orWhere(DB::raw("CONCAT(lastname,' ',firstname)"), 'like', "%$query%")
+                            ->pluck('id')->toArray();
+
+        $posts = Post::where('title', 'like', "%$query%")
+                        ->orWhere('body', 'like', "%$query%")
+                        ->orWhere('category', $query)
+                        ->orWhere('tags', 'like', "%$query%")
+                        ->orWhere('type', $query)
+                        ->orWhereIn('user_id', $expertIds)
+                        ->orderBy('views', 'DESC')->paginate(15);
+
+        $data = [
+            'title'     => 'Search',
+            'result'    => $posts,
+            'query'     => $query,
+        ];
+
+        return view('search')->with($data);
+
     }
 
     function notification(){
@@ -56,6 +85,7 @@ class indexController extends Controller{
             'title' => 'Notification',
             'notifications' => Notificaton::where('user_id', auth()->user()->id)->orderBy('created_at', 'DESC')->get(),
         ];
+
         Notificaton::where([ ['user_id', auth()->user()->id], ['seen', false] ])->update(['seen' => true]);
 
         return view('notification')->with($data);

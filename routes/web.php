@@ -70,17 +70,22 @@ Route::get('/expert/{id}/answers', 'ExpertController@viewAnswersAsGuest')->name(
 
 Route::get('/admin', 'Admin\AdminController@index')->name('admin.home');
 Route::get('/admin/experts', 'Admin\ExpertController@viewExperts')->name('admin.expert');
+Route::get('/admin/expert/disabled', 'Admin\ExpertController@viewDisabledExperts')->name('admin.expert.disabled');
 Route::get('/admin/expert/new', 'Admin\ExpertController@showAddExpertForm')->name('admin.expert.new');
 Route::post('/admin/expert/new', 'Admin\ExpertController@addExpert')->name('admin.expert.store');
 Route::delete('/admin/expert/delete', 'Admin\ExpertController@removeExpert')->name('admin.expert.delete');
+Route::put('/admin/expert/restore', 'Admin\ExpertController@enableExpert')->name('admin.expert.enable');
 Route::get('/admin/expert/{id}', 'Admin\ExpertController@viewExpert')->name('admin.expert.show');
 
 Route::get('/admin/questions', 'Admin\QuestionController@index')->name('admin.questions');
+Route::get('/admin/question/deleted', 'Admin\QuestionController@viewDeletedQuestions')->name('admin.questions.deleted');
 Route::delete('/admin/question/delete', 'Admin\QuestionController@deleteQuestion')->name('admin.question.delete');
+Route::put('/admin/question/restore', 'Admin\QuestionController@restoreQuestion')->name('admin.question.restore');
 Route::get('/admin/question/{id}', 'Admin\QuestionController@viewQuestion')->name('admin.question.show');
 Route::delete('/admin/question/answer/delete', 'Admin\QuestionController@deleteAnswer')->name('admin.question.answer.delete');
 
 Route::get('/admin/posts', 'Admin\PostController@index')->name('admin.posts');
+Route::get('/admin/post/deleted', 'Admin\PostController@viewDeletedPosts')->name('admin.posts.deleted');
 Route::delete('/admin/post/delete', 'Admin\PostController@deletePost')->name('admin.post.delete');
 Route::get('/admin/post/{id}', 'Admin\PostController@viewPost')->name('admin.post.show');
 Route::delete('/admin/post/comment/delete', 'Admin\PostController@deleteComment')->name('admin.post.comment.delete');

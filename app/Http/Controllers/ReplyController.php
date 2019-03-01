@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Reply;
 use App\Post;
 use App\ReplyLike;
+use App\Services\NotificationService;
 use App\User;
 use App\Services\ReplyStoreService;
 use App\Notificaton;
@@ -46,8 +47,8 @@ class ReplyController extends Controller{
         $addAnswer = new ReplyStoreService('QUESTION');
         $newAnswer = $addAnswer->store($request);
 
-        if($newAnswer) return redirect("/question/".$newAnswer->post->id."/".formatUrlString($newAnswer->post->title))->with('success', 'Answer submitted');else{
-            return redirect("/question/".$newAnswer->post->id."/".formatUrlString($newAnswer->post->title))->with('error', 'An error occurred');
+        if($newAnswer) return redirect()->route('question.show', [$newAnswer->post->id, formatUrlString($newAnswer->post->title)])->with('success', 'Answer submitted');else{
+            return redirect()->route('question.show', [$newAnswer->post->id, formatUrlString($newAnswer->post->title)])->with('error', 'An error occurred');
         }
     }
 
@@ -67,6 +68,7 @@ class ReplyController extends Controller{
                 if ($hasCorrect < 1){
                     $reply->correct = true;
                     $reply->save();
+                    NotificationService::correctAnswer($question, $reply)->save();
                     $message = ['success', 'Answer saved as correct answer'];
                 }else $message = ['error', 'Question has a correct answer'];
             }else $message = ['error', 'Permission not granted'];
