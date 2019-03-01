@@ -12,7 +12,7 @@
                         <div class="col-sm-2" >
                             <div style="display: flex;align-items: flex-end;justify-content: center;height: 100%;" >
                                 @if($type == 'deleted')
-                                    <a href="{{ route('admin.posts') }}" ><button class="btn btn-success" >View Questions</button></a>
+                                    <a href="{{ route('admin.posts') }}" ><button class="btn btn-success" >View Posts</button></a>
                                 @else
                                     <a href="{{ route('admin.posts.deleted') }}" ><button class="btn btn-danger" >View Trash</button></a>
                                 @endif
@@ -20,6 +20,16 @@
                         </div>
                     </div>
                     <hr>
+                    <form>
+                        <div class="row" >
+                            <div class="input-group col-md-6 offset-md-6" >
+                                <input type="text" class="form-control" id="search" name="q" title="search" placeholder="Search" value="{{ request('q') }}" >
+                                <div class="input-group-addon" >
+                                    <input type="submit" class="btn btn-success" value="Search" >
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                     <table class="table table-striped table-hover">
                         <thead>
                         <tr>
@@ -40,14 +50,14 @@
                                 </td>
                                 <td class="text-right" >
                                     @if($type == 'active')
-                                        <form action="{{ route('admin.post.delete') }}" method="post" class="delete-post" >
+                                        <form action="{{ route('admin.post.delete') }}" method="post" class="action-form" id="delete-post-{{ $post->id }}" >
                                             @csrf
                                             @method('delete')
                                             <input type="hidden" name="id" value="{{ $post->id }}" >
                                             <button type="submit" class="btn btn-danger" ><i class="fa fa-trash"></i></button>
                                         </form>
                                     @else
-                                        <form action="{{ route('admin.post.restore') }}" method="post" class="delete-post" >
+                                        <form action="{{ route('admin.post.restore') }}" method="post" class="action-form" id="restore-post-{{ $post->id }}" >
                                             @csrf
                                             @method('put')
                                             <input type="hidden" name="id" value="{{ $post->id }}" >
