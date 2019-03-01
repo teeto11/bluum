@@ -32,7 +32,7 @@
                                         <td>Status</td>
                                         @if($expert->expert->active)
                                             <td>
-                                                <form method="post" action="{{ route('admin.expert.delete') }}" >
+                                                <form method="post" action="{{ route('admin.expert.delete') }}" class="action-form" id="disable-expert-{{ $expert->id }}"  >
                                                     @csrf
                                                     @method('delete')
                                                     <input name="id" type="hidden" value="{{ $expert->id }}" >
@@ -41,7 +41,7 @@
                                             </td>
                                         @else
                                             <td>
-                                                <form method="post" action="{{ route('admin.expert.enable') }}" >
+                                                <form method="post" action="{{ route('admin.expert.enable') }}" class="action-form" id="enable-expert-{{ $expert->id }}" >
                                                     @csrf
                                                     @method('put')
                                                     <input name="id" type="hidden" value="{{ $expert->id }}" >
