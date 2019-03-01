@@ -12,9 +12,9 @@
                         <div class="col-sm-2 text-center" >
                             <div style="display: flex;align-items: flex-end;justify-content: center;height: 100%;" >
                                 @if($type == 'deleted')
-                                    <a href="{{ route('admin.questions') }}" ><button class="btn btn-success" ><i class="fa fa-eye" ></i></button></a>
+                                    <a href="{{ route('admin.questions') }}" ><button class="btn btn-success" >View Questions</button></a>
                                 @else
-                                    <a href="{{ route('admin.questions.deleted') }}" ><button class="btn btn-danger" ><i class="fa fa-trash" ></i></button></a>
+                                    <a href="{{ route('admin.questions.deleted') }}" ><button class="btn btn-danger" >View Trash</button></a>
                                 @endif
                             </div>
                         </div>
@@ -24,8 +24,9 @@
                         <thead>
                         <tr>
                             <th scope="" style="width:20%">User</th>
-                            <th scope="" style="width:40%">Question</th>
-                            <th scope="" style="width:20%">Date</th>
+                            <th scope="" style="width:50%">Question</th>
+                            <th scope="" >Date</th>
+                            <th></th>
                             <th></th>
                         </tr>
                         </thead>
@@ -35,8 +36,16 @@
                                 <td>{{ ucwords($question->user->firstname.' '.$question->user->lastname) }}</td>
                                 <td>{{ ucwords($question->title) }}</td>
                                 <td>{{ date('M d, Y', strtotime($question->created_at)) }}</td>
+                                <td><a href="{{ route('admin.question.show', $question->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-eye text-light"></i></a></td>
                                 @if($question->active)
-                                    <td><a href="/admin/question/{{ $question->id }}" class="btn btn-warning"><i class="fa fa-eye text-light"></i></a></td>
+                                    <td>
+                                        <form action="{{ route('admin.question.delete') }}" method="post" >
+                                            @csrf
+                                            @method('delete')
+                                            <input type="hidden" name="id" value="{{ $question->id }}" >
+                                            <button type="submit" class="btn btn-danger btn-sm" ><i class="fa fa-trash" ></i></button>
+                                        </form>
+                                    </td>
                                 @else
                                     <td>
                                         <form action="{{ route('admin.question.restore') }}" method="post" >

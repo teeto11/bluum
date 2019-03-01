@@ -5,7 +5,21 @@
         <div class="view-posts-wrapper">
             <div class="table-row">
                 <div class="table-responsive bg-white px-4">
-                    <h3 class="">All Post</h3><hr>
+                    <div class="row" >
+                        <div class="col-sm-10" >
+                            <h3 class="">All Post</h3>
+                        </div>
+                        <div class="col-sm-2" >
+                            <div style="display: flex;align-items: flex-end;justify-content: center;height: 100%;" >
+                                @if($type == 'deleted')
+                                    <a href="{{ route('admin.posts') }}" ><button class="btn btn-success" >View Questions</button></a>
+                                @else
+                                    <a href="{{ route('admin.posts.deleted') }}" ><button class="btn btn-danger" >View Trash</button></a>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
                     <table class="table table-striped table-hover">
                         <thead>
                         <tr>
@@ -22,15 +36,24 @@
                                 <td>{{ ucfirst($post->title) }}</td>
                                 <td>{{ date('M d, Y', strtotime($post->created_at)) }}</td>
                                 <td class="text-right" >
-                                    <a href="/admin/post/{{ $post->id }}" class="btn btn-warning"><i class="fa fa-eye text-light"></i></a>
+                                    <a href="{{ route('admin.post.show', $post->id) }}" class="btn btn-warning"><i class="fa fa-eye text-light"></i></a>
                                 </td>
                                 <td class="text-right" >
-                                    <form action="{{ route('admin.post.delete') }}" method="post" class="delete-post" >
-                                        @csrf
-                                        @method('delete')
-                                        <input type="hidden" name="id" value="{{ $post->id }}" >
-                                        <button type="submit" class="btn btn-danger" ><i class="fa fa-trash"></i></button>
-                                    </form>
+                                    @if($type == 'active')
+                                        <form action="{{ route('admin.post.delete') }}" method="post" class="delete-post" >
+                                            @csrf
+                                            @method('delete')
+                                            <input type="hidden" name="id" value="{{ $post->id }}" >
+                                            <button type="submit" class="btn btn-danger" ><i class="fa fa-trash"></i></button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('admin.post.restore') }}" method="post" class="delete-post" >
+                                            @csrf
+                                            @method('put')
+                                            <input type="hidden" name="id" value="{{ $post->id }}" >
+                                            <button type="submit" class="btn btn-success" ><i class="fa fa-undo"></i></button>
+                                        </form>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

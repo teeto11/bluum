@@ -87,6 +87,7 @@ Route::delete('/admin/question/answer/delete', 'Admin\QuestionController@deleteA
 Route::get('/admin/posts', 'Admin\PostController@index')->name('admin.posts');
 Route::get('/admin/post/deleted', 'Admin\PostController@viewDeletedPosts')->name('admin.posts.deleted');
 Route::delete('/admin/post/delete', 'Admin\PostController@deletePost')->name('admin.post.delete');
+Route::put('/admin/post/restore', 'Admin\PostController@restorePost')->name('admin.post.restore');
 Route::get('/admin/post/{id}', 'Admin\PostController@viewPost')->name('admin.post.show');
 Route::delete('/admin/post/comment/delete', 'Admin\PostController@deleteComment')->name('admin.post.comment.delete');
 
