@@ -83,7 +83,7 @@
                             @foreach ($posts as $post)
                                 <div class="content-wrapper">
                                     <div class="image-wrapper">
-                                        <img src="/storage/post_cover_image/{{ $post->cover_img }}" width="100%" alt="">
+                                        <img src="/storage/post_cover_image/{{ $post->cover_img }}" width="210" height="" alt="">
                                     </div>
                                     <div class="post-details">
                                         <p class="mini-header"><span>{{ formatTime($post->created_at) }}</span> - <span class="medicine"><a href="{{ route('blog.category', formatUrlString($post->category)) }}" >{{ ucfirst($post->category) }}</a></span> - <span>{{ $post->replies->count() }} comments</span> - <span class="views"> {{ $post->views }} view{{ ($post->views > 1) ? 's' : '' }} </span></p>
@@ -110,4 +110,10 @@
 
         $(".cover_img").height($('.posts__item').height());
     </script>
+    <script>
+	$('img').on("error", function() {
+		$(".image-wrapper").css({"display":"none"}),
+        $(".post-details").css({"width":"100%"});
+	})
+	</script>
 @endsection

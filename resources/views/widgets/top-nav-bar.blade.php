@@ -1,7 +1,7 @@
 <!-- NAVIGATION -->
 <header>
     <div class="header js-header js-dropdown">
-        <div class="container">
+        <div class="container nav-wrapper">
             <div class="header__logo">
                 <a class="header__link" href="/" title="Bluumhealth">
                     <h1>
@@ -20,10 +20,10 @@
                 </form>
                 <div class="header__search-close js-header-search-btn-close"><i class="icon-Cancel"></i></div>
             </div>
-            <div class="header__menu">
+            <div class="header__menu sm-none">
                 <a class="header__menu__link" href="{{ route('question.create') }}">Ask</a>
             </div>
-            <div class="header__menu active">
+            <div class="header__menu active sm-none">
                 <a class="header__menu__link active" href="{{ route('blog') }}">Blog</a>
             </div>
             <div class="header__menu header__dropdown">
