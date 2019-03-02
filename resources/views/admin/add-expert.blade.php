@@ -126,6 +126,13 @@
             img.css('left', '');
         }
 
+        function destroyDragabble(){
+
+            if($( "#p-image img" ).hasClass('ui-draggable')){
+                $( "#p-image img" ).draggable( "destroy" );
+            }
+        }
+
         //open form file input
         $("#p-image").click(function () {
             $("#profile_image").click();
@@ -138,7 +145,7 @@
             let img = $("#p-image img");
             img.attr('height', '');
             img.attr('width', '');
-            resetDragabble();
+            destroyDragabble();
 
             if(input.files && input.files[0]) {
                 let reader = new FileReader();

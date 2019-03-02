@@ -9,6 +9,7 @@ use App\Reply;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 
 class ExpertController extends Controller{
 
@@ -43,6 +44,12 @@ class ExpertController extends Controller{
             $expert->user_id = $user->id;
 
             // todo upload base64 image here
+            $image = $request->profile_image_base64;
+            $image = str_replace('data:image/png;base64', '', $image);
+            $image = str_replace(' ', '+', $image);
+            $imageName = 'expert_'.$user->id.'_profile.png';
+            File::put(storage_path().'/app/public/profile_img/'.$imageName, base64_decode($image));
+            $expert->profile_picture = $imageName;
 
             $expert->save();
             $user->role = 'EXPERT';

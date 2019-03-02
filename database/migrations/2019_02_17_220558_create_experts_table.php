@@ -21,6 +21,7 @@ class CreateExpertsTable extends Migration
             $table->string('experience');
             $table->longText('about');
             $table->integer('user_id');
+            $table->string('profile_picture');
             $table->boolean('active')->default(true);
         });
     }
