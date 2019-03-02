@@ -11,7 +11,7 @@
                                 <div class="row" >
                                     <h3 class="col-10" >Question Details</h3>
                                     <div class="col-2 text-right" >
-                                        <form action="{{ route('admin.question.delete') }}" method="post" >
+                                        <form action="{{ route('admin.question.delete') }}" method="post" class="action-form" id="delete-question-{{ $question->id }}" >
                                             @csrf
                                             @method('delete')
                                             <input type="hidden" name="id" value="{{ $question->id }}" >
@@ -66,7 +66,7 @@
                                         <td>{{ ucfirst($answer->body) }}</td>
                                         <td>{{ date('M d, Y', strtotime($answer->created_at)) }}</td>
                                         <td>
-                                            <form action="{{ route('admin.question.answer.delete') }}" method="post" >
+                                            <form action="{{ route('admin.question.answer.delete') }}" method="post" class="action-form" id="delete-answer-{{ $answer->id }}" >
                                                 @csrf
                                                 @method('delete')
                                                 <input type="hidden" value="{{ $answer->id }}" name="id" >
@@ -102,7 +102,7 @@
                                         <td>{{ ucfirst($comment->body) }}</td>
                                         <td>{{ date('M d, Y', strtotime($comment->created_at)) }}</td>
                                         <td>
-                                            <form action="{{ route('admin.question.answer.delete') }}" method="post" >
+                                            <form action="{{ route('admin.question.answer.delete') }}" method="post" class="action-form" id="delete-comment-{{ $comment->id }}" >
                                                 @csrf
                                                 @method('delete')
                                                 <input type="hidden" value="{{ $comment->id }}" name="id" >

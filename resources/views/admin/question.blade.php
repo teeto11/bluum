@@ -39,7 +39,7 @@
                                 <td><a href="{{ route('admin.question.show', $question->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-eye text-light"></i></a></td>
                                 @if($question->active)
                                     <td>
-                                        <form action="{{ route('admin.question.delete') }}" method="post" >
+                                        <form action="{{ route('admin.question.delete') }}" method="post" class="action-form" id="delete-question-{{ $question->id }}" >
                                             @csrf
                                             @method('delete')
                                             <input type="hidden" name="id" value="{{ $question->id }}" >
@@ -48,7 +48,7 @@
                                     </td>
                                 @else
                                     <td>
-                                        <form action="{{ route('admin.question.restore') }}" method="post" >
+                                        <form action="{{ route('admin.question.restore') }}" method="post" class="action-form" id="restore-question-{{ $question->id }}" >
                                             @csrf
                                             @method('put')
                                             <input type="hidden" name="id" value="{{ $question->id }}" >

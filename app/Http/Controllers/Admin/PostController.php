@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Services\Admin\PostService;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -13,7 +14,15 @@ class PostController extends Controller{
 
     public function index(){
 
-        $data = $this->posts(true, request('q'));
+        $postService = new PostService('POST');
+        $data = $postService->posts(true, request('q'));
+        return view('admin.view-posts')->with($data);
+    }
+
+    public function viewDeletedPosts(){
+
+        $postService = new PostService('POST');
+        $data = $postService->posts(false, request('q'));
         return view('admin.view-posts')->with($data);
     }
 
@@ -37,18 +46,10 @@ class PostController extends Controller{
             'id' => ['required', 'int']
         ]);
 
-        $post = Post::find($request->id);
-        if(! $post) return redirect()->route('admin');
-        $post->active = false;
-        $post->save();
-
-        return redirect()->route('admin.posts')->with('success', 'post deleted');
-    }
-
-    public function viewDeletedPosts(){
-
-        $data = $this->posts(false, request('q'));
-        return view('admin.view-posts')->with($data);
+        $postService = new PostService('POST');
+        if ($postService->deletePost($request)){
+            return redirect()->route('admin.posts')->with('success', 'post deleted');
+        }else return redirect()->route('admin.posts')->with('error', 'an error occurred');
     }
 
     public function restorePost(Request $request){
@@ -57,12 +58,10 @@ class PostController extends Controller{
             'id' => ['required', 'int']
         ]);
 
-        $post = Post::find($request->id);
-        if(! $post) return redirect()->route('admin.posts.deleted');
-        $post->active = true;
-        $post->save();
-
-        return redirect()->route('admin.posts.deleted')->with('success', 'post restored');
+        $postService = new PostService('POST');
+        if ($postService->restorePost($request)){
+            return redirect()->route('admin.posts.deleted')->with('success', 'post restored');
+        }else return redirect()->route('admin.posts.deleted')->with('error', 'an error occurred');
     }
 
     public function deleteComment(Request $request){
@@ -79,33 +78,5 @@ class PostController extends Controller{
         $comment->save();
 
         return redirect()->route('admin.post.show', $postId)->with('success', 'comment deleted');
-    }
-
-    private function posts($status, $q = null){
-
-        $posts = Post::where([ 'type'=>'POST', 'active'=>$status])->orderBy('created_at', 'DESC');
-
-        if($q){
-            $expertIds = User::where('firstname', 'like', "%$q%")
-                                ->orWhere('lastname', 'like', "%$q%")
-                                ->orWhere(DB::raw("CONCAT(firstname,' ',lastname)"), 'like', "%$q%")
-                                ->orWhere(DB::raw("CONCAT(lastname,' ',firstname)"), 'like', "%$q%")
-                                ->pluck('id')->toArray();
-
-            $posts = $posts->where('title', 'like', "%$q%")
-                            ->orWhere('body', 'like', "%$q%")
-                            ->orWhere('category', $q)
-                            ->orWhere('tags', 'like', "%$q%")
-                            ->orWhere('type', $q)
-                            ->orWhereIn('user_id', $expertIds)
-                            ->orderBy('views', 'DESC');
-        }
-
-        $data = [
-            'type'  =>  $status ? 'active' : 'deleted',
-            'posts' =>  $posts->paginate(15)
-        ];
-
-        return $data;
     }
 }
