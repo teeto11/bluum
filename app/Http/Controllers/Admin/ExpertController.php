@@ -43,7 +43,6 @@ class ExpertController extends Controller{
             $expert->about = $request->about;
             $expert->user_id = $user->id;
 
-            // todo upload base64 image here
             $image = $request->profile_image_base64;
             $image = str_replace('data:image/png;base64', '', $image);
             $image = str_replace(' ', '+', $image);
