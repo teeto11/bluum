@@ -27,13 +27,14 @@ class PostService{
                 ->orWhere(DB::raw("CONCAT(lastname,' ',firstname)"), 'like', "%$q%")
                 ->pluck('id')->toArray();
 
-            $posts = $posts->where('title', 'like', "%$q%")
-                ->orWhere('body', 'like', "%$q%")
-                ->orWhere('category', $q)
-                ->orWhere('tags', 'like', "%$q%")
-                ->orWhere('type', $q)
-                ->orWhereIn('user_id', $expertIds)
-                ->orderBy('views', 'DESC');
+            $posts = $posts->where(function ($query) use ($q, $expertIds) {
+                            $query->where('title', 'like', "%$q%")
+                                ->orWhere('body', 'like', "%$q%")
+                                ->orWhere('category', $q)
+                                ->orWhere('tags', 'like', "%$q%")
+                                ->orWhere('type', $q)
+                                ->orWhereIn('user_id', $expertIds);
+                            })->orderBy('views', 'DESC');
         }
 
         $data = [

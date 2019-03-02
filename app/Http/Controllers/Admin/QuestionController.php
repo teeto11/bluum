@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Post;
 use App\Reply;
+use App\Services\Admin\PostService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -11,22 +12,16 @@ class QuestionController extends Controller{
 
     public function index(){
 
-        $questions = Post::where(['type'=>'QUESTION', 'active'=>true])->orderBy('created_at', 'DESC')->paginate(20);
-        $data = [
-            'questions' =>  $questions,
-            'type'      =>  'active',
-        ];
+        $postService = new PostService('QUESTION');
+        $data = $postService->posts(true, request('q'));
 
         return view('admin.question')->with($data);
     }
 
     public function viewDeletedQuestions(){
 
-        $questions = Post::where(['type'=>'QUESTION', 'active'=>false])->orderBy('created_at', 'DESC')->paginate(20);
-        $data = [
-            'questions' =>  $questions,
-            'type'      =>  'deleted',
-        ];
+        $postService = new PostService('QUESTION');
+        $data = $postService->posts(false, request('q'));
 
         return view('admin.question')->with($data);
     }
@@ -53,12 +48,10 @@ class QuestionController extends Controller{
             'id' => ['required', 'int']
         ]);
 
-        $question = Post::find($request->id);
-        if(! $question) return redirect(route('admin.questions'));
-        $question->active = false;
-        $question->save();
-
-        return redirect()->route('admin.questions')->with('success', 'question deleted');
+        $postService = new PostService('QUESTION');
+        if ($postService->deletePost($request)){
+            return redirect()->route('admin.questions')->with('success', 'post deleted');
+        }else return redirect()->route('admin.questions')->with('error', 'an error occurred');
     }
 
     public function restoreQuestion(Request $request){
@@ -67,12 +60,10 @@ class QuestionController extends Controller{
             'id' => ['required', 'int']
         ]);
 
-        $question = Post::find($request->id);
-        if(! $question) return redirect(route('admin.questions.deleted'));
-        $question->active = true;
-        $question->save();
-
-        return redirect()->route('admin.questions.deleted')->with('success', 'question restored');
+        $postService = new PostService('QUESTION');
+        if ($postService->restorePost($request)){
+            return redirect()->route('admin.questions.deleted')->with('success', 'post deleted');
+        }else return redirect()->route('admin.questions.deleted')->with('error', 'an error occurred');
     }
 
     public function deleteAnswer(Request $request){

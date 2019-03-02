@@ -20,6 +20,16 @@
                         </div>
                     </div>
                     <hr>
+                    <form>
+                        <div class="row" >
+                            <div class="input-group col-md-6 offset-md-6" >
+                                <input type="text" class="form-control" id="search" name="q" title="search" placeholder="Search" value="{{ request('q') }}" >
+                                <div class="input-group-addon" >
+                                    <input type="submit" class="btn btn-success" value="Search" >
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                     <table class="table table-striped table-hover">
                         <thead>
                         <tr>
@@ -31,7 +41,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($questions as $question)
+                        @foreach($posts as $question)
                             <tr>
                                 <td>{{ ucwords($question->user->firstname.' '.$question->user->lastname) }}</td>
                                 <td>{{ ucwords($question->title) }}</td>
@@ -64,7 +74,7 @@
             </div>
         </div>
         <div class="my-3" >
-            {{ $questions->links() }}
+            {{ $posts->links() }}
         </div>
     </div>
 @endsection

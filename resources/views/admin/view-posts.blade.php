@@ -72,8 +72,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="my-4" >
-        {{ $posts->links() }}
+        <div class="my-3" >
+            {{ $posts->links() }}
+        </div>
     </div>
 @endsection
