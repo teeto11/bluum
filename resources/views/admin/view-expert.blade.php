@@ -11,7 +11,7 @@
                                 <h3 class="">Expert Details <a href="" class="btn btn-sm float-right"></a></h3><hr>
                                 <table class="table table-borderless table-hover">
                                     <tbody>
-                                    <tr><img src="{{ asset('') }}" class="expert-img" alt=""></tr>
+                                    <tr><img src="{{ asset('storage/profile_img/'.$expert->expert->profile_picture) }}" class="expert-img my-3" alt=""></tr>
                                     <tr>
                                         <td>Name</td>
                                         <td>{{ ucwords($expert->firstname.' '.$expert->lastname) }}</td>
