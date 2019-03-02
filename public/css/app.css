@@ -1775,3 +1775,9 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
+.verified-icon{
+    font-size: 2rem;
+    margin-left: 0.5rem;
+    padding-top: 0.6vh;
+    color: #3c763d;
+}

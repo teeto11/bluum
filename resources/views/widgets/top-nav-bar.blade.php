@@ -67,8 +67,8 @@
             @else
                 <div class="header__user">
                     <div class="header__user-btn" data-dropdown-btn="user">
-                        <img src="{{ asset('fonts/icons/avatars/'.ucfirst(Auth::user()->firstname[0]).'.svg') }}" alt="avatar">
-                        {{ ucwords(Auth::user()->firstname.' '.Auth::user()->lastname) }}<i class="icon-Arrow_Below"></i>
+                        <img src="{{ asset('fonts/icons/avatars/'.getFirstLetterUppercase(auth()->user()->firstname).'.svg') }}" alt="avatar">
+                        {!! getInitials(auth()->user()) !!}<i class="icon-Arrow_Below"></i>
                     </div>
                     <nav class="dropdown dropdown--design-01" data-dropdown-list="user">
                         <div>
@@ -81,16 +81,20 @@
                         </div>
                         <div>
                             <ul class="dropdown__catalog">
-                                @if(auth()->user()->role == 'EXPERT')
+                                @if(auth()->user()->role == 'ADMIN')
+                                    <li><a href="{{ route('admin.home') }}">Dashboard</a></li>
+                                @elseif(auth()->user()->role == 'EXPERT')
                                     <li><a href="{{ route('expert.profile') }}">Dashboard</a></li>
+                                    <li><a href="{{ route('user.profile') }}">Profile</a></li>
                                     <li><a href="{{ route('expert.posts') }}">Topics</a></li>
+                                    <li><a href="{{ route('notification') }}">Notifications</a></li>
                                 @else
                                     <li><a href="{{ route('user.profile') }}">Profile</a></li>
                                     <li><a href="{{ route('user.questions') }}">Questions</a></li>
+                                    <li><a href="{{ route('notification') }}">Notifications</a></li>
                                 @endif
                                 {{--<li><a href="#">Badges</a></li>
                                 <li><a href="#">My Groups</a></li>--}}
-                                <li><a href="{{ route('notification') }}">Notifications</a></li>
                                 {{--<li><a href="">Likes</a></li>
                                 <li><a href="#">Solved</a></li>--}}
                                 <li>
