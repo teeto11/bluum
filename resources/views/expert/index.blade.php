@@ -17,7 +17,7 @@
                     @php $details = $expert->expert @endphp
                     <div class="expert-card hvr-float ">
                         <div class="image-wrapper">
-                            <img src="{{ asset('fonts/icons/avatars/'.ucfirst($expert->firstname[0]).'.svg') }}" class="" alt="">
+                            <img src="{{ asset('storage/profile_img/'.$expert->expert->profile_picture) }}" class="" alt="">
                         </div>
                         <div class="details-body">
                             <section class="expert-header">

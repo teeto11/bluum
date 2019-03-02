@@ -12,7 +12,7 @@
         <div class="container profile-sub-wrapper">
             <div class="profile-sidebar">
                 <div class="profile-sidebar-header">
-                    <img src="{{ asset('fonts/icons/avatars/'.getFirstLetterUppercase($expert->firstname)).'.svg' }}" class="" alt="">
+                    <img src="{{ asset('storage/profile_img/'.$expert->expert->profile_picture) }}" class="" alt="">
                     <p>{{ ucwords($expert->firstname.' '.$expert->lastname) }}</p>
                 </div>
                 <div class="profile-sidebar-social hvr-float">
