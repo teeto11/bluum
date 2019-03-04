@@ -2,6 +2,14 @@
 
 @section('profile-main')
     <section class="questions">
+        <div style="padding-left: 2rem" >
+            @php
+                if(auth()->user() && auth()->user()->role == 'EXPERT' && auth()->user()->id == $expert->id){
+                    $backRoute = route('expert.profile');
+                }else $backRoute = route('expert.show', $expert->id);
+            @endphp
+            <a href="{{ $backRoute }}" ><i class="fa fa-arrow-left" ></i></a>
+        </div>
         <div class="table-row">
             <div class="table-responsive bg-white">
                 <h3 class="">Expert Answers</h3><hr>

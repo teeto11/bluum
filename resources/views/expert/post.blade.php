@@ -1,13 +1,13 @@
 @extends('expert.layout.profile')
 
 @section('profile-main')
-    <div id="" >
+    <div style="padding-left: 2rem" >
         @php
             if(auth()->user() && auth()->user()->role == 'EXPERT' && auth()->user()->id == $expert->id){
                 $backRoute = route('expert.profile');
-            }else $backRoute = route('expert');
+            }else $backRoute = route('expert.show', $expert->id);
         @endphp
-        <a href="{{  }}" >Go back</a>
+        <a href="{{ $backRoute }}" ><i class="fa fa-arrow-left" ></i></a>
     </div>
     <section class="nav">
         <div class="container" >

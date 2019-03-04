@@ -43,7 +43,7 @@
                 <div class="profile-sidebar-body">
                     <ul>
                         <li><b><i class="fa fa-briefcase"></i> Profession : </b>{{ ucwords($personalInfo->expertise) }}</li>
-                        <li><b><i class="fa fa-gears"></i> Work Experience : </b>{{ $personalInfo->experience }}{{ ($personalInfo->experience > 1) ? 'Years' : 'Year' }}</li>
+                        <li><b><i class="fa fa-gears"></i> Work Experience : </b>{{ $personalInfo->experience }}{{ ($personalInfo->experience > 1) ? ' Years' : ' Year' }}</li>
                     </ul>
                 </div>
             </div>
