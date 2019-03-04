@@ -110,10 +110,4 @@
 
         $(".cover_img").height($('.posts__item').height());
     </script>
-    <script>
-	$('img').on("error", function() {
-		$(".image-wrapper").css({"display":"none"}),
-        $(".post-details").css({"width":"100%"});
-	})
-	</script>
 @endsection

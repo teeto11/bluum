@@ -100,6 +100,8 @@ class PostsViewService{
 
         $filters = self::getFilter();
         $filters['filters'][] = ['user_id', $id];
+        $filters['filters'][] = ['active', true];
+
         $posts = Post::where($filters['filters'])->orderBy('created_at', 'DESC')->paginate(15);
         $data = $this->viewPostsData();
         $data['urlPad'] = $filters['urlPad'];
@@ -112,6 +114,8 @@ class PostsViewService{
 
         $filters = self::getFilter();
         $filters['filters'][] = ['user_id', $id];
+        $filters['filters'][] = ['active', true];
+
         $posts = Post::where($filters['filters'])->orderBy('likes', 'DESC')->paginate(15);
         $data = $this->viewPostsData();
         $data['urlPad'] = $filters['urlPad'];

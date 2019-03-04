@@ -36,3 +36,12 @@
 	</div>
     @include('widgets.footer')
 @endsection
+
+@section('scripts')
+    <script>
+        $('img').on("error", function() {
+            $(".image-wrapper").css({"display":"none"}),
+                $(".post-details").css({"width":"100%"});
+        })
+    </script>
+@endsection

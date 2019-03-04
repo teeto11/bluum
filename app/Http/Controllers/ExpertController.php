@@ -193,8 +193,8 @@ class ExpertController extends Controller{
 
         $post = Post::find($request->id);
         if(auth()->user()->id == $post->user_id){
-            Reply::where('post_id', $post->id)->delete();
-            $post->delete();
+            $post->active = false;
+            $post->save();
 
             return redirect()->route('expert.posts');
         }else return redirect()->route('index')->with('error', 'access denied');
@@ -207,7 +207,10 @@ class ExpertController extends Controller{
         ]);
 
         $reply = Reply::find($request->id);
-        if(auth()->user()->id == $reply->user_id) $reply->delete();
+        if(auth()->user()->id == $reply->user_id) {
+            $reply->active = false;
+            $reply->save();
+        }
 
         return redirect()->route('expert.profile');
     }
@@ -245,7 +248,11 @@ class ExpertController extends Controller{
         $postViewService = new PostsViewService('QUESTION');
         $data = $this->details($expert);
         $questionIds = Post::where('type', 'QUESTION')->pluck('id')->toArray();
-        $data['answers'] = Reply::where([ ['parent_reply', null], ['user_id', $expert->id] ])->whereIn('post_id', $questionIds)->orderBy('created_at', 'DESC')->paginate(15);
+        $data['answers'] = Reply::where([
+            'user_id'       => $expert->id,
+            'parent_reply'  => null,
+            'active'        => true
+        ])->whereIn('post_id', $questionIds)->orderBy('created_at', 'DESC')->paginate(15);
 
         return $data;
     }
@@ -256,8 +263,12 @@ class ExpertController extends Controller{
         $personalInfo = $expert->expert;
         $totalPost = $expert->post->where('type', 'POST')->count();
         $totalFollowers = $expert->followers->count();
-        $questionQ = Post::where('type', 'QUESTION');
-        $totalAnswers = $expert->replies->where('parent_reply', null)->whereIn('post_id', $questionQ->pluck('id')->toArray())->count();
+        $questionQ = Post::where(['type'=>'QUESTION']);
+        $totalAnswers = Reply::where([
+            'user_id'       => $expert->id,
+            'parent_reply'  => null,
+            'active'        => true
+        ])->whereIn('post_id', $questionQ->pluck('id')->toArray())->count();
 
         $data = [
             'title'             =>  'Expert',

@@ -20,7 +20,7 @@
                             <td class="text-right" ><a href="{{ route('question.show', ['id'=>$answer->post->id, 'title'=>formatUrlString($answer->post->title)]) }}" class="" ><i class="fa fa-eye text-light"></i></a></td>
                             <td class="text-right" >
                                 @if(auth()->user() && auth()->user()->role == 'EXPERT' && auth()->user()->id == $expert->id)
-                                    <form action="{{ route('expert.post.reply.delete') }}" method="post" >
+                                    <form action="{{ route('expert.post.reply.delete') }}" method="post" class="action-form" id="delete-answer-{{ $answer->id }}"  >
                                         @csrf
                                         @method('delete')
                                         <input type="hidden" name="id" value="{{ $answer->id }}" >
