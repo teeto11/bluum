@@ -77,7 +77,7 @@
                                 <img src="../assets/images/fyuma.jpg" class="mx-2" height="30" width="30" alt="" style="border-radius:100%;"> Admin
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Change Password</a>
+                                <a class="dropdown-item" href="{{ route('admin.changepasswordform') }}" >Change Password</a>
                                 <a class="dropdown-item" href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                     {{ __('Log Out') }}
                                 </a>

@@ -60,7 +60,7 @@ function expert(){
 
 function formatTime($time){
 
-    return date('H:ia d M, Y', strtotime($time));
+    return date('h:ia d M, Y', strtotime($time));
 }
 
 function getInitials($user, $full=false, $icon=true){

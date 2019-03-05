@@ -9,12 +9,12 @@ class AdminService{
 
     static public function changePassword($request){
 
-        $currentPassword = User::find(auth()->user()->password);
-        if(Hash::check($request->new_password, $currentPassword)){
+        $currentPassword = auth()->user()->password;
+        if(Hash::check($request->password, $currentPassword)){
             $admin = User::find(auth()->user()->id);
             $admin->password = Hash::make($request->new_password);
             $admin->save();
-            return ['success', 'password changed successfully'];
-        }else return ['failure', 'old password is incorrect'];
+            return ['success' => 'password changed successfully'];
+        }else return ['failure' => 'old password is incorrect'];
     }
 }
