@@ -71,6 +71,9 @@ Route::get('/expert/{id}/answers', 'ExpertController@viewAnswersAsGuest')->name(
 Route::middleware(['auth', 'admin'])->group(function() {
    Route::prefix('admin')->group(function (){
        Route::get('/', 'Admin\AdminController@index')->name('admin.home');
+
+       Route::get('/users', 'Admin\UserController@index')->name('admin.users');
+
        Route::get('/experts', 'Admin\ExpertController@viewExperts')->name('admin.expert');
        Route::get('/expert/disabled', 'Admin\ExpertController@viewDisabledExperts')->name('admin.expert.disabled');
        Route::get('/expert/new', 'Admin\ExpertController@showAddExpertForm')->name('admin.expert.new');
