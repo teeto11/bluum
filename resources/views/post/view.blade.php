@@ -60,18 +60,23 @@
                         <div class="topic">
                             <div class="topic__head">
                                 <div class="topic__avatar">
-                                    <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/'.$post->user->firstname[0].'.svg') }}" alt="avatar"></a>
+                                    <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/'.getFirstLetterUppercase($post->user->firstname).'.svg') }}" alt="avatar"></a>
                                 </div>
                                 <div class="topic__caption">
                                     <div class="topic__name">
-                                        <a href="#">{{ ucwords($post->user->firstname." ".$post->user->lastname) }}</a>
+                                        <a href="#">{!! getInitials($post->user, true) !!}</a>
                                     </div>
-                                    <div class="topic__date"><i class="icon-Watch_Later"></i>{{ date("h:ia d M, Y", strtotime($post->created_at)) }}</div>
+                                    <div class="topic__date"><i class="icon-Watch_Later"></i>{{ formatTime($post->created_at) }}</div>
                                 </div>
                             </div>
                             <div class="topic__content">
+                                @if($post->cover_img != 'noimage.png')
+                                    <div class="topic-image" style="margin-bottom: 2rem;text-align: center" >
+                                        <img src="{{ asset('storage/post_cover_image/'.$post->cover_img) }}" style="max-height: 50vh;" >
+                                    </div>
+                                @endif
                                 <div class="topic__text">
-                                    <p>{!! $post->body !!}</p>
+                                    <p>{{ ucfirst($post->body) }}</p>
                                 </div>
                                 <div class="topic__footer">
                                     <div class="topic__footer-likes">
@@ -93,7 +98,6 @@
                                         <div data-visible="mobile">
                                             <a href="#"><i class="icon-More_Options"></i></a>
                                         </div>
-                                        <a href="#"><i class="icon-Reply_Fill"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -180,12 +184,7 @@
                         @endforeach
                     </div>
                 </div>
-                <div class="topics__title"><i class="icon-Watch_Later"></i>This topic will has been closed.</div>
-                <div class="topics__control">
-                    <a href="#" class="btn"><i class="icon-Bookmark"></i>Bookmark</a>
-                    <a href="#" class="btn"><i class="icon-Share_Topic"></i>Share</a>
-                    <a href="#" class="btn btn--type-02" data-visible="desktop"><i class="icon-Reply_Fill"></i>Reply</a>
-                </div>
+                <hr>
                 <div class="topics__title">Suggested Posts</div>
             </div>
             <div class="posts">
