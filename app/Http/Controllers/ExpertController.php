@@ -65,7 +65,10 @@ class ExpertController extends Controller{
         $follower->expert_id = $expert->id;
 
         $follower->save();
-        return redirect()->route('experts')->with('success', "Followed expert");
+
+        if($request->redirect) {
+            return redirect()->route($request->redirect)->with('success', "Followed expert");
+        }else return redirect()->route('experts')->with('success', "Followed expert");
     }
 
     function unfollowExpert(Request $request){

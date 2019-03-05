@@ -59,7 +59,7 @@
 
                         </div>
                         <div>
-                            <form action="{{ route('question.delete') }}" method="post" >
+                            <form action="{{ route('question.delete') }}" method="post" class="action-form" id="delete-question-{{ $question->id }}" >
                                 @csrf
                                 @method('delete')
                                 <input type="hidden" name="id" value="{{ $question->id }}" >

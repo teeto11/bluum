@@ -330,6 +330,7 @@
                 url: url,
                 data: { reply_id:reply_id },
             }).done(function(data){
+                console.log(data);
                 if(data !== 'false' && data !== ''){
                     $(`#reply-${reply_id}-likes`).html(data);
                     if(likeBtn.attr('class') === "reply-like") likeBtn.attr("class", "reply-unlike"); else likeBtn.attr("class", "reply-like");

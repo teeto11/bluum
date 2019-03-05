@@ -6,6 +6,7 @@ use App\Followers;
 use App\Post;
 use App\Reply;
 use App\Services\PostsViewService;
+use App\Services\ReplyService;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -26,16 +27,16 @@ class UserController extends Controller{
         $data['title'] = 'Profile';
 
         $topExpertId = Followers::select('expert_id', DB::raw('count(user_id) as followers'))
-            ->where('user_id', auth()->user()->id)
-            ->groupBy('expert_id')
-            ->orderBy('followers', 'DESC')
-            ->take(4)
-            ->pluck('expert_id')
-            ->toArray();
+                                    ->where('user_id', auth()->user()->id)
+                                    ->groupBy('expert_id')
+                                    ->orderBy('followers', 'DESC')
+                                    ->take(4)
+                                    ->pluck('expert_id')
+                                    ->toArray();
 
         $data['topFollowing'] = User::whereIn('id', $topExpertId)->get();
         $data['recentQuestions'] = Post::where([ ['user_id', auth()->user()->id], ['type', 'QUESTION'] ])->take(4)->get();
-        $data['recentResponse'] = Reply::where('user_id', auth()->user()->id)->take(4)->get();
+        $data['recentResponse'] = auth()->user()->replies->take(4);
 
         return view('user.index')->with($data);
     }
@@ -72,12 +73,8 @@ class UserController extends Controller{
             'id' => ['int', 'required']
         ]);
 
-        $reply = Reply::find($request->id);
-        if($reply && $reply->user_id == auth()->user()->id){
-
-            $reply->delete();
-            return redirect()->route('user.profile');
-        }else{ return redirect()->route('user.profile')->with('error', 'Access denied'); }
+        $reply = ReplyService::delete($request->id);
+        return redirect()->route('user.profile')->with($reply);
     }
 
     public function deleteQuestion(Request $request){

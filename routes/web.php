@@ -68,7 +68,7 @@ Route::get('/expert/{id}/post/popular', 'ExpertController@viewPopularPostsAsGues
 Route::get('/expert/{id}/post/{category}', 'ExpertController@viewPostsAsGuest')->name('expert.guest.posts.viewByCategory');
 Route::get('/expert/{id}/answers', 'ExpertController@viewAnswersAsGuest')->name('expert.guest.answers');
 
-Route::middleware('auth')->group(function() {
+Route::middleware(['auth', 'admin'])->group(function() {
    Route::prefix('admin')->group(function (){
        Route::get('/', 'Admin\AdminController@index')->name('admin.home');
        Route::get('/experts', 'Admin\ExpertController@viewExperts')->name('admin.expert');

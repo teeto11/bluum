@@ -10,8 +10,9 @@
                 <div class="follow-card hvr-grow">
                     <img src="{{ asset('fonts/icons/avatars/'.getFirstLetterUppercase($expert->firstname).'.svg') }}" height="100" width="100" alt="">
                     <p class=""><a href="">{{ ucwords($expert->firstname.' '.$expert->lastname) }}</a></p>
-                    <form action="{{ route('expert.unfollow') }}" method="post" >
+                    <form action="{{ route('expert.unfollow') }}" method="post" class="action-form" id="unfollow-expert-{{ $expert->id }}" >
                         @csrf
+                        <input type="hidden" name="redirect" value="{{ $routeName }}" >
                         <input type="hidden" name="id" value="{{ $expert->id }}" >
                         <button type="submit" class="btn" ><i class="fa fa-check"></i> Unfollow</button>
                     </form>
@@ -45,7 +46,7 @@
                         <div class="posts__replies">{{ $question->replies->count() }}</div>
                         <div class="posts__views">{{ $question->views }}</div>
                         <div class="posts__activity" id="post_actions">
-                            <form action="{{ route('question.delete') }}" method="post" >
+                            <form action="{{ route('question.delete') }}" method="post" class="action-form" id="delete-question-{{ $question->id }}" >
                                 @csrf
                                 @method('delete')
                                 <input type="hidden" name="id" value="{{ $question->id }}" >
@@ -83,7 +84,7 @@
                                 <a href="{{ $route }}" class=""><i class="fa fa-eye text-light"></i></a>
                             </td>
                             <td class="text-center" >
-                                <form action="{{ route('reply.delete') }}" method="post" >
+                                <form action="{{ route('reply.delete') }}" method="post" class="action-form" id="delete-reply-{{ $reply->id }}" >
                                     @csrf
                                     @method('delete')
                                     <input type="hidden" name="id" value="{{ $reply->id }}" >
