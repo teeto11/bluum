@@ -1,6 +1,14 @@
 @extends('expert.layout.profile')
 
 @section('profile-main')
+    <div style="padding-left: 2rem" >
+        @php
+            if(auth()->user() && auth()->user()->role == 'EXPERT' && auth()->user()->id == $expert->id){
+                $backRoute = route('expert.profile');
+            }else $backRoute = route('expert.show', $expert->id);
+        @endphp
+        <a href="{{ $backRoute }}" ><i class="fa fa-arrow-left" ></i></a>
+    </div>
     <section class="nav">
         <div class="container" >
             <div class="nav__categories js-dropdown">
@@ -87,7 +95,7 @@
                                         <a href="{{ route('blog.post.edit', $post->id) }}" class=""><i class="fa fa-pencil"></i></a>
                                     </div>
                                     <div>
-                                        <form action="{{ route('expert.post.delete') }}" method="post" >
+                                        <form action="{{ route('expert.post.delete') }}" method="post" class="action-form" id="delete-post-{{ $post->id }}" >
                                             @csrf
                                             @method('delete')
                                             <input type="hidden" name="id" value="{{ $post->id }}" >

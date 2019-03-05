@@ -31,7 +31,7 @@
                         <div class="posts__section-left">
                             <div class="posts__topic">
                                 <div class="posts__content">
-                                    <a href="#">
+                                    <a href="{{ route('blog.post', [$post->id, formatUrlString($post->title)]) }}">
                                         <h3>{{ ucwords($post->title) }}</h3>
                                     </a>
                                     <div class="posts__tags tags">
@@ -48,7 +48,7 @@
                             <div class="posts__replies" >{{ $post->likes }}</div>
                             <div class="posts__replies">{{ $post->replies->count() }}</div>
                             <div class="posts__views">{{ $post->views }}</div>
-                            <div class="posts__activity">{{ getLastActivityTime($post->updated_at) }}</div>
+                            <div class="posts__activity">{{ getLastActivityTime($post->updated_at) }} ago</div>
                         </div>
                     </div>
                         @php $counter++; @endphp
@@ -81,11 +81,11 @@
                                     $route = route('blog.post', ['id'=>$response->post->id, 'title'=>formatUrlString($response->post->title)]);
                                 endif;
                                 @endphp
-                                <a href="{{ $route }}" class=""><i class="fa fa-eye text-light"></i></a>
+                                <a href="{{ $route."#reply-$response->id" }}" class=""><i class="fa fa-eye text-light"></i></a>
                             </td>
                             <td class="text-right" >
                                 @if(auth()->user() && auth()->user()->role == 'EXPERT' && auth()->user()->id == $expert->id)
-                                    <form action="{{ route('expert.post.reply.delete') }}" method="post" >
+                                    <form action="{{ route('expert.post.reply.delete') }}" method="post" class="action-form" id="delete-reply-{{ $response->id }}" >
                                         @csrf
                                         @method('delete')
                                         <input type="hidden" name="id" value="{{ $response->id }}" >

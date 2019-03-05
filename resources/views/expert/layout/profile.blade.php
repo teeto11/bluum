@@ -12,7 +12,7 @@
         <div class="container profile-sub-wrapper">
             <div class="profile-sidebar">
                 <div class="profile-sidebar-header">
-                    <img src="{{ asset('fonts/icons/avatars/'.getFirstLetterUppercase($expert->firstname)).'.svg' }}" class="" alt="">
+                    <img src="{{ asset('storage/profile_img/'.$expert->expert->profile_picture) }}" class="" alt="">
                     <p>{{ ucwords($expert->firstname.' '.$expert->lastname) }}</p>
                 </div>
                 <div class="profile-sidebar-social hvr-float">
@@ -43,7 +43,7 @@
                 <div class="profile-sidebar-body">
                     <ul>
                         <li><b><i class="fa fa-briefcase"></i> Profession : </b>{{ ucwords($personalInfo->expertise) }}</li>
-                        <li><b><i class="fa fa-gears"></i> Work Experience : </b>{{ $personalInfo->experience }}{{ ($personalInfo->experience > 1) ? 'Years' : 'Year' }}</li>
+                        <li><b><i class="fa fa-gears"></i> Work Experience : </b>{{ $personalInfo->experience }}{{ ($personalInfo->experience > 1) ? ' Years' : ' Year' }}</li>
                     </ul>
                 </div>
             </div>

@@ -2,6 +2,14 @@
 
 @section('profile-main')
     <section class="questions">
+        <div style="padding-left: 2rem" >
+            @php
+                if(auth()->user() && auth()->user()->role == 'EXPERT' && auth()->user()->id == $expert->id){
+                    $backRoute = route('expert.profile');
+                }else $backRoute = route('expert.show', $expert->id);
+            @endphp
+            <a href="{{ $backRoute }}" ><i class="fa fa-arrow-left" ></i></a>
+        </div>
         <div class="table-row">
             <div class="table-responsive bg-white">
                 <h3 class="">Expert Answers</h3><hr>
@@ -20,7 +28,7 @@
                             <td class="text-right" ><a href="{{ route('question.show', ['id'=>$answer->post->id, 'title'=>formatUrlString($answer->post->title)]) }}" class="" ><i class="fa fa-eye text-light"></i></a></td>
                             <td class="text-right" >
                                 @if(auth()->user() && auth()->user()->role == 'EXPERT' && auth()->user()->id == $expert->id)
-                                    <form action="{{ route('expert.post.reply.delete') }}" method="post" >
+                                    <form action="{{ route('expert.post.reply.delete') }}" method="post" class="action-form" id="delete-answer-{{ $answer->id }}"  >
                                         @csrf
                                         @method('delete')
                                         <input type="hidden" name="id" value="{{ $answer->id }}" >

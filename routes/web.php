@@ -68,28 +68,37 @@ Route::get('/expert/{id}/post/popular', 'ExpertController@viewPopularPostsAsGues
 Route::get('/expert/{id}/post/{category}', 'ExpertController@viewPostsAsGuest')->name('expert.guest.posts.viewByCategory');
 Route::get('/expert/{id}/answers', 'ExpertController@viewAnswersAsGuest')->name('expert.guest.answers');
 
-Route::get('/admin', 'Admin\AdminController@index')->name('admin.home');
-Route::get('/admin/experts', 'Admin\ExpertController@viewExperts')->name('admin.expert');
-Route::get('/admin/expert/disabled', 'Admin\ExpertController@viewDisabledExperts')->name('admin.expert.disabled');
-Route::get('/admin/expert/new', 'Admin\ExpertController@showAddExpertForm')->name('admin.expert.new');
-Route::post('/admin/expert/new', 'Admin\ExpertController@addExpert')->name('admin.expert.store');
-Route::delete('/admin/expert/delete', 'Admin\ExpertController@removeExpert')->name('admin.expert.delete');
-Route::put('/admin/expert/restore', 'Admin\ExpertController@enableExpert')->name('admin.expert.enable');
-Route::get('/admin/expert/{id}', 'Admin\ExpertController@viewExpert')->name('admin.expert.show');
+Route::middleware(['auth', 'admin'])->group(function() {
+   Route::prefix('admin')->group(function (){
+       Route::get('/', 'Admin\AdminController@index')->name('admin.home');
+       Route::get('/change-password', 'Admin\AdminController@showChangePasswordForm')->name('admin.changepasswordform');
+       Route::post('/change-password', 'Admin\AdminController@changePassword')->name('admin.changepassword');
 
-Route::get('/admin/questions', 'Admin\QuestionController@index')->name('admin.questions');
-Route::get('/admin/question/deleted', 'Admin\QuestionController@viewDeletedQuestions')->name('admin.questions.deleted');
-Route::delete('/admin/question/delete', 'Admin\QuestionController@deleteQuestion')->name('admin.question.delete');
-Route::put('/admin/question/restore', 'Admin\QuestionController@restoreQuestion')->name('admin.question.restore');
-Route::get('/admin/question/{id}', 'Admin\QuestionController@viewQuestion')->name('admin.question.show');
-Route::delete('/admin/question/answer/delete', 'Admin\QuestionController@deleteAnswer')->name('admin.question.answer.delete');
+       Route::get('/users', 'Admin\UserController@index')->name('admin.users');
 
-Route::get('/admin/posts', 'Admin\PostController@index')->name('admin.posts');
-Route::get('/admin/post/deleted', 'Admin\PostController@viewDeletedPosts')->name('admin.posts.deleted');
-Route::delete('/admin/post/delete', 'Admin\PostController@deletePost')->name('admin.post.delete');
-Route::put('/admin/post/restore', 'Admin\PostController@restorePost')->name('admin.post.restore');
-Route::get('/admin/post/{id}', 'Admin\PostController@viewPost')->name('admin.post.show');
-Route::delete('/admin/post/comment/delete', 'Admin\PostController@deleteComment')->name('admin.post.comment.delete');
+       Route::get('/experts', 'Admin\ExpertController@viewExperts')->name('admin.expert');
+       Route::get('/expert/disabled', 'Admin\ExpertController@viewDisabledExperts')->name('admin.expert.disabled');
+       Route::get('/expert/new', 'Admin\ExpertController@showAddExpertForm')->name('admin.expert.new');
+       Route::post('/expert/new', 'Admin\ExpertController@addExpert')->name('admin.expert.store');
+       Route::delete('/expert/delete', 'Admin\ExpertController@removeExpert')->name('admin.expert.delete');
+       Route::put('/expert/restore', 'Admin\ExpertController@enableExpert')->name('admin.expert.enable');
+       Route::get('/expert/{id}', 'Admin\ExpertController@viewExpert')->name('admin.expert.show')->where(['id'=>'[0-9]+']);
+
+       Route::get('/questions', 'Admin\QuestionController@index')->name('admin.questions');
+       Route::get('/question/deleted', 'Admin\QuestionController@viewDeletedQuestions')->name('admin.questions.deleted');
+       Route::delete('/question/delete', 'Admin\QuestionController@deleteQuestion')->name('admin.question.delete');
+       Route::put('/question/restore', 'Admin\QuestionController@restoreQuestion')->name('admin.question.restore');
+       Route::get('/question/{id}', 'Admin\QuestionController@viewQuestion')->name('admin.question.show')->where(['id'=>'[0-9]+']);
+       Route::delete('/question/answer/delete', 'Admin\QuestionController@deleteAnswer')->name('admin.question.answer.delete');
+
+       Route::get('/posts', 'Admin\PostController@index')->name('admin.posts');
+       Route::get('/post/deleted', 'Admin\PostController@viewDeletedPosts')->name('admin.posts.deleted');
+       Route::delete('/post/delete', 'Admin\PostController@deletePost')->name('admin.post.delete');
+       Route::put('/post/restore', 'Admin\PostController@restorePost')->name('admin.post.restore');
+       Route::get('/post/{id}', 'Admin\PostController@viewPost')->name('admin.post.show');
+       Route::delete('/post/comment/delete', 'Admin\PostController@deleteComment')->name('admin.post.comment.delete');
+   });
+});
 
 Route::post('/search', 'IndexController@search')->name('search');
 Route::get('/search/{query}', 'IndexController@searchResult')->name('search.result');

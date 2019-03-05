@@ -51,11 +51,11 @@
                         <div class="topic">
                             <div class="topic__head">
                                 <div class="topic__avatar">
-                                    <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/'.$question->user->firstname[0].'.svg') }}" alt="avatar"></a>
+                                    <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/'.getFirstLetterUppercase($question->user->firstname).'.svg') }}" alt="avatar"></a>
                                 </div>
                                 <div class="topic__caption">
                                     <div class="topic__name">
-                                        <a href="#">{{ ucwords($question->user->firstname." ".$question->user->lastname) }}</a>
+                                        <a href="#">{!! getInitials($question->user, true) !!}</a>
                                     </div>
                                     <div class="topic__date"><i class="icon-Watch_Later"></i>{{ date("h:ia d M, Y", strtotime($question->created_at)) }}</div>
                                 </div>
@@ -118,7 +118,7 @@
                                     </div>
                                     <div class="topic__caption">
                                         <div class="topic__name">
-                                            <a href="#">{{ ucwords($r_user->firstname.' '.$r_user->lastname) }}</a>
+                                            <a href="#">{!! getInitials($r_user, true) !!}</a>
                                         </div>
                                         <div class="topic__date"><i class="icon-Watch_Later"></i>{{ formatTime($answer->created_at) }}</div>
                                     </div>
@@ -163,8 +163,8 @@
                                     </div>
                                     <hr>
                                     @foreach($question->replies->where('parent_reply', $answer->id) as $a_reply)
-                                        <div class="creply" >
-                                            <p><strong>{{ $a_reply->recipient }}</strong> {{ $a_reply->body }}. <strong>{{ $a_reply->user->username }}</strong> <a href="#" class="reply-answer" data-id="{{ $a_reply->id }}" data-parent="{{ $answer->id }}" ><i class="icon-Reply_Empty"></i></a></p>
+                                        <div class="creply" id="reply-{{ $a_reply->id }}" >
+                                            <p><strong>{{ $a_reply->recipient }}</strong> {{ $a_reply->body }}. <strong>{!! getInitials($a_reply->user) !!}</strong> <a href="#" class="reply-answer" data-id="{{ $a_reply->id }}" data-parent="{{ $answer->id }}" ><i class="icon-Reply_Empty"></i></a></p>
                                         </div>
                                         <hr>
                                     @endforeach
@@ -186,7 +186,7 @@
                                     </div>
                                     <div class="topic__caption">
                                         <div class="topic__name">
-                                            <a href="#">{{ ucwords($r_user->firstname.' '.$r_user->lastname) }}</a>
+                                            <a href="#">{!! getInitials($r_user, true) !!}</a>
                                         </div>
                                         <div class="topic__date"><i class="icon-Watch_Later"></i>{{ formatTime($answer->created_at) }}</div>
                                     </div>
@@ -231,8 +231,8 @@
                                     </div>
                                     <hr>
                                     @foreach($question->replies->where('parent_reply', $answer->id) as $a_reply)
-                                        <div class="creply" >
-                                            <p><strong>{{ $a_reply->recipient }}</strong> {{ $a_reply->body }}. <strong>{{ $a_reply->user->username }}</strong> <a href="#" class="reply-answer" data-id="{{ $a_reply->id }}" data-parent="{{ $answer->id }}" ><i class="icon-Reply_Empty"></i></a></p>
+                                        <div class="creply" id="reply-{{ $a_reply->id }}" >
+                                            <p><strong>{!! $a_reply->recipient !!}</strong> {{ $a_reply->body }}. <strong>{!! getInitials($a_reply->user ) !!}</strong> <a href="#" class="reply-answer" data-id="{{ $a_reply->id }}" data-parent="{{ $answer->id }}" ><i class="icon-Reply_Empty"></i></a></p>
                                         </div>
                                         <hr>
                                     @endforeach
@@ -330,6 +330,7 @@
                 url: url,
                 data: { reply_id:reply_id },
             }).done(function(data){
+                console.log(data);
                 if(data !== 'false' && data !== ''){
                     $(`#reply-${reply_id}-likes`).html(data);
                     if(likeBtn.attr('class') === "reply-like") likeBtn.attr("class", "reply-unlike"); else likeBtn.attr("class", "reply-like");

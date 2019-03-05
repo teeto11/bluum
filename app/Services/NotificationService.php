@@ -45,6 +45,15 @@ class NotificationService{
         return $notification;
     }
 
+    static function newReplyAnswerCommentNotification($user_id, $body){
+
+        $notification = new Notificaton;
+        $notification->user_id = $user_id;
+        $notification->notification = '<strong>'.getInitials(auth()->user()).'</strong> replied your comment <strong>'.$body.'</strong>';
+
+        return $notification;
+    }
+
     static function correctAnswer($question, $answer){
 
         $notification = new Notificaton;

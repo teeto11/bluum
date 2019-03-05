@@ -35,15 +35,22 @@ class ReplyStoreService{
             $recipientReply = Reply::find($request->recipient);
             $recipient = $recipientReply->user;
 
-            if($recipientReply->parent_reply) $reply->parent_reply = $recipientReply->parent_reply; else $reply->parent_reply = $recipientReply->id;
             if($recipient){
-                $reply->recipient = "@".getInitials($recipient);
+                $reply->recipient = "@".getInitials($recipient, false, false);
                 $body = substr($recipientReply->body, 0, 50);
-                $r_notification = ($this->type == 'POST') ? NotificationService::newCommentReplyNotification($recipient->id, $body) : NotificationService::newAnswerCommentNotification($recipient->id, $body);
             }else return false;
+
+            if($recipientReply->parent_reply) {
+                $reply->parent_reply = $recipientReply->parent_reply;
+                $r_notification = ($this->type == 'POST') ? NotificationService::newCommentReplyNotification($recipient->id, $body) : NotificationService::newReplyAnswerCommentNotification($recipient->id, $body);
+            } else{
+                $reply->parent_reply = $recipientReply->id;
+                $r_notification = ($this->type == 'POST') ? NotificationService::newCommentReplyNotification($recipient->id, $body) : NotificationService::newAnswerCommentNotification($recipient->id, $body);
+            }
         }
 
         $reply->save();
+
         if(auth()->user()->id != $post->user_id) {
             if($this->type == 'POST') {
                 NotificationService::newCommentNotification($post, $reply->id)->save();

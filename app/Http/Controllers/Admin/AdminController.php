@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Post;
+use App\Services\Admin\AdminService;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -30,6 +31,22 @@ class AdminController extends Controller{
         ];
 
         return view('admin.home')->with($data);
+    }
+
+    public function showChangePasswordForm(){
+
+        return view('admin.change-password');
+    }
+
+    public function changePassword(Request $request){
+
+        $this->validate($request, [
+            'old_password'              =>  ['required'],
+            'new_password'              =>  ['required'],
+            'new_password_confirmation' =>  ['required', 'same:new_password'],
+        ]);
+
+        return view('admin.change-password')->with(AdminService::changePassword($request));
     }
 
     public function showLoginForm(){
