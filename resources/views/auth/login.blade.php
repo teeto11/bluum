@@ -1,7 +1,14 @@
 @php $title = 'Login' @endphp
 @extends('layouts.app-temp')
 
+@section('header_scripts')
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/hover.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/animate.css') }}" />
+@endsection
+
 @section('content')
+    @include('widgets.top-nav-bar')
     <div class="signup">
         <!-- MAIN -->
         <main class="signup__main">
@@ -35,6 +42,7 @@
                             <button type="submit" class="signup__btn-create btn btn--type-02">
                                 {{ __('Login') }}
                             </button>
+                            <p class="" style="margin-top:25px;">Are you a new to bluum? <a href="/register" class="">Register</a></p>
                         </div>
                     </form>
                 </div>
@@ -43,16 +51,9 @@
         <!-- FOOTER -->
         <footer class="signup__footer">
             <div class="container">
-                <p class="signup__link">New user? <a href="/register" class="btn">Sign Up</a></p>
-                <div class="signup__footer-content">
-                    <ul class="signup__footer-menu">
-                        <li><a href="#">Teams</a></li>
-                        <li><a href="#">Privacy</a></li>
-                        <li><a href="#">Send Feedback</a></li>
-                        <li class="footer__copyright"><span>2018 &copy; Bluumhealth. All rights reserved.</li>
-                    </ul>
-                </div>
+                
             </div>
         </footer>
     </div>
+    @include('widgets.footer')
 @endsection

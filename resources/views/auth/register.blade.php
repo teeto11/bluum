@@ -1,7 +1,14 @@
 @php $title = 'Register' @endphp
 @extends('layouts.app-temp')
 
+@section('header_scripts')
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/hover.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/animate.css') }}" />
+@endsection
+
 @section('content')
+@include('widgets.top-nav-bar')
 <div class="signup">
     <!-- MAIN -->
     <main class="signup__main">
@@ -89,15 +96,8 @@
     <footer class="signup__footer">
         <div class="container">
             <p class="signup__link">Already have an account? <a href="/login" class="btn">Sign In</a></p>
-            <div class="signup__footer-content">
-                <ul class="signup__footer-menu">
-                    <li><a href="#">Teams</a></li>
-                    <li><a href="#">Privacy</a></li>
-                    <li><a href="#">Send Feedback</a></li>
-                    <li class="footer__copyright"><span>2018 &copy; Bluumhealth. All rights reserved.</li>
-                </ul>
-            </div>
         </div>
     </footer>
 </div>
+@include('widgets.footer')
 @endsection
