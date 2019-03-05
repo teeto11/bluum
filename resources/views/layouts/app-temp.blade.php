@@ -49,13 +49,6 @@
             $('#search-form').submit();
         });
 
-        $('#search-form').keydown(function(event){
-            if(event.keyCode == 13) {
-                event.preventDefault();
-                return false;
-            }
-        });
-
         $('.action-form').submit(function (e) {
 
             if(!$(this).hasClass('confirmed')){
