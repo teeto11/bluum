@@ -27,7 +27,7 @@
             <div class="nav">
                 <div class="nav__categories js-dropdown">
                     <div class="nav__select">
-                        <a href="/blog" class="nav__thread-btn nav__thread-btn--prev"><i class="icon-Arrow_Left"></i>Back</a>
+                        <a href="{{ \Illuminate\Support\Facades\URL::previous() }}" class="nav__thread-btn nav__thread-btn--prev"><i class="icon-Arrow_Left"></i>Back</a>
                     </div>
                 </div>
             </div>

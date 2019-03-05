@@ -15,9 +15,10 @@
     <div class="container" >
         <form action="{{ route('admin.changepassword') }}" method="post" >
             @csrf
-            {{ (session('old_password')) ? session('old_password') : '' }}
+            {{ session('success') }}
+            {{ session('failure') }}
             <div class="form-group">
-                <input type="password" class="form-control" name="old_password" title="password" >
+                <input type="password" class="form-control" name="password" title="password" >
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" name="new_password" title="new_password" >
