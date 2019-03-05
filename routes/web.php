@@ -71,6 +71,8 @@ Route::get('/expert/{id}/answers', 'ExpertController@viewAnswersAsGuest')->name(
 Route::middleware(['auth', 'admin'])->group(function() {
    Route::prefix('admin')->group(function (){
        Route::get('/', 'Admin\AdminController@index')->name('admin.home');
+       Route::get('/change-password', 'Admin\AdminController@showChangePasswordForm')->name('admin.changepasswordform');
+       Route::post('/change-password', 'Admin\AdminController@changePassword')->name('admin.changepassword');
 
        Route::get('/users', 'Admin\UserController@index')->name('admin.users');
 
