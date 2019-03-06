@@ -885,6 +885,7 @@
                         overflow: hidden;
                         white-space: nowrap;
                         text-overflow: ellipsis;
+                        max-width: 75ch;
                     }
                     .post-header{
                         font-size: 18px;

@@ -979,6 +979,7 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  max-width: 75ch;
 }
 
 .category-wrapper .category-results-wrapper .results .content-wrapper .post-details .post-header {
