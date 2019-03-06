@@ -20,6 +20,14 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap-grid.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}" />
+    <style>
+        .verified-icon {
+            font-size: 2rem;
+            margin-left: 0.5rem;
+            padding-top: 0.6vh;
+            color: #3c763d;
+        }
+    </style>
     @yield('header_scripts')
 </head>
 <body>
