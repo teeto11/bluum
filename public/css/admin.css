@@ -287,6 +287,60 @@ ul ul a {
     border-radius: 20px;
     background-color: #F5F5F5; }
 
+    #content .content-wrapper .view-experts-wrapper .table-row .table-responsive form .form-control {
+      border-radius: 0px;
+      border-right: 0px;
+      background-image: url(../images/search.png) !important;
+      background-position: top 50% left 2%;
+      background-repeat: no-repeat;
+      padding: 5px 50px;
+      transition: all .5s; }
+    #content .content-wrapper .view-experts-wrapper .table-row .table-responsive form .form-control:focus {
+      background-image: none !important;
+      padding: 5px 15px;
+      transition: all .5s;
+      box-shadow: none;
+      border-color: #ced4da; }
+    #content .content-wrapper .view-experts-wrapper .table-row .table-responsive form .btn {
+      border-radius: 0px;
+      border-left: 0px; }
+
+      #content .content-wrapper .view-posts-wrapper .table-row .table-responsive form .form-control {
+        border-radius: 0px;
+        border-right: 0px;
+        background-image: url(../images/search.png) !important;
+        background-position: top 50% left 2%;
+        background-repeat: no-repeat;
+        padding: 5px 50px;
+        transition: all .5s; }
+      #content .content-wrapper .view-posts-wrapper .table-row .table-responsive form .form-control:focus {
+        background-image: none !important;
+        padding: 5px 15px;
+        transition: all .5s;
+        box-shadow: none;
+        border-color: #ced4da; }
+      #content .content-wrapper .view-posts-wrapper .table-row .table-responsive form .btn {
+        border-radius: 0px;
+        border-left: 0px; }
+    
+
+    #content .content-wrapper .view-users-wrapper .table-row .table-responsive form .form-control {
+      border-radius: 0px;
+      border-right: 0px;
+      background-image: url(../images/search.png) !important;
+      background-position: top 50% left 2%;
+      background-repeat: no-repeat;
+      padding: 5px 50px;
+      transition: all .5s; }
+    #content .content-wrapper .view-users-wrapper .table-row .table-responsive form .form-control:focus {
+      background-image: none !important;
+      padding: 5px 15px;
+      transition: all .5s;
+      box-shadow: none;
+      border-color: #ced4da; }
+    #content .content-wrapper .view-users-wrapper .table-row .table-responsive form .btn {
+      border-radius: 0px;
+      border-left: 0px; }
 #content::-webkit-scrollbar {
   width: 12px;
   background-color: #d4b5b5; }

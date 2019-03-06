@@ -33,7 +33,7 @@
                 <nav class="dropdown dropdown--design-01" data-dropdown-list="menu">
                     <div>
                         <ul class="dropdown__catalog row">
-                            <li class="col-xs-6"><a href="{{ route('question.create') }}">New</a></li>
+                            <li class="col-xs-6"><a href="{{ route('question.create') }}">Ask</a></li>
                             <li class="col-xs-6"><a href="{{ route('experts') }}">Experts</a></li>
                             <li class="col-xs-6"><a href="/tags">Tags</a></li>
                             <li class="col-xs-6"><a href="{{ route('question.showbycategory', 'pregnancy') }}">Pregnancy</a></li>

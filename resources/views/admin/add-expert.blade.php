@@ -21,6 +21,11 @@
         #p-image-cover #p-image:hover {
             cursor: pointer;
         }
+        #p-image:hover{
+            cursor:pointer;
+            background: rgba(0,0,0,.5);
+            transition: all 0.5s;
+        }
     </style>
 @endsection
 
