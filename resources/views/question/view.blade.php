@@ -48,12 +48,12 @@
                 <div class="topics__heading">
                     <h2 class="topics__heading-title">{{ $question->title }}</h2>
                     <div class="topics__heading-info">
-                        <a href="#" class="category"><i class="bg-3ebafa"></i>{{ ucfirst($question->category) }}</a>
+                        <a href="{{ route('question.showbycategory', formatUrlString($question->category)) }}" class="category"><i class="bg-3ebafa"></i>{{ ucfirst($question->category) }}</a>
                         @if ($question->tags)
                             <div class="tags">
                                 @php $tags = explode(',', $question->tags); @endphp
                                 @foreach ($tags as $tag)
-                                    <a href="{{ route('blog.tag', ['tag'=>$tag]) }}" class="bg-4f80b0">{{ $tag }}</a>
+                                    <a href="{{ route('question.showbytag', urlencode($tag)) }}" class="bg-4f80b0">{{ $tag }}</a>
                                 @endforeach
                             </div>
                         @endif
@@ -101,23 +101,31 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="comment" >
-                            <form action="{{ route('question.answer') }}" method="post">
-                                @csrf
-                                <input type="hidden" name="post_id" value="{{ $question->id }}" >
-                                @if ($errors->has('body'))
-                                    <div class="invalid-feedback text-danger" role="alert">
-                                        <p><strong>{{ $errors->first('body') }}</strong></p>
+                        @if(isset($correctAnswer))
+                            <div class="topics__title"><i class="icon-Watch_Later"></i>This topic has been closed.</div>
+                            <div class="topics__control">
+                                <a href="#" class="btn"><i class="icon-Bookmark"></i>Bookmark</a>
+                                <a href="#" class="btn"><i class="icon-Share_Topic"></i>Share</a>
+                            </div>
+                        @else
+                            <div id="comment" >
+                                <form action="{{ route('question.answer') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="post_id" value="{{ $question->id }}" >
+                                    @if ($errors->has('body'))
+                                        <div class="invalid-feedback text-danger" role="alert">
+                                            <p><strong>{{ $errors->first('body') }}</strong></p>
+                                        </div>
+                                    @endif
+                                    <div class="form-group" >
+                                        <textarea class="form-control" name="body" style="resize: none" rows="5" ></textarea>
                                     </div>
-                                @endif
-                                <div class="form-group" >
-                                    <textarea class="form-control" name="body" style="resize: none" rows="5" ></textarea>
-                                </div>
-                                <div class="form-group text-right" >
-                                    <input type="submit" class="btn btn-success" value="Answer" >
-                                </div>
-                            </form>
-                        </div>
+                                    <div class="form-group text-right" >
+                                        <input type="submit" class="btn btn-success" value="Answer" >
+                                    </div>
+                                </form>
+                            </div>
+                        @endif
                         @if(isset($correctAnswer))
                             @php
                                 $answer = $correctAnswer;
@@ -179,7 +187,7 @@
                                         <div class="creply" id="reply-{{ $a_reply->id }}" >
                                             <div class="topic__head">
                                                 <div class="topic__avater">
-                                                    <a href="#" class="avatar" style="margin-right:30px;"><img src="{{ asset('fonts/icons/avatars/'.ucfirst($a_reply->user->firstname[0]).'.svg') }}" alt="avatar"></a>
+                                                    <a href="#" class="avatar" style="margin-right:30px;"><img src="{{ asset('fonts/icons/avatars/'.getFirstLetterUppercase($a_reply->user->firstname).'.svg') }}" alt="avatar"></a>
                                                 </div>
                                                 <div class="topic__caption">
                                                     <div class="topic__name">
@@ -277,13 +285,9 @@
                         @endforeach
                     </div>
                 </div>
-                <div class="topics__title"><i class="icon-Watch_Later"></i>This topic will has been closed.</div>
-                <div class="topics__control">
-                    <a href="#" class="btn"><i class="icon-Bookmark"></i>Bookmark</a>
-                    <a href="#" class="btn"><i class="icon-Share_Topic"></i>Share</a>
-                    <a href="#" class="btn btn--type-02" data-visible="desktop"><i class="icon-Reply_Fill"></i>Reply</a>
-                </div>
+                <hr>
                 <div class="topics__title">Suggested Questions</div>
+                <hr>
             </div>
             <div class="posts">
                 <div class="posts__head">
