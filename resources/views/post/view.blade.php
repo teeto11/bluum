@@ -30,6 +30,9 @@
             .topic.topic--comment {
                 margin-left: 0px !important;
             }
+            .creply{
+                margin-left:15px !important;
+            }
         }
         .child-comment-wrapper {
             max-height:25vh;
