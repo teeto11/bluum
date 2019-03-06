@@ -55,12 +55,12 @@
                     @endif
                     <h2 class="topics__heading-title">{{ ucwords($post->title) }}</h2>
                     <div class="topics__heading-info">
-                        <a href="#" class="category"><i class="bg-3ebafa"></i>{{ ucfirst($post->category) }}</a>
+                        <a href="{{ route('blog.category', formatUrlString($post->category)) }}" class="category"><i class="bg-3ebafa"></i>{{ ucfirst($post->category) }}</a>
                         @if ($post->tags)
                             <div class="tags">
                                 @php $tags = explode(',', $post->tags); @endphp
                                 @foreach ($tags as $tag)
-                                    <a href="/blog/tag/{{ $tag }}" class="bg-4f80b0">{{ $tag }}</a>
+                                    <a href="{{ route('blog.tag', urlencode($tag)) }}" class="bg-4f80b0">{{ $tag }}</a>
                                 @endforeach
                             </div>
                         @endif
@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="topic__caption">
                                     <div class="topic__name">
-                                        <a href="#">{!! getInitials($post->user, true) !!}</a>
+                                        <a href="{{ route('expert.show', $post->user->id) }}">{!! getInitials($post->user, true) !!}</a>
                                     </div>
                                     <div class="topic__date"><i class="icon-Watch_Later"></i>{{ formatTime($post->created_at) }}</div>
                                 </div>
@@ -139,7 +139,7 @@
                                     </div>
                                     <div class="topic__caption">
                                         <div class="topic__name">
-                                            <a href="#">{{ ucwords($reply->user->lastname.' '.$reply->user->firstname) }}</a>
+                                            <a href="#">{!! getInitials($reply->user, true) !!}</a>
                                         </div>
                                         <div class="topic__date">
                                             @if ($reply->recipient)
