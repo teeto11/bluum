@@ -63,7 +63,7 @@
                 <div class="topics__heading">
                     <h2 class="topics__heading-title">{{ $question->title }}</h2>
                     <div class="topics__heading-info">
-                        <a href="#" class="category"><i class="bg-3ebafa"></i>{{ ucfirst($question->category) }}</a>
+                        <a href="{{ route('question.showbycategory', formatUrlString($question->category)) }}" class="category"><i class="bg-3ebafa"></i>{{ ucfirst($question->category) }}</a>
                         @if ($question->tags)
                             <div class="tags">
                                 @php $tags = explode(',', $question->tags); @endphp
