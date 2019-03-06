@@ -174,7 +174,8 @@
                                     </div>
                                     <hr>
                                     @foreach($post->replies->where('parent_reply', $reply->id) as $creply)
-                                        <div class="creply" id="reply-{{ $creply->id }}" >
+                                        <div class="topic topic--coment" id="reply-{{ $creply->id }}" >
+                                            
                                             <p><strong>{{ $creply->recipient }}</strong> {{ $creply->body }}. <strong>{{ getInitials($creply->user) }}</strong></p>
                                         </div>
                                         <hr>

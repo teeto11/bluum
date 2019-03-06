@@ -386,6 +386,36 @@ ul ul a {
                 }
             }
         }
+        .view-users-wrapper{
+            .table-row{
+                .table-responsive{
+                    form{
+                        .row{
+                            .form-control{
+                                border-radius: 0px;
+                                border-right: 0px;
+                                background-image: url(/images/search.png) !important;
+                                background-position: top 50% left 2%;
+                                background-repeat: no-repeat;
+                                padding: 5px 50px;
+                                transition: all .5s;
+                            }
+                            .form-control:focus{
+                                background-image: none !important;
+                                padding: 5px 15px;
+                                transition: all .5s;
+                                box-shadow: none;
+                                border-color: #ced4da;
+                            }
+                            .btn{
+                                border-radius: 0px;
+                                border-left: 0px;
+                            }    
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 body::-webkit-scrollbar {
