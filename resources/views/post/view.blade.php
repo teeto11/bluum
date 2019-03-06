@@ -1,6 +1,9 @@
 @extends('layouts.app-temp')
 
 @section('header_scripts')
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/hover.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/animate.css') }}" />
     <style>
         .topic__footer-likes div a{
             margin-left: 7.5px;
@@ -28,7 +31,17 @@
                 margin-left: 0px !important;
             }
         }
-        
+        .child-comment-wrapper {
+            max-height:25vh;
+            overflow-y:auto;
+        }
+        .topic--comment-wrapper {
+            max-height:150vh;
+            overflow-y:auto;
+        }
+        .topic.topic--comment {
+            margin-top: 10px !important;
+        }
     </style>
 @endsection
 @section('content')
@@ -55,12 +68,12 @@
                     @endif
                     <h2 class="topics__heading-title">{{ ucwords($post->title) }}</h2>
                     <div class="topics__heading-info">
-                        <a href="{{ route('blog.category', formatUrlString($post->category)) }}" class="category"><i class="bg-3ebafa"></i>{{ ucfirst($post->category) }}</a>
+                        <a href="#" class="category"><i class="bg-3ebafa"></i>{{ ucfirst($post->category) }}</a>
                         @if ($post->tags)
                             <div class="tags">
                                 @php $tags = explode(',', $post->tags); @endphp
                                 @foreach ($tags as $tag)
-                                    <a href="{{ route('blog.tag', urlencode($tag)) }}" class="bg-4f80b0">{{ $tag }}</a>
+                                    <a href="/blog/tag/{{ $tag }}" class="bg-4f80b0">{{ $tag }}</a>
                                 @endforeach
                             </div>
                         @endif
@@ -75,7 +88,7 @@
                                 </div>
                                 <div class="topic__caption">
                                     <div class="topic__name">
-                                        <a href="{{ route('expert.show', $post->user->id) }}">{!! getInitials($post->user, true) !!}</a>
+                                        <a href="#">{!! getInitials($post->user, true) !!}</a>
                                     </div>
                                     <div class="topic__date"><i class="icon-Watch_Later"></i>{{ formatTime($post->created_at) }}</div>
                                 </div>
@@ -130,81 +143,85 @@
                                 </div>
                             </form>
                         </div>
-                        @foreach ($post->replies->where('parent_reply', null) as $reply)
-                            @php if(auth()->user()) $userLikedReply = userLikedReply($reply->id); @endphp
-                            <div class="topic topic--comment" id="reply-{{ $reply->id }}" >
-                                <div class="topic__head">
-                                    <div class="topic__avatar">
-                                        <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/'.ucfirst($reply->user->firstname[0]).'.svg') }}" alt="avatar"></a>
-                                    </div>
-                                    <div class="topic__caption">
-                                        <div class="topic__name">
-                                            <a href="#">{!! getInitials($reply->user, true) !!}</a>
+                        <div class="topic--comment-wrapper">
+                            @foreach ($post->replies->where('parent_reply', null) as $reply)
+                                @php if(auth()->user()) $userLikedReply = userLikedReply($reply->id); @endphp
+                                <div class="topic topic--comment" id="reply-{{ $reply->id }}" >
+                                    <div class="topic__head">
+                                        <div class="topic__avatar">
+                                            <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/'.ucfirst($reply->user->firstname[0]).'.svg') }}" alt="avatar"></a>
                                         </div>
-                                        <div class="topic__date">
-                                            @if ($reply->recipient)
-                                                <div class="topic__user topic__user--pos-r">
-                                                    <i class="icon-Reply_Fill"></i>
-                                                    <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/'.ucfirst($reply->recipient[1]).'.svg') }}" alt="avatar"></a>
-                                                    <a href="#" class="topic__user-name">{{ ucwords($reply->recipient) }}</a>
-                                                </div>
-                                            @endif
-                                            <p><i class="icon-Watch_Later"></i>{{ date("h:ia d M, Y", strtotime($reply->created_at)) }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="topic__content">
-                                    <div class="topic__text">
-                                        <p>{{ $reply->body }}</p>
-                                    </div>
-                                    <div class="topic__footer">
-                                        <div class="topic__footer-likes">
-                                            <div>
-                                                @guest
-                                                    <a href="#" class="reply-like" data-id="{{ $reply->id }}" ><i class="icon-Favorite_Topic"></i></a>
-                                                @else
-                                                    <a href="#" class="{{ ($userLikedReply) ? __('reply-unlike') : __('reply-like') }}" data-id="{{ $reply->id }}" ><i class="icon-Favorite_Topic"></i></a>
-                                                @endguest
-                                                <span id="reply-{{ $reply->id }}-likes" >{{ $reply->likes }}</span>
+                                        <div class="topic__caption">
+                                            <div class="topic__name">
+                                                <a href="#">{{ ucwords($reply->user->lastname.' '.$reply->user->firstname) }}</a>
                                             </div>
-                                            <div>
-                                                <a href="#" data-id="{{ $reply->id }}" class="reply-comment" data-name="{{ strtolower($reply->user->firstname.' '.$reply->user->lastname) }}" ><i class="icon-Reply_Empty"></i></a>
-                                                <span class="" >{{ $post->replies->where('parent_reply', $reply->id)->count() }}</span>
-                                            </div>
-                                        </div>
-                                        <div class="topic__footer-share">
-                                            <div data-visible="desktop">
-                                                <a href="#"><i class="icon-Share_Topic"></i></a>
-                                                <a href="#"><i class="icon-Flag_Topic"></i></a>
-                                                <a href="#" class="active" ><i class="icon-Already_Bookmarked"></i></a>
-                                            </div>
-                                            <div data-visible="mobile">
-                                                <a href="#"><i class="icon-More_Options"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    @foreach($post->replies->where('parent_reply', $reply->id) as $creply)
-                                        <div class="topic topic--coment" id="reply-{{ $creply->id }}" >
-                                            <div class="topic__head">
-                                                <div class="topic__avater">
-                                                <a href="#" class="avatar" style="margin-right:30px;"><img src="{{ asset('fonts/icons/avatars/'.getFirstLetterUppercase($creply->user->firstname).'.svg') }}" alt="avatar"></a>
-                                                </div>
-                                                <div class="topic__caption">
-                                                    <div class="topic__name">
-                                                        <p href="" class="">{!! getInitials($creply->user) !!} <a href="#" class="reply-comment" data-id="{{ $creply->id }}" data-parent="{{ $reply->id }}" ><i class="icon-Reply_Empty"></i></a></p>
+                                            <div class="topic__date">
+                                                @if ($reply->recipient)
+                                                    <div class="topic__user topic__user--pos-r">
+                                                        <i class="icon-Reply_Fill"></i>
+                                                        <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/'.ucfirst($reply->recipient[1]).'.svg') }}" alt="avatar"></a>
+                                                        <a href="#" class="topic__user-name">{{ ucwords($reply->recipient) }}</a>
                                                     </div>
+                                                @endif
+                                                <p><i class="icon-Watch_Later"></i>{{ date("h:ia d M, Y", strtotime($reply->created_at)) }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="topic__content">
+                                        <div class="topic__text">
+                                            <p>{{ $reply->body }}</p>
+                                        </div>
+                                        <div class="topic__footer">
+                                            <div class="topic__footer-likes">
+                                                <div>
+                                                    @guest
+                                                        <a href="#" class="reply-like" data-id="{{ $reply->id }}" ><i class="icon-Favorite_Topic"></i></a>
+                                                    @else
+                                                        <a href="#" class="{{ ($userLikedReply) ? __('reply-unlike') : __('reply-like') }}" data-id="{{ $reply->id }}" ><i class="icon-Favorite_Topic"></i></a>
+                                                    @endguest
+                                                    <span id="reply-{{ $reply->id }}-likes" >{{ $reply->likes }}</span>
+                                                </div>
+                                                <div>
+                                                    <a href="#" data-id="{{ $reply->id }}" class="reply-comment" data-name="{{ strtolower($reply->user->firstname.' '.$reply->user->lastname) }}" ><i class="icon-Reply_Empty"></i></a>
+                                                    <span class="" >{{ $post->replies->where('parent_reply', $reply->id)->count() }}</span>
                                                 </div>
                                             </div>
-                                            <div class="topic__content">
-                                                <p class=""><strong>{{ $creply->recipient }}</strong> {{ $creply->body }}</p>
+                                            <div class="topic__footer-share">
+                                                <div data-visible="desktop">
+                                                    <a href="#"><i class="icon-Share_Topic"></i></a>
+                                                    <a href="#"><i class="icon-Flag_Topic"></i></a>
+                                                    <a href="#" class="active" ><i class="icon-Already_Bookmarked"></i></a>
+                                                </div>
+                                                <div data-visible="mobile">
+                                                    <a href="#"><i class="icon-More_Options"></i></a>
+                                                </div>
                                             </div>
                                         </div>
                                         <hr>
-                                    @endforeach
+                                        <div class="child-comment-wrapper">
+                                            @foreach($post->replies->where('parent_reply', $reply->id) as $creply)
+                                                <div class="topic topic--coment" id="reply-{{ $creply->id }}" >
+                                                    <div class="topic__head">
+                                                        <div class="topic__avater">
+                                                        <a href="#" class="avatar" style="margin-right:30px;"><img src="{{ asset('fonts/icons/avatars/'.ucfirst($creply->user->firstname[0]).'.svg') }}" alt="avatar"></a>
+                                                        </div>
+                                                        <div class="topic__caption">
+                                                            <div class="topic__name">
+                                                                <a href="" class="">{!! getInitials($creply->user) !!}</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="topic__content">
+                                                        <p class=""><strong>{{ $creply->recipient }}</strong> {{ $creply->body }}</p>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                            @endforeach
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
                 </div>
                 <hr>
