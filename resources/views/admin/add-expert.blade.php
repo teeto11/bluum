@@ -12,6 +12,14 @@
             border: 1px solid #fafafa;
             height: 100%;
             overflow: hidden;
+            -webkit-transition: all 0.1s;
+            -moz-transition: all 0.1s;
+            -ms-transition: all 0.1s;
+            -o-transition: all 0.1s;
+            transition: all 0.1s;
+        }
+        #p-image-cover #p-image:hover {
+            cursor: pointer;
         }
     </style>
 @endsection
@@ -101,6 +109,13 @@
 
 @section('scripts')
     <script>
+
+        let pImageCover = $('#p-image-cover');
+        pImageCover.height(pImageCover.width());
+
+        setInterval(function () {
+            pImageCover.height(pImageCover.width());
+        }, 100);
 
         //convert canvas to base64
         function convertCanvasToImage(canvas) {
