@@ -188,11 +188,11 @@
                                         <div class="topic topic--coment" id="reply-{{ $creply->id }}" >
                                             <div class="topic__head">
                                                 <div class="topic__avater">
-                                                <a href="#" class="avatar" style="margin-right:30px;"><img src="{{ asset('fonts/icons/avatars/'.ucfirst($creply->user->firstname[0]).'.svg') }}" alt="avatar"></a>
+                                                <a href="#" class="avatar" style="margin-right:30px;"><img src="{{ asset('fonts/icons/avatars/'.getFirstLetterUppercase($creply->user->firstname).'.svg') }}" alt="avatar"></a>
                                                 </div>
                                                 <div class="topic__caption">
                                                     <div class="topic__name">
-                                                        <a href="" class="">{{ getInitials($creply->user) }}</a>
+                                                        <p href="" class="">{!! getInitials($creply->user) !!} <a href="#" class="reply-comment" data-id="{{ $creply->id }}" data-parent="{{ $reply->id }}" ><i class="icon-Reply_Empty"></i></a></p>
                                                     </div>
                                                 </div>
                                             </div>
