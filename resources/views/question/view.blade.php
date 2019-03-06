@@ -63,12 +63,12 @@
                 <div class="topics__heading">
                     <h2 class="topics__heading-title">{{ $question->title }}</h2>
                     <div class="topics__heading-info">
-                        <a href="{{ route('question.showbycategory', formatUrlString($question->category)) }}" class="category"><i class="bg-3ebafa"></i>{{ ucfirst($question->category) }}</a>
+                        <a href="#" class="category"><i class="bg-3ebafa"></i>{{ ucfirst($question->category) }}</a>
                         @if ($question->tags)
                             <div class="tags">
                                 @php $tags = explode(',', $question->tags); @endphp
                                 @foreach ($tags as $tag)
-                                    <a href="{{ route('question.showbytag', urlencode($tag)) }}" class="bg-4f80b0">{{ $tag }}</a>
+                                    <a href="{{ route('blog.tag', ['tag'=>$tag]) }}" class="bg-4f80b0">{{ $tag }}</a>
                                 @endforeach
                             </div>
                         @endif
@@ -116,75 +116,34 @@
                                 </div>
                             </div>
                         </div>
-                        @if(isset($correctAnswer))
-                            <div class="topics__title"><i class="icon-Watch_Later"></i>This topic has been closed.</div>
-                            <div class="topics__control">
-                                <a href="#" class="btn"><i class="icon-Bookmark"></i>Bookmark</a>
-                                <a href="#" class="btn"><i class="icon-Share_Topic"></i>Share</a>
-                            </div>
-                        @else
-                            <div id="comment" >
-                                <form action="{{ route('question.answer') }}" method="post">
-                                    @csrf
-                                    <input type="hidden" name="post_id" value="{{ $question->id }}" >
-                                    @if ($errors->has('body'))
-                                        <div class="invalid-feedback text-danger" role="alert">
-                                            <p><strong>{{ $errors->first('body') }}</strong></p>
-                                        </div>
-                                    @endif
-                                    <div class="form-group" >
-                                        <textarea class="form-control" name="body" style="resize: none" rows="5" ></textarea>
+                        <div id="comment" >
+                            <form action="{{ route('question.answer') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="post_id" value="{{ $question->id }}" >
+                                @if ($errors->has('body'))
+                                    <div class="invalid-feedback text-danger" role="alert">
+                                        <p><strong>{{ $errors->first('body') }}</strong></p>
                                     </div>
-                                    <div class="form-group text-right" >
-                                        <input type="submit" class="btn btn-success" value="Answer" >
-                                    </div>
-                                </form>
-                            </div>
-                        @endif
-                        @if(isset($correctAnswer))
-                            @php
-                                $answer = $correctAnswer;
-                                $r_user = $answer->user;
-                                if(auth()->user()) $userLikedReply = userLikedReply($answer->id);
-                            @endphp
-                            <div class="topic topic--comment correct-answer" id="reply-{{ $answer->id }}" >
-                                <div class="topic__head">
-                                    <div class="topic__avatar">
-                                        <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/'.getFirstLetterUppercase($r_user->firstname).'.svg') }}" alt="avatar"></a>
-                                    </div>
-                                    <div class="topic__caption">
-                                        <div class="topic__name">
-                                            <a href="#">{!! getInitials($r_user, true) !!}</a>
-                                        </div>
-                                        <div class="topic__date"><i class="icon-Watch_Later"></i>{{ formatTime($answer->created_at) }}</div>
-                                    </div>
+                                @endif
+                                <div class="form-group" >
+                                    <textarea class="form-control" name="body" style="resize: none" rows="5" ></textarea>
                                 </div>
-                                <div class="topic__content">
-                                    <div class="topic__text">
-                                        <p>{{ $answer->body }}.</p>
-                                    </div>
-                                    <div class="topic__footer">
-                                        <div class="topic__footer-likes">
-                                            <div>
-                                                <a href="#" class="up-vote" data-target="{{ $answer->id }}" ><i class="icon-Upvote"></i></a>
-                                                <span>{{ $answer->upVote->count() }}</span>
-                                            </div>
-                                            <div>
-                                                <a href="#" class="down-vote" data-target="{{ $answer->id }}" ><i class="icon-Downvote"></i></a>
-                                                <span>{{ $answer->downVote->count() }}</span>
-                                            </div>
-                                            <div>
-                                                @guest
-                                                    <a href="#" class="reply-like" data-id="{{ $answer->id }}" ><i class="icon-Favorite_Topic"></i></a>
-                                                @else
-                                                    <a href="#" class="{{ ($userLikedReply) ? __('reply-unlike') : __('reply-like') }}" data-id="{{ $answer->id }}" ><i class="icon-Favorite_Topic"></i></a>
-                                                @endguest
-                                                <span id="reply-{{ $answer->id }}-likes" >{{ $answer->likes }}</span>
-                                            </div>
-                                            <div>
-                                                <a href="#" class="reply-answer" data-id="{{ $answer->id }}" data-parent="{{ $answer->id }}" ><i class="icon-Reply_Empty"></i></a>
-                                                <span>{{ $question->replies->where('parent_reply', $answer->id)->count() }}</span>
-                                            </div>
+                                <div class="form-group text-right" >
+                                    <input type="submit" class="btn btn-success" value="Answer" >
+                                </div>
+                            </form>
+                        </div>
+                        <div class="topic--comment-wrapper">
+                            @if(isset($correctAnswer))
+                                @php
+                                    $answer = $correctAnswer;
+                                    $r_user = $answer->user;
+                                    if(auth()->user()) $userLikedReply = userLikedReply($answer->id);
+                                @endphp
+                                <div class="topic topic--comment correct-answer" id="reply-{{ $answer->id }}" >
+                                    <div class="topic__head">
+                                        <div class="topic__avatar">
+                                            <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/'.getFirstLetterUppercase($r_user->firstname).'.svg') }}" alt="avatar"></a>
                                         </div>
                                         <div class="topic__caption">
                                             <div class="topic__name">
@@ -193,12 +152,15 @@
                                             <div class="topic__date"><i class="icon-Watch_Later"></i>{{ formatTime($answer->created_at) }}</div>
                                         </div>
                                     </div>
-                                    <hr>
-                                    @foreach($question->replies->where('parent_reply', $answer->id) as $a_reply)
-                                        <div class="creply" id="reply-{{ $a_reply->id }}" >
-                                            <div class="topic__head">
-                                                <div class="topic__avater">
-                                                    <a href="#" class="avatar" style="margin-right:30px;"><img src="{{ asset('fonts/icons/avatars/'.getFirstLetterUppercase($a_reply->user->firstname).'.svg') }}" alt="avatar"></a>
+                                    <div class="topic__content">
+                                        <div class="topic__text">
+                                            <p>{{ $answer->body }}.</p>
+                                        </div>
+                                        <div class="topic__footer">
+                                            <div class="topic__footer-likes">
+                                                <div>
+                                                    <a href="#" class="up-vote" data-target="{{ $answer->id }}" ><i class="icon-Upvote"></i></a>
+                                                    <span>{{ $answer->upVote->count() }}</span>
                                                 </div>
                                                 <div>
                                                     <a href="#" class="down-vote" data-target="{{ $answer->id }}" ><i class="icon-Downvote"></i></a>
@@ -346,9 +308,13 @@
                         </div>
                     </div>
                 </div>
-                <hr>
+                <div class="topics__title"><i class="icon-Watch_Later"></i>This topic will has been closed.</div>
+                <div class="topics__control">
+                    <a href="#" class="btn"><i class="icon-Bookmark"></i>Bookmark</a>
+                    <a href="#" class="btn"><i class="icon-Share_Topic"></i>Share</a>
+                    <a href="#" class="btn btn--type-02" data-visible="desktop"><i class="icon-Reply_Fill"></i>Reply</a>
+                </div>
                 <div class="topics__title">Suggested Questions</div>
-                <hr>
             </div>
             <div class="posts">
                 <div class="posts__head">
