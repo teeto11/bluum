@@ -115,25 +115,31 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div id="comment" >
-                            <form action="{{ route('question.answer') }}" method="post">
-                                @csrf
-                                <input type="hidden" name="post_id" value="{{ $question->id }}" >
-                                @if ($errors->has('body'))
-                                    <div class="invalid-feedback text-danger" role="alert">
-                                        <p><strong>{{ $errors->first('body') }}</strong></p>
-                                    </div>
-                                @endif
-                                <div class="form-group" >
-                                    <textarea class="form-control" name="body" style="resize: none" rows="5" ></textarea>
+                            @if(isset($correctAnswer))
+                                <div class="topics__title"><i class="icon-Watch_Later"></i>This topic has been closed.</div>
+                                <div class="topics__control">
+                                    <a href="#" class="btn"><i class="icon-Bookmark"></i>Bookmark</a>
+                                    <a href="#" class="btn"><i class="icon-Share_Topic"></i>Share</a>
                                 </div>
-                                <div class="form-group text-right" >
-                                    <input type="submit" class="btn btn-success" value="Answer" >
+                            @else
+                                <div id="comment" >
+                                    <form action="{{ route('question.answer') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="post_id" value="{{ $question->id }}" >
+                                        @if ($errors->has('body'))
+                                            <div class="invalid-feedback text-danger" role="alert">
+                                                <p><strong>{{ $errors->first('body') }}</strong></p>
+                                            </div>
+                                        @endif
+                                        <div class="form-group" >
+                                            <textarea class="form-control" name="body" style="resize: none" rows="5" ></textarea>
+                                        </div>
+                                        <div class="form-group text-right" >
+                                            <input type="submit" class="btn btn-success" value="Answer" >
+                                        </div>
+                                    </form>
                                 </div>
-                            </form>
-                        </div>
-                        <div class="topic--comment-wrapper">
+                            @endif
                             @if(isset($correctAnswer))
                                 @php
                                     $answer = $correctAnswer;
@@ -179,15 +185,11 @@
                                                     <span>{{ $question->replies->where('parent_reply', $answer->id)->count() }}</span>
                                                 </div>
                                             </div>
-                                            <div class="topic__footer-share">
-                                                <div data-visible="desktop">
-                                                    <a href="#"><i class="icon-Share_Topic"></i></a>
-                                                    <a href="#"><i class="icon-Flag_Topic"></i></a>
-                                                    <a href="#" class="active"><i class="icon-Already_Bookmarked"></i></a>
+                                            <div class="topic__caption">
+                                                <div class="topic__name">
+                                                    <a href="#">{!! getInitials($r_user, true) !!}</a>
                                                 </div>
-                                                <div data-visible="mobile">
-                                                    <a href="#"><i class="icon-More_Options"></i></a>
-                                                </div>
+                                                <div class="topic__date"><i class="icon-Watch_Later"></i>{{ formatTime($answer->created_at) }}</div>
                                             </div>
                                         </div>
                                         <hr>
@@ -195,25 +197,61 @@
                                             <div class="creply" id="reply-{{ $a_reply->id }}" >
                                                 <div class="topic__head">
                                                     <div class="topic__avater">
-                                                        <a href="#" class="avatar" style="margin-right:30px;"><img src="{{ asset('fonts/icons/avatars/'.ucfirst($a_reply->user->firstname[0]).'.svg') }}" alt="avatar"></a>
+                                                        <a href="#" class="avatar" style="margin-right:30px;"><img src="{{ asset('fonts/icons/avatars/'.getFirstLetterUppercase($a_reply->user->firstname).'.svg') }}" alt="avatar"></a>
                                                     </div>
-                                                    <div class="topic__caption">
-                                                        <div class="topic__name">
-                                                            <a href="">{!! getInitials($a_reply->user) !!}</a>
-                                                        </div>
+                                                    <div>
+                                                        <a href="#" class="down-vote" data-target="{{ $answer->id }}" ><i class="icon-Downvote"></i></a>
+                                                        <span>{{ $answer->downVote->count() }}</span>
+                                                    </div>
+                                                    <div>
+                                                        @guest
+                                                            <a href="#" class="reply-like" data-id="{{ $answer->id }}" ><i class="icon-Favorite_Topic"></i></a>
+                                                        @else
+                                                            <a href="#" class="{{ ($userLikedReply) ? __('reply-unlike') : __('reply-like') }}" data-id="{{ $answer->id }}" ><i class="icon-Favorite_Topic"></i></a>
+                                                        @endguest
+                                                        <span id="reply-{{ $answer->id }}-likes" >{{ $answer->likes }}</span>
+                                                    </div>
+                                                    <div>
+                                                        <a href="#" class="reply-answer" data-id="{{ $answer->id }}" data-parent="{{ $answer->id }}" ><i class="icon-Reply_Empty"></i></a>
+                                                        <span>{{ $question->replies->where('parent_reply', $answer->id)->count() }}</span>
                                                     </div>
                                                 </div>
-                                                <div class="topic__content">
-                                                    <p class=""><strong>{{ $a_reply->recipient }}</strong> {{ $a_reply->body }}. <a href="#" class="reply-answer" data-id="{{ $a_reply->id }}" data-parent="{{ $answer->id }}" ><i class="icon-Reply_Empty"></i></a></p>
+                                                <div class="topic__footer-share">
+                                                    <div data-visible="desktop">
+                                                        <a href="#"><i class="icon-Share_Topic"></i></a>
+                                                        <a href="#"><i class="icon-Flag_Topic"></i></a>
+                                                        <a href="#" class="active"><i class="icon-Already_Bookmarked"></i></a>
+                                                    </div>
+                                                    <div data-visible="mobile">
+                                                        <a href="#"><i class="icon-More_Options"></i></a>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <hr>
+                                            @foreach($question->replies->where('parent_reply', $answer->id) as $a_reply)
+                                                <div class="creply" id="reply-{{ $a_reply->id }}" >
+                                                    <div class="topic__head">
+                                                        <div class="topic__avater">
+                                                            <a href="#" class="avatar" style="margin-right:30px;"><img src="{{ asset('fonts/icons/avatars/'.ucfirst($a_reply->user->firstname[0]).'.svg') }}" alt="avatar"></a>
+                                                        </div>
+                                                        <div class="topic__caption">
+                                                            <div class="topic__name">
+                                                                <a href="">{!! getInitials($a_reply->user) !!}</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="topic__content">
+                                                        <p class=""><strong>{{ $a_reply->recipient }}</strong> {{ $a_reply->body }}. <a href="#" class="reply-answer" data-id="{{ $a_reply->id }}" data-parent="{{ $answer->id }}" ><i class="icon-Reply_Empty"></i></a></p>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                            @endforeach
                                         @endforeach
+                                        </div>
+                                        <div class="text-right">
+                                            <p class="text-success" style="font-weight: bold;" >CORRECT ANSWER</p>
+                                        </div>
                                     </div>
-                                    <div class="text-right">
-                                        <p class="text-success" style="font-weight: bold;" >CORRECT ANSWER</p>
-                                    </div>
-                                </div>
                             @endif
                             @foreach ($question->replies->where('parent_reply', null)->where('correct', false) as $answer)
                                 @php
