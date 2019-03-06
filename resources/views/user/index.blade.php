@@ -61,7 +61,7 @@
     <section class="questions">
         <div class="table-row">
             <div class="bg-white">
-                <h3 class="" style="font-size:20px;">Recent Responses</h3><hr>
+                <h3 class="" style="font-size:20px;">Recent Responses <a href="" style="float:right;font-size:15px;">view all</a></h3><hr>
                 <table class="table table-borderless table-hover">
                     <thead>
                     <tr>
