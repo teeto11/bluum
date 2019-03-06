@@ -135,28 +135,6 @@
                                     <div class="form-group" >
                                         <textarea class="form-control" name="body" style="resize: none" rows="5" ></textarea>
                                     </div>
-<<<<<<< HEAD
-                                @endif
-                                <div class="form-group" >
-                                    <textarea class="form-control" name="body" style="resize: none" rows="5" ></textarea>
-                                </div>
-                                <div class="form-group text-right" >
-                                    <input type="submit" class="btn btn-success" value="Answer" >
-                                </div>
-                            </form>
-                        </div>
-                        <div class="topic--comment-wrapper">
-                            @if(isset($correctAnswer))
-                                @php
-                                    $answer = $correctAnswer;
-                                    $r_user = $answer->user;
-                                    if(auth()->user()) $userLikedReply = userLikedReply($answer->id);
-                                @endphp
-                                <div class="topic topic--comment correct-answer" id="reply-{{ $answer->id }}" >
-                                    <div class="topic__head">
-                                        <div class="topic__avatar">
-                                            <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/'.getFirstLetterUppercase($r_user->firstname).'.svg') }}" alt="avatar"></a>
-=======
                                     <div class="form-group text-right" >
                                         <input type="submit" class="btn btn-success" value="Answer" >
                                     </div>
@@ -207,7 +185,6 @@
                                                 <a href="#" class="reply-answer" data-id="{{ $answer->id }}" data-parent="{{ $answer->id }}" ><i class="icon-Reply_Empty"></i></a>
                                                 <span>{{ $question->replies->where('parent_reply', $answer->id)->count() }}</span>
                                             </div>
->>>>>>> c8dba437b2e902aecfaeed5ec70ff26c34992129
                                         </div>
                                         <div class="topic__caption">
                                             <div class="topic__name">
@@ -216,24 +193,12 @@
                                             <div class="topic__date"><i class="icon-Watch_Later"></i>{{ formatTime($answer->created_at) }}</div>
                                         </div>
                                     </div>
-<<<<<<< HEAD
-                                    <div class="topic__content">
-                                        <div class="topic__text">
-                                            <p>{{ $answer->body }}.</p>
-                                        </div>
-                                        <div class="topic__footer">
-                                            <div class="topic__footer-likes">
-                                                <div>
-                                                    <a href="#" class="up-vote" data-target="{{ $answer->id }}" ><i class="icon-Upvote"></i></a>
-                                                    <span>{{ $answer->upVote->count() }}</span>
-=======
                                     <hr>
                                     @foreach($question->replies->where('parent_reply', $answer->id) as $a_reply)
                                         <div class="creply" id="reply-{{ $a_reply->id }}" >
                                             <div class="topic__head">
                                                 <div class="topic__avater">
                                                     <a href="#" class="avatar" style="margin-right:30px;"><img src="{{ asset('fonts/icons/avatars/'.getFirstLetterUppercase($a_reply->user->firstname).'.svg') }}" alt="avatar"></a>
->>>>>>> c8dba437b2e902aecfaeed5ec70ff26c34992129
                                                 </div>
                                                 <div>
                                                     <a href="#" class="down-vote" data-target="{{ $answer->id }}" ><i class="icon-Downvote"></i></a>
