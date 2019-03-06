@@ -18,6 +18,17 @@
         #reply-comment a.close{
             font-size: 3rem;
         }
+        @media (max-width:787px){
+            .container{
+                width:100% !important;
+            }
+        }
+        @media only screen and (max-width: 1039px){
+            .topic.topic--comment {
+                margin-left: 0px !important;
+            }
+        }
+        
     </style>
 @endsection
 @section('content')
@@ -175,8 +186,19 @@
                                     <hr>
                                     @foreach($post->replies->where('parent_reply', $reply->id) as $creply)
                                         <div class="topic topic--coment" id="reply-{{ $creply->id }}" >
-                                            
-                                            <p><strong>{{ $creply->recipient }}</strong> {{ $creply->body }}. <strong>{{ getInitials($creply->user) }}</strong></p>
+                                            <div class="topic__head">
+                                                <div class="topic__avater">
+                                                <a href="#" class="avatar" style="margin-right:30px;"><img src="{{ asset('fonts/icons/avatars/'.ucfirst($creply->user->firstname[0]).'.svg') }}" alt="avatar"></a>
+                                                </div>
+                                                <div class="topic__caption">
+                                                    <div class="topic__name">
+                                                        <a href="" class="">{{ getInitials($creply->user) }}</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="topic__content">
+                                                <p class=""><strong>{{ $creply->recipient }}</strong> {{ $creply->body }}</p>
+                                            </div>
                                         </div>
                                         <hr>
                                     @endforeach

@@ -17,6 +17,19 @@
         .correct-answer{
             border: 1px solid #3c763d;
         }
+        @media (max-width:787px){
+            .container{
+                width:100% !important;
+            }
+        }
+        @media only screen and (max-width: 1039px){
+            .topic.topic--comment {
+                margin-left: 0px !important;
+            }
+            .creply{
+                margin-left:15px !important;
+            }
+        }
     </style>
 @endsection
 
@@ -164,7 +177,19 @@
                                     <hr>
                                     @foreach($question->replies->where('parent_reply', $answer->id) as $a_reply)
                                         <div class="creply" id="reply-{{ $a_reply->id }}" >
-                                            <p><strong>{{ $a_reply->recipient }}</strong> {{ $a_reply->body }}. <strong>{!! getInitials($a_reply->user) !!}</strong> <a href="#" class="reply-answer" data-id="{{ $a_reply->id }}" data-parent="{{ $answer->id }}" ><i class="icon-Reply_Empty"></i></a></p>
+                                            <div class="topic__head">
+                                                <div class="topic__avater">
+                                                    <a href="#" class="avatar" style="margin-right:30px;"><img src="{{ asset('fonts/icons/avatars/'.ucfirst($a_reply->user->firstname[0]).'.svg') }}" alt="avatar"></a>
+                                                </div>
+                                                <div class="topic__caption">
+                                                    <div class="topic__name">
+                                                        <a href="">{!! getInitials($a_reply->user) !!}</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="topic__content">
+                                                <p class=""><strong>{{ $a_reply->recipient }}</strong> {{ $a_reply->body }}. <a href="#" class="reply-answer" data-id="{{ $a_reply->id }}" data-parent="{{ $answer->id }}" ><i class="icon-Reply_Empty"></i></a></p>
+                                            </div>
                                         </div>
                                         <hr>
                                     @endforeach
