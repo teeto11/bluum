@@ -103,3 +103,7 @@ Route::middleware(['auth', 'admin'])->group(function() {
 Route::post('/search', 'IndexController@search')->name('search');
 Route::get('/search/{query}', 'IndexController@searchResult')->name('search.result');
 Route::get('/notification', 'IndexController@notification')->name('notification');
+Route::get('/terms', function (){ return view('terms')->with('title', 'Terms and Conditions'); })->name('terms');
+Route::get('/privacy', function (){ return view('privacy')->with('title', 'Privacy Policy'); })->name('privacy');
+Route::get('/contact-us', function (){ return view('contact')->with('title', 'Contact Us'); })->name('contact');
+Route::get('/about', function (){ return view('about')->with('title', 'About Us'); })->name('about');
