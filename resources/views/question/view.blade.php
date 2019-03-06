@@ -468,7 +468,6 @@
             });
         });
     </script>
-
     <script>
         $(".reply-answer").click(function (e) {
 
