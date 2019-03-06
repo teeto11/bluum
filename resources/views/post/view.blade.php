@@ -207,7 +207,7 @@
                                                         </div>
                                                         <div class="topic__caption">
                                                             <div class="topic__name">
-                                                                <a href="" class="">{{ getInitials($creply->user) }}</a>
+                                                                <a href="" class="">{!! getInitials($creply->user) !!}</a>
                                                             </div>
                                                         </div>
                                                     </div>
