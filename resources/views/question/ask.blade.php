@@ -1,5 +1,19 @@
 @extends('layouts.app-temp')
 
+@section('header_scripts')
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/hover.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/animate.css') }}" />
+
+    <style>
+        @media (max-width:787px){
+            .container{
+                width:100% !important;
+            }
+        }
+    </style>
+@endsection
+
 @section('content')
     @include('widgets.top-nav-bar')
     <main>
@@ -7,16 +21,16 @@
             <div class="create">
                 <form action="{{ route('question.store') }}" method="post" >
                     @csrf
-                    <div class="create__head">
+                    <div class="">
                         <div class="create__title"><img src="{{ asset('fonts/icons/main/New_Topic.svg') }}" alt="New topic">Ask your question</div>
-                    </div>
+                    </div><hr>
                     @if ($errors->has('title'))
                         <span class="invalid-feedback text-danger" role="alert">
                             <strong><p>{{ $errors->first('title') }}</p></strong>
                         </span>
                     @endif
                     <div class="create__section">
-                        <label class="create__label" for="question">Question</label>
+                        <label class="" for="question">Question</label>
                         <input type="text" class="form-control" name="title" id="question" />
                     </div>
                     @if ($errors->has('category'))
@@ -25,7 +39,7 @@
                         </span>
                     @endif
                     <div class="create__section">
-                        <label class="create__label" for="category">Select Category</label>
+                        <label class=" for="category">Select Category</label>
                         <label class="custom-select">
                             <select id="category" name="category" >
                                 <option hidden></option>
@@ -41,7 +55,7 @@
                         </span>
                     @endif
                     <div class="create__section create__textarea">
-                        <label class="create__label" for="description">Description</label>
+                        <label class="" for="description">Description</label>
                         <textarea class="form-control" id="description" name="description"></textarea>
                     </div>
                     @if ($errors->has('tags'))
@@ -50,7 +64,7 @@
                         </span>
                     @endif
                     <div class="create__section">
-                        <label class="create__label" for="tags">Add Tags</label>
+                        <label class="" for="tags">Add Tags</label>
                         <input type="text" class="form-control" id="tags" name="tags" placeholder="e.g. nature, science">
                     </div>
                     <div class="create__footer">

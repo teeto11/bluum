@@ -19,7 +19,7 @@
                         <div class="image-wrapper">
                             <img src="{{ asset('storage/profile_img/'.$expert->expert->profile_picture) }}" class="" alt="">
                         </div>
-                        <div class="details-body">
+                        <div class="details-body" style="margin-left:20px;">
                             <section class="expert-header">
                                 <h6 class="expert-name"><i class="fa fa-user-circle-o"></i>{{ ucwords($expert->firstname.' '.$expert->lastname) }}</h6>
                                 <h6 class="expert-practice"><i class="fa fa-briefcase"></i> {{ ucwords($details->expertise)  }}</h6>
@@ -35,7 +35,7 @@
                                             <form action="{{ route('expert.unfollow') }}" method="post" >
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{ $expert->id }}">
-                                                <button type="submit" class="btn hvr-grow">UnFollow <i class="glyphicon-remove-sign"></i></button>
+                                                <button type="submit" class="btn hvr-grow" style="font-size:13px;">UnFollow <i class="fa fa-remove"></i></button>
                                             </form>
                                         @elseif(auth()->user() && $expert->id == auth()->user()->id)
 
