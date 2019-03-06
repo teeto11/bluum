@@ -6,6 +6,16 @@
             <div class="table-row">
                 <div class="table-responsive bg-white px-4">
                     <h3 class="">All Experts</h3><hr>
+                    <form action="">
+                        <div class="row">
+                            <div class="input-group col-md-6 offset-md-6">
+                                <input type="text" class="form-control" id="search" name="q" title="search" placeholder="Search" value="">
+                                <div class="input-group-addon">
+                                    <input type="submit" class="btn btn" value="Search">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                     <table class="table table-striped table-hover">
                         <thead>
                         <tr>

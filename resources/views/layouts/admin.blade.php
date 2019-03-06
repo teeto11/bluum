@@ -48,7 +48,7 @@
                 </ul>
             </li>
             <li>
-                <a href="#">Users <i class="fa fa-users float-right"></i></a>
+                <a href="/admin/users">Users <i class="fa fa-users float-right"></i></a>
             </li>
             <li>
                 <a href="/admin/questions">Questions <i class="fa fa-question-circle float-right"></i></a>

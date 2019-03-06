@@ -168,12 +168,20 @@
 {
     webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
     box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
-    background-color: #be49d1 !important;
+    background-color: rgb(86, 172, 126) !important;
     color: #FFF !important;
-    border-color: #be49d1;
+    border-color: rgb(86, 172, 126);
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
 }
-
+.btn-ask:hover{
+	background:#4c7d63 !important;
+	border-color: #4c7d63 !important;
+}
+.experts-intro-text{
+	display: flex !important;
+	justify-content: center !important;
+	align-items: center !important;
+}
 .btn-lg
 {
 	height: 55px;
