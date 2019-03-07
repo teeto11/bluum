@@ -26,12 +26,11 @@
                             <table class="table table-striped table-hover">
                                 <thead>
                                     <tr>
-                                        <th scope="" style="width:25%">Userame</th>
-                                        <th scope="" style="width:25%">Email</th>
-                                        <th scope="" style="width:15%">Role</th>
-                                        <th scope="" style="width:10%">Status</th>
-                                        <th style="width:15%">Joined</th>
-                                        <th></th>
+                                        <th>Username</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
+                                        <th>Status</th>
+                                        <th >Joined</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -40,9 +39,8 @@
                                             <td>{{ $user->username }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->role }}</td>
-                                            <td>{{ $user->active }}</td>
-                                            <td>{{ $user->create_at }}</td>
-                                            <td><a href="/admin/view-user/{{ $user->id }}" class="btn btn-warning"><i class="fa fa-eye text-light"></i></a></td>
+                                            <td>{!! ($user->active) ? '<span class="text-success" >active</span>' : '<span class="text-danger" >disabled</span>' !!}</td>
+                                            <td>{{ formatTime($user->created_at) }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

@@ -114,8 +114,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                <hr>
                                 @if(isset($correctAnswer))
-                                    <hr>
                                     <div class="topics__title"><i class="icon-Watch_Later"></i>This topic has been closed.</div>
                                     <div class="topics__control">
                                         <a href="#" class="btn"><i class="icon-Bookmark"></i>Bookmark</a>
