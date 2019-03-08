@@ -32,10 +32,10 @@
                 </div>
                 <div class="footer__links col-sm-12 col-xs-12 col-md-4">
                     <div class="footer-social-bar">
-                        <a href=""><i class="fa fa-facebook"></i></a>
-                        <a href=""><i class="fa fa-twitter"></i></a>
-                        <a href=""><i class="fa fa-linkedin"></i></a>
-                        <a href=""><i class="fa fa-instagram"></i></a>
+                        <a href="https://web.facebook.com/bluumhealth/?_rdc=1&_rdr"><i class="fa fa-facebook"></i></a>
+                        <a href="https://twitter.com/bluumhealth"><i class="fa fa-twitter"></i></a>
+                        <a href="https://ng.linkedin.com/in/bluum-health-177071178"><i class="fa fa-linkedin"></i></a>
+                        <a href="https://www.instagram.com/bluumhealth/?hl=en"><i class="fa fa-instagram"></i></a>
                     </div>
                 </div>
             </div>
