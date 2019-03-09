@@ -25,6 +25,11 @@
                         @csrf
                         <div class="signup__form">
                             <div class="signup__section">
+                                @if (session()->has('error'))
+                                    <span class="invalid-feedback text-danger" role="alert">
+                                        <strong><p>{{ ucfirst(session('error')) }}</p></strong>
+                                    </span>
+                                @endif
                                 @if ($errors->has('email') || $errors->has('password') )
                                     <span class="invalid-feedback text-danger" role="alert">
                                         <strong><p>Email or Password incorrect</p></strong>
