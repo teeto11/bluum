@@ -25,6 +25,7 @@ class PostLikeService{
 
                 $post->likes = count($post->postLikes);
                 $post->save();
+                NotificationService::postLike($post)->save();
                 return $post->likes;
             }
         }

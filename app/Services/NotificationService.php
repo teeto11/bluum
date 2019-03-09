@@ -67,9 +67,11 @@ class NotificationService{
 
     static function postLike($post){
 
+        $user = User::find(auth()->user()->id);
         $notification = new Notificaton;
         $notification->user_id = $post->user->id;
-        $notification->notification = '<strong>'.getInitials(auth()->user).'</strong> Liked your '.($post->type == 'QUESTION') ? 'Question' : 'Post';
+        $type = ($post->type == 'QUESTION') ? 'Question' : 'Post';
+        $notification->notification = '<strong>'.getInitials($user).'</strong> Liked your '.$type;
 
         $urlParams = [$post->id, formatUrlString($post->title)];
         if ($post->type == 'QUESTION') {
@@ -90,7 +92,7 @@ class NotificationService{
             $notification->notification = '<strong>'.getInitials($user).'</strong> Liked your comment';
         }else {
             $type = ($post->type == 'QUESTION') ? 'answer' : 'comment';
-            $notification->notification = '<strong>'.getInitials($user).'</strong> Liked your comment';
+            $notification->notification = '<strong>'.getInitials($user).'</strong> Liked your '.$type;
         }
 
         $urlParams = [$post->id, formatUrlString($post->title)];
