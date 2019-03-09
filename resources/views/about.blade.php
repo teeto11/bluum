@@ -36,7 +36,7 @@
             <section class="layer2">
                 <div class="card">
                     <p><i class="fa fa-question-circle"></i> Ask</p>
-                    <p>Ask The community questions and get answers from variuos experts</p>
+                    <p>Ask the community questions and get answers from various experts</p>
                 </div>
                 <div class="card">
                     <p><i class="fa fa-commenting"></i> Answer</p>
