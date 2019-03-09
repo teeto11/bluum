@@ -30,7 +30,7 @@
                             Instagram(@bluumhealth across all social media platforms)</p>
                 </div>
                 <div class="image-wrapper animated bounceInRight">
-                    <img src="assets/images/laptop.png" alt="">
+                    <img src="/images/laptop.png" alt="">
                 </div>
             </section>
             <section class="layer2">
@@ -44,7 +44,7 @@
                 </div>
                 <div class="card">
                     <p><i class="fa fa-bookmark-o"></i> Post</p>
-                    <p>Stay updated with posts of variuos experts you follow</p>
+                    <p>Stay updated with posts of various experts you follow</p>
                 </div>
             </section>
         </div>

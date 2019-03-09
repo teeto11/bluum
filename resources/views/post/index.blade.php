@@ -87,9 +87,9 @@
                                         <img src="/storage/post_cover_image/{{ $post->cover_img }}" width="210" height="" alt="">
                                     </div>
                                     <div class="post-details">
-                                        <p class="mini-header"><span>{{ formatTime($post->created_at) }}</span> - <span class="medicine"><a href="{{ route('blog.category', formatUrlString($post->category)) }}" >{{ ucfirst($post->category) }}</a></span> - <span>{{ $post->replies->count() }} comments</span> - <span class="views"> {{ $post->views }} view{{ ($post->views > 1) ? 's' : '' }} </span></p>
-                                        <p class="post-header"><a href="{{ $viewLink }}" ><b>{{ ucwords($post->title) }}</b></a> <span class="views" style="float: right; opacity: .6"><span class="activity">Last updated</span> {{ getLastActivityTime($post->updated_at) }}</span> </p>
-                                        <p class="mini-text">{{ ucfirst($post->body) }}</p>
+                                        <p class="mini-header"><span style="color:#fc5305">{{ formatTime($post->created_at) }}</span> - <span class="medicine"><a href="{{ route('blog.category', formatUrlString($post->category)) }}" style="color:#1ea059;" >{{ ucfirst($post->category) }}</a></span> - <span>{{ $post->replies->count() }} comments</span> - <span class="views" style="color:#fc5305;"> {{ $post->views }} view{{ ($post->views > 1) ? 's' : '' }} </span></p>
+                                        <p class="post-header"><a href="{{ $viewLink }}" ><b>{{ ucwords($post->title) }}</b></a> <span class="views" style="float: right; opacity: .6;font-size:14px; color:#A2DABC;"><span class="activity">Last updated</span> {{ getLastActivityTime($post->updated_at) }}</span> </p>
+                                        <p class="mini-text" style="font-size:14px;">{{ ucfirst($post->body) }}</p>
                                         <p class="buttons"><span class="" style="float: left">Posted by: <a href="{{ route('expert.show', $post->user->id) }}" class="name">{{ ucwords($post->user->firstname.' '.$post->user->lastname) }}</a></span> <a href="{{ $viewLink }}" class="btn-sm read"><i class="fa fa-book"></i>Read more</a> </p>
                                     </div>
                                 </div>

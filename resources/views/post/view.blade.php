@@ -51,10 +51,11 @@
     @include('widgets.top-nav-bar')
     <main>
         <div class="container">
-            <div class="nav">
-                <div class="nav__categories js-dropdown">
-                    <div class="nav__select">
-                        <a href="{{ \Illuminate\Support\Facades\URL::previous() }}" class="nav__thread-btn nav__thread-btn--prev"><i class="icon-Arrow_Left"></i>Back</a>
+            <div class="nav" style="width:100%">
+                <div class="nav__categories js-dropdown" style="width:100%">
+                    <div class="nav__select" style="width:100%">
+                        <a href="{{ \Illuminate\Support\Facades\URL::previous() }}" class="btn"><i class="icon-Arrow_Left"></i>Back</a>
+                        <a href="" class="btn" style="float:right"><i class="fa fa-download"></i> Download</a>
                     </div>
                 </div>
             </div>

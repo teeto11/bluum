@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div class="image-wrapper col-md-7 animated bounceInRight" style="">
-                    <img src="assets/images/contact.jpg" alt="">
+                    <img src="/images/contact.jpg" alt="">
                 </div>
             </div>
         </div>
