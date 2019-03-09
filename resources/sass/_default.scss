@@ -1613,3 +1613,13 @@ body::-webkit-scrollbar-track {
         }
     }
 }
+@media screen and (min-width:1038px){
+    .nav-wrapper{
+        .md-none{
+            display: none;
+        }
+        .divider-hr{
+            display:none;
+        }
+    }
+}
