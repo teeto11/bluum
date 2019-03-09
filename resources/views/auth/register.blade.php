@@ -66,9 +66,10 @@
                             @endif
                             <label class="signup__label" for="password">{{ __('Password:') }}</label>
                             <div class="message-input">
-                                <input type="password" class="form-control" name="password" id="password" />
+                                <input type="password" class="form-control" name="password" id="password" placeholder="Must contain letters and numbers" />
                             </div>
                         </div>
+
                         <div class="signup__section">
                             <label class="signup__label" for="password-confirm">{{ __('Confirm Password:') }}</label>
                             <div class="message-input">
