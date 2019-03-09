@@ -126,7 +126,7 @@
 										</div>
 										<div class="card-icon-text">
 											<h5 class="card-title">Ask an expert</h5>
-											<p class="card-text">We took a step further and created a set of 70+ pages for a variety of purposes that makes it the ideal point to start building websites of any kind.</p>
+											<p class="card-text">Our experts are selectively handpicked all over the world and have a conscious effort to help you achieve a healthy beginning with your baby.</p>
 										</div>
 									</div>
 								</div>
