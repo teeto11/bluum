@@ -32,10 +32,12 @@
                 </div>
                 <nav class="dropdown dropdown--design-01" data-dropdown-list="menu">
                     <div>
-                        <ul class="dropdown__catalog row md-none">
-                            <li class="col-xs-6"><a href="{{ route('login') }}">Sign In</a></li>
-                            <li class="col-xs-6"><a href="{{ route('register') }}">Sign Up</a></li>
-                        </ul><hr class="divider-hr">
+                        @guest
+                            <ul class="dropdown__catalog row md-none">
+                                <li class="col-xs-6"><a href="{{ route('login') }}">Sign In</a></li>
+                                <li class="col-xs-6"><a href="{{ route('register') }}">Sign Up</a></li>
+                            </ul><hr class="divider-hr">
+                        @endguest
                         <ul class="dropdown__catalog row">
                             <li class="col-xs-6"><a href="{{ route('question.create') }}">Ask</a></li>
                             <li class="col-xs-6"><a href="{{ route('experts') }}">Experts</a></li>
@@ -52,24 +54,34 @@
                             <li class="col-xs-6"><a href="{{ route('question.showbycategory', formatUrlString('common illness')) }}" class="category"><i class="bg-777da7"></i>Common illness</a></li>
                             <li class="col-xs-6"><a href="{{ route('question.showbycategory', formatUrlString('special illness')) }}" class="category"><i class="bg-368f8b"></i>Special illness</a></li>
                         </ul>
-                        <hr class="divider-hr">
-                        <ul class="dropdown__catalog row md-none">
-                            <li class="col-xs-6"><a href="{{ route('admin.home') }}"> Dashboard</a></li>
-                            <li class="col-xs-6"><a href="{{ route('user.profile') }}">Profile</a></li>
-                            <li class="col-xs-6"><a href="{{ route('expert.posts') }}">Topics</a></li>
-                            <li class="col-xs-6"><a href="{{ route('notification') }}">Notifications</a></li>
-                            <li class="col-xs-6">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                        @auth
+                            <hr class="divider-hr">
+                            <ul class="dropdown__catalog row md-none">
+                                @if(auth()->user()->role == 'ADMIN')
+                                    <li><a href="{{ route('admin.home') }}">Dashboard</a></li>
+                                @elseif(auth()->user()->role == 'EXPERT')
+                                    <li class="col-xs-6"><a href="{{ route('expert.profile') }}">Dashboard</a></li>
+                                    <li class="col-xs-6"><a href="{{ route('user.profile') }}">Profile</a></li>
+                                    <li class="col-xs-6"><a href="{{ route('expert.posts') }}">Topics</a></li>
+                                    <li class="col-xs-6"><a href="{{ route('notification') }}">Notifications</a></li>
+                                @else
+                                    <li class="col-xs-6"><a href="{{ route('user.profile') }}">Profile</a></li>
+                                    <li class="col-xs-6"><a href="{{ route('user.questions') }}">Questions</a></li>
+                                    <li class="col-xs-6"><a href="{{ route('notification') }}">Notifications</a></li>
+                                @endif
+                                <li class="col-xs-6">
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </li>
-                        </ul>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </li>
+                            </ul>
+                        @endauth
                     </div>
                     <div>
                         <ul class="dropdown__catalog row">
@@ -116,10 +128,6 @@
                                     <li><a href="{{ route('user.questions') }}">Questions</a></li>
                                     <li><a href="{{ route('notification') }}">Notifications</a></li>
                                 @endif
-                                {{--<li><a href="#">Badges</a></li>
-                                <li><a href="#">My Groups</a></li>--}}
-                                {{--<li><a href="">Likes</a></li>
-                                <li><a href="#">Solved</a></li>--}}
                                 <li>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
