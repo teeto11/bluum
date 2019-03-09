@@ -14,6 +14,11 @@
 			<div class="posts-subwrapper">
 				<div class="main">
 					<div class="row">
+                        @if($result->total() < 1)
+                            <div>
+                                <p>Nothing was found</p>
+                            </div>
+                        @endif
 						@foreach($result as $post)
                             @php $urlParam = ['id'=>$post->id, 'title'=>formatUrlString($post->title)]; @endphp
                             <div class="content-wrapper" style="width:100%;">
