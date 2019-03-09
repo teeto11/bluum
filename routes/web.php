@@ -45,6 +45,21 @@ Route::post('/post/unlike', 'PostLikeController@unlike')->name('post.unlike');
 Route::post('/reply/like', 'ReplyLikeController@like')->name('reply.like');
 Route::post('/reply/unlike', 'ReplyLikeController@unlike')->name('reply.unlike');
 
+Route::middleware('roles:expert')->group(function() {
+    Route::prefix('expert')->group(function () {
+        Route::get('/profile', 'ExpertController@profile')->name('expert.profile');
+        Route::get('/edit', 'ExpertController@showEditForm')->name('expert.edit');
+        Route::post('/update', 'ExpertController@update')->name('expert.update');
+        Route::get('/posts', 'ExpertController@viewPostsAsExpert')->name('expert.posts');
+        Route::get('/post/popular', 'ExpertController@viewPopularPostsAsExpert')->name('expert.posts.popular');
+        Route::get('/post/{category}', 'ExpertController@viewPostsAsExpert')->name('expert.posts.viewByCategory');
+        Route::get('/answers', 'ExpertController@viewAnswersAsExpert')->name('expert.answers');
+        Route::delete('/post', 'ExpertController@deletePost')->name('expert.post.delete');
+        Route::delete('/post/reply', 'ExpertController@deleteResponse')->name('expert.post.reply.delete');
+
+    });
+});
+
 Route::get('/experts', 'ExpertController@index')->name('experts');
 Route::post('/expert/follow', 'ExpertController@followExpert')->name('expert.follow');
 Route::post('/expert/unfollow', 'ExpertController@unfollowExpert')->name('expert.unfollow');
@@ -61,21 +76,6 @@ Route::middleware('roles:expert,admin')->group(function() {
     Route::get('blog/post/edit/{id}', 'PostController@edit')->name('blog.post.edit');
     Route::put('/blog/post/{post}', 'PostController@update')->name('blog.post.update');
     Route::post('/question/answer', 'ReplyController@answerQuestion')->name('question.answer');
-});
-
-Route::middleware('roles:expert')->group(function() {
-    Route::prefix('expert')->group(function () {
-        Route::get('/profile', 'ExpertController@profile')->name('expert.profile');
-        Route::get('/edit', 'ExpertController@showEditForm')->name('expert.edit');
-        Route::post('/update', 'ExpertController@update')->name('expert.update');
-        Route::get('/posts', 'ExpertController@viewPostsAsExpert')->name('expert.posts');
-        Route::get('/post/popular', 'ExpertController@viewPopularPostsAsExpert')->name('expert.posts.popular');
-        Route::get('/post/{category}', 'ExpertController@viewPostsAsExpert')->name('expert.posts.viewByCategory');
-        Route::get('/answers', 'ExpertController@viewAnswersAsExpert')->name('expert.answers');
-        Route::delete('/post', 'ExpertController@deletePost')->name('expert.post.delete');
-        Route::delete('/post/reply', 'ExpertController@deleteResponse')->name('expert.post.reply.delete');
-
-    });
 });
 
 Route::middleware('roles:admin')->group(function() {
