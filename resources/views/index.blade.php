@@ -17,10 +17,17 @@
     @include('widgets.top-nav-bar')
     <section class="bg-header view text-white">
 		<div class="container text-center mask rgba-gradient hoverable">
-			<h1>Your journey through pregnancy <br />begins here.</h1>
-			<p>
-				<a href="/register" class="btn btn-bluum btn-lg">Get Started</a>
-			</p>
+			@if(auth()->user())
+				<h1>Your journey through pregnancy <br />begins here.</h1>
+				<p>
+					<a href="{{ route('blog') }}" class="btn btn-bluum btn-lg">View Blog</a>
+				</p>
+			@else
+				<h1>Your journey through pregnancy <br />begins here.</h1>
+				<p>
+					<a href="{{ route('register') }}" class="btn btn-bluum btn-lg">Get Started</a>
+				</p>
+			@endif
 		</div>
 	</section>
     <!-- MAIN -->

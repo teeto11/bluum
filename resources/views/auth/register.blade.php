@@ -18,11 +18,11 @@
                 @csrf
                 <div class="signup__container">
                     <div class="signup__logo">
-                        <a href="index.html"><img src="{{asset('images/logo_small.png')}}" alt="logo" />Bluumhealth</a>
+                        <a href="{{ route('index') }}"><img src="{{asset('images/logo_small.png')}}" alt="logo" />Bluumhealth</a>
                     </div>
                     <div class="signup__head">
                         <h3>Create a New Bluumhealth Account</h3>
-                        <p>By singing up you can start posting, replying to topics, vote topics and many more.</p>
+                        <p>By signing up you can start posting, replying to topics, vote topics and many more.</p>
                     </div>
                     <div class="signup__form">
                         @if ($errors->has('firstname'))
@@ -95,7 +95,7 @@
     <!-- FOOTER -->
     <footer class="signup__footer">
         <div class="container">
-            <p class="signup__link">Already have an account? <a href="/login" class="btn">Sign In</a></p>
+            <p class="signup__link">Already have an account? <a href="{{ route('login') }}" class="btn">Sign In</a></p>
         </div>
     </footer>
 </div>
