@@ -1809,6 +1809,10 @@ body::-webkit-scrollbar-track {
   .nav-wrapper .md-none {
     display: none;
   }
+
+  .nav-wrapper .divider-hr {
+    display: none;
+  }
 }
 
 .navbar-laravel {
