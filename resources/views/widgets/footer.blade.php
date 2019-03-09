@@ -19,7 +19,6 @@
                         <li><a href="#"><i class="fa fa-angle-double-right"></i> FAQ</a></li>
                         <li><a href="#"><i class="fa fa-angle-double-right"></i> Q &amp; A</a></li>
                         <li><a href="#"><i class="fa fa-angle-double-right"></i> Learn</a></li>
-                        <li><a href="{{ route('question.create') }}"><i class="fa fa-angle-double-right"></i> Ask an Expert</a></li>
                     </ul>
                 </div>
                 <div class="footer__links col-sm-6 col-xs-6 col-md-2">

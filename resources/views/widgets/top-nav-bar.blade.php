@@ -51,7 +51,7 @@
                     </div>
                     <div>
                         <ul class="dropdown__catalog row">
-                            <li class="col-xs-6"><a href="#">Forum Rules</a></li>
+                            <li class="col-xs-6"><a href="{{ route('terms') }}">Forum Rules</a></li>
                             <li class="col-xs-6"><a href="{{ route('blog') }}">Blog</a></li>
                         </ul>
                     </div>
