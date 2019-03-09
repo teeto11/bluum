@@ -36,6 +36,7 @@ class ReplyService{
 
             $reply->likes = $reply->replyLikes->count();
             $reply->save();
+            NotificationService::replyLike($reply)->save();
             return $reply->likes;
         }
 
