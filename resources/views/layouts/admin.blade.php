@@ -31,7 +31,7 @@
 
         <ul class="list-unstyled contents">
             <li class="active">
-                <a href="/admin">Dashboard <i class="fa fa-dashboard float-right"></i></a>
+                <a href="{{ route('admin.home') }}">Dashboard <i class="fa fa-dashboard float-right"></i></a>
             </li>
             <li class="">
                 <a href="#expertsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Experts</a>
@@ -48,13 +48,16 @@
                 </ul>
             </li>
             <li>
-                <a href="/admin/users">Users <i class="fa fa-users float-right"></i></a>
+                <a href="{{ route('admin.users') }}">Users <i class="fa fa-users float-right"></i></a>
             </li>
             <li>
-                <a href="/admin/questions">Questions <i class="fa fa-question-circle float-right"></i></a>
+                <a href="{{ route('admin.questions') }}">Questions <i class="fa fa-question-circle float-right"></i></a>
             </li>
             <li>
-                <a href="/admin/posts">Posts <i class="fa fa-sticky-note-o float-right"></i></a>
+                <a href="{{ route('blog.post.create') }}">Create Post <i class="fa fa-sticky-note-o float-right"></i></a>
+            </li>
+            <li>
+                <a href="{{ route('admin.posts') }}">Posts <i class="fa fa-sticky-note-o float-right"></i></a>
             </li>
         </ul>
     </nav>
