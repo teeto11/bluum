@@ -55,7 +55,7 @@
                 <div class="nav__categories js-dropdown" style="width:100%">
                     <div class="nav__select" style="width:100%">
                         <a href="{{ \Illuminate\Support\Facades\URL::previous() }}" class="btn"><i class="icon-Arrow_Left"></i>Back</a>
-                        <a href="" class="btn" style="float:right"><i class="fa fa-download"></i> Download</a>
+                        <button class="btn" id="cmd" style="float:right"><i class="fa fa-download"></i> Download</button>
                     </div>
                 </div>
             </div>
@@ -85,7 +85,7 @@
                 </div>
                 <div class="topics__body">
                     <div class="topics__content">
-                        <div class="topic">
+                        <div class="topic" id="topics">
                             <div class="topic__head">
                                 <div class="topic__avatar">
                                     <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/'.getFirstLetterUppercase($post->user->firstname).'.svg') }}" alt="avatar"></a>
@@ -104,7 +104,7 @@
                                     </div>
                                 @endif
                                 <div class="topic__text">
-                                    <p>{{ ucfirst($post->body) }}</p>
+                                    <p id="texttt">{{ ucfirst($post->body) }}</p>
                                 </div>
                                 <div class="topic__footer">
                                     <div class="topic__footer-likes">
@@ -231,6 +231,7 @@
                 <hr>
                 <div class="topics__title">Suggested Posts</div>
             </div>
+            <div id="editor"></div>
             <div class="posts">
                 <div class="posts__head">
                     <div class="posts__topic">Post</div>
@@ -277,6 +278,7 @@
 @endsection
 
 @section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
     <script>
         let running = false;
 
@@ -382,6 +384,22 @@
 
             e.preventDefault();
             $("#reply-comment").remove();
+        });
+    </script>
+    <script>
+        var doc = new jsPDF();
+        var specialElementHandlers = {
+            '#editor': function (element, renderer) {
+                return true;
+            }
+        };
+
+        $('#cmd').click(function () {   
+            doc.fromHTML($('#topics').html(), 15, 15, {
+                'width': 170,
+                    'elementHandlers': specialElementHandlers
+            });
+            doc.save('sample-file.pdf');
         });
     </script>
 @endsection
