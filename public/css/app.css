@@ -1805,6 +1805,12 @@ body::-webkit-scrollbar-track {
   }
 }
 
+@media screen and (min-width: 1038px) {
+  .nav-wrapper .md-none {
+    display: none;
+  }
+}
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
