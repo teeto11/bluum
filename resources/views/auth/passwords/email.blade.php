@@ -1,6 +1,8 @@
-@extends('layouts.app')
+@php $title = 'Reset Password' @endphp
+@extends('layouts.app-temp')
 
 @section('content')
+@include('widgets.top-nav-bar')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -44,4 +46,5 @@
         </div>
     </div>
 </div>
+@include('widgets.footer')
 @endsection
