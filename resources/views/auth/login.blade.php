@@ -41,7 +41,10 @@
                             <div class="signup__section">
                                 <label class="signup__label" for="password">Password:</label>
                                 <div class="message-input">
-                                    <input type="password" class="form-control" name="password" id="password" />
+                                    <div class="password-input-cover" >
+                                        <input type="password" class="form-control password-input" name="password" id="password" />
+                                        <i class="fa fa-eye-slash toggle-password-visibility" ></i>
+                                    </div>
                                 </div>
                             </div>
                             <button type="submit" class="signup__btn-create btn btn--type-02">

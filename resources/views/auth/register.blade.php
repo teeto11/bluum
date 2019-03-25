@@ -66,14 +66,20 @@
                             @endif
                             <label class="signup__label" for="password">{{ __('Password:') }}</label>
                             <div class="message-input">
-                                <input type="password" class="form-control" name="password" id="password" placeholder="Must contain letters and numbers" />
+                                <div class="password-input-cover" >
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="Must contain letters and numbers" />
+                                    <i class="fa fa-eye-slash toggle-password-visibility" ></i>
+                                </div>
                             </div>
                         </div>
 
                         <div class="signup__section">
                             <label class="signup__label" for="password-confirm">{{ __('Confirm Password:') }}</label>
                             <div class="message-input">
-                                <input type="password" class="form-control" name="password_confirmation" id="password-confirm" />
+                                <div class="password-input-cover" >
+                                    <input type="password" class="form-control password-input" name="password_confirmation" id="password-confirm" />
+                                    <i class="fa fa-eye-slash toggle-password-visibility" ></i>
+                                </div>
                             </div>
                         </div>
                         <div class="signup__checkbox">
