@@ -1623,3 +1623,111 @@ body::-webkit-scrollbar-track {
         }
     }
 }
+.forgotten-password{
+    .container .row{
+        .col-md-6{
+            margin: 50px auto;
+            background: #ffffff;
+            padding: 20px;
+            .forgot-card{
+                .forgot-header{
+                    text-align: center;
+                    margin-bottom: 20px;
+                }
+                .forgot-body{
+                    p{
+                        opacity: .5;
+                        font-weight: 700;
+                        text-align: center;
+                    }
+                    .form-control{
+                        padding: 30px;
+                        border-radius: 0px;
+                    }
+                    .form-control:focus{
+                        outline: 0px;
+                        border-color:#A1D9BB;
+                        box-shadow: 0px 0px 0px !important;
+                    }
+                    input[type='email'] {
+                        background-image: url(/images/email.png) !important;
+                        background-position: top 50% right 3%;
+                        background-repeat: no-repeat;
+                    }
+                    .button{
+                        width: 100%;
+                        padding: 10px;
+                        border: 0px;
+                        background:linear-gradient(140deg,#015e61,#019783);
+                        color: white;
+                        border-radius:25px; 
+                        transition: all .5s;
+                    }
+                    .button:hover{
+                        transform: scale(1.05);
+                        transition: all .5s;
+                        background: #015e61;
+                    }
+                }
+                .forgot-footer{
+                    p{
+                        opacity: .7;
+                        text-align: center;
+                        margin: 30px 0px;
+                        a{
+                            color: #005d41;
+                            opacity: 1;
+                            font-weight: 800;
+                        }
+                        a:hover{
+                            border-bottom: 1px solid #dbd8d8;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @media screen and(max-width:1039px) {
+        .container{
+            width: 100%;
+            .col-md-6{
+                flex: 0 0 80%;
+                max-width: 80%;
+            }
+        }
+    }
+    @media screen and(max-width:520px){
+        .container{
+            .col-md-6{
+                flex: 0 0 100%;
+                max-width: 100%;
+                .forgot-card{
+                    .forgot-body{
+                        p{
+                            font-size: 13px !important;
+                        }
+                        .button{
+                            width: 100%;
+                            padding: 10px;
+                            border: 0px;
+                            background:linear-gradient(140deg,#015e61,#019783);
+                            color: white;
+                            border-radius:0px !important; 
+                            transition: all .5s;
+                        }
+                        input[type='email'] {
+                            background-image: url(/images/email.png) !important;
+                            background-position: top 50% right 3%;
+                            background-repeat: no-repeat;
+                        }
+                    }
+                    .forgot-footer{
+                        p{
+                            font-size: 13px !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

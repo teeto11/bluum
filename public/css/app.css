@@ -1815,15 +1815,117 @@ body::-webkit-scrollbar-track {
   }
 }
 
+.forgotten-password .container .row .col-md-6 {
+  margin: 50px auto;
+  background: #ffffff;
+  padding: 20px;
+}
+
+.forgotten-password .container .row .col-md-6 .forgot-card .forgot-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.forgotten-password .container .row .col-md-6 .forgot-card .forgot-body p {
+  opacity: 0.5;
+  font-weight: 700;
+  text-align: center;
+}
+
+.forgotten-password .container .row .col-md-6 .forgot-card .forgot-body .form-control {
+  padding: 30px;
+  border-radius: 0px;
+}
+
+.forgotten-password .container .row .col-md-6 .forgot-card .forgot-body .form-control:focus {
+  outline: 0px;
+  border-color: #A1D9BB;
+  box-shadow: 0px 0px 0px !important;
+}
+
+.forgotten-password .container .row .col-md-6 .forgot-card .forgot-body input[type=email] {
+  background-image: url(/images/email.png) !important;
+  background-position: top 50% right 3%;
+  background-repeat: no-repeat;
+}
+
+.forgotten-password .container .row .col-md-6 .forgot-card .forgot-body .button {
+  width: 100%;
+  padding: 10px;
+  border: 0px;
+  background: linear-gradient(140deg, #015e61, #019783);
+  color: white;
+  border-radius: 25px;
+  transition: all 0.5s;
+}
+
+.forgotten-password .container .row .col-md-6 .forgot-card .forgot-body .button:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+  transition: all 0.5s;
+  background: #015e61;
+}
+
+.forgotten-password .container .row .col-md-6 .forgot-card .forgot-footer p {
+  opacity: 0.7;
+  text-align: center;
+  margin: 30px 0px;
+}
+
+.forgotten-password .container .row .col-md-6 .forgot-card .forgot-footer p a {
+  color: #005d41;
+  opacity: 1;
+  font-weight: 800;
+}
+
+.forgotten-password .container .row .col-md-6 .forgot-card .forgot-footer p a:hover {
+  border-bottom: 1px solid #dbd8d8;
+}
+
+@media screen and (max-width: 1039px) {
+  .forgotten-password .container {
+    width: 100%;
+  }
+
+  .forgotten-password .container .col-md-6 {
+    flex: 0 0 80%;
+    max-width: 80%;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .forgotten-password .container .col-md-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .forgotten-password .container .col-md-6 .forgot-card .forgot-body p {
+    font-size: 13px !important;
+  }
+
+  .forgotten-password .container .col-md-6 .forgot-card .forgot-body .button {
+    width: 100%;
+    padding: 10px;
+    border: 0px;
+    background: linear-gradient(140deg, #015e61, #019783);
+    color: white;
+    border-radius: 0px !important;
+    transition: all 0.5s;
+  }
+
+  .forgotten-password .container .col-md-6 .forgot-card .forgot-body input[type=email] {
+    background-image: url(/images/email.png) !important;
+    background-position: top 50% right 3%;
+    background-repeat: no-repeat;
+  }
+
+  .forgotten-password .container .col-md-6 .forgot-card .forgot-footer p {
+    font-size: 13px !important;
+  }
+}
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
-.password-input-cover {
-  display: flex;
-}
-
-.toggle-password-visibility:hover {
-  cursor: pointer;
-}
