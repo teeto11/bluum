@@ -1,7 +1,7 @@
 @extends('expert.layout.profile')
 
 @section('profile-main')
-    <div class="profile-main edit-profile" style="">
+    <div class="profile-main edit-profile" style="width:100%">
         <div class="create" style="margin: 0px;">
             <div class="header">
                 <h4 style=""><i class="fa fa-edit"></i> Edit Profile</h4>
