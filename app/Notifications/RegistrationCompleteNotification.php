@@ -46,7 +46,7 @@ class RegistrationCompleteNotification extends Notification
                     ->subject('Welcome')
                     ->greeting('Welcome')
                     ->line('Thank you for completing your registration on Bluumhealth. click the button below to go to your profile')
-                    ->action('Notification Action', $url)
+                    ->action('Profile', $url)
                     ->line('We have many exiting things for you to try out!');
     }
 

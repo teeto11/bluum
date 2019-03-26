@@ -2,7 +2,7 @@
 
 Route::get('/', 'IndexController@index')->name('index');
 
-// Auth::routes(["verify" => true]);
+Auth::routes(["verify" => true]);
 Auth::routes();
 
 Route::get('/profile', 'UserController@profile')->name('user.profile');
@@ -30,7 +30,7 @@ Route::get('/questions', 'QuestionController@index')->name('questions');
 Route::get('/questions/popular', 'QuestionController@viewMostPopular')->name('question.popular');
 Route::get('/questions/unread', 'QuestionController@viewUnreadOnly')->name('question.unread');
 Route::get('/question/following', 'QuestionController@viewByFollowing')->name('question.following');
-Route::get('/question/ask', 'QuestionController@create')->name('question.create');
+Route::get('/question/ask', 'QuestionController@create')->middleware('verified')->name('question.create');
 Route::get('/questions/category/{category}', 'QuestionController@viewByCategory')->name('question.showbycategory');
 Route::get('/questions/tag/{tag}', 'QuestionController@viewByTag')->name('question.showbytag');
 Route::post('/question/answer/markAsCorrect', 'ReplyController@markAsCorrect')->name('question.answer.markAsCorrect');
@@ -39,11 +39,13 @@ Route::post('/question/answer/down-vote', 'ReplyVoteController@downVote')->name(
 Route::get('/question/{id}/{title}', 'QuestionController@show')->name('question.show');
 Route::post('/question', 'QuestionController@store')->name('question.store');
 
-Route::post('/post/like', 'PostLikeController@like')->name('post.like');
-Route::post('/post/unlike', 'PostLikeController@unlike')->name('post.unlike');
+Route::middleware('auth,verified')->group(function() {
+    Route::post('/post/like', 'PostLikeController@like')->name('post.like');
+    Route::post('/post/unlike', 'PostLikeController@unlike')->name('post.unlike');
 
-Route::post('/reply/like', 'ReplyLikeController@like')->name('reply.like');
-Route::post('/reply/unlike', 'ReplyLikeController@unlike')->name('reply.unlike');
+    Route::post('/reply/like', 'ReplyLikeController@like')->name('reply.like');
+    Route::post('/reply/unlike', 'ReplyLikeController@unlike')->name('reply.unlike');
+});
 
 Route::middleware('roles:expert')->group(function() {
     Route::prefix('expert')->group(function () {
@@ -61,7 +63,7 @@ Route::middleware('roles:expert')->group(function() {
 });
 
 Route::get('/experts', 'ExpertController@index')->name('experts');
-Route::post('/expert/follow', 'ExpertController@followExpert')->name('expert.follow');
+Route::post('/expert/follow', 'ExpertController@followExpert')->middleware('verified')->name('expert.follow');
 Route::post('/expert/unfollow', 'ExpertController@unfollowExpert')->name('expert.unfollow');
 Route::get('/expert/{id}', 'ExpertController@viewExpert')->name('expert.show');
 Route::get('/expert/{id}/posts', 'ExpertController@viewPostsAsGuest')->name('expert.guest.posts');
@@ -69,8 +71,7 @@ Route::get('/expert/{id}/post/popular', 'ExpertController@viewPopularPostsAsGues
 Route::get('/expert/{id}/post/{category}', 'ExpertController@viewPostsAsGuest')->name('expert.guest.posts.viewByCategory');
 Route::get('/expert/{id}/answers', 'ExpertController@viewAnswersAsGuest')->name('expert.guest.answers');
 
-Route::middleware('roles:expert,admin')->group(function() {
-
+Route::middleware('roles:expert,admin,verified')->group(function() {
     Route::get('blog/post/new', 'PostController@create')->name('blog.post.create');
     Route::post('blog/post', 'PostController@store')->name('blog.post.store');
     Route::get('blog/post/edit/{id}', 'PostController@edit')->name('blog.post.edit');
@@ -117,3 +118,4 @@ Route::get('/terms', function (){ return view('terms')->with('title', 'Terms and
 Route::get('/privacy', function (){ return view('privacy')->with('title', 'Privacy Policy'); })->name('privacy');
 Route::get('/contact-us', function (){ return view('contact')->with('title', 'Contact Us'); })->name('contact');
 Route::get('/about', function (){ return view('about')->with('title', 'About Us'); })->name('about');
+Route::get('/verification', function (){ return view('verification')->with('title', 'Verification'); })->name('verification.notice');

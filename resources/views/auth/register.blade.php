@@ -39,13 +39,13 @@
                             <div class="col-md-6">
                                 <div class="signup__section">
                                     <label class="signup__label" for="first-name">{{ __('First Name:') }}</label>
-                                    <input type="text" class="form-control" name="firstname" id="first-name" />
+                                    <input type="text" class="form-control" name="firstname" id="first-name" value="{{ old('firstname') }}" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="signup__section">
                                     <label class="signup__label" for="last-name">{{ __('Last Name:') }}</label>
-                                    <input type="text" class="form-control" name="lastname" id="last-name" />
+                                    <input type="text" class="form-control" name="lastname" id="last-name" {{ old('lastname') }}/>
                                 </div>
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                                 </span>
                             @endif
                             <label class="signup__label" for="email">{{ __('Email Address:') }}</label>
-                            <input type="email" class="form-control" name="email" id="email" />
+                            <input type="email" class="form-control" name="email" id="email" value="{{ old('email') }}" />
                         </div>
                         <div class="signup__section">
                             @if ($errors->has('password'))
