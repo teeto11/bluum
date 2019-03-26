@@ -30,7 +30,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="password" class="">{{ __('Password') }}</label>
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                                <!-- todo let eye button class be 'toggle-password-visibility' -->
+                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} password-input" name="password" required>
     
                                     @if ($errors->has('password'))
                                         <span class="invalid-feedback" role="alert">
@@ -40,7 +41,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="password-confirm" class="">{{ __('Confirm Password') }}</label>
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                <!-- todo let eye button class be 'toggle-password-visibility' -->
+                                <input id="password-confirm" type="password" class="form-control password-input" name="password_confirmation" required>
                             </div>
                             <button type="submit" class="button">
                                 {{ __('Reset Password') }}
