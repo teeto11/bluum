@@ -1,6 +1,8 @@
+@php $title = 'Reset Password' @endphp
 @extends('layouts.app-temp')
 
 @section('content')
+@include('widgets.top-nav-bar')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -45,7 +47,10 @@
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                <div class="password-input-cover" >
+                                    <input id="password-confirm" type="password" class="form-control password-input" name="password_confirmation" required>
+                                    <i class="fa fa-eye-slash toggle-password-visibility" ></i>
+                                </div>
                             </div>
                         </div>
 
@@ -62,4 +67,5 @@
         </div>
     </div>
 </div>
+@include('widgets.footer')
 @endsection
