@@ -62,7 +62,6 @@
 	<script src="{{ asset('js/app-ui.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}" ></script>
     <script src="{{ asset('js/default.js') }}" ></script>
-    <script src="{{ asset('js/html2canvas.min.js') }}"></script>
     <script>
         $('#search-btn').click(function () {
             $('#search-form').submit();
