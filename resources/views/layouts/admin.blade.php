@@ -19,6 +19,15 @@
     <link rel="stylesheet" href="{{ asset('css/hover.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/morris.css') }}" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136856977-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-136856977-1');
+    </script>
     @yield('header-scripts')
 </head>
 <body>
