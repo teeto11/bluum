@@ -43,6 +43,7 @@ class PasswordResetNotification extends Notification
     {
         $url = url()->route('password.reset', $this->token);
         return (new MailMessage)
+                    ->priority(1)
                     ->from('support@bluumhealth.com', 'Bluumhealth')
                     ->subject('Password Reset')
                     ->line('You are receiving this email because we received a password reset request for your account.')
