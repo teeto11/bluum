@@ -43,7 +43,7 @@
 						<p><img class="card-img-top" src="{{ asset('fonts/icons/badges/pregnant.png') }}" alt="user-icon" /></p>
 						<a class="card-content-links" href="{{ route('blog.category', formatUrlString('pregnancy')) }}" title="" style="height:10em;overflow-y:hidden">
 							<div class="card-body">
-								<h4 class="card-title">Pregnancy</h4>
+								<h4 class="card-title">Pregnancy and new born care</h4>
 								<p class="card-text">Connect with experts and other users for a stress free and exciting pregnancy experience, trimester by trimester.</p>
 							</div>
 						</a>
@@ -65,7 +65,7 @@
 						<p><img class="card-img-top" src="{{ asset('fonts/icons/badges/illness.jpg') }}" alt="user-icon" /></p>
 						<a class="card-content-links" href="{{ route('blog.category', formatUrlString('common illness')) }}" title="" style="height:10em;overflow-y:hidden">
 							<div class="card-body">
-								<h4 class="card-title">Common Illnesses</h4>
+								<h4 class="card-title">Common Illnesses In Children</h4>
 								<p class="card-text">Connect with experts and other users on information regarding to common illnesses that can tamper with your babies' healthy development e.g measles.</p>
 							</div>
 						</a>
@@ -78,7 +78,7 @@
 						<p><img class="card-img-top" src="{{ asset('fonts/icons/badges/special_illness.jpg') }}" alt="user-icon" /></p>
 						<a class="card-content-links" href="{{ route('blog.category', formatUrlString('special illness')) }}" title="" style="height:10em;overflow-y:hidden">
 							<div class="card-body">
-								<h4 class="card-title">Special Illnesses</h4>
+								<h4 class="card-title">Special Illnesses In Children</h4>
 								<p class="card-text">Connect with experts and other users on information regarding to special illnesses around children that can be avoided and also managed for healthy development.</p>
 							</div>
 						</a>

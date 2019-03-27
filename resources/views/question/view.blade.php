@@ -55,7 +55,7 @@
             <div class="nav" style="width:100%">
                 <div class="nav__categories js-dropdown" style="width:100%">
                     <div class="nav__select" style="width:100%">
-                        <a href="/questions" class="btn"><i class="icon-Arrow_Left"></i>Back</a>
+                        <a href="{{ \Illuminate\Support\Facades\URL::previous() }}" class="btn"><i class="icon-Arrow_Left"></i>Back</a>
                         <button class="btn" id="cmd" style="float:right"><i class="fa fa-download"></i> Download</button>
                     </div>
                 </div>

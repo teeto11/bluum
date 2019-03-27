@@ -50,6 +50,7 @@
                             <button type="submit" class="signup__btn-create btn btn--type-02">
                                 {{ __('Login') }}
                             </button>
+                            <p class="" style="margin-top:25px;"><a href="{{ route('password.request') }}" class="">Forgotten password</a></p>
                             <p class="" style="margin-top:25px;">Are you a new to bluum? <a href="/register" class="">Register</a></p>
                         </div>
                     </form>

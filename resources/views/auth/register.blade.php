@@ -39,13 +39,13 @@
                             <div class="col-md-6">
                                 <div class="signup__section">
                                     <label class="signup__label" for="first-name">{{ __('First Name:') }}</label>
-                                    <input type="text" class="form-control" name="firstname" id="first-name" />
+                                    <input type="text" class="form-control" name="firstname" id="first-name" value="{{ old('firstname') }}" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="signup__section">
                                     <label class="signup__label" for="last-name">{{ __('Last Name:') }}</label>
-                                    <input type="text" class="form-control" name="lastname" id="last-name" />
+                                    <input type="text" class="form-control" name="lastname" id="last-name" {{ old('lastname') }}/>
                                 </div>
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                                 </span>
                             @endif
                             <label class="signup__label" for="email">{{ __('Email Address:') }}</label>
-                            <input type="email" class="form-control" name="email" id="email" />
+                            <input type="email" class="form-control" name="email" id="email" value="{{ old('email') }}" />
                         </div>
                         <div class="signup__section">
                             @if ($errors->has('password'))
@@ -67,7 +67,7 @@
                             <label class="signup__label" for="password">{{ __('Password:') }}</label>
                             <div class="message-input">
                                 <div class="password-input-cover" >
-                                    <input type="password" class="form-control" name="password" id="password" placeholder="Must contain letters and numbers" />
+                                    <input type="password" class="form-control password-input" name="password" id="password" placeholder="Must contain letters and numbers" />
                                     <i class="fa fa-eye-slash toggle-password-visibility" ></i>
                                 </div>
                             </div>
@@ -83,12 +83,17 @@
                             </div>
                         </div>
                         <div class="signup__checkbox">
+                            @if ($errors->has('terms_condition'))
+                                <span class="invalid-feedback text-danger" role="alert">
+                                    <strong><p>{{ $errors->first('terms_condition') }}</p></strong>
+                                </span>
+                            @endif
                             <label class="signup__box">
                                 <label class="custom-checkbox">
-                                    <input type="checkbox" checked="checked" />
+                                    <input type="checkbox" name="terms_condition" />
                                     <i></i>
                                 </label>
-                                <span>I agree to the Terms &amp; Conditions.</span>
+                                <a href="{{ route('terms') }}" ><span>I agree to the Terms &amp; Conditions.</span></a>
                             </label>
                         </div>
                         <button href="#" class="signup__btn-create btn btn--type-02">
