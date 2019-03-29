@@ -165,6 +165,7 @@
             let img = $("#p-image img");
             img.attr('height', '');
             img.attr('width', '');
+            console.log(img.width(), img.height());
             destroyDragabble();
 
             if(input.files && input.files[0]) {
