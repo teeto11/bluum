@@ -1731,3 +1731,10 @@ body::-webkit-scrollbar-track {
         }
     }
 }
+.password-input-cover {
+  display: flex;
+}
+
+.toggle-password-visibility:hover {
+  cursor: pointer;
+}

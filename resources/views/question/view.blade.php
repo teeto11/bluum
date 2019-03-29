@@ -56,11 +56,11 @@
                 <div class="nav__categories js-dropdown" style="width:100%">
                     <div class="nav__select" style="width:100%">
                         <a href="{{ \Illuminate\Support\Facades\URL::previous() }}" class="btn"><i class="icon-Arrow_Left"></i>Back</a>
-                        <button class="btn" id="cmd" style="float:right"><i class="fa fa-download"></i> Download</button>
+                        <button class="btn" onclick="PdfPrint()" style="float:right"><i class="fa fa-download"></i> Download</button>
                     </div>
                 </div>
             </div>
-            <div class="topics">
+            <div class="topics" id="element-to-print">
                 <div class="topics__heading">
                     <h2 class="topics__heading-title">{{ $question->title }}</h2>
                     <div class="topics__heading-info">
@@ -307,9 +307,9 @@
                     </div>
                 </div>
                 <hr>
-                <div class="topics__title">Suggested Questions</div>
                 <hr>
             </div>
+            <div class="topics__title">Suggested Questions</div>
             <div id="editor"></div>
             <div class="posts">
                 <div class="posts__head">
@@ -356,7 +356,10 @@
     @include('widgets.footer')
 @endsection
 @section('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.auto.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.bootcss.com/html2pdf.js/0.9.1/html2pdf.bundle.min.js"></script>
     <script>
         let running = false;
 
@@ -501,19 +504,16 @@
         });
     </script>
     <script>
-        var doc = new jsPDF();
-        var specialElementHandlers = {
-            '#editor': function (element, renderer) {
-                return true;
-            }
-        };
+        function PdfPrint() {
+            var element = document.getElementById('element-to-print');
 
-        $('#cmd').click(function () {   
-            doc.fromHTML($('#topics').html(), 15, 15, {
-                'width': 170,
-                    'elementHandlers': specialElementHandlers
+            html2pdf(element, {
+            margin:       10,
+            filename:     'bluum.pdf',
+            image:        { type: 'jpeg', quality: 1 },
+            html2canvas:  { scale: 2, logging: true, dpi: 192, letterRendering: true },
+            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' }
             });
-            doc.save('bluum.pdf');
-        });
+        }
     </script>
 @endsection

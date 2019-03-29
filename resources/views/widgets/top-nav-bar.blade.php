@@ -11,7 +11,7 @@
                 </a>
             </div>
             <div class="header__search">
-                <form action="{{ route('search') }}" method="post" id="search-form" >
+                <form action="{{ route('search') }}" method="post" id="" >
                     @csrf
                     <label>
                         <i class="icon-Search js-header-search-btn-open" id="search-btn" ></i>
