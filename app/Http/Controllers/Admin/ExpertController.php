@@ -60,7 +60,7 @@ class ExpertController extends Controller{
             $user->save();
             return redirect()->route('admin.expert.new')->with('success', 'User has been successfully converted to an expert');
 
-        }else return redirect()->route('admin.expert.new')->with('error', 'User with email does not exist');
+        }else return redirect()->route('admin.expert.new')->with('error', 'User with email does not exist')->withInput();
     }
 
     public function viewExperts(){

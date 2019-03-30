@@ -37,11 +37,6 @@
                 @csrf
                 <div class="row mb-5" >
                     <div class="col-md-3" >
-                        @if ($errors->has('profile_image_base64'))
-                            <div class="invalid-feedback text-danger" role="alert">
-                                <p><strong>{{ $errors->first('profile_image_base64') }}</strong></p>
-                            </div>
-                        @endif
                         <div id="p-image-cover" >
                             <div id="p-image" >
                                 <img src="{{ asset('storage/post_cover_image/noimage.png') }}" height="100%" >
@@ -49,58 +44,64 @@
                             <input type="file" id="profile_image" >
                             <button type="button" class="btn btn-danger btn-sm" id="reset-img-crop" >Reset</button>
                         </div>
+                        @if ($errors->has('profile_image_base64'))
+                            <div class="invalid-feedback text-danger d-block" role="alert">
+                                <p><strong>{{ $errors->first('profile_image_base64') }}</strong></p>
+                            </div>
+                        @endif
                     </div>
+                    @php if(session->has) echo "<strong>$error</strong>"; @endphp
                     <div class="col-md-9" >
                         <div class="form-row">
                             <div class="form-group col-md-8">
+                                <label for="email">Email</label>
+                                <input type="Email" class="form-control" name="email" id="email" placeholder="E.g expert@gmail.com" value="{{ old('email') }}" >
                                 @if ($errors->has('email'))
-                                    <div class="invalid-feedback text-danger" role="alert">
+                                    <div class="invalid-feedback text-danger d-block" role="alert">
                                         <p><strong>{{ $errors->first('email') }}</strong></p>
                                     </div>
                                 @endif
-                                <label for="email">Email</label>
-                                <input type="Email" class="form-control" name="email" id="email" placeholder="E.g expert@gmail.com">
                             </div>
                             <div class="form-group col-md-4">
-                                @if ($errors->has('name'))
-                                    <div class="invalid-feedback text-danger" role="alert">
-                                        <p><strong>{{ $errors->first('name') }}</strong></p>
+                                <label for="">Telephone</label>
+                                <input type="tel" class="form-control" name="tel" id="" value="{{ old('tel') }}" >
+                                @if ($errors->has('tel'))
+                                    <div class="invalid-feedback text-danger d-block" role="alert">
+                                        <p><strong>{{ $errors->first('tel') }}</strong></p>
                                     </div>
                                 @endif
-                                <label for="">Telephone</label>
-                                <input type="tel" class="form-control" name="tel" id="">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
+                                <label for="">Expertise</label>
+                                <input type="text" class="form-control" name="expertise" id="" placeholder="e.g Medical doctor" value="{{ old('expertise') }}" >
                                 @if ($errors->has('expertise'))
-                                    <div class="invalid-feedback text-danger" role="alert">
+                                    <div class="invalid-feedback text-danger d-block" role="alert">
                                         <p><strong>{{ $errors->first('expertise') }}</strong></p>
                                     </div>
                                 @endif
-                                <label for="">Expertise</label>
-                                <input type="text" class="form-control" name="expertise" id="" placeholder="e.g Medical doctor">
                             </div>
                             <div class="form-group col-md-6">
+                                <label for="">Experience</label>
+                                <input type="number" min="0" class="form-control" name="experience" id="" value="{{ old('experience') }}" >
                                 @if ($errors->has('experience'))
-                                    <div class="invalid-feedback text-danger" role="alert">
+                                    <div class="invalid-feedback text-danger d-block" role="alert">
                                         <p><strong>{{ $errors->first('experience') }}</strong></p>
                                     </div>
                                 @endif
-                                <label for="">Experience</label>
-                                <input type="number" min="0" class="form-control" name="experience" id="" >
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="">About Expert</label>
+                    <textarea name="about" class="form-control" id="" rows="10">{{ old('about') }}</textarea>
                     @if ($errors->has('about'))
-                        <div class="invalid-feedback text-danger" role="alert">
+                        <div class="invalid-feedback text-danger d-block" role="alert">
                             <p><strong>{{ $errors->first('about') }}</strong></p>
                         </div>
                     @endif
-                    <label for="">About Expert</label>
-                    <textarea name="about" class="form-control" id="" rows="10"></textarea>
                 </div>
                 <div class="w-100 btn-container">
                     <input type="submit" class="post-btn btn" name="" id="" value="Create">
@@ -148,6 +149,7 @@
 
         function destroyDragabble(){
 
+            resetDragabble();
             if($( "#p-image img" ).hasClass('ui-draggable')){
                 $( "#p-image img" ).draggable( "destroy" );
             }
@@ -163,26 +165,34 @@
 
             let input = this;
             let img = $("#p-image img");
-            img.attr('height', '');
-            img.attr('width', '');
-            console.log(img.width(), img.height());
-            destroyDragabble();
 
             if(input.files && input.files[0]) {
+                destroyDragabble();
                 let reader = new FileReader();
 
                 reader.onload = function (e) {
                     $("#p-image img").attr('src', e.target.result);
+                    let i = new Image();
+                    let imgHeight = null;
+                    let imgWidth = null;
 
-                    console.log(img.width(), img.height());
+                    i.onload = function(){
+                        imgHeight = i.height;
+                        imgWidth = i.width;
 
-                    if(img.height() >= img.width()){
-                        img.attr('width', '100%');
-                        makeDragabble('y');
-                    }else{
-                        img.attr('height', '100%');
-                        makeDragabble('x');
-                    }
+                        console.log();
+                        if(imgHeight >= imgWidth){
+                            img.attr('width', '100%');
+                            img.attr('height', 'auto');
+                            makeDragabble('y');
+                        }else{
+                            img.attr('height', '100%');
+                            img.attr('width', 'auto');
+                            makeDragabble('x');
+                        }
+                    };
+
+                    i.src = e.target.result;
                 };
 
                 reader.readAsDataURL(input.files[0]);
