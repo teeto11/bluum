@@ -104,7 +104,7 @@
                                     </div>
                                 @endif
                                 <div class="topic__text">
-                                    <p id="texttt">{{ ucfirst($post->body) }}</p>
+                                    <p id="texttt">{!! ucfirst($post->body) !!}</p>
                                 </div>
                                 <div class="topic__footer">
                                     <div class="topic__footer-likes">
