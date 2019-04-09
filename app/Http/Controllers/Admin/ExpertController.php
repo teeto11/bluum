@@ -20,7 +20,7 @@ class ExpertController extends Controller{
 
     public function showAddExpertForm(){
 
-        return view('admin.add-expert');
+        return view('admin.add-expert')->with('error', 'gg');
     }
 
     public function addExpert(Request $request){
@@ -61,6 +61,10 @@ class ExpertController extends Controller{
             return redirect()->route('admin.expert.new')->with('success', 'User has been successfully converted to an expert');
 
         }else return redirect()->route('admin.expert.new')->with('error', 'User with email does not exist')->withInput();
+    }
+
+    public function showEditExpertForm() {
+
     }
 
     public function viewExperts(){

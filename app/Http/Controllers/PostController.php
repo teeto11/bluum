@@ -148,7 +148,6 @@ class PostController extends Controller
     }
 
     public function edit($id){
-
         $post = Post::find($id);
 
         if($post){

@@ -33,6 +33,11 @@
     <div class="content-wrapper px-4">
         <div class="add-expert-wrapper">
             <h4><i class="fa fa-gears"></i> Add Expert</h4><hr>
+            @if(session()->has('error'))
+                {!! '<div class="alert alert-danger" >'.session("error").'</div>' !!}
+            @elseif(session()->has('success'))
+                {!! '<div class="alert alert-success" >'.session("success").'</div>' !!}
+            @endif
             <form action="{{ route('admin.expert.store') }}" method="post" >
                 @csrf
                 <div class="row mb-5" >
@@ -50,7 +55,6 @@
                             </div>
                         @endif
                     </div>
-                    @php if(session->has) echo "<strong>$error</strong>"; @endphp
                     <div class="col-md-9" >
                         <div class="form-row">
                             <div class="form-group col-md-8">

@@ -22,6 +22,7 @@ Route::get('/blog/unread', 'PostController@viewUnreadOnly')->name('blog.unread')
 Route::get('/blog/popular', 'PostController@viewMostPopular')->name('blog.popular');
 Route::get('/blog/following', 'PostController@viewByFollowing')->name('blog.following');
 Route::get('/blog/{category}', 'PostController@viewByCategory')->name('blog.category');
+Route::get('blog/post/edit/{id}', 'PostController@edit')->name('blog.post.edit')->middleware('auth');
 Route::get('/blog/post/{id}/{title}', 'PostController@show')->name('blog.post');
 Route::post('/blog/post/comment', 'ReplyController@addComment')->name('blog.post.comment');
 
@@ -74,7 +75,6 @@ Route::get('/expert/{id}/answers', 'ExpertController@viewAnswersAsGuest')->name(
 Route::middleware('roles:expert,admin')->group(function() {
     Route::get('blog/post/new', 'PostController@create')->name('blog.post.create');
     Route::post('blog/post', 'PostController@store')->name('blog.post.store');
-    Route::get('blog/post/edit/{id}', 'PostController@edit')->name('blog.post.edit');
     Route::put('/blog/post/{post}', 'PostController@update')->name('blog.post.update');
     Route::post('/question/answer', 'ReplyController@answerQuestion')->name('question.answer');
 });

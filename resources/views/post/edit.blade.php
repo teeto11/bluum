@@ -64,3 +64,14 @@
     </main>
     @include('widgets.footer')
 @endsection
+
+@section('scripts')
+    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js" ></script>
+    <script src="/vendor/unisharp/laravel-ckeditor/adapters/jquery.js" ></script>
+    <script>
+        $("#post").ckeditor({
+            removeButtons: 'image',
+            removePlugins: 'image',
+        });
+    </script>
+@endsection

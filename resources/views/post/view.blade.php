@@ -57,19 +57,19 @@
                         <a href="{{ \Illuminate\Support\Facades\URL::previous() }}" class="btn"><i class="icon-Arrow_Left"></i>Back</a>
                         <button class="btn" onclick="PdfPrint()" style="float:right"><i class="fa fa-download"></i> Download</button>
                     </div>
-                </div>
-            </div>
-            <div class="topics" id="element-to-print">
-                <div class="topics__heading">
                     @if(auth()->user())
                         @if(auth()->user()->id == $post->user_id)
-                            <div class="text-right" >
+                            <div class="nav__categories js-dropdown" >
                                 <a href="/blog/post/edit/{{ $post->id }}" >
-                                    <button class="btn btn-success" >EDIT</button>
+                                    <button class="btn" >EDIT</button>
                                 </a>
                             </div>
                         @endif
                     @endif
+                </div>
+            </div>
+            <div class="topics" id="element-to-print">
+                <div class="topics__heading">
                     <h2 class="topics__heading-title">{{ ucwords($post->title) }}</h2>
                     <div class="topics__heading-info">
                         <a href="#" class="category"><i class="bg-3ebafa"></i>{{ ucfirst($post->category) }}</a>
@@ -86,7 +86,7 @@
                 <div class="topics__body">
                     <div class="topics__content">
                         <div class="topic" id="topics">
-                            <div class="topic__head">
+                            <div class="topic__head" style="padding-bottom: 0">
                                 <div class="topic__avatar">
                                     <a href="#" class="avatar"><img src="{{ asset('fonts/icons/avatars/'.getFirstLetterUppercase($post->user->firstname).'.svg') }}" alt="avatar"></a>
                                 </div>
@@ -97,10 +97,11 @@
                                     <div class="topic__date"><i class="icon-Watch_Later"></i>{{ formatTime($post->created_at) }}</div>
                                 </div>
                             </div>
+                            <hr>
                             <div class="topic__content">
                                 @if($post->cover_img != 'noimage.png')
-                                    <div class="topic-image" style="margin-bottom: 2rem;text-align: center" >
-                                        <img src="{{ asset('storage/post_cover_image/'.$post->cover_img) }}" style="max-height: 50vh;" >
+                                    <div class="topic-image" style="margin-bottom:" >
+                                        <img src="{{ asset('storage/post_cover_image/'.$post->cover_img) }}" style="height: 60vh;" >
                                     </div>
                                 @endif
                                 <div class="topic__text">

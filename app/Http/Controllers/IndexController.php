@@ -61,12 +61,15 @@ class indexController extends Controller{
                             ->orWhere(DB::raw("CONCAT(lastname,' ',firstname)"), 'like', "%$query%")
                             ->pluck('id')->toArray();
 
-        $posts = Post::where('title', 'like', "%$query%")
-                        ->orWhere('body', 'like', "%$query%")
-                        ->orWhere('category', $query)
-                        ->orWhere('tags', 'like', "%$query%")
-                        ->orWhere('type', $query)
-                        ->orWhereIn('user_id', $expertIds)
+        $posts = Post::where('active', true)
+                        ->where(function ($q) use ($query, $expertIds) {
+                            $q->where('title', 'like', "%$query%")
+                                    ->orWhere('body', 'like', "%$query%")
+                                    ->orWhere('category', $query)
+                                    ->orWhere('tags', 'like', "%$query%")
+                                    ->orWhere('type', $query)
+                                    ->orWhereIn('user_id', $expertIds);
+                        })
                         ->orderBy('views', 'DESC')->paginate(15);
 
         $data = [

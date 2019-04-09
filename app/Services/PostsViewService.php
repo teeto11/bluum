@@ -32,7 +32,10 @@ class PostsViewService{
 
     public function viewPosts(){
 
-        $posts = Post::where('type', $this->type)->orderBy('created_at', 'desc')->paginate(15);
+        $posts = Post::where([
+            'type' => $this->type,
+            'active' => true
+        ])->orderBy('created_at', 'desc')->paginate(15);
         $data = $this->viewPostsData();
         $data['posts'] = $posts;
 
@@ -44,7 +47,8 @@ class PostsViewService{
         $category = unFormatUrlString($category);
         $postQ = Post::where([
             'type' => $this->type,
-            'category' => $category
+            'category' => $category,
+            'active' => true
         ])->orderBy('created_at', 'DESC');
         $posts = $postQ->paginate(15);
         $data = $this->viewPostsData();
@@ -56,7 +60,10 @@ class PostsViewService{
 
     public function viewPostsByPopularity(){
 
-        $posts = Post::where('type', $this->type)->orderBy('likes', 'desc')->paginate(15);
+        $posts = Post::where([
+            'type' => $this->type,
+            'active' => true
+        ])->orderBy('likes', 'desc')->paginate(15);
         $data = $this->viewPostsData();
         $data['posts'] = $posts;
         $data['active_link'] = 'popular-link';
@@ -67,7 +74,11 @@ class PostsViewService{
     public function viewPostsByTags($tag){
 
         $tag = strtolower(urldecode($tag));
-        $posts = Post::where([['tags', 'LIKE', "%$tag%"], ['type', $this->type]])->orderBy('created_at', 'DESC')->paginate(15);
+        $posts = Post::where([
+            ['tags', 'LIKE', "%$tag%"],
+            ['type', $this->type],
+            ['active', true]
+        ])->orderBy('created_at', 'DESC')->paginate(15);
         $data = $this->viewPostsData();
         $data['posts'] = $posts;
 
@@ -77,7 +88,10 @@ class PostsViewService{
     public function viewByFollowing(){
 
         $expertsId = Followers::where('user_id', auth()->user()->id)->pluck('expert_id')->toArray();
-        $posts = Post::where('type', $this->type)->whereIn('user_id', $expertsId)->orderBy('created_at', 'DESC')->paginate(15);
+        $posts = Post::where([
+            'type' => $this->type,
+            'active' => true
+        ])->whereIn('user_id', $expertsId)->orderBy('created_at', 'DESC')->paginate(15);
         $data = $this->viewPostsData();
         $data['posts'] = $posts;
         $data['active_link'] = 'following-link';
@@ -88,7 +102,10 @@ class PostsViewService{
     public function viewUnreadPost(){
 
         $seenPost = PostView::where('user_id', auth()->user()->id)->pluck('post_id')->toArray();
-        $posts = Post::where('type', $this->type)->whereNotIn('id', $seenPost)->orderBy('created_at', 'DESC')->paginate(15);
+        $posts = Post::where([
+            'type' => $this->type,
+            'active' => true
+        ])->whereNotIn('id', $seenPost)->orderBy('created_at', 'DESC')->paginate(15);
         $data = $this->viewPostsData();
         $data['posts'] = $posts;
         $data['active_link'] = 'unread-link';
