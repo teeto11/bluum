@@ -16,6 +16,6 @@ class UserController extends Controller
             'users' =>  UserService::all(request('q')),
         ];
 
-        return view('admin.users')->with($data);
+        return view('admin.user.index')->with($data);
     }
 }

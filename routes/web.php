@@ -94,6 +94,8 @@ Route::middleware('roles:admin')->group(function() {
        Route::delete('/expert/delete', 'Admin\ExpertController@removeExpert')->name('admin.expert.delete');
        Route::put('/expert/restore', 'Admin\ExpertController@enableExpert')->name('admin.expert.enable');
        Route::get('/expert/{id}', 'Admin\ExpertController@viewExpert')->name('admin.expert.show')->where(['id'=>'[0-9]+']);
+       Route::get('/expert/{id}/edit', 'Admin\ExpertController@showEditExpertForm')->name('admin.expert.edit')->where(['id'=>'[0-9]+']);
+       Route::post('/expert/{id}/update', 'Admin\ExpertController@update')->name('admin.expert.update')->where(['id'=>'[0-9]+']);
 
        Route::get('/questions', 'Admin\QuestionController@index')->name('admin.questions');
        Route::get('/question/deleted', 'Admin\QuestionController@viewDeletedQuestions')->name('admin.questions.deleted');

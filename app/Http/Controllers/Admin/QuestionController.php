@@ -15,7 +15,7 @@ class QuestionController extends Controller{
         $postService = new PostService('QUESTION');
         $data = $postService->posts(true, request('q'));
 
-        return view('admin.question')->with($data);
+        return view('admin.question.index')->with($data);
     }
 
     public function viewDeletedQuestions(){

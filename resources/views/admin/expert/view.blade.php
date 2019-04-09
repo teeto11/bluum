@@ -8,7 +8,7 @@
                     <div class="post-details">
                         <div class="table-row">
                             <div class="table-responsive bg-white">
-                                <h3 class="">Expert Details <a href="" class="btn btn-sm float-right"></a></h3><hr>
+                                <h3 class="">Expert Details <a href="{{ route('admin.expert.edit', $expert->id) }}" class="btn btn-success float-right">Edit</a></h3><hr>
                                 <table class="table table-borderless table-hover">
                                     <tbody>
                                     <tr><img src="{{ asset('storage/profile_img/'.$expert->expert->profile_picture) }}" class="expert-img my-3" alt=""></tr>
