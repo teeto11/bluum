@@ -30,7 +30,7 @@
                         </span>
                     @endif
                     <div class="create__section">
-                        <label class="" for="question">Question</label>
+                        <label class="" for="question">Question *</label>
                         <input type="text" class="form-control" name="title" id="question" />
                     </div>
                     @if ($errors->has('category'))
@@ -39,7 +39,7 @@
                         </span>
                     @endif
                     <div class="create__section">
-                        <label class=" for="category">Select Category</label>
+                        <label class="category" for="category">Select Category *</label>
                         <label class="custom-select">
                             <select id="category" name="category" >
                                 <option hidden></option>
@@ -55,7 +55,7 @@
                         </span>
                     @endif
                     <div class="create__section create__textarea">
-                        <label class="" for="description">Description</label>
+                        <label class="" for="description">Description *</label>
                         <textarea class="form-control" id="description" name="description"></textarea>
                     </div>
                     @if ($errors->has('tags'))

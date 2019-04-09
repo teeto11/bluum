@@ -27,7 +27,7 @@
                         </span>
                     @endif
                     <div class="create__section">
-                        <label class="create__label" for="title">{{ __('Title') }}</label>
+                        <label class="create__label" for="title">{{ __('Title *') }}</label>
                         <input type="text" class="form-control" name="title" id="title" />
                     </div>
                     @if ($errors->has('category'))
@@ -36,7 +36,7 @@
                         </span>
                     @endif
                     <div class="create__section">
-                        <label class="create__label" for="category">{{ __('Select Category') }}</label>
+                        <label class="create__label" for="category">{{ __('Select Category *') }}</label>
                         <label class="custom-select">
                             <select id="category" name="category">
                                 <option hidden ></option>
@@ -69,7 +69,7 @@
                         </span>
                     @endif
                     <div class="create__section create__textarea">
-                        <label class="create__label" for="post">{{ __('Post') }}</label>
+                        <label class="create__label" for="post">{{ __('Post *') }}</label>
                         <textarea class="form-control" id="post" name="post" ></textarea>
                     </div>
                     @if ($errors->has('tags'))
@@ -102,9 +102,10 @@
                             <div class="posts__activity">Activity</div>
                         </div>
                         <div class="posts__body">
+                            @php $counter = 1; @endphp
                             @if ($recent_posts)
                                 @foreach ($recent_posts->all() as $post)
-                                    <div class="posts__item">
+                                    <div class="posts__item {{ ($counter%2 == 0) ? 'bg-f2f4f6' : '' }}" >
                                         <div class="posts__section-left">
                                             <div class="posts__topic">
                                                 <div class="posts__content">
@@ -129,6 +130,7 @@
                                             <div class="posts__activity">{{ getLastActivityTime($post->updated_at) }}</div>
                                         </div>
                                     </div>
+                                    @php $counter++ @endphp
                                 @endforeach
                             @endif
                         </div>
