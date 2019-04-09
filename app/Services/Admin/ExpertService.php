@@ -30,7 +30,6 @@ class ExpertService{
 
     public function create($user, $request) {
 
-        $user = $user->first();
         if(Expert::where('user_id', $user->id)->count() > 0) return redirect()->route('admin.expert.new')->with('error', 'User already an expert');
 
         $expert = new Expert;
