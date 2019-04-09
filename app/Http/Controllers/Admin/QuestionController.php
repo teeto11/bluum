@@ -23,7 +23,7 @@ class QuestionController extends Controller{
         $postService = new PostService('QUESTION');
         $data = $postService->posts(false, request('q'));
 
-        return view('admin.question')->with($data);
+        return view('admin.question.index')->with($data);
     }
 
     public function viewQuestion($id){
@@ -39,7 +39,7 @@ class QuestionController extends Controller{
             'comments' => $comments,
         ];
 
-        return view('admin.view-question')->with($data);
+        return view('admin.question.view')->with($data);
     }
 
     public function deleteQuestion(Request $request){

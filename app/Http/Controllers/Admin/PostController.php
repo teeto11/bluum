@@ -16,14 +16,14 @@ class PostController extends Controller{
 
         $postService = new PostService('POST');
         $data = $postService->posts(true, request('q'));
-        return view('admin.view-posts')->with($data);
+        return view('admin.post.index')->with($data);
     }
 
     public function viewDeletedPosts(){
 
         $postService = new PostService('POST');
         $data = $postService->posts(false, request('q'));
-        return view('admin.view-posts')->with($data);
+        return view('admin.post.index')->with($data);
     }
 
     public function viewPost($id){
@@ -37,7 +37,7 @@ class PostController extends Controller{
             'comments' => $comments,
         ];
 
-        return view('admin.view-post')->with($data);
+        return view('admin.post.view')->with($data);
     }
 
     public function deletePost(Request $request){
