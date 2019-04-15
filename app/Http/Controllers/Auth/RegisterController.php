@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Notifications\RegistrationCompleteNotification;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -53,6 +55,7 @@ class RegisterController extends Controller
             'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'terms_condition' => ['required']
         ]);
     }
 
@@ -68,12 +71,15 @@ class RegisterController extends Controller
             $username = $data['firstname'][0].$data['lastname'].rand(1000, 9999);
         }while (User::where('username', $username)->count() > 0);
 
-        return User::create([
+        $createUser = User::create([
             'firstname' => $data['firstname'],
             'lastname' => $data['lastname'],
             'username' => $username,
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        Notification::send($createUser, new RegistrationCompleteNotification());
+        return $createUser;
     }
 }

@@ -1,6 +1,14 @@
+@php $title = 'Register' @endphp
 @extends('layouts.app-temp')
 
+@section('header_scripts')
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/hover.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/animate.css') }}" />
+@endsection
+
 @section('content')
+@include('widgets.top-nav-bar')
 <div class="signup">
     <!-- MAIN -->
     <main class="signup__main">
@@ -10,11 +18,11 @@
                 @csrf
                 <div class="signup__container">
                     <div class="signup__logo">
-                        <a href="index.html"><img src="{{asset('images/logo_small.png')}}" alt="logo" />Bluumhealth</a>
+                        <a href="{{ route('index') }}"><img src="{{asset('images/logo_small.png')}}" alt="logo" />Bluumhealth</a>
                     </div>
                     <div class="signup__head">
                         <h3>Create a New Bluumhealth Account</h3>
-                        <p>By singing up you can start posting, replying to topics, vote topics and many more.</p>
+                        <p>By signing up you can start posting, replying to topics, vote topics and many more.</p>
                     </div>
                     <div class="signup__form">
                         @if ($errors->has('firstname'))
@@ -27,17 +35,17 @@
                                 <strong><p>{{ $errors->first('lastname') }}</p></strong>
                             </span>
                         @endif
-                        <div class="row" data-visible="desktop">
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="signup__section">
                                     <label class="signup__label" for="first-name">{{ __('First Name:') }}</label>
-                                    <input type="text" class="form-control" name="firstname" id="first-name" />
+                                    <input type="text" class="form-control" name="firstname" id="first-name" value="{{ old('firstname') }}" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="signup__section">
                                     <label class="signup__label" for="last-name">{{ __('Last Name:') }}</label>
-                                    <input type="text" class="form-control" name="lastname" id="last-name" />
+                                    <input type="text" class="form-control" name="lastname" id="last-name" {{ old('lastname') }}/>
                                 </div>
                             </div>
                         </div>
@@ -48,7 +56,7 @@
                                 </span>
                             @endif
                             <label class="signup__label" for="email">{{ __('Email Address:') }}</label>
-                            <input type="email" class="form-control" name="email" id="email" />
+                            <input type="email" class="form-control" name="email" id="email" value="{{ old('email') }}" />
                         </div>
                         <div class="signup__section">
                             @if ($errors->has('password'))
@@ -58,22 +66,34 @@
                             @endif
                             <label class="signup__label" for="password">{{ __('Password:') }}</label>
                             <div class="message-input">
-                                <input type="password" class="form-control" name="password" id="password" />
+                                <div class="password-input-cover" >
+                                    <input type="password" class="form-control password-input" name="password" id="password" placeholder="Must contain letters and numbers" />
+                                    <i class="fa fa-eye-slash toggle-password-visibility" ></i>
+                                </div>
                             </div>
                         </div>
+
                         <div class="signup__section">
                             <label class="signup__label" for="password-confirm">{{ __('Confirm Password:') }}</label>
                             <div class="message-input">
-                                <input type="password" class="form-control" name="password_confirmation" id="password-confirm" />
+                                <div class="password-input-cover" >
+                                    <input type="password" class="form-control password-input" name="password_confirmation" id="password-confirm" />
+                                    <i class="fa fa-eye-slash toggle-password-visibility" ></i>
+                                </div>
                             </div>
                         </div>
                         <div class="signup__checkbox">
+                            @if ($errors->has('terms_condition'))
+                                <span class="invalid-feedback text-danger" role="alert">
+                                    <strong><p>{{ $errors->first('terms_condition') }}</p></strong>
+                                </span>
+                            @endif
                             <label class="signup__box">
                                 <label class="custom-checkbox">
-                                    <input type="checkbox" checked="checked" />
+                                    <input type="checkbox" name="terms_condition" />
                                     <i></i>
                                 </label>
-                                <span>I agree to the Terms &amp; Conditions.</span>
+                                <a href="{{ route('terms') }}" ><span>I agree to the Terms &amp; Conditions.</span></a>
                             </label>
                         </div>
                         <button href="#" class="signup__btn-create btn btn--type-02">
@@ -87,16 +107,9 @@
     <!-- FOOTER -->
     <footer class="signup__footer">
         <div class="container">
-            <p class="signup__link">Already have an account? <a href="/login" class="btn">Sign In</a></p>
-            <div class="signup__footer-content">
-                <ul class="signup__footer-menu">
-                    <li><a href="#">Teams</a></li>
-                    <li><a href="#">Privacy</a></li>
-                    <li><a href="#">Send Feedback</a></li>
-                    <li class="footer__copyright"><span>2018 &copy; Bluumhealth. All rights reserved.</li>
-                </ul>
-            </div>
+            <p class="signup__link">Already have an account? <a href="{{ route('login') }}" class="btn">Sign In</a></p>
         </div>
     </footer>
 </div>
+@include('widgets.footer')
 @endsection

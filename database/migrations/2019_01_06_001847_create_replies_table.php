@@ -15,6 +15,15 @@ class CreateRepliesTable extends Migration
     {
         Schema::create('replies', function (Blueprint $table) {
             $table->increments('id');
+            $table->longText('body');
+            $table->integer('likes')->default(0);
+            $table->integer('votes')->default(0);
+            $table->string('recipient')->nullable();
+            $table->integer('parent_reply')->nullable();
+            $table->integer('post_id');
+            $table->integer('user_id');
+            $table->boolean('correct')->default(false);
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

@@ -1,6 +1,14 @@
+@php $title = 'Login' @endphp
 @extends('layouts.app-temp')
 
+@section('header_scripts')
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/hover.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/animate.css') }}" />
+@endsection
+
 @section('content')
+    @include('widgets.top-nav-bar')
     <div class="signup">
         <!-- MAIN -->
         <main class="signup__main">
@@ -17,6 +25,11 @@
                         @csrf
                         <div class="signup__form">
                             <div class="signup__section">
+                                @if (session()->has('error'))
+                                    <span class="invalid-feedback text-danger" role="alert">
+                                        <strong><p>{{ ucfirst(session('error')) }}</p></strong>
+                                    </span>
+                                @endif
                                 @if ($errors->has('email') || $errors->has('password') )
                                     <span class="invalid-feedback text-danger" role="alert">
                                         <strong><p>Email or Password incorrect</p></strong>
@@ -28,12 +41,17 @@
                             <div class="signup__section">
                                 <label class="signup__label" for="password">Password:</label>
                                 <div class="message-input">
-                                    <input type="password" class="form-control" name="password" id="password" />
+                                    <div class="password-input-cover" >
+                                        <input type="password" class="form-control password-input" name="password" id="password" />
+                                        <i class="fa fa-eye-slash toggle-password-visibility" ></i>
+                                    </div>
                                 </div>
                             </div>
                             <button type="submit" class="signup__btn-create btn btn--type-02">
                                 {{ __('Login') }}
                             </button>
+                            <p class="" style="margin-top:25px;"><a href="{{ route('password.request') }}" class="">Forgotten password</a></p>
+                            <p class="" style="margin-top:25px;">Are you a new to bluum? <a href="/register" class="">Register</a></p>
                         </div>
                     </form>
                 </div>
@@ -42,16 +60,9 @@
         <!-- FOOTER -->
         <footer class="signup__footer">
             <div class="container">
-                <p class="signup__link">New user? <a href="/register" class="btn">Sign Up</a></p>
-                <div class="signup__footer-content">
-                    <ul class="signup__footer-menu">
-                        <li><a href="#">Teams</a></li>
-                        <li><a href="#">Privacy</a></li>
-                        <li><a href="#">Send Feedback</a></li>
-                        <li class="footer__copyright"><span>2018 &copy; Bluumhealth. All rights reserved.</li>
-                    </ul>
-                </div>
+                
             </div>
         </footer>
     </div>
+    @include('widgets.footer')
 @endsection

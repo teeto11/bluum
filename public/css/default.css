@@ -1,0 +1,322 @@
+.experts-wrapper {
+  margin: 25px 0px; }
+  .experts-wrapper .experts-container .page-link {
+    font-family: 'Courier New', Courier, monospace; }
+  .experts-wrapper .experts-container .page-link:hover {
+    transform: scale(1.2); }
+  @media screen and (min-width: 800px) {
+    .experts-wrapper .experts-container .expert-card {
+      width: 100%;
+      margin-top: 20px;
+      padding: 10px 30px;
+      display: flex;
+      max-height: auto;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 1px 10px 20px #d4d4d4; }
+      .experts-wrapper .experts-container .expert-card .image-wrapper {
+        width: 20%; }
+        .experts-wrapper .experts-container .expert-card .image-wrapper img {
+          padding: 10px 10px;
+          border-radius: 100%;
+          height: 200px;
+          width: 210px;
+          border: 0px;
+          box-shadow: 1px 10px 20px #d4d4d4; }
+      .experts-wrapper .experts-container .expert-card .details-body {
+        width: 80%;
+        padding: 10px 10px; }
+        .experts-wrapper .experts-container .expert-card .details-body .expert-header {
+          padding: 5px 10px;
+          margin: 10px 0px;
+          color: white;
+          background: rgba(75, 126, 99, 0.609);
+          display: flex;
+          width: 100%;
+          border-radius: 25px; }
+          .experts-wrapper .experts-container .expert-card .details-body .expert-header i {
+            padding: 0px 5px; }
+          .experts-wrapper .experts-container .expert-card .details-body .expert-header .expert-name {
+            width: 50%; }
+          .experts-wrapper .experts-container .expert-card .details-body .expert-header .expert-practice {
+            width: 50%;
+            text-align: center; }
+        .experts-wrapper .experts-container .expert-card .details-body .expert-summary {
+          padding: 5px 10px; }
+        .experts-wrapper .experts-container .expert-card .details-body .expert-footer {
+          display: flex; }
+          .experts-wrapper .experts-container .expert-card .details-body .expert-footer .exp {
+            width: 30%;
+            font-size: 15px; }
+            .experts-wrapper .experts-container .expert-card .details-body .expert-footer .exp b {
+              opacity: .7; }
+          .experts-wrapper .experts-container .expert-card .details-body .expert-footer .small {
+            width: 70%; }
+            .experts-wrapper .experts-container .expert-card .details-body .expert-footer .small section {
+              float: right; }
+              .experts-wrapper .experts-container .expert-card .details-body .expert-footer .small section button {
+                border: 0px;
+                width: 100px;
+                margin: 0px 10px;
+                background: white;
+                box-shadow: 2px 2px 5px #d4d4d4; }
+              .experts-wrapper .experts-container .expert-card .details-body .expert-footer .small section a {
+                border: none;
+                color: #282828;
+                transition: all 0.5s;
+                cursor: pointer; }
+              .experts-wrapper .experts-container .expert-card .details-body .expert-footer .small section a span {
+                cursor: pointer;
+                display: inline-block;
+                position: relative;
+                transition: 0.5s; }
+              .experts-wrapper .experts-container .expert-card .details-body .expert-footer .small section a span:after {
+                content: '\00bb';
+                position: absolute;
+                opacity: 0;
+                top: 0;
+                right: -10px;
+                transition: 0.5s; }
+              .experts-wrapper .experts-container .expert-card .details-body .expert-footer .small section a:hover span {
+                padding-right: 15px; }
+              .experts-wrapper .experts-container .expert-card .details-body .expert-footer .small section a:hover span:after {
+                opacity: 1;
+                right: 0; } }
+  @media screen and (max-width: 800px) {
+    .experts-wrapper .experts-container .expert-card {
+      box-shadow: 0px 7px 10px #d4d4d4;
+      margin-top: 20px;
+      padding: 10px 30px; }
+      .experts-wrapper .experts-container .expert-card .image-wrapper {
+        width: 100%;
+        text-align: center; }
+        .experts-wrapper .experts-container .expert-card .image-wrapper img {
+          padding: 10px 10px;
+          border-radius: 100%;
+          height: 200px;
+          width: 210px;
+          border: 0px;
+          box-shadow: 1px 10px 20px #d4d4d4; }
+      .experts-wrapper .experts-container .expert-card .expert-header {
+        padding: 5px 10px;
+        margin: 10px 0px;
+        color: white;
+        background: rgba(75, 126, 99, 0.609);
+        width: 100%;
+        border-radius: 25px; }
+        .experts-wrapper .experts-container .expert-card .expert-header i {
+          padding: 0px 5px; }
+        .experts-wrapper .experts-container .expert-card .expert-header .expert-name {
+          font-size: 15px; }
+        .experts-wrapper .experts-container .expert-card .expert-header .expert-practice {
+          font-size: 15px; }
+      .experts-wrapper .experts-container .expert-card .expert-footer .exp {
+        width: 100% !important;
+        font-size: 13px;
+        opacity: .7; }
+      .experts-wrapper .experts-container .expert-card .expert-footer .small {
+        width: 100% !important; }
+        .experts-wrapper .experts-container .expert-card .expert-footer .small button {
+          border: 0px;
+          width: 150px; }
+        .experts-wrapper .experts-container .expert-card .expert-footer .small a {
+          float: right; } }
+  @media screen and (max-width: 1250px) {
+    .experts-wrapper .experts-container {
+      width: 100%; }
+      .experts-wrapper .experts-container .expert-card .expert-footer .exp {
+        width: 70% !important; }
+      .experts-wrapper .experts-container .expert-card .expert-footer .small {
+        width: 30%; } }
+
+@media screen and (min-width: 1040px) {
+  .profile-wrapper .profile-sub-wrapper {
+    display: flex; }
+    .profile-wrapper .profile-sub-wrapper .profile-sidebar {
+      top: 20px;
+      width: 25%;
+      background: #fff;
+      height: 100vh;
+      box-shadow: 2px 2px 15px #d4d4d4; }
+      .profile-wrapper .profile-sub-wrapper .profile-sidebar .edit-btn-wrapper {
+        text-align: right;
+        padding: 0px 20px; }
+      .profile-wrapper .profile-sub-wrapper .profile-sidebar .profile-sidebar-header {
+        text-align: center; }
+        .profile-wrapper .profile-sub-wrapper .profile-sidebar .profile-sidebar-header img {
+          padding: 10px 10px;
+          height: 210px;
+          width: 210px;
+          border-radius: 100%; }
+      .profile-wrapper .profile-sub-wrapper .profile-sidebar .profile-sidebar-social {
+        display: flex;
+        padding: 10px 10px;
+        background-image: linear-gradient(150deg, #4B7E63, #A2DABC);
+        color: white;
+        font-weight: 800;
+        border: 0px;
+        font-size: 15px; }
+        .profile-wrapper .profile-sub-wrapper .profile-sidebar .profile-sidebar-social .followers {
+          width: 50%;
+          text-align: center; }
+          .profile-wrapper .profile-sub-wrapper .profile-sidebar .profile-sidebar-social .followers p {
+            margin: 0px; }
+        .profile-wrapper .profile-sub-wrapper .profile-sidebar .profile-sidebar-social .post {
+          width: 50%;
+          text-align: center; }
+          .profile-wrapper .profile-sub-wrapper .profile-sidebar .profile-sidebar-social .post a {
+            margin: 0px; }
+      .profile-wrapper .profile-sub-wrapper .profile-sidebar .btn {
+        width: 100%;
+        box-shadow: 1px 10px 10px #d4d4d4;
+        background: #4B7E63;
+        color: #fff; }
+        .profile-wrapper .profile-sub-wrapper .profile-sidebar .btn i {
+          color: #fff;
+          padding: 0px 5px; }
+      .profile-wrapper .profile-sub-wrapper .profile-sidebar .profile-sidebar-body {
+        padding: 20px 0px; }
+        .profile-wrapper .profile-sub-wrapper .profile-sidebar .profile-sidebar-body ul {
+          list-style: none; }
+          .profile-wrapper .profile-sub-wrapper .profile-sidebar .profile-sidebar-body ul li {
+            padding: 5px 15px; }
+            .profile-wrapper .profile-sub-wrapper .profile-sidebar .profile-sidebar-body ul li b {
+              opacity: 0.7; }
+    .profile-wrapper .profile-sub-wrapper .profile-main {
+      width: 75%;
+      height: 100vh;
+      overflow-y: scroll; }
+      .profile-wrapper .profile-sub-wrapper .profile-main .questions {
+        padding: 20px; }
+        .profile-wrapper .profile-sub-wrapper .profile-main .questions .table-row .table-responsive h3 {
+          font-size: 25px;
+          font-weight: 50;
+          padding: 20px 10px 2px; }
+        .profile-wrapper .profile-sub-wrapper .profile-main .questions .table-row .table-responsive tr {
+          font-size: 13px; }
+        .profile-wrapper .profile-sub-wrapper .profile-main .questions .table-row .table-responsive th {
+          opacity: 0.7;
+          border-top: 0px; }
+        .profile-wrapper .profile-sub-wrapper .profile-main .questions .table-row .table-borderless td {
+          border: 0px; }
+        .profile-wrapper .profile-sub-wrapper .profile-main .questions .table-row .table-borderless th {
+          border: 0px; }
+      .profile-wrapper .profile-sub-wrapper .profile-main .summary {
+        padding: 20px 30px;
+        display: flex;
+        width: 100%; }
+        .profile-wrapper .profile-sub-wrapper .profile-main .summary .posts {
+          width: 50%;
+          background: #fff;
+          padding: 10px 10px;
+          background: linear-gradient(140deg, #35aca2, #119abd);
+          color: #F5F5F5;
+          text-align: center; }
+        .profile-wrapper .profile-sub-wrapper .profile-main .summary .question {
+          width: 50%;
+          background: #fff;
+          padding: 10px 10px;
+          background: linear-gradient(140deg, #161f99, #166cf5);
+          color: #F5F5F5;
+          text-align: center;
+          float: right; }
+      .profile-wrapper .profile-sub-wrapper .profile-main .page-posts {
+        padding: 0px !important; }
+        .profile-wrapper .profile-sub-wrapper .profile-main .page-posts .post__head {
+          padding: 20px; }
+    .profile-wrapper .profile-sub-wrapper .profile-main::-webkit-scrollbar {
+      width: 12px;
+      background-color: #d4b5b5; }
+    .profile-wrapper .profile-sub-wrapper .profile-main::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 6px #4B7E63;
+      background-color: #4B7E63; }
+    .profile-wrapper .profile-sub-wrapper .profile-main::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      border-radius: 20px;
+      background-color: #F5F5F5; } }
+@media screen and (max-width: 1040px) {
+  .profile-wrapper .questions {
+    padding: 20px; }
+    .profile-wrapper .questions .table-row .table-responsive h3 {
+      font-size: 25px;
+      font-weight: 50;
+      padding: 20px 10px 2px; }
+    .profile-wrapper .questions .table-row .table-responsive tr {
+      font-size: 13px; }
+    .profile-wrapper .questions .table-row .table-responsive th {
+      opacity: 0.7;
+      border-top: 0px; }
+    .profile-wrapper .questions .table-row .table-borderless td {
+      border: 0px; }
+    .profile-wrapper .questions .table-row .table-borderless th {
+      border: 0px; }
+  .profile-wrapper .summary {
+    padding: 20px 30px;
+    display: flex;
+    width: 100%; }
+    .profile-wrapper .summary .posts {
+      width: 50%;
+      background: #fff;
+      padding: 10px 10px;
+      background: linear-gradient(140deg, #35aca2, #119abd);
+      color: #F5F5F5;
+      text-align: center; }
+    .profile-wrapper .summary .question {
+      width: 50%;
+      background: #fff;
+      padding: 10px 10px;
+      background: linear-gradient(140deg, #161f99, #166cf5);
+      color: #F5F5F5;
+      text-align: center;
+      float: right; }
+  .profile-wrapper .profile-sub-wrapper {
+    width: 100%; }
+    .profile-wrapper .profile-sub-wrapper .profile-sidebar .profile-sidebar-header {
+      text-align: center; }
+      .profile-wrapper .profile-sub-wrapper .profile-sidebar .profile-sidebar-header img {
+        padding: 10px 10px;
+        height: 210px;
+        width: 210px;
+        border-radius: 100%; }
+    .profile-wrapper .profile-sub-wrapper .profile-sidebar .profile-sidebar-social {
+      display: flex;
+      padding: 10px 10px;
+      background-image: linear-gradient(150deg, #4B7E63, #A2DABC);
+      color: white;
+      font-weight: 800;
+      border: 0px;
+      font-size: 15px; }
+      .profile-wrapper .profile-sub-wrapper .profile-sidebar .profile-sidebar-social .followers {
+        width: 50%;
+        text-align: center; }
+        .profile-wrapper .profile-sub-wrapper .profile-sidebar .profile-sidebar-social .followers p {
+          margin: 0px; }
+      .profile-wrapper .profile-sub-wrapper .profile-sidebar .profile-sidebar-social .post {
+        width: 50%;
+        text-align: center; }
+        .profile-wrapper .profile-sub-wrapper .profile-sidebar .profile-sidebar-social .post a {
+          margin: 0px; }
+    .profile-wrapper .profile-sub-wrapper .profile-sidebar .btn {
+      width: 100%;
+      box-shadow: 1px 10px 10px #d4d4d4;
+      background: #4B7E63;
+      color: #fff; }
+      .profile-wrapper .profile-sub-wrapper .profile-sidebar .btn i {
+        color: #fff;
+        padding: 0px 5px; }
+    .profile-wrapper .profile-sub-wrapper .profile-sidebar .profile-sidebar-body {
+      padding: 20px 0px; }
+      .profile-wrapper .profile-sub-wrapper .profile-sidebar .profile-sidebar-body ul {
+        list-style: none; }
+        .profile-wrapper .profile-sub-wrapper .profile-sidebar .profile-sidebar-body ul li {
+          padding: 5px 15px;
+          display: block;
+          float: left; }
+          .profile-wrapper .profile-sub-wrapper .profile-sidebar .profile-sidebar-body ul li b {
+            opacity: 0.7; }
+    .profile-wrapper .profile-sub-wrapper .post-container {
+      width: 100%; }
+      .profile-wrapper .profile-sub-wrapper .post-container .h2 {
+        margin-top: 100px; } }
+
+/*# sourceMappingURL=default.css.map */
