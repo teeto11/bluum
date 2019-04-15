@@ -56,7 +56,7 @@ class EmailVerificationNotification extends Notification
 
         return (new MailMessage)
             ->priority(1)
-            ->from('info@bluumhealth.com', 'Bluumhealth')
+            ->from('bluumhealth@gmail.com', 'Bluumhealth')
             ->subject(Lang::getFromJson('Verify Email Address'))
             ->line(Lang::getFromJson('Please click the button below to verify your email address.'))
             ->action(

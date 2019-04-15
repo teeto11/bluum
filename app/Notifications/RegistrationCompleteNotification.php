@@ -43,7 +43,7 @@ class RegistrationCompleteNotification extends Notification
         $url = url()->route('user.profile');
         return (new MailMessage)
                     ->priority(1)
-                    ->from('info@bluumhealth.com', 'Bluumhealth')
+                    ->from('bluumhealth@gmail.com', 'Bluumhealth')
                     ->subject('Welcome')
                     ->greeting('Welcome')
                     ->line('Thank you for completing your registration on Bluumhealth. click the button below to go to your profile')

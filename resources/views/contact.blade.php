@@ -21,7 +21,7 @@
                     <div class="contact-header">
                         <h4>Have a Question</h4>
                         <p>Send us an email at:</p>
-                        <p>info@bluumhealth.com, bluumhealth@gmail.com</p>
+                        <p>bluumhealth@gmail.com, bluumhealth@gmail.com</p>
                     </div>
                     <p style="margin: 5px 14px;">Follow us on social media</p>
                     <div class="social-bar">
