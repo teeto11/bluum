@@ -135,7 +135,28 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-6 col-md-6 col-sm-12">
+				<div class="col-lg-6 col-md-6 col-sm-12 experts-into-text">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card expert__description bg-gradient-rb">
+								<div class="card-body">
+									<div class="card-icon-content">
+										<div class="card-icon">
+											<i class="icon-Bookmark"></i>
+										</div>
+										<div class="card-icon-text">
+											<h5 class="card-title">Term of the day - Amniotic sac</h5>
+											<p class="card-text">
+												Definition: The sac around the baby inside the uterus.
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="col-lg-6 col-md-6 col-sm-12">
 					<div class="row text-center">
                         <div class="col-md-12">
                         @foreach($topExperts as $expert)
@@ -151,7 +172,7 @@
                         @endforeach
                         </div>
                     </div>
-				</div>
+				</div> -->
 			</div>
 		</div>
     </section>
