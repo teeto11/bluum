@@ -133,7 +133,7 @@
                                                 </div>
                                             @endif
                                             <div class="form-group" >
-                                                <textarea class="form-control" name="body" style="resize: none" rows="5" ></textarea>
+                                                <textarea class="form-control" name="body" style="resize: none" rows="5"  title="body"></textarea>
                                             </div>
                                             <div class="form-group text-right" >
                                                 <input type="submit" class="btn btn-success" value="Answer" >
@@ -508,11 +508,11 @@
             var element = document.getElementById('element-to-print');
 
             html2pdf(element, {
-            margin:       10,
-            filename:     'bluum.pdf',
-            image:        { type: 'jpeg', quality: 1 },
-            html2canvas:  { scale: 2, logging: true, dpi: 192, letterRendering: true },
-            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' }
+                margin:       10,
+                filename:     'bluum.pdf',
+                image:        { type: 'jpeg', quality: 1 },
+                html2canvas:  { scale: 2, logging: true, dpi: 192, letterRendering: true },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' }
             });
         }
     </script>

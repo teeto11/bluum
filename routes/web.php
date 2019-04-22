@@ -34,6 +34,7 @@ Route::get('/question/following', 'QuestionController@viewByFollowing')->name('q
 Route::get('/question/ask', 'QuestionController@create')->name('question.create');
 Route::get('/questions/category/{category}', 'QuestionController@viewByCategory')->name('question.showbycategory');
 Route::get('/questions/tag/{tag}', 'QuestionController@viewByTag')->name('question.showbytag');
+Route::post('/question/answer', 'ReplyController@answerQuestion')->name('question.answer');
 Route::post('/question/answer/markAsCorrect', 'ReplyController@markAsCorrect')->name('question.answer.markAsCorrect');
 Route::post('/question/answer/up-vote', 'ReplyVoteController@upVote')->name('question.answer.up-vote');
 Route::post('/question/answer/down-vote', 'ReplyVoteController@downVote')->name('question.answer.down-vote');
@@ -76,7 +77,6 @@ Route::middleware('roles:expert,admin')->group(function() {
     Route::get('blog/post/new', 'PostController@create')->name('blog.post.create');
     Route::post('blog/post', 'PostController@store')->name('blog.post.store');
     Route::put('/blog/post/{post}', 'PostController@update')->name('blog.post.update');
-    Route::post('/question/answer', 'ReplyController@answerQuestion')->name('question.answer');
 });
 
 Route::middleware('roles:admin')->group(function() {
