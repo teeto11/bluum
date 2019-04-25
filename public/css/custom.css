@@ -399,7 +399,18 @@ section.page-posts
 	background: linear-gradient(80deg,#d9b26f 0,#100f0f 100%)!important;
 }
 
-.expert__description
+.bg-gradient-wb
+{
+	/* background: linear-gradient(80deg,#c1d0c8 0,#7c847f 100%)!important; */
+	background: linear-gradient(80deg,#bac4be 0,#ba9b7b 100%)!important;
+}
+
+.term .card-body
+{
+    height: 203px;
+}
+
+.expert__description, .term
 {
     color: #FFF;
     border-radius: .375rem;
@@ -414,26 +425,26 @@ section.page-posts
 	box-shadow: 0 1rem 3rem rgba(0,0,0,.125)!important;
 }
 
-.expert__description .card-body
+.expert__description .card-body, .term .card-body
 {
 	padding: 2.5rem 2rem;
 	flex: 1 1 auto;
 }
 
-.expert__description .card-text
+.expert__description .card-text, .term .card-text
 {
 	font-size: 1.4rem;
     font-weight: 600;
     line-height: 1.7;
 }
 
-.expert__description .card-icon-content
+.expert__description .card-icon-content, .term .card-icon-content
 {
 	align-items: flex-start !important;
     display: flex !important;
 }
 
-.expert__description .card-icon
+.expert__description .card-icon, .term .card-icon
 {
 	display: inline-flex;
 	min-width: 3rem;
@@ -442,13 +453,13 @@ section.page-posts
 	margin-top: 10px;
 }
 
-.expert__description .card-icon i
+.expert__description .card-icon i, .term .card-icon i
 {
 	color: #FFF;
 	font-size: 45px;
 }
 
-.expert__description .card-icon-text
+.expert__description .card-icon-text, .term .card-icon-text
 {
 	padding-left: 1rem;
 }
