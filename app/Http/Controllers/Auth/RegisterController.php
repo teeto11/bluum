@@ -79,7 +79,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        Notification::send($createUser, new RegistrationCompleteNotification());
+        $createUser->sendRegistrationCompleteNotification();
         return $createUser;
     }
 }
