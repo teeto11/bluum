@@ -23,7 +23,7 @@
 					<a href="{{ route('blog') }}" class="btn btn-bluum btn-lg">View Blog</a>
 				</p>
 			@else
-				<h1>Your journey through pregnancy <br />begins here.</h1>
+				<h1>Because life is a miracle and babies are something more.<br /> Get Started.</h1>
 				<p>
 					<a href="{{ route('register') }}" class="btn btn-bluum btn-lg">Get Started</a>
 				</p>
@@ -35,7 +35,7 @@
         <div class="container text-center">
 			<div class="card-head">
 				<h3 class="h2">Features For You.</h3>
-				<p class="lead">Expressive community for knowledge in pregnancy journey and baby health</p>
+				<!-- <p class="lead">Expressive community for knowledge in pregnancy journey and baby health</p> -->
 			</div>
 			<div class="row">
 				<div class="col-lg-4 col-md-6">
@@ -43,8 +43,8 @@
 						<p><img class="card-img-top" src="{{ asset('fonts/icons/badges/pregnant.png') }}" alt="user-icon" /></p>
 						<a class="card-content-links" href="{{ route('blog.category', formatUrlString('pregnancy')) }}" title="" style="height:10em;overflow-y:hidden">
 							<div class="card-body">
-								<h4 class="card-title">Pregnancy and new born care</h4>
-								<p class="card-text">Connect with experts and other users for a stress free and exciting pregnancy experience, trimester by trimester.</p>
+								<h4 class="card-title">Pregnancy and Newborn Care</h4>
+								<p class="card-text">Connect with experts and other users for a stress-free and exciting pregnancy experience, trimester by trimester.</p>
 							</div>
 						</a>
 					</div>
@@ -55,7 +55,7 @@
 						<a class="card-content-links" href="{{ route('blog.category', formatUrlString('medical travels')) }}" title="" style="height:10em;overflow-y:hidden">
 							<div class="card-body">
 								<h4 class="card-title">Pregnancy Medical Travels</h4>
-								<p class="card-text">Connect and get concise information from experienced moms for your baby delivery and health outside your country of residence.</p>
+								<p class="card-text">Get to know experienced mums. Enjoy vital information for your baby delivery and health outside your country of residence.</p>
 							</div>
 						</a>
 					</div>
@@ -66,7 +66,7 @@
 						<a class="card-content-links" href="{{ route('blog.category', formatUrlString('common illness')) }}" title="" style="height:10em;overflow-y:hidden">
 							<div class="card-body">
 								<h4 class="card-title">Common Illnesses In Children</h4>
-								<p class="card-text">Connect with experts and other users on information regarding to common illnesses that can tamper with your babies' healthy development e.g measles.</p>
+								<p class="card-text">Mingle with experts and other users. Know more about common illnesses that can tamper with your baby's health.</p>
 							</div>
 						</a>
 					</div>
@@ -79,7 +79,7 @@
 						<a class="card-content-links" href="{{ route('blog.category', formatUrlString('special illness')) }}" title="" style="height:10em;overflow-y:hidden">
 							<div class="card-body">
 								<h4 class="card-title">Special Illnesses In Children</h4>
-								<p class="card-text">Connect with experts and other users on information regarding to special illnesses around children that can be avoided and also managed for healthy development.</p>
+								<p class="card-text">Interact with experts and other users. Become aware of special illnesses and how to keep them away from your baby.</p>
 							</div>
 						</a>
 					</div>
@@ -90,7 +90,7 @@
 						<a class="card-content-links" href="{{ route('blog.category', formatUrlString('bluum stories')) }}" title="" style="height:10em;overflow-y:hidden">
 							<div class="card-body">
 								<h4 class="card-title">Bluum Stories</h4>
-								<p class="card-text">Tell your story of how your pregnancy, the scare, the joy, the moments, the myths and how your journey can motivate a newbie in the process.</p>
+								<p class="card-text">Tell your pregnancy story – the joy, the scare, the myths and marvels. Who knows? You can inspire a newbie in the process.</p>
 							</div>
 						</a>
 					</div>
@@ -101,7 +101,7 @@
 						<a class="card-content-links" href="{{ route('blog') }}" title="" style="height:10em;overflow-y:hidden">
 							<div class="card-body">
 								<h4 class="card-title">Blog</h4>
-								<p class="card-text">All news and exciting new findings for you and your baby.</p>
+								<p class="card-text">All news and exciting new findings for you and your darling baby.</p>
 							</div>
 						</a>
 					</div>
@@ -112,7 +112,7 @@
     <section class="page-experts">
         <div class="container">
 			<div class="card-head text-center">
-				<h3 class="h2">Meet our medical experts.</h3>
+				<h3 class="h2">The best maternity care doesn’t have to come at a price. Meet our medical experts.</h3>
 			</div>
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-sm-12 experts-into-text">
@@ -126,7 +126,7 @@
 										</div>
 										<div class="card-icon-text">
 											<h5 class="card-title">Ask an expert</h5>
-											<p class="card-text">Our experts are selectively handpicked all over the world and have a conscious effort to help you achieve a healthy beginning with your baby.</p>
+											<p class="card-text">Our experts are selectively handpicked all over the world to help you experience a healthy beginning with your baby.</p>
 										</div>
 									</div>
 								</div>
