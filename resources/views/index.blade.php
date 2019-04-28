@@ -23,7 +23,7 @@
 					<a href="{{ route('blog') }}" class="btn btn-bluum btn-lg">View Blog</a>
 				</p>
 			@else
-				<h1>Because life is a miracle and babies are something more.<br /> Get Started.</h1>
+				<h1>Because life is a miracle<br />and babies are something more.</h1>
 				<p>
 					<a href="{{ route('register') }}" class="btn btn-bluum btn-lg">Get Started</a>
 				</p>
