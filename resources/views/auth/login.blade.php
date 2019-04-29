@@ -51,7 +51,7 @@
                                 {{ __('Login') }}
                             </button>
                             <p class="" style="margin-top:25px;"><a href="{{ route('password.request') }}" class="">Forgotten password</a></p>
-                            <p class="" style="margin-top:25px;">Are you a new to bluum? <a href="/register" class="">Register</a></p>
+                            <p class="" style="margin-top:25px;">New to Bluumhealth?<a href="/register" class="">Register Here</a></p>
                         </div>
                     </form>
                 </div>
