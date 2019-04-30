@@ -68,7 +68,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         do{
-            $username = $data['firstname'][0].$data['lastname'].rand(1000, 9999);
+            $username = 'user'.rand(1000, 9999);
         }while (User::where('username', $username)->count() > 0);
 
         $createUser = User::create([

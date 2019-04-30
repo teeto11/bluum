@@ -63,12 +63,14 @@ function formatTime($time){
     return date('h:ia d M, Y', strtotime($time));
 }
 
-function getInitials($user, $full=false, $icon=true){
+function getInitials($user, $full=false, $icon=true, $anonymous=false){
 
     if($user->role == 'ADMIN'){
         $name = 'Admin'.($icon ? '<i class="fa fa-check-circle verified-icon" ></i>' : '');
     }else{
-        $name = ($full ? ucfirst($user->firstname) : strtoupper($user->firstname[0])).'. '.ucfirst($user->lastname);
+        if($user->role == 'USER' && $anonymous) $name = $user->username; else {
+            $name = ($full ? ucfirst($user->firstname).' ' : strtoupper($user->firstname[0]).'. ').ucfirst($user->lastname);
+        }
         if($user->role == 'EXPERT') $name .= $icon ? '<i class="fa fa-check-circle verified-icon" ></i>' : '';
     }
 

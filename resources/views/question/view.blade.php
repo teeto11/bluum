@@ -84,7 +84,7 @@
                                 </div>
                                 <div class="topic__caption">
                                     <div class="topic__name">
-                                        <a href="#">{!! getInitials($question->user, true) !!}</a>
+                                        <a href="#">{!! getInitials($question->user, true, true) !!}</a>
                                     </div>
                                     <div class="topic__date"><i class="icon-Watch_Later"></i>{{ date("h:ia d M, Y", strtotime($question->created_at)) }}</div>
                                 </div>
@@ -155,7 +155,7 @@
                                         </div>
                                         <div class="topic__caption">
                                             <div class="topic__name">
-                                                <a href="#">{!! getInitials($r_user, true) !!}</a>
+                                                <a href="#">{!! getInitials($r_user, true, true, true) !!}</a>
                                             </div>
                                             <div class="topic__date"><i class="icon-Watch_Later"></i>{{ formatTime($answer->created_at) }}</div>
                                         </div>
@@ -225,7 +225,7 @@
                                         </div>
                                         <div class="topic__caption">
                                             <div class="topic__name">
-                                                <a href="#">{!! getInitials($r_user, true) !!}</a>
+                                                <a href="#">{!! getInitials($r_user, true, true, true) !!}</a>
                                             </div>
                                             <div class="topic__date"><i class="icon-Watch_Later"></i>{{ formatTime($answer->created_at) }}</div>
                                         </div>
@@ -278,7 +278,7 @@
                                                         </div>
                                                         <div class="topic__caption">
                                                             <div class="topic__name">
-                                                                <a href="" class="">{!! getInitials($a_reply->user ) !!}</a>
+                                                                <a href="" class="">{!! getInitials($a_reply->user, false, true, true) !!}</a>
                                                             </div>
                                                         </div>
                                                     </div>

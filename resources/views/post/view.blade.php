@@ -158,7 +158,7 @@
                                         </div>
                                         <div class="topic__caption">
                                             <div class="topic__name">
-                                                <a href="#">{{ ucwords($reply->user->lastname.' '.$reply->user->firstname) }}</a>
+                                                <a href="#">{!! getInitials($reply->user, false, true, true) !!}</a>
                                             </div>
                                             <div class="topic__date">
                                                 @if ($reply->recipient)
@@ -212,7 +212,7 @@
                                                         </div>
                                                         <div class="topic__caption">
                                                             <div class="topic__name">
-                                                                <a href="" class="">{!! getInitials($creply->user) !!}</a>
+                                                                <a href="" class="">{!! getInitials($creply->user, false, true, true) !!}</a>
                                                             </div>
                                                         </div>
                                                     </div>
