@@ -43,6 +43,7 @@ class NewQuestionNotification extends Notification
         return (new MailMessage)
                     ->line('The introduction to the notification.')
                     ->action('Notification Action', url('/'))
+                    ->line("new Question")
                     ->line('Thank you for using our application!');
     }
 

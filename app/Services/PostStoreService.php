@@ -2,7 +2,10 @@
 
 namespace App\Services;
 
+use App\Notifications\NewQuestionNotification;
 use App\Post;
+use App\User;
+use Illuminate\Support\Facades\Notification;
 
 class PostStoreService{
 
@@ -28,6 +31,14 @@ class PostStoreService{
         $postTagService = new PostTagService($request->type);
         $postTagService->updateTag(explode(",", $post->tags));
 
-        return $post->save();
+        if($post->save()) {
+            if($post->type == 'QUESTION') {
+                $experts = User::where('role', 'EXPERT')->get();
+                Notification::send($experts, new NewQuestionNotification());
+            }
+            return true;
+        }
+
+        return false;
     }
 }
