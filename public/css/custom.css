@@ -401,13 +401,7 @@ section.page-posts
 
 .bg-gradient-wb
 {
-	/* background: linear-gradient(80deg,#c1d0c8 0,#7c847f 100%)!important; */
 	background: linear-gradient(80deg,#bac4be 0,#ba9b7b 100%)!important;
-}
-
-.term .card-body
-{
-    height: 203px;
 }
 
 .expert__description, .term
