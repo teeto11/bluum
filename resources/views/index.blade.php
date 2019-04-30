@@ -138,22 +138,22 @@
 				<div class="col-lg-6 col-md-6 col-sm-12 experts-into-text">
 					<div class="row">
 						<div class="col-md-12">
-							<div class="card expert__description bg-gradient-rb">
+							<div class="card term bg-gradient-wb">
 								<div class="card-body">
 									<div class="card-icon-content">
 										<div class="card-icon">
-											<i class="icon-Bookmark"></i>
+											<i class="icon-Advanced_Search"></i>
 										</div>
 										<div class="card-icon-text">
-											<h5 class="card-title">Term of the day - Amniotic sac</h5>
+											<h5 class="card-title">Term of the day - Anesthetic</h5>
 											<p class="card-text">
-												Definition: The sac around the baby inside the uterus.
+												A drug that gives total or partial loss of sensation of a part or the whole of the body.
 											</p>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> 
 					</div>
 				</div>
 				<!-- <div class="col-lg-6 col-md-6 col-sm-12">
