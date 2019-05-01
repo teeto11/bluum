@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\CorrectAnswerNotification;
 use App\Reply;
 use App\Post;
 use App\ReplyLike;
@@ -68,6 +69,7 @@ class ReplyController extends Controller{
                 if ($hasCorrect < 1){
                     $reply->correct = true;
                     $reply->save();
+                    $reply->user->notify(new CorrectAnswerNotification());
                     NotificationService::correctAnswer($question, $reply)->save();
                     $message = ['success', 'Answer saved as correct answer'];
                 }else $message = ['error', 'Question has a correct answer'];
